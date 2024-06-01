@@ -43,7 +43,8 @@ export default function (eleventyConfig) {
     // A set of filters to load into Vento
     filters: {},
 
-    // Define whether Javascript Functions should be added to page data. See below for usage notes on this.
+    // Define whether Javascript Functions should be added
+    // to page data. See below for usage notes on this.
     addHelpers: true
 
     // A Vento configuration object
