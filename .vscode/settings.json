@@ -1,3 +1,4 @@
 {
-	"todo-tree.filtering.excludeGlobs": ["**/node_modules/*/**"]
+	"todo-tree.filtering.excludeGlobs": ["**/node_modules/*/**"],
+	"cSpell.words": ["Vento"]
 }
