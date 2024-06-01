@@ -120,3 +120,14 @@ Alternatively, if you'd rather keep functions namespaced in your page data, pass
 ```js
 addPlugin(VentoPlugin, { addHelpers: 'functions' });
 ```
+
+```hbs
+<!-- With the above, this: -->
+<p>This is something {{ italicize('really') }} important.</p>
+<p>{{ possumPosse() }}</p>
+
+<!-- becomes: -->
+<!-- With the above, this: -->
+<p>This is something {{ functions.italicize('really') }} important.</p>
+<p>{{ functions.possumPosse() }}</p>
+```
