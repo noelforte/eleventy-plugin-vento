@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  check:
+  ci:
     runs-on: ubuntu-latest
     steps:
       # ========== SETUP ========== #
@@ -14,10 +14,8 @@ jobs:
         uses: actions/checkout@v4.1.6
 
       # Setup node
-      - name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
+      - name: Setup tools
+        uses: jdx/mise-action@v2
 
       # Setup pnpm
       - name: Setup pnpm
