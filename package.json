@@ -14,7 +14,9 @@
 	},
 	"keywords": [
 		"eleventy",
-		"eleventy-plugin"
+		"eleventy-plugin",
+		"ventojs",
+		"templating"
 	],
 	"author": {
 		"name": "Noel Forte",
