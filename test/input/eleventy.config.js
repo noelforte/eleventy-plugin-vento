@@ -17,5 +17,5 @@ export default async function (eleventyConfig) {
 		},
 	});
 
-	eleventyConfig.addShortcode('possums', () => 'Release the possums!!');
+	eleventyConfig.addShortcode('possumPosse', () => 'Release the possums!!!');
 }
