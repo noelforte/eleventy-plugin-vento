@@ -8,9 +8,9 @@
 		"test": "rm -rf test/output; cd test/input; eleventy"
 	},
 	"main": "./VentoPlugin.js",
-	"repository": "git@github.com:forte-co/eleventy-plugin-vento.git",
+	"repository": "git@github.com:noelforte/eleventy-plugin-vento.git",
 	"bugs": {
-		"url": "https://github.com/forte-co/eleventy-plugin-vento/issues"
+		"url": "https://github.com/noelforte/eleventy-plugin-vento/issues"
 	},
 	"keywords": [
 		"eleventy",
