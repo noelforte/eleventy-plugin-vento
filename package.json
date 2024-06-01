@@ -5,7 +5,7 @@
 	"type": "module",
 	"packageManager": "pnpm@9.1.4",
 	"scripts": {
-		"test": "cd test/input; eleventy"
+		"test": "rm -rf test/output; cd test/input; eleventy"
 	},
 	"keywords": [
 		"eleventy",
@@ -18,17 +18,20 @@
 	},
 	"license": "MIT",
 	"dependencies": {
+		"eslint": "^9.4.0",
+		"eslint-config-flat-gitignore": "^0.1.5",
+		"eslint-config-prettier": "^9.1.0",
+		"globals": "^15.3.0",
 		"node-retrieve-globals": "6.0.0",
 		"ventojs": "0.12.6"
 	},
 	"devDependencies": {
-		"@11ty/eleventy": "3.0.0-alpha.10",
-		"eslint": "9.3.0"
+		"@11ty/eleventy": "3.0.0-alpha.10"
 	},
 	"prettier": {
+		"bracketSameLine": true,
 		"singleQuote": true,
-		"tabWidth": 2,
-		"useTabs": true,
-		"semi": true
+		"semi": true,
+		"trailingComma": "es5"
 	}
 }
