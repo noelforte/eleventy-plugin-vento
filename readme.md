@@ -36,9 +36,6 @@ Options are as follows (see below for more information about each):
 
 ```js
 {
-  // Merge global variables into the Data Cascade via `node-retrieve-globals`
-  retrieveGlobals: false,
-
   // An set of filters to load into Vento
   filters: {}
 
@@ -51,37 +48,6 @@ Options are as follows (see below for more information about each):
 ```
 
 View the [full list of options](https://vento.js.org/configuration/#options/) to pass as a Vento Configuration object.
-
-## Retrieving Globals
-
-If you'd like any globals you declare in your templates to be merged back into the Data Cascade, set `retrieveGlobals` to `true`. Note that merging into the global scope can have unintended side effects so this option is turned off by default. Front-matter parsing is always enabled.
-
-When enabled, the following templates are all equivalent:
-
-```vento
----
-title: 'My Page Title'
-layout: 'page-layout.vto'
----
-
-<h1>{{ title }}</h1>
-```
-
-```vento
-{{ set title = 'My Page Title' }}
-{{ set layout = 'page-layout.vto' }}
-
-<h1>{{ title }}</h1>
-```
-
-```vento
-{{>
-  const title = 'My Page Title'
-  const layout = 'page-layout.vto'
-}}
-
-<h1>{{ title }}</h1>
-```
 
 ## Defining filters
 
@@ -105,4 +71,4 @@ And now we can use our filter in a template:
 <p>The title of my page is: "{{ title |> italicize }}"</p>
 ```
 
-See https://vento.js.org/configuration/#filters for more details
+See https://vento.js.org/configuration/#filters for more information about filters and how they work.

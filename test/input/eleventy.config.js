@@ -1,4 +1,3 @@
-import { defineConfig } from '11ty.ts';
 import { VentoPlugin } from '../../VentoPlugin.js';
 
 export const config = {
@@ -8,8 +7,15 @@ export const config = {
 	},
 };
 
-export default defineConfig(async (eleventyConfig) => {
+/** @param {import('@11ty/eleventy/src/UserConfig.js').default} eleventyConfig */
+export default async function (eleventyConfig) {
 	eleventyConfig.addPlugin(VentoPlugin, {
-		retrieveGlobals: true,
+		filters: {
+			italicize(content) {
+				return `<em>${content}</em>`;
+			},
+		},
 	});
-});
+
+	eleventyConfig.addShortcode('possums', () => 'Release the possums!!');
+}

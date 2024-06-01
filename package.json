@@ -27,11 +27,9 @@
 		"eslint-config-flat-gitignore": "^0.1.5",
 		"eslint-config-prettier": "^9.1.0",
 		"globals": "^15.3.0",
-		"node-retrieve-globals": "6.0.0",
 		"ventojs": "0.12.6"
 	},
 	"devDependencies": {
-		"11ty.ts": "0.0.3",
 		"@11ty/eleventy": "3.0.0-alpha.10"
 	},
 	"prettier": {

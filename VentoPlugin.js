@@ -1,10 +1,7 @@
 /**
- * @file Adds Vento support to eleventy.
+ * @file Adds Vento support to Eleventy.
  *
  * @typedef VentoPluginOptions
- * @prop {boolean} retrieveGlobals If true, uses
- * [`node-retrieve-globals`](https://www.npmjs.com/package/node-retrieve-globals)
- * to merge globals back into the Data Cascade outside of front matter.
  * @prop {Object<string,(...any) => any} filters An object containing methods that
  * will be loaded as filters into Vento.
  * @prop {import('ventojs').Options} ventoOptions Vento engine configuration object
@@ -12,8 +9,6 @@
  */
 
 import path from 'node:path';
-
-import { RetrieveGlobals } from 'node-retrieve-globals';
 import VentoJs from 'ventojs';
 
 /**
@@ -21,10 +16,10 @@ import VentoJs from 'ventojs';
  * @param {VentoPluginOptions} options
  */
 export function VentoPlugin(eleventyConfig, options = {}) {
-	const { dir } = eleventyConfig;
+	const { dir, javascriptFunctions } = eleventyConfig;
+	const env = VentoJs(options.ventoOptions);
 
 	options = {
-		retrieveGlobals: false,
 		filters: {},
 		ventoOptions: {
 			includes: path.join(dir.input, dir.includes),
@@ -33,9 +28,7 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 		...options,
 	};
 
-	const jsHelpers = eleventyConfig.javascriptFunctions;
-
-	const env = VentoJs(options.ventoOptions);
+	for (const filter in options.filters) env.filters[filter] = options.filters[filter];
 
 	env.cache.clear();
 
@@ -45,28 +38,12 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 
 		async compile(inputContent) {
 			return async (data) => {
-				for (const [name, callback] of Object.entries(jsHelpers)) {
-					jsHelpers[name] = callback.bind(data);
+				for (const jsHelper in javascriptFunctions) {
+					data[jsHelper] = javascriptFunctions[jsHelper].bind(data);
 				}
-
-				Object.assign(data, jsHelpers);
 
 				return env.runString(inputContent, data).then(({ content }) => content);
 			};
-		},
-
-		async getData(inputPath) {
-			if (!options.retrieveGlobals) return {};
-
-			const { code } = await env.load(inputPath);
-
-			const vm = new RetrieveGlobals(code);
-			const globals = await vm.getGlobalContext({
-				__exports: '',
-				[options.ventoOptions?.dataVarname || 'it']: {},
-			});
-
-			return globals;
 		},
 	});
 }
