@@ -1,9 +1,8 @@
 /**
- * @file Adds Vento {@link Vento https://vento.js.org/} support to eleventy.
+ * @file Adds Vento support to eleventy.
  */
 
 import path from 'node:path';
-import debug from 'debug';
 
 import { RetrieveGlobals } from 'node-retrieve-globals';
 import VentoJs from 'ventojs';
