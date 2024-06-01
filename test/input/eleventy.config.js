@@ -9,5 +9,7 @@ export const config = {
 
 /** @param {import('@11ty/eleventy/src/UserConfig.js').default} eleventyConfig  */
 export default async function (eleventyConfig) {
-	eleventyConfig.addPlugin(VentoPlugin);
+	eleventyConfig.addPlugin(VentoPlugin, {
+		retrieveGlobals: true,
+	});
 }
