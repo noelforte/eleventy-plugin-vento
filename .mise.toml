@@ -1,0 +1,3 @@
+[tools]
+# renovate: datasource=node-version versioning=node
+node = "20.14.0"

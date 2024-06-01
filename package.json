@@ -1,0 +1,34 @@
+{
+	"name": "eleventy-plugin-vento",
+	"version": "1.0.0",
+	"description": "Adds support for the Vento templating language to Eleventy",
+	"type": "module",
+	"packageManager": "pnpm@9.1.4",
+	"scripts": {
+		"test": "cd test/input; eleventy"
+	},
+	"keywords": [
+		"eleventy",
+		"eleventy-plugin"
+	],
+	"author": {
+		"name": "Noel Forte",
+		"email": "noel@forte.is",
+		"url": "https://forte.is/"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"node-retrieve-globals": "6.0.0",
+		"ventojs": "0.12.6"
+	},
+	"devDependencies": {
+		"@11ty/eleventy": "3.0.0-alpha.10",
+		"eslint": "9.3.0"
+	},
+	"prettier": {
+		"singleQuote": true,
+		"tabWidth": 2,
+		"useTabs": true,
+		"semi": true
+	}
+}
