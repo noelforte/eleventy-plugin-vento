@@ -1,6 +1,6 @@
 # eleventy-plugin-vento 🌬️🎈🐀
 
-An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://vento.js.org/) templates to Eleventy.
+An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://vento.js.org/) templates.
 
 ## Usage
 
