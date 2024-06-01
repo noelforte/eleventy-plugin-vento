@@ -4,6 +4,8 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+packageExtensionsChecksum: b185e034b59783f45ccc0dc2a8447bf3
+
 importers:
 
   .:
@@ -27,11 +29,19 @@ importers:
         specifier: 0.12.6
         version: 0.12.6
     devDependencies:
+      11ty.ts:
+        specifier: 0.0.3
+        version: 0.0.3(@11ty/eleventy@3.0.0-alpha.10)
       '@11ty/eleventy':
         specifier: 3.0.0-alpha.10
         version: 3.0.0-alpha.10
 
 packages:
+
+  11ty.ts@0.0.3:
+    resolution: {integrity: sha512-nZ4ohEMjKKe/pT3RrnS5mbfFDzTSLh9VKrWhA+0QKWyCmAKl9K1jkK7ul1NzSgoxHACsfNtWXj6JVzHWRLsNew==}
+    peerDependencies:
+      '@11ty/eleventy': ^2.0.1
 
   '@11ty/dependency-tree-esm@1.0.0':
     resolution: {integrity: sha512-Z3KN1Fkv50UM/ZzTR3VBbyOY52HnmhIVCsAV1hn2UzFsGAjyF1Cw8uohhVtheDOSuBR7ZSeo1unwkz1HxFlUtQ==}
@@ -1049,6 +1059,10 @@ packages:
     engines: {node: '>=12.20'}
 
 snapshots:
+
+  11ty.ts@0.0.3(@11ty/eleventy@3.0.0-alpha.10):
+    dependencies:
+      '@11ty/eleventy': 3.0.0-alpha.10
 
   '@11ty/dependency-tree-esm@1.0.0':
     dependencies:

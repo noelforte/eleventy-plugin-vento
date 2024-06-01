@@ -1,3 +1,4 @@
+import { defineConfig } from '11ty.ts';
 import { VentoPlugin } from '../../VentoPlugin.js';
 
 export const config = {
@@ -7,9 +8,8 @@ export const config = {
 	},
 };
 
-/** @param {import('@11ty/eleventy/src/UserConfig.js').default} eleventyConfig  */
-export default async function (eleventyConfig) {
+export default defineConfig(async (eleventyConfig) => {
 	eleventyConfig.addPlugin(VentoPlugin, {
 		retrieveGlobals: true,
 	});
-}
+});
