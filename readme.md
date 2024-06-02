@@ -111,7 +111,7 @@ export default function (eleventyConfig) {
 <!-- renders as: -->
 
 <p>This is something <em>really</em> important.</p>
-<p>Release the possums!</p>
+<p>Release the possums!!!</p>
 
 ```
 
@@ -126,8 +126,7 @@ addPlugin(VentoPlugin, { addHelpers: 'functions' });
 <p>This is something {{ italicize('really') }} important.</p>
 <p>{{ possumPosse() }}</p>
 
-<!-- becomes: -->
-<!-- With the above, this: -->
+<!-- should be written as: -->
 <p>This is something {{ functions.italicize('really') }} important.</p>
 <p>{{ functions.possumPosse() }}</p>
 ```
