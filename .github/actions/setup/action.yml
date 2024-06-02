@@ -1,5 +1,5 @@
-name: Handle pnpm dependencies
-description: Cache and restore the dependencies with pnpm
+name: Setup
+description: Setup project with pnpm
 
 outputs:
   cache-hit:
