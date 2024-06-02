@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  check:
+    uses: ./.github/workflows/ci.yml
+  release:
+    needs: [check]
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Setup node
+      - name: Setup tools
+        uses: jdx/mise-action@v2
+
+      # Setup pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4.0.0
+
+      # Get metadata
+      - name: Get pnpm store directory
+        id: get-pnpm-store
+        shell: bash
+        run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+
+      # Setup the cache
+      - uses: actions/cache@v4
+        name: Restore cache
+        id: cache-deps
+        with:
+          path: ${{ steps.get-pnpm-store.outputs.path }}
+          key:
+            deps_os-${{ runner.os }}_arch-${{ runner.arch }}_${{
+            hashFiles('./pnpm-lock.yaml') }}
+
+      # Install dependencies
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
