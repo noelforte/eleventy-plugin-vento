@@ -1,4 +1,5 @@
 import { VentoPlugin } from '../../VentoPlugin.js';
+import autoTrim from 'ventojs/plugins/auto_trim.js';
 
 export const config = {
 	dir: {
@@ -15,6 +16,7 @@ export default async function (eleventyConfig) {
 				return `<em>${content}</em>`;
 			},
 		},
+		plugins: [autoTrim()],
 	});
 
 	eleventyConfig.addShortcode('possumPosse', () => 'Release the possums!!!');

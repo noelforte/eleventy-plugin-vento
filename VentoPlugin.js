@@ -4,10 +4,11 @@
  * @typedef VentoPluginOptions
  * @prop {Object<string,(...any) => any} [filters={}] An object containing methods that
  * will be loaded as filters into Vento.
+ * @prop {Function[]} [plugins=[]] An array of plugins to load into vento.
  * @prop {import('ventojs').Options} [ventoOptions] Vento engine configuration object
  * that will be merged with default options.
- * @prop {string|boolean} [addHelpers=true] Whether
- * [Javascript Functions](https://www.11ty.dev/docs/languages/javascript/#javascript-template-functions)
+ * @prop {string|boolean} [addHelpers=true]
+ * Whether [Javascript Functions](https://www.11ty.dev/docs/languages/javascript/#javascript-template-functions)
  * should be merged into data provided to templates. If a string, functions will be namespaced under
  * a property with this name.
  */
@@ -31,6 +32,7 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 	options = {
 		addHelpers: true,
 		filters: {},
+		plugins: [],
 		ventoOptions: {
 			includes: path.join(dir.input, dir.includes),
 			autoescape: false,
@@ -43,6 +45,9 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 
 	// Load user-defined filters into vento
 	for (const filter in options.filters) env.filters[filter] = options.filters[filter];
+
+	// Load user-defined plugins into vento
+	for (const plugin of options.plugins) env.use(plugin);
 
 	eleventyConfig.on('eleventy.before', () => {
 		env.cache.clear();
