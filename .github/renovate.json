@@ -1,6 +1,5 @@
 {
 	"extends": ["github>noelforte/renovate-config", "group:allNonMajor"],
-	"semanticCommits": "enabled",
 	"customManagers": [
 		{
 			"customType": "regex",
