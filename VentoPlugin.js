@@ -44,8 +44,9 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 	// Load user-defined filters into vento
 	for (const filter in options.filters) env.filters[filter] = options.filters[filter];
 
-	// Clear out the cache if need be.
-	env.cache.clear();
+	eleventyConfig.on('eleventy.before', () => {
+		env.cache.clear();
+	});
 
 	// Add vto as a template format and create a custom template for it
 	eleventyConfig.addTemplateFormats('vto');
