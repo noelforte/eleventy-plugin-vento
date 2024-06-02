@@ -1,13 +1,3 @@
 {
-	"extends": ["github>noelforte/renovate-config", "group:allNonMajor"],
-	"customManagers": [
-		{
-			"customType": "regex",
-			"fileMatch": ["(^|\\/)\\.mise\\.toml$"],
-			"matchStrings": [
-				"#renovate: datasource=(?<datasource>\\S+)(\\s|\\sversioning=(?<versioning>\\S+)\\s)(?<depName>\\S+)\\s?=\\s?\"(?<currentValue>[^\\\"]+)\""
-			],
-			"versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
-		}
-	]
+	"extends": ["github>noelforte/renovate-config", "group:allNonMajor"]
 }
