@@ -8,18 +8,6 @@ importers:
 
   .:
     dependencies:
-      eslint:
-        specifier: ^9.4.0
-        version: 9.4.0
-      eslint-config-flat-gitignore:
-        specifier: ^0.1.5
-        version: 0.1.5
-      eslint-config-prettier:
-        specifier: ^9.1.0
-        version: 9.1.0(eslint@9.4.0)
-      globals:
-        specifier: ^15.3.0
-        version: 15.3.0
       ventojs:
         specifier: 0.12.6
         version: 0.12.6
@@ -27,6 +15,18 @@ importers:
       '@11ty/eleventy':
         specifier: 3.0.0-alpha.10
         version: 3.0.0-alpha.10
+      eslint:
+        specifier: 9.4.0
+        version: 9.4.0
+      eslint-config-flat-gitignore:
+        specifier: 0.1.5
+        version: 0.1.5
+      eslint-config-prettier:
+        specifier: 9.1.0
+        version: 9.1.0(eslint@9.4.0)
+      globals:
+        specifier: 15.3.0
+        version: 15.3.0
 
 packages:
 
