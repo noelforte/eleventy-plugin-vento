@@ -2,8 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [renovate/**]
+    branches: [renovate/**, dev]
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   ci:
