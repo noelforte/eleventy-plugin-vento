@@ -51,8 +51,7 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 	eleventyConfig.addTemplateFormats('vto');
 	eleventyConfig.addExtension('vto', {
 		outputFileExtension: 'html',
-
-		async compile(inputContent) {
+		async compile(inputContent, inputPath) {
 			return async (data) => {
 				if (options.addHelpers) {
 					// Extract a possible namespace from the addHelpers option
@@ -68,7 +67,7 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 					else data = { ...data, ...helpers };
 				}
 
-				return env.runString(inputContent, data).then(({ content }) => content);
+				return await env.runString(inputContent, data, inputPath).then((result) => result.content);
 			};
 		},
 	});
