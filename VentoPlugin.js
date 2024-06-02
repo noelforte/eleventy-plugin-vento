@@ -1,5 +1,5 @@
 /**
- * @file Adds Vento support to Eleventy.
+ * @file Adds support for the Vento templating language to Eleventy.
  *
  * @typedef VentoPluginOptions
  * @prop {Object<string,(...any) => any} [filters={}] An object containing methods that

@@ -1,9 +1,12 @@
 {
 	"name": "eleventy-plugin-vento",
 	"version": "1.0.4",
-	"description": "Adds support for the Vento templating language to Eleventy",
+	"description": "Adds support for the Vento templating language to Eleventy.",
 	"type": "module",
 	"packageManager": "pnpm@9.1.4",
+	"engines": {
+		"node": ">=16"
+	},
 	"scripts": {
 		"test": "rm -rf test/output; cd test/input; eleventy",
 		"test-serve": "rm -rf test/output; cd test/input; eleventy --serve"
