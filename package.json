@@ -5,7 +5,8 @@
 	"type": "module",
 	"packageManager": "pnpm@9.1.4",
 	"scripts": {
-		"test": "rm -rf test/output; cd test/input; eleventy"
+		"test": "rm -rf test/output; cd test/input; eleventy",
+		"test-serve": "rm -rf test/output; cd test/input; eleventy --serve"
 	},
 	"main": "./VentoPlugin.js",
 	"repository": "git@github.com:noelforte/eleventy-plugin-vento.git",
