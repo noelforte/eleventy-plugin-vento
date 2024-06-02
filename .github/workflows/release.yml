@@ -12,6 +12,8 @@ jobs:
       id-token: write
       contents: write
     steps:
+      - uses: actions/checkout@v4
+
       - name: Setup
         uses: ./.github/actions/setup
 
