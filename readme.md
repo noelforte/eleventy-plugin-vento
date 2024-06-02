@@ -43,6 +43,9 @@ export default function (eleventyConfig) {
     // A set of filters to load into Vento
     filters: {},
 
+    // An array of Vento plugins to load
+    plugins: [],
+
     // Define whether Javascript Functions should be added
     // to page data. See below for usage notes on this.
     addHelpers: true
@@ -57,7 +60,7 @@ export default function (eleventyConfig) {
 }
 ```
 
-View the [full list of options](https://vento.js.org/configuration/#options/) to pass as a Vento Configuration object.
+View the [full list of options](https://vento.js.org/configuration/#options/) to pass as a Vento Configuration object (as `ventoOptions`).
 
 ## Vento Filters
 
@@ -66,12 +69,14 @@ Set the `filters` property to an object with methods, these will be loaded as fi
 Here's an example of defining an `italicize` filter like the example in the Vento documentation:
 
 ```js
-{
-  filters: {
-    italicize(text) {
-      return `<em>${text}</em>`
-    }
-  }
+export default function (eleventyConfig) {
+  eleventyConfig.addPlugin(VentoPlugin, {
+    filters: {
+      italicize(text) {
+        return `<em>${text}</em>`;
+      },
+    },
+  });
 }
 ```
 
@@ -82,6 +87,25 @@ And now we can use our filter in a template:
 ```
 
 See https://vento.js.org/configuration/#filters for more information about filters and how they work.
+
+## Vento Plugins
+
+If you'd like to extend the Vento library with any plugins, include them in an array passed to the `plugins` option. Here's an example loading the [auto trim](https://vento.js.org/plugins/auto-trim/) plugin:
+
+```js
+import { VentoPlugin } from 'eleventy-plugin-vento';
+import autoTrim, { defaultTags } from 'ventojs/plugins/autotrim_plugin.js';
+
+export default function (eleventyConfig) {
+  eleventyConfig.addPlugin(VentoPlugin, {
+    plugins: [
+      autoTrim({
+        tags: ['tag', ...defaultTags],
+      }),
+    ],
+  });
+}
+```
 
 ## JavaScript Helpers
 
