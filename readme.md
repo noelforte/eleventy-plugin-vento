@@ -6,6 +6,7 @@ An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://ve
 [Usage](#usage)<br>
 [Plugin Options](#plugin-options)<br>
 [Vento Filters](#vento-filters)<br>
+[Vento Plugins](#vento-plugins)<br>
 [JavaScript Helpers](#javascript-helpers)<br>
 
 ## Installing
