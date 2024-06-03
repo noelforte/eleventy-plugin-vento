@@ -65,7 +65,7 @@ View the [full list of options](https://vento.js.org/configuration/#options/) to
 
 ## Vento Filters
 
-Set the `filters` property to an object with methods, these will be loaded as filters into Vento when Eleventy is run. Note that this feature exists **separately** from the concept of filters in Eleventy ([which are optionally accessible as data in Vento templates]()).
+Set the `filters` property to an object with methods, these will be loaded as filters into Vento when Eleventy is run. Note that this feature exists **separately** from the concept of filters in Eleventy ([which are optionally accessible as data in Vento templates](#javascript-helpers)).
 
 Here's an example of defining an `italicize` filter like the example in the Vento documentation:
 
