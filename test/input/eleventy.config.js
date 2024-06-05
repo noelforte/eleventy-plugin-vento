@@ -1,4 +1,4 @@
-import { VentoPlugin } from '../../VentoPlugin.js';
+import { VentoPlugin } from 'eleventy-plugin-vento';
 import autoTrim from 'ventojs/plugins/auto_trim.js';
 
 export const config = {

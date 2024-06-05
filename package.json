@@ -12,6 +12,9 @@
 		"test-serve": "rm -rf test/output; cd test/input; eleventy --serve"
 	},
 	"main": "./VentoPlugin.js",
+	"exports": {
+		".": "./VentoPlugin.js"
+	},
 	"repository": "git@github.com:noelforte/eleventy-plugin-vento.git",
 	"bugs": {
 		"url": "https://github.com/noelforte/eleventy-plugin-vento/issues"
