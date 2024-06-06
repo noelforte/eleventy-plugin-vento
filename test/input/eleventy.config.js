@@ -1,4 +1,4 @@
-import { VentoPlugin, ventoTrimDefaultTags } from 'eleventy-plugin-vento';
+import { VentoPlugin, ventoDefaultTrimTags } from 'eleventy-plugin-vento';
 
 export const config = {
 	dir: {
@@ -16,7 +16,7 @@ export default async function (eleventyConfig) {
 	});
 
 	eleventyConfig.addPlugin(VentoPlugin, {
-		trimTags: [...ventoTrimDefaultTags.autoTrimDefaultTags, 'for'],
+		trimTags: [...ventoDefaultTrimTags, 'for'],
 	});
 
 	eleventyConfig.addShortcode('possumPosse', () => 'Release the possums!!!');

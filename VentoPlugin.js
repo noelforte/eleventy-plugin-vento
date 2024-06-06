@@ -21,7 +21,7 @@ import {
 	default as autoTrim,
 	defaultTags as ventoDefaultTrimTags,
 } from 'ventojs/plugins/auto_trim.js';
-export { ventoDefaultTrimTags } from 'ventojs/plugins/auto_trim.js';
+export { ventoDefaultTrimTags };
 
 /**
  * @param {import('@11ty/eleventy/src/UserConfig.js').default} eleventyConfig
