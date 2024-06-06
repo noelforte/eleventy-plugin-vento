@@ -18,8 +18,10 @@ jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
-      contents: write
+      contents: write # to be able to publish a GitHub release
+      id-token: write # to enable use of OIDC for npm provenance
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
     needs: test
     steps:
       - uses: actions/checkout@v4
@@ -27,20 +29,13 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Test
-        run: pnpm test
-
-      - name: Publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
-        run: |
-          pnpm publish --no-git-checks --access public
-
-      - name: Write changelog
-        run: pnpm dlx changelogithub@latest --output CHANGELOG.md
+      - name:
+          Verify the integrity of provenance attestations and registry
+          signatures for installed dependencies
+        run: npm audit signatures
 
       - name: Release
-        uses: softprops/action-gh-release@v2
-        with:
-          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm exec semantic-release
