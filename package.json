@@ -1,6 +1,6 @@
 {
 	"name": "eleventy-plugin-vento",
-	"version": "0.0.0-semantically-released",
+	"version": "0.0.0-semrel-managed",
 	"description": "Adds support for the Vento templating language to Eleventy.",
 	"type": "module",
 	"packageManager": "pnpm@9.1.4",
