@@ -2,15 +2,25 @@ name: Release
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches:
+      - main
+      - alpha
+      - beta
+      - next
+      - next-major
+      - v[0-9]+.[0-9]+.[0-9]+
+      - v[0-9]+.[0-9]+.[0-9]+-[a-z]+.[0-9]+
 
 jobs:
+  test:
+    uses: ./.github/workflows/ci.yml
+
   release:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: write
+    needs: test
     steps:
       - uses: actions/checkout@v4
 
