@@ -5,16 +5,25 @@
  * @prop {Object<string,(...any) => any} [filters={}] An object containing methods that
  * will be loaded as filters into Vento.
  * @prop {Function[]} [plugins=[]] An array of plugins to load into vento.
- * @prop {import('ventojs').Options} [ventoOptions] Vento engine configuration object
- * that will be merged with default options.
  * @prop {string|boolean} [addHelpers=true]
  * Whether [Javascript Functions](https://www.11ty.dev/docs/languages/javascript/#javascript-template-functions)
  * should be merged into data provided to templates. If a string, functions will be namespaced under
  * a property with this name.
+ * @prop {boolean|string[]} [trimTags=false] Whether to automatically trim tags from output. Uses Vento's
+ * [autoTrim](https://vento.js.org/plugins/auto-trim/) plugin under the hood.
+ * @prop {import('ventojs').Options} [ventoOptions] Vento engine configuration object
+ * that will be merged with default options.
  */
 
 import path from 'node:path';
 import VentoJs from 'ventojs';
+
+// Expose autotrim plugin defaults
+import {
+	default as autoTrim,
+	defaultTags as ventoDefaultTrimTags,
+} from 'ventojs/plugins/auto_trim.js';
+export { ventoDefaultTrimTags } from 'ventojs/plugins/auto_trim.js';
 
 /**
  * @param {import('@11ty/eleventy/src/UserConfig.js').default} eleventyConfig
@@ -32,6 +41,7 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 	options = {
 		addHelpers: true,
 		filters: {},
+		trimTags: false,
 		plugins: [],
 		ventoOptions: {
 			includes: path.join(dir.input, dir.includes),
@@ -48,6 +58,9 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 
 	// Load user-defined plugins into vento
 	for (const plugin of options.plugins) env.use(plugin);
+
+	// Add autotrim plugin if enabled
+	if (options.trimTags) env.use(autoTrim({ tags: options.trimTags || ventoDefaultTrimTags }));
 
 	eleventyConfig.on('eleventy.before', () => {
 		env.cache.clear();
