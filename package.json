@@ -32,11 +32,13 @@
 		"ventojs": "0.12.6"
 	},
 	"devDependencies": {
+		"@11ty/eleventy": "3.0.0-alpha.10",
+		"conventional-changelog-conventionalcommits": "^8.0.0",
 		"eslint": "9.4.0",
 		"eslint-config-flat-gitignore": "0.1.5",
 		"eslint-config-prettier": "9.1.0",
 		"globals": "15.3.0",
-		"@11ty/eleventy": "3.0.0-alpha.10"
+		"semantic-release": "24.0.0"
 	},
 	"prettier": {
 		"bracketSameLine": true,

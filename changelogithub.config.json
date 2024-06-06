@@ -1,8 +1,0 @@
-{
-	"types": {
-		"feat": { "title": "New Features" },
-		"fix": { "title": "Bug Fixes" },
-		"refactor": { "title": "Refactorings" },
-		"docs": { "title": "Documentation" }
-	}
-}
