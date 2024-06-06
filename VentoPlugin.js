@@ -2,8 +2,6 @@
  * @file Adds support for the Vento templating language to Eleventy.
  *
  * @typedef VentoPluginOptions
- * @prop {Object<string,(...any) => any} [filters={}] An object containing methods that
- * will be loaded as filters into Vento.
  * @prop {Function[]} [plugins=[]] An array of plugins to load into vento.
  * @prop {string|boolean} [addHelpers=true]
  * Whether [Javascript Functions](https://www.11ty.dev/docs/languages/javascript/#javascript-template-functions)
@@ -37,10 +35,10 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 	}
 
 	// Pull some bits from eleventyConfig and merge user-options with defaults
-	const { dir, javascriptFunctions } = eleventyConfig;
+	const { dir, javascriptFunctions, liquidFilters, nunjucksFilters, nunjucksAsyncFilters } =
+		eleventyConfig;
 	options = {
 		addHelpers: true,
-		filters: {},
 		trimTags: false,
 		plugins: [],
 		ventoOptions: {
@@ -53,8 +51,17 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 	// Init vento
 	const env = VentoJs(options.ventoOptions);
 
-	// Load user-defined filters into vento
-	for (const filter in options.filters) env.filters[filter] = options.filters[filter];
+	// Create empty sets to hold user defined functions
+	const filters = {};
+	const helperFunctions = {};
+
+	for (const fn in javascriptFunctions) {
+		if (liquidFilters[fn] && (nunjucksFilters[fn] || nunjucksAsyncFilters[fn])) {
+			filters[fn] = javascriptFunctions[fn];
+		} else {
+			helperFunctions[fn] = javascriptFunctions[fn];
+		}
+	}
 
 	// Load user-defined plugins into vento
 	for (const plugin of options.plugins) env.use(plugin);
@@ -77,13 +84,18 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 					const namespace = options.addHelpers;
 
 					// Rebind functions to page data so this.page, this.eleventy, etc works as intended
-					const helpers = Object.assign(
-						...Object.entries(javascriptFunctions).map(([name, fn]) => ({ [name]: fn.bind(data) }))
-					);
+					for (const helper in helperFunctions) {
+						helperFunctions[helper] = helperFunctions[helper].bind(data);
+					}
+
+					// Rebind filters the same way
+					for (const filter in filters) {
+						env.filters[filter] = filters[filter].bind(data);
+					}
 
 					// Merge helpers into page data
-					if (typeof namespace === 'string') data = { ...data, [namespace]: helpers };
-					else data = { ...data, ...helpers };
+					if (typeof namespace === 'string') data = { ...data, [namespace]: helperFunctions };
+					else data = { ...data, ...helperFunctions };
 				}
 
 				return await env.runString(inputContent, data, inputPath).then((result) => result.content);

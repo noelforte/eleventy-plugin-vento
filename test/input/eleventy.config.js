@@ -9,6 +9,12 @@ export const config = {
 
 /** @param {import('@11ty/eleventy/src/UserConfig.js').default} eleventyConfig */
 export default async function (eleventyConfig) {
+	eleventyConfig.addFilter('italicize', (content) => `<em>${content}</em>`);
+
+	eleventyConfig.addFilter('appendURL', function (content) {
+		return `${content} ${this.page.url}`;
+	});
+
 	eleventyConfig.addPlugin(VentoPlugin, {
 		trimTags: [...ventoTrimDefaultTags.autoTrimDefaultTags, 'for'],
 	});

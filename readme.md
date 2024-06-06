@@ -7,6 +7,7 @@ An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://ve
 [Plugin Options](#plugin-options)<br>
 [Vento Filters](#vento-filters)<br>
 [Vento Plugins](#vento-plugins)<br>
+[Auto-Trimming Tags](#auto-trimming-tags)<br>
 [JavaScript Helpers](#javascript-helpers)<br>
 
 ## Installing
@@ -39,17 +40,17 @@ This plugin ships with default options out of the box, but you can [pass an opti
 import { VentoPlugin } from 'eleventy-plugin-vento';
 
 export default function (eleventyConfig) {
-
   eleventyConfig.addPlugin(VentoPlugin, {
-    // A set of filters to load into Vento
-    filters: {},
-
     // An array of Vento plugins to load
     plugins: [],
 
     // Define whether Javascript Functions should be added
     // to page data. See below for usage notes on this.
-    addHelpers: true
+    addHelpers: true,
+
+    // Define tags that should be trimmed, or set to true
+    // to trim the default tags
+    trimTags: [],
 
     // A Vento configuration object
     ventoOptions: {
@@ -57,62 +58,74 @@ export default function (eleventyConfig) {
       autoescape: false,
     },
   });
-
 }
 ```
 
 View the [full list of options](https://vento.js.org/configuration/#options/) to pass as a Vento Configuration object (as `ventoOptions`).
 
-## Vento Filters
+## Filters
 
-Set the `filters` property to an object with methods, these will be loaded as filters into Vento when Eleventy is run. Note that this feature exists **separately** from the concept of filters in Eleventy ([which are optionally accessible as data in Vento templates](#javascript-helpers)).
+Filters that are added using Eleventy's `.addFilter()` or `.addAsyncFilter()` methods will be automatically loaded into Vento. Since Vento filters and Eleventy filters follow the same syntax for filters (content as first argument), the implementation is 1:1.
 
-Here's an example of defining an `italicize` filter like the example in the Vento documentation:
+[More information about Vento filters](https://vento.js.org/configuration/#filters)
 
-```js
-export default function (eleventyConfig) {
-  eleventyConfig.addPlugin(VentoPlugin, {
-    filters: {
-      italicize(text) {
-        return `<em>${text}</em>`;
-      },
-    },
-  });
-}
-```
-
-And now we can use our filter in a template:
-
-```hbs
-<p>The title of my page is: "{{ title |> italicize }}"</p>
-```
-
-See https://vento.js.org/configuration/#filters for more information about filters and how they work.
+[More information about Eleventy filters](https://www.11ty.dev/docs/filters/)
 
 ## Vento Plugins
 
-If you'd like to extend the Vento library with any plugins, include them in an array passed to the `plugins` option. Here's an example loading the [auto trim](https://vento.js.org/plugins/auto-trim/) plugin:
+If you'd like to extend the Vento library with any plugins, include them in an array passed to the `plugins` option.
 
 ```js
 import { VentoPlugin } from 'eleventy-plugin-vento';
-import autoTrim, { defaultTags } from 'ventojs/plugins/autotrim_plugin.js';
+
+function myCustomPlugin() {
+  // ...plugin code...
+}
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(VentoPlugin, {
-    plugins: [
-      autoTrim({
-        tags: ['tag', ...defaultTags],
-      }),
-    ],
+    plugins: [myCustomPlugin()],
   });
 }
 ```
+
+## Auto-Trimming Tags
+
+One exception to Vento plugins is the `autoTrim` plugin which is bundled with Vento, and by extension, this plugin. This plugin provides a convenient way to control whitespace in the output by collapsing spaces left behind when Vento's tags are removed.
+
+To trim the default tags, set the `trimTags` plugin option to `true`.
+
+```js
+eleventyConfig.addPlugin(VentoPlugin, {
+  trimTags: true,
+});
+```
+
+The default set of tags that are trimmed are defined by Vento and are listed in the [usage notes](https://vento.js.org/plugins/auto-trim/#usage) for the auto trim plugin. To set your own tags, set `trimTags` to an array instead.
+
+```js
+eleventyConfig.addPlugin(VentoPlugin, {
+  trimTags: ['set', 'if', 'for'],
+});
+```
+
+If instead, you'd like to extend instead of replace the default tag list, `eleventy-plugin-vento` reexports the `defaultTags` array used by as `ventoDefaultTrimTags`, which can be used like so:
+
+```js
+import { VentoPlugin, ventoDefaultTrimTags } from 'eleventy-plugin-vento';
+
+eleventyConfig.addPlugin(VentoPlugin, {
+  trimTags: [...ventoDefaultTrimTags, 'tag'],
+});
+```
+
+For more information on the auto-trim plugin, consult the [plugin documentation](https://vento.js.org/plugins/auto-trim/).
 
 ## JavaScript Helpers
 
 Vento can [run arbitrary JavaScript](https://vento.js.org/syntax/javascript/) in templates through its `{{> ...}}` operator, which evaluates at the time the template is run. However, you may want to use Eleventy Shortcodes and Filters in your templates as well.
 
-By setting `addHelpers` in the plugin options (defaults to `true`), all JavaScript functions (which includes any Universal Filters and Shortcodes) are exposed as functions in page data. This feature functions very similarly to WebC's ["helper functions"](https://www.11ty.dev/docs/languages/javascript/#javascript-template-functions) feature.
+By setting `addHelpers` in the plugin options (defaults to `true`), all JavaScript functions (which includes any Universal Shortcodes) are exposed as functions in page data. This feature functions very similarly to WebC's ["helper functions"](https://www.11ty.dev/docs/languages/javascript/#javascript-template-functions) feature.
 
 As an example:
 
@@ -154,4 +167,12 @@ addPlugin(VentoPlugin, { addHelpers: 'functions' });
 <!-- should be written as: -->
 <p>This is something {{ functions.italicize('really') }} important.</p>
 <p>{{ functions.possumPosse() }}</p>
+```
+
+Finally, if you'd like to disable populating helper functions at all, set `addHelpers` to false:
+
+```js
+eleventyConfig.addPlugin(VentoPlugin, {
+  addHelpers: false,
+});
 ```
