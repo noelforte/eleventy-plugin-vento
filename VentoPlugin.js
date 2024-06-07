@@ -57,6 +57,7 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 	eleventyConfig.addTemplateFormats('vto');
 	eleventyConfig.addExtension('vto', {
 		outputFileExtension: 'html',
+
 		async compile(inputContent, inputPath) {
 			return async (data) => {
 				if (options.addHelpers) {
@@ -75,6 +76,13 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 
 				return await env.runString(inputContent, data, inputPath).then((result) => result.content);
 			};
+		},
+
+		compileOptions: {
+			permalink(contents, inputPath) {
+				if (!contents) return contents;
+				return (data) => env.runString(contents, data, inputPath).then((result) => result.content);
+			},
 		},
 	});
 }
