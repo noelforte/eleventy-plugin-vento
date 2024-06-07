@@ -19,5 +19,5 @@ export default async function (eleventyConfig) {
 		trimTags: [...ventoDefaultTrimTags, 'for'],
 	});
 
-	eleventyConfig.addShortcode('possumPosse', () => 'Release the possums!!!');
+	eleventyConfig.addShortcode('possumPosse', (number = 'the') => `Release ${number} possums!!!`);
 }
