@@ -31,9 +31,7 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name:
-          Verify the integrity of provenance attestations and registry
-          signatures for installed dependencies
+      - name: Verify provenance attestations and registry signatures
         run: npm audit signatures
 
       - name: Release
