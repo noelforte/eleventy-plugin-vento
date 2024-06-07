@@ -5,7 +5,7 @@ An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://ve
 [Installing](#installing)<br>
 [Usage](#usage)<br>
 [Plugin Options](#plugin-options)<br>
-[Vento Filters](#vento-filters)<br>
+[Filters](#filters)<br>
 [Vento Plugins](#vento-plugins)<br>
 [Auto-Trimming Tags](#auto-trimming-tags)<br>
 [JavaScript Helpers](#javascript-helpers)<br>
@@ -49,7 +49,7 @@ export default function (eleventyConfig) {
     addHelpers: true,
 
     // Define tags that should be trimmed, or set to true
-    // to trim the default tags
+    // to trim the default tags (see section on Auto-trimming)
     trimTags: [],
 
     // A Vento configuration object
