@@ -63,6 +63,11 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 		}
 	}
 
+	// Load filters into vento
+	for (const filter in filters) {
+		env.filters[filter] = filters[filter];
+	}
+
 	// Load user-defined plugins into vento
 	for (const plugin of options.plugins) env.use(plugin);
 
@@ -87,8 +92,8 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 					}
 
 					// Rebind filters the same way
-					for (const filter in filters) {
-						env.filters[filter] = filters[filter].bind(data);
+					for (const filter in env.filters) {
+						env.filters[filter] = env.filters[filter].bind(data);
 					}
 
 					// Merge helpers into page data
@@ -104,7 +109,6 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 
 		compileOptions: {
 			permalink(linkContents, inputPath) {
-				console.log(linkContents);
 				if (!linkContents) return linkContents;
 				return async (data) => {
 					const result = await env.runString(linkContents, data, inputPath);
