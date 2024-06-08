@@ -1,5 +1,4 @@
-import { VentoPlugin } from '../../VentoPlugin.js';
-import autoTrim from 'ventojs/plugins/auto_trim.js';
+import { VentoPlugin, ventoDefaultTrimTags } from 'eleventy-plugin-vento';
 
 export const config = {
 	dir: {
@@ -10,14 +9,15 @@ export const config = {
 
 /** @param {import('@11ty/eleventy/src/UserConfig.js').default} eleventyConfig */
 export default async function (eleventyConfig) {
-	eleventyConfig.addPlugin(VentoPlugin, {
-		filters: {
-			italicize(content) {
-				return `<em>${content}</em>`;
-			},
-		},
-		plugins: [autoTrim()],
+	eleventyConfig.addFilter('italicize', (content) => `<em>${content}</em>`);
+
+	eleventyConfig.addFilter('appendURL', function (content) {
+		return `${content} ${this.page.url}`;
 	});
 
-	eleventyConfig.addShortcode('possumPosse', () => 'Release the possums!!!');
+	eleventyConfig.addPlugin(VentoPlugin, {
+		trimTags: [...ventoDefaultTrimTags, 'for'],
+	});
+
+	eleventyConfig.addShortcode('possumPosse', (number = 'the') => `Release ${number} possums!!!`);
 }
