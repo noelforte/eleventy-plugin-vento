@@ -109,7 +109,7 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 
 		compileOptions: {
 			permalink(linkContents, inputPath) {
-				if (!linkContents) return linkContents;
+				if (typeof linkContents !== 'string') return linkContents;
 				return async (data) => {
 					const result = await env.runString(linkContents, data, inputPath);
 					return result.content;
