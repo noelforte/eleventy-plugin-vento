@@ -104,9 +104,13 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 		},
 
 		compileOptions: {
-			permalink(contents, inputPath) {
-				if (!contents) return contents;
-				return (data) => env.runString(contents, data, inputPath).then((result) => result.content);
+			permalink(linkContents, inputPath) {
+				console.log(linkContents);
+				if (!linkContents) return linkContents;
+				return async (data) => {
+					const result = await env.runString(linkContents, data, inputPath);
+					return result.content;
+				};
 			},
 		},
 	});
