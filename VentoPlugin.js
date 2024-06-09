@@ -85,14 +85,20 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 					// Extract a possible namespace from the addHelpers option
 					const namespace = options.addHelpers;
 
+					// Extract page and eleventy values from data
+					const { page, eleventy } = data;
+
 					// Rebind functions to page data so this.page, this.eleventy, etc works as intended
 					for (const helper in helperFunctions) {
-						helperFunctions[helper] = helperFunctions[helper].bind(data);
+						helperFunctions[helper] = helperFunctions[helper].bind({
+							page,
+							eleventy,
+						});
 					}
 
 					// Rebind filters the same way
-					for (const filter in env.filters) {
-						env.filters[filter] = env.filters[filter].bind(data);
+					for (const filter in filters) {
+						env.filters[filter] = filters[filter].bind({ page, eleventy });
 					}
 
 					// Merge helpers into page data
