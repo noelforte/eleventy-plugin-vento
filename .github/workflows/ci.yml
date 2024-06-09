@@ -2,11 +2,12 @@ name: CI
 
 on:
   push:
+    branches: [main, dev, alpha, beta, next, renovate/**]
   workflow_dispatch:
   workflow_call:
 
 jobs:
-  ci:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
