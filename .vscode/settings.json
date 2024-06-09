@@ -1,3 +1,4 @@
 {
-	"cSpell.words": ["Vento"]
+	"cSpell.words": ["Vento"],
+	"deno.enable": false
 }
