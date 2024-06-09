@@ -72,7 +72,8 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 	for (const plugin of options.plugins) env.use(plugin);
 
 	// Add autotrim plugin if enabled
-	if (options.trimTags) env.use(autoTrim({ tags: options.trimTags || ventoDefaultTrimTags }));
+	if (options.trimTags === true) env.use(autoTrim());
+	else if (options.trimTags) env.use(autoTrim({ tags: options.trimTags }));
 
 	// Add vto as a template format and create a custom template for it
 	eleventyConfig.addTemplateFormats('vto');
