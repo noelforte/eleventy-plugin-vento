@@ -13,7 +13,6 @@
  * that will be merged with default options.
  */
 
-import path from 'node:path';
 import VentoJs from 'ventojs';
 
 // Expose autotrim plugin defaults
@@ -35,14 +34,15 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 	}
 
 	// Pull some bits from eleventyConfig and merge user-options with defaults
-	const { dir, javascriptFunctions, liquidFilters, nunjucksFilters, nunjucksAsyncFilters } =
+	const { directories, javascriptFunctions, liquidFilters, nunjucksFilters, nunjucksAsyncFilters } =
 		eleventyConfig;
+
 	options = {
 		addHelpers: true,
 		trimTags: false,
 		plugins: [],
 		ventoOptions: {
-			includes: path.join(dir.input, dir.includes),
+			includes: directories.includes,
 			autoescape: false,
 		},
 		...options,
