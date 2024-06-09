@@ -1,20 +1,11 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - main
-      - alpha
-      - beta
-      - next
-      - next-major
-      - v[0-9]+.[0-9]+.[0-9]+
-      - v[0-9]+.[0-9]+.[0-9]+-[a-z]+.[0-9]+
+  # Run releases every monday and wednesday at 12:33 UTC (or manually)
+  schedule: ['33 12 * * 1,3']
+  workflow_dispatch:
 
 jobs:
-  test:
-    uses: ./.github/workflows/ci.yml
-
   release:
     runs-on: ubuntu-latest
     permissions:
