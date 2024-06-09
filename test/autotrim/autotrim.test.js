@@ -1,17 +1,19 @@
-import { runBuild } from '../get-instance.js';
 import { expect, test } from 'vitest';
+import { runBuild } from '../get-instance.js';
 
 const [trimSingle, trimAll] = await Promise.all([
 	runBuild(import.meta.dirname, { vento: { trimTags: ['set'] } }),
 	runBuild(import.meta.dirname, { vento: { trimTags: true } }),
 ]);
 
-test('trim a single tag', async () => {
+test('should trim a single tag', async () => {
 	const page = trimSingle[0];
-	expect(page.content).toMatchSnapshot();
+	await expect(page.content).toMatchFileSnapshot(
+		'./build/autotrim-single.html'
+	);
 });
 
-test('trim a single tag', async () => {
+test('should trim all tags', async () => {
 	const page = trimAll[0];
-	expect(page.content).toMatchSnapshot();
+	await expect(page.content).toMatchFileSnapshot('./build/autotrim-all.html');
 });

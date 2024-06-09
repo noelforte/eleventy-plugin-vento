@@ -1,9 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`renders a basic template 1`] = `
-"
-<h1>Basic Page</h1>
-
-This is a standalone page.
-"
-`;

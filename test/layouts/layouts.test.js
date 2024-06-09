@@ -1,14 +1,18 @@
-import { runBuild } from '../get-instance.js';
 import { expect, test } from 'vitest';
+import { runBuild } from '../get-instance.js';
 
 const results = await runBuild(import.meta.dirname);
 
-test('render page with example layout 1', () => {
+test('render page with example layout 1', async () => {
 	const page = results.find(({ url }) => url === '/page1/');
-	expect(page.content).toMatchSnapshot();
+	await expect(page.content).toMatchFileSnapshot(
+		'./__snapshots__/example-layout-1.html'
+	);
 });
 
-test('render page with example layout 2', () => {
+test('render page with example layout 2', async () => {
 	const page = results.find(({ url }) => url === '/page2/');
-	expect(page.content).toMatchSnapshot();
+	await expect(page.content).toMatchFileSnapshot(
+		'./__snapshots__/example-layout-2.html'
+	);
 });

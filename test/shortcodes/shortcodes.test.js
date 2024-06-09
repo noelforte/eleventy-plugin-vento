@@ -1,5 +1,5 @@
+import { test } from 'vitest';
 import { runBuild } from '../get-instance.js';
-import { expect, test } from 'vitest';
 
 const results = await runBuild(import.meta.dirname, {
 	eleventy(configApi) {
@@ -11,12 +11,14 @@ const results = await runBuild(import.meta.dirname, {
 	},
 });
 
-test('shortcode without argument', () => {
+test.concurrent('shortcode without argument', ({ expect }) => {
 	const page = results.find(({ url }) => url === '/basic/');
 	expect(page.content).toBe('Hello world!\n');
 });
 
-test('shortcode with arguments', async () => {
+test.concurrent('shortcode with arguments', async ({ expect }) => {
 	const page = results.find(({ url }) => url === '/with-arguments/');
-	await expect(page.content).toMatchSnapshot();
+	await expect(page.content).toMatchFileSnapshot(
+		'./__snapshots__/shortcode-with-arguments.html'
+	);
 });

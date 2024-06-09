@@ -21,7 +21,8 @@ export async function runBuild(fromInput, extensions = {}) {
 		/** @param {import('@11ty/eleventy/src/UserConfig.js').default} eleventyConfig */
 		config(eleventyConfig) {
 			eleventyConfig.addPlugin(VentoPlugin, extensions.vento || {});
-			eleventyConfig.ignores.add('**/*.output.html');
+
+			eleventyConfig.ignores.add('**/__snapshots__/**');
 
 			if (extensions.eleventy) extensions.eleventy.call(this, eleventyConfig);
 		},
