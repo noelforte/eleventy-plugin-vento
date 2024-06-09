@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`include a page 1`] = `
+"
+<h1>Page with includes</h1>
+
+<section class="include">
+	<p>This content is included.</p>
+	<p>Passed data for \`extra\` key: ''</p>
+</section>
+
+"
+`;
+
+exports[`include a page with data passing 1`] = `
+"
+<h1>Page with includes (data passing)</h1>
+
+<section class="include">
+	<p>This content is included.</p>
+	<p>Passed data for \`extra\` key: 'super fancy data'</p>
+</section>
+
+"
+`;

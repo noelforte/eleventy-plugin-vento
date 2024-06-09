@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`transform string with built-in method 1`] = `
+"
+Page title is 'A BASIC PAGE'
+"
+`;
+
+exports[`transform string with passed arguments 1`] = `
+"This is a <strong>really cool</strong> filter.
+"
+`;
