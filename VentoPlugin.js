@@ -64,9 +64,7 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 	}
 
 	// Load filters into vento
-	for (const filter in filters) {
-		env.filters[filter] = filters[filter];
-	}
+	for (const filter in filters) env.filters[filter] = filters[filter];
 
 	// Load user-defined plugins into vento
 	for (const plugin of options.plugins) env.use(plugin);
