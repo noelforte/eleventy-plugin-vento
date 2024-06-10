@@ -17,7 +17,7 @@ export default [
 
 	// Configure ignores
 	{
-		ignores: ['**/.cache', '**/_site', '**/node_modules', '**/functions'],
+		ignores: ['**/node_modules'],
 	},
 
 	// Configure defaults
