@@ -3,7 +3,7 @@ const presetConfig = {
 		{ type: 'feat', section: 'New Features' },
 		{ type: 'fix', section: 'Bug Fixes' },
 		{ type: 'refactor', section: 'Refactorings' },
-		{ type: 'docs', hidden: 'Documentation' },
+		{ type: 'docs', section: 'Documentation' },
 		{ type: 'chore', hidden: true },
 		{ type: 'perf', hidden: true },
 		{ type: 'style', hidden: true },
