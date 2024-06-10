@@ -73,13 +73,14 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 	if (options.trimTags === true) env.use(autoTrim());
 	else if (options.trimTags) env.use(autoTrim({ tags: options.trimTags }));
 
+	eleventyConfig.on('eleventy.before', () => env.cache.clear());
+
 	// Add vto as a template format and create a custom template for it
 	eleventyConfig.addTemplateFormats('vto');
 	eleventyConfig.addExtension('vto', {
 		outputFileExtension: 'html',
 
 		async compile(inputContent, inputPath) {
-			env.cache.clear();
 			return async (data) => {
 				if (options.addHelpers) {
 					// Extract a possible namespace from the addHelpers option
@@ -113,10 +114,10 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 		},
 
 		compileOptions: {
-			permalink(linkContents, inputPath) {
+			permalink(linkContents) {
 				if (typeof linkContents !== 'string') return linkContents;
 				return async (data) => {
-					const result = await env.runString(linkContents, data, inputPath);
+					const result = await env.runString(linkContents, data);
 					return result.content;
 				};
 			},
