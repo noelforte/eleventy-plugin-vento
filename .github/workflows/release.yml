@@ -1,6 +1,3 @@
-# Run releases every monday and wednesday
-# at 12:33 UTC (or manually)
-
 name: Release
 
 on:
