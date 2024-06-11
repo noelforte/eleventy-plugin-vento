@@ -4,13 +4,19 @@
 name: Release
 
 on:
-  schedule:
-    - cron: '33 12 * * 1,3'
+  push:
+    branches: [main, alpha, beta, next]
   workflow_dispatch:
 
 jobs:
+  test:
+    name: Pre-release checks
+    uses: ./.github/workflows/ci.yml
+
   release:
+    name: Release new version
     runs-on: ubuntu-latest
+    needs: test
     permissions:
       contents: write # to be able to publish a GitHub release
       id-token: write # to enable use of OIDC for npm provenance
@@ -24,9 +30,6 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Check project for errors
-        run: pnpm test
-
       - name: Verify provenance attestations and registry signatures
         run: npm audit signatures
 
@@ -34,4 +37,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec semantic-release
+        run: pnpm exec semantic-release --dryrun

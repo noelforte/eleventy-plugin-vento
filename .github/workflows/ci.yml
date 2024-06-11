@@ -2,8 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main, dev, alpha, beta, next, renovate/**]
-  workflow_dispatch:
+    branches-ignore: [main, alpha, beta, next]
   workflow_call:
 
 jobs:
