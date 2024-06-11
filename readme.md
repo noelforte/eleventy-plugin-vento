@@ -172,7 +172,7 @@ Alternatively, if you'd rather keep functions namespaced in your page data, pass
 addPlugin(VentoPlugin, { addHelpers: 'functions' });
 ```
 
-```hbs
+```nunjucks
 <!-- With the above, this: -->
 <p>This is something {{ italicize('really') }} important.</p>
 <p>{{ possumPosse() }}</p>
@@ -196,7 +196,7 @@ Exclusive to this plugin is the ability to skip processing a vento tag entirely 
 
 To skip over a tag, add a `!` directly after the opening tag.
 
-```hbs
+```nunjucks
 <!-- This: -->
 {{! doSomeServerSideStuff() }}
 
@@ -206,7 +206,7 @@ To skip over a tag, add a `!` directly after the opening tag.
 
 Works with JS expressions too:
 
-```hbs
+```nunjucks
 {{!> 2 + 2 }}
 
 <!-- Renders as: -->
@@ -217,7 +217,7 @@ Vento does offer similar functionality with the [`echo` tag](https://vento.js.or
 
 Consider the following:
 
-```hbs
+```nunjucks
 {{ echo }}
   <!-- Will be preserved in output -->
   {{ if someCondition }}
@@ -231,7 +231,7 @@ Consider the following:
 
 Rather than having to do multiple `{{ /echo }} ... {{ echo }}` statements, the previous can be rewritten as such:
 
-```hbs
+```nunjucks
 <!-- This: -->
 {{! if someCondition }}
   <p>{{! getServerData }}</p>
