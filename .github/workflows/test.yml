@@ -1,12 +1,9 @@
-name: CI
+name: CI Tests
 
-on:
-  push:
-    branches-ignore: [main, alpha, beta, next]
-  workflow_call:
+on: push
 
 jobs:
-  test:
+  default:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
