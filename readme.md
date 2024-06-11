@@ -1,5 +1,17 @@
 # eleventy-plugin-vento 🌬️🎈🐀
 
+<p>
+<a href="https://github.com/semantic-release/semantic-release">
+<img src="https://img.shields.io/badge/semantic--release-Conventional_Commits-fa6673?style=flat-square&logo=semanticrelease&labelColor=111">
+</a>
+<a href="https://github.com/noelforte/eleventy-plugin-vento/actions/workflows/ci.yml">
+<img src="https://img.shields.io/github/actions/workflow/status/noelforte/eleventy-plugin-vento/ci.yml?branch=main&style=flat-square&logo=github&logoColor=eee&label=Tests&labelColor=111">
+</a>
+<a href="https://npmjs.com/package/eleventy-plugin-vento">
+<img src="https://img.shields.io/npm/v/eleventy-plugin-vento?style=flat-square&logo=npm&logoColor=eee&labelColor=cb3837&color=111">
+</a>
+</p>
+
 An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://vento.js.org/) templates.
 
 [Installing](#installing)<br>
@@ -9,6 +21,7 @@ An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://ve
 [Vento Plugins](#vento-plugins)<br>
 [Auto-Trimming Tags](#auto-trimming-tags)<br>
 [JavaScript Helpers](#javascript-helpers)<br>
+[Hybrid Rendering](#hybrid-rendering)<br>
 
 ## Installing
 
@@ -175,4 +188,61 @@ Finally, if you'd like to disable populating helper functions at all, set `addHe
 eleventyConfig.addPlugin(VentoPlugin, {
   addHelpers: false,
 });
+```
+
+## Hybrid Rendering
+
+Exclusive to this plugin is the ability to skip processing a vento tag entirely and instead preserve the tag in the markup. This could be useful if you're doing some hybrid rendering and would like to defer certain tags from being processed until load time, so they can be rendered on the server.
+
+To skip over a tag, add a `!` directly after the opening tag.
+
+```hbs
+<!-- This: -->
+{{! doSomeServerSideStuff() }}
+
+<!-- Renders as: -->
+{{ doSomeServerSideStuff() }}
+```
+
+Works with JS expressions too:
+
+```hbs
+{{!> 2 + 2 }}
+
+<!-- Renders as: -->
+{{ 2 + 2 }}
+```
+
+Vento does offer similar functionality with the [`echo` tag](https://vento.js.org/syntax/print/#echo) which works great for blocks, but can be verbose for 1-off tags.
+
+Consider the following:
+
+```hbs
+{{ echo }}
+  <!-- Will be preserved in output -->
+  {{ if someCondition }}
+    <p>{{ getServerData }}</p>
+
+    <!-- Can't render this without exiting and re-entering echo -->
+    <p>Page built on: {{ localBuildTime }}</p>
+  {{ /if }}
+{{ /echo }}
+```
+
+Rather than having to do multiple `{{ /echo }} ... {{ echo }}` statements, the previous can be rewritten as such:
+
+```hbs
+<!-- This: -->
+{{! if someCondition }}
+  <p>{{! getServerData }}</p>
+
+  <p>Page built on: {{ localBuildTime }}</p>
+{{! /if }}
+
+<!-- Renders as: -->
+{{ if someCondition }}
+  <p>{{ getServerData }}</p>
+
+  <p>Page built on: 04-08-2024</p>
+{{ /if }}
 ```
