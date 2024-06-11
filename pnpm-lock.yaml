@@ -11,6 +11,9 @@ importers:
       ventojs:
         specifier: 0.12.7
         version: 0.12.7
+      vitest:
+        specifier: 1.6.0
+        version: 1.6.0
     devDependencies:
       '@11ty/eleventy':
         specifier: 3.0.0-alpha.11
@@ -33,9 +36,6 @@ importers:
       semantic-release:
         specifier: 24.0.0
         version: 24.0.0
-      vitest:
-        specifier: 1.6.0
-        version: 1.6.0
 
 packages:
 

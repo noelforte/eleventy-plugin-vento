@@ -2,6 +2,9 @@
 	"compilerOptions": {
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
-		"baseUrl": "."
+		"baseUrl": ".",
+		"paths": {
+			"#lib/*": ["./lib/*"]
+		}
 	}
 }

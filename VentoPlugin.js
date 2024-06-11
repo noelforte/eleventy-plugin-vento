@@ -14,6 +14,7 @@
  */
 
 import VentoJs from 'ventojs';
+import { ssr } from '#lib/ssr.js';
 
 // Expose autotrim plugin defaults
 import {
@@ -68,6 +69,9 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 
 	// Load user-defined plugins into vento
 	for (const plugin of options.plugins) env.use(plugin);
+
+	// Load ssr plugin
+	env.use(ssr);
 
 	// Add autotrim plugin if enabled
 	if (options.trimTags === true) env.use(autoTrim());
