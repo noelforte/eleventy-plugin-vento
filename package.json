@@ -35,8 +35,7 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"ventojs": "0.12.7",
-		"vitest": "1.6.0"
+		"ventojs": "0.12.7"
 	},
 	"devDependencies": {
 		"@11ty/eleventy": "3.0.0-alpha.11",
