@@ -13,8 +13,8 @@ importers:
         version: 0.12.7
     devDependencies:
       '@11ty/eleventy':
-        specifier: 3.0.0-alpha.11
-        version: 3.0.0-alpha.11
+        specifier: 3.0.0-alpha.12
+        version: 3.0.0-alpha.12
       conventional-changelog-conventionalcommits:
         specifier: 8.0.0
         version: 8.0.0
@@ -58,8 +58,8 @@ packages:
     resolution: {integrity: sha512-nULO91om7vQw4Y/UBjM8i7nJ1xl+/nyK4rImZ41lFxiY2d+XUz7ChAj1CDYFjrLZeu0utAYJTZ45LlcHTkUG4g==}
     engines: {node: '>=12'}
 
-  '@11ty/eleventy@3.0.0-alpha.11':
-    resolution: {integrity: sha512-NNhx2rySlFWfij2YQ87eU+03yLOhBNPRqGDTK/gjvsi/bY/OSAbb3sQLrycQpM6V5XtMlIqh6C1adxT0CMz3Rg==}
+  '@11ty/eleventy@3.0.0-alpha.12':
+    resolution: {integrity: sha512-dtBcjyAeUDKzYgrJ6/wTqZIUXCgEWGjlBhRT/5jX8GJ4yTkDxtmTzCbkaWOwvmqpYB5+OuZdnee9wAmm1pRDsQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -2668,7 +2668,7 @@ snapshots:
     dependencies:
       normalize-path: 3.0.0
 
-  '@11ty/eleventy@3.0.0-alpha.11':
+  '@11ty/eleventy@3.0.0-alpha.12':
     dependencies:
       '@11ty/dependency-tree': 3.0.0
       '@11ty/dependency-tree-esm': 1.0.0
