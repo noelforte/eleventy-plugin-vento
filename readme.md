@@ -6,6 +6,8 @@
 
 An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://vento.js.org/) templates.
 
+## Contents
+
 [Installing](#installing)<br>
 [Usage](#usage)<br>
 [Plugin Options](#plugin-options)<br>
