@@ -1,8 +1,8 @@
 # eleventy-plugin-vento 🌬️🎈🐀
 
-[![Github Actions Status](https://img.shields.io/github/actions/workflow/status/noelforte/eleventy-plugin-vento/ci.yml?branch=main&style=for-the-badge&logo=github&logoColor=eee&label=Tests&labelColor=333)](https://github.com/noelforte/eleventy-plugin-vento/actions/workflows/ci.yml)
-[![`eleventy-plugin-vento` on npm](https://img.shields.io/npm/v/eleventy-plugin-vento?style=for-the-badge&logo=npm&logoColor=eee&labelColor=cb3837&color=333)](https://npmjs.com/package/eleventy-plugin-vento)
-[![semantic-release](https://img.shields.io/badge/semantic--release-Conventional_Commits-fa6673?style=for-the-badge&logo=semanticrelease&labelColor=111)](https://github.com/semantic-release/semantic-release)
+<a href="https://github.com/noelforte/eleventy-plugin-vento/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/noelforte/eleventy-plugin-vento/ci.yml?branch=main&style=flat-square&logo=github&logoColor=fff&label=Tests&labelColor=333" alt="Github Actions Status"></a>
+<a href="https://npmjs.com/package/eleventy-plugin-vento"><img src="https://img.shields.io/npm/v/eleventy-plugin-vento?style=flat-square&logo=npm&logoColor=fff&labelColor=333" alt="eleventy-plugin-vento on npm"></a>
+<a href="https://github.com/semantic-release/semantic-release"><img src="https://img.shields.io/badge/semantic--release-Conventional_Commits-fa6673?style=flat-square&logo=semanticrelease&logoColor=fff&labelColor=333" alt="semantic-release"></a>
 
 An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://vento.js.org/) templates.
 
