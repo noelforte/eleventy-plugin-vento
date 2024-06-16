@@ -43,7 +43,7 @@
 		"eslint-config-flat-gitignore": "0.1.5",
 		"eslint-config-prettier": "9.1.0",
 		"eslint": "9.5.0",
-		"globals": "15.4.0",
+		"globals": "15.5.0",
 		"semantic-release": "24.0.0",
 		"vitest": "1.6.0"
 	},
