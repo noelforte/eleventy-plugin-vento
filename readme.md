@@ -204,10 +204,10 @@ Works with JS expressions too:
 {{!> 2 + 2 }}
 
 <!-- Renders as: -->
-{{ 2 + 2 }}
+{{> 2 + 2 }}
 ```
 
-Vento does offer similar functionality with the [`echo` tag](https://vento.js.org/syntax/print/#echo) which works great for blocks, but can be verbose for 1-off tags.
+The Vento language offers similar functionality via the [`echo` tag](https://vento.js.org/syntax/print/#echo) which works great for blocks, but can be verbose for 1-off tags.
 
 Consider the following:
 
@@ -216,9 +216,12 @@ Consider the following:
   <!-- Will be preserved in output -->
   {{ if someCondition }}
     <p>{{ getServerData }}</p>
+{{ /echo }}
 
     <!-- Can't render this without exiting and re-entering echo -->
     <p>Page built on: {{ localBuildTime }}</p>
+
+{{ echo }}
   {{ /if }}
 {{ /echo }}
 ```
