@@ -3,12 +3,14 @@
  *
  * @typedef VentoPluginOptions
  * @prop {Function[]} [plugins=[]] An array of plugins to load into vento.
- * @prop {string|boolean} [addHelpers=true]
- * Whether [Javascript Functions](https://www.11ty.dev/docs/languages/javascript/#javascript-template-functions)
- * should be merged into data provided to templates. If a string, functions will be namespaced under
- * a property with this name.
+ * @prop {boolean} [useEleventyFeatures=true]
+ * Whether Eleventy features should be enabled in templates. If true, will create tags and filters
+ * from Eleventy shortcodes and filters.
  * @prop {boolean|string[]} [trimTags=false] Whether to automatically trim tags from output. Uses Vento's
  * [autoTrim](https://vento.js.org/plugins/auto-trim/) plugin under the hood.
+ * @prop {boolean} [useSsrPlugin=true] Whether to load the SSR-specific syntax into Vento.
+ * If true, the `{{! ... }}` tag wont be removed from the output and instead kept as is. Helpful for
+ * hybrid rendering of pre-rendered and server-side templates.
  * @prop {import('ventojs').Options} [ventoOptions] Vento engine configuration object
  * that will be merged with default options.
  */
@@ -25,62 +27,50 @@ export { ventoDefaultTrimTags };
 
 /**
  * @param {import('@11ty/eleventy/src/UserConfig.js').default} eleventyConfig
- * @param {VentoPluginOptions} options
+ * @param {VentoPluginOptions} userOptions
  */
-export function VentoPlugin(eleventyConfig, options = {}) {
+export function VentoPlugin(eleventyConfig, userOptions = {}) {
 	if (!('addExtension' in eleventyConfig)) {
 		console.log(
 			`[eleventy-plugin-vento] WARN Eleventy plugin compatibility: Custom templates are required for this plugin, please use Eleventy v1.0 or newer.`
 		);
 	}
 
-	// Pull some bits from eleventyConfig and merge user-options with defaults
-	const { directories, javascriptFunctions, liquidFilters, nunjucksFilters, nunjucksAsyncFilters } =
-		eleventyConfig;
-
-	options = {
-		addHelpers: true,
+	/** @type {VentoPluginOptions} */
+	const options = {
+		// Define defaults
 		trimTags: false,
 		plugins: [],
+		useSsrPlugin: true,
+		useEleventyFeatures: true,
 		ventoOptions: {
-			includes: directories.includes,
+			includes: eleventyConfig.directories.includes,
 			autoescape: false,
 		},
-		...options,
+
+		// Merge in user-provided options
+		...userOptions,
 	};
 
 	// Init vento
-	const env = VentoJs(options.ventoOptions);
-
-	// Create empty sets to hold user defined functions
-	const filters = {};
-	const helperFunctions = {};
-
-	for (const fn in javascriptFunctions) {
-		if (liquidFilters[fn] && (nunjucksFilters[fn] || nunjucksAsyncFilters[fn])) {
-			filters[fn] = javascriptFunctions[fn];
-		} else {
-			helperFunctions[fn] = javascriptFunctions[fn];
-		}
-	}
-
-	// Load filters into vento
-	for (const filter in filters) env.filters[filter] = filters[filter];
+	const ventoEnv = VentoJs(options.ventoOptions);
 
 	// Load user-defined plugins into vento
-	for (const plugin of options.plugins) env.use(plugin);
+	for (const plugin of options.plugins) ventoEnv.use(plugin);
 
 	// Load ssr plugin
-	env.use(ssr);
+	ventoEnv.use(ssr);
 
 	// Add autotrim plugin if enabled
-	if (options.trimTags === true) env.use(autoTrim());
-	else if (options.trimTags) env.use(autoTrim({ tags: options.trimTags }));
+	if (userOptions.trimTags === true) ventoEnv.use(autoTrim());
+	else if (userOptions.trimTags) ventoEnv.use(autoTrim({ tags: userOptions.trimTags }));
 
-	eleventyConfig.on('eleventy.before', () => env.cache.clear());
+	eleventyConfig.on('eleventy.before', () => ventoEnv.cache.clear());
 
-	// Add vto as a template format and create a custom template for it
+	// Add vto as a template format
 	eleventyConfig.addTemplateFormats('vto');
+
+	// Add vto extension handling
 	eleventyConfig.addExtension('vto', {
 		// Set output extension
 		outputFileExtension: 'html',
@@ -91,32 +81,19 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 		// Main compile function
 		async compile(inputContent, inputPath) {
 			return async (data) => {
-				if (options.addHelpers) {
-					// Extract a possible namespace from the addHelpers option
-					const namespace = options.addHelpers;
-
-					// Extract page and eleventy values from data
-					const { page, eleventy } = data;
-
-					// Rebind functions to page data so this.page, this.eleventy, etc works as intended
-					for (const helper in helperFunctions) {
-						helperFunctions[helper] = helperFunctions[helper].bind({
-							page,
-							eleventy,
+				if (options.useEleventyFeatures) {
+					// Add context to filters
+					for (const name in eleventyConfig.getFilters()) {
+						const filter = eleventyConfig.getFilter(name);
+						const filterWithContext = eleventyConfig.augmentFunctionContext(filter, {
+							source: {},
 						});
-					}
 
-					// Rebind filters the same way
-					for (const filter in filters) {
-						env.filters[filter] = filters[filter].bind({ page, eleventy });
+						ventoEnv.filters[name] = filterWithContext;
 					}
-
-					// Merge helpers into page data
-					if (typeof namespace === 'string') data = { ...data, [namespace]: helperFunctions };
-					else data = { ...data, ...helperFunctions };
 				}
 
-				const result = await env.runString(inputContent, data, inputPath);
+				const result = await ventoEnv.runString(inputContent, data, inputPath);
 
 				if (data.page?.rawInput !== inputContent) {
 					env.cache.delete(inputPath);
@@ -131,7 +108,7 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 			permalink(linkContents) {
 				if (typeof linkContents !== 'string') return linkContents;
 				return async (data) => {
-					const result = await env.runString(linkContents, data);
+					const result = await ventoEnv.runString(linkContents, data);
 					return result.content;
 				};
 			},

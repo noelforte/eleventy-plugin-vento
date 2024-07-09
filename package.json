@@ -53,5 +53,10 @@
 		"singleQuote": true,
 		"semi": true,
 		"trailingComma": "es5"
+	},
+	"pnpm": {
+		"overrides": {
+			"@11ty/eleventy": "github:11ty/eleventy#26d26b7a4fe1e8a7a9431283ff437998a5468cf4"
+		}
 	}
 }
