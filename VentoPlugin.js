@@ -85,7 +85,14 @@ export function VentoPlugin(eleventyConfig, userOptions = {}) {
 					// Add context to filters
 					for (const name in eleventyConfig.getFilters()) {
 						const filter = eleventyConfig.getFilter(name);
-						const filterWithContext = eleventyConfig.augmentFunctionContext(filter);
+						const filterWithContext = function (...args) {
+							const fn = eleventyConfig.augmentFunctionContext(filter, {
+								source: this.data,
+								overwrite: false,
+							});
+
+							return fn(...args);
+						};
 
 						ventoEnv.filters[name] = filterWithContext;
 					}
