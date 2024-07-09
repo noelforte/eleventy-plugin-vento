@@ -12,6 +12,7 @@ const results = await runBuild(import.meta.dirname, {
 		configApi.addFilter('wrapWith', (content, tag) => `<${tag}>${content}</${tag}>`);
 
 		configApi.addFilter('pageUrlCompare', function (url) {
+			console.log(this);
 			return url === this.page.url;
 		});
 	},
