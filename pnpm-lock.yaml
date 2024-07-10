@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       ventojs:
-        specifier: 0.12.7
-        version: 0.12.7
+        specifier: 0.12.8
+        version: 0.12.8
     devDependencies:
       '@11ty/eleventy':
         specifier: 3.0.0-alpha.14
@@ -1192,6 +1192,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   globals@14.0.0:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
@@ -1324,6 +1325,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -2129,6 +2131,7 @@ packages:
 
   rimraf@2.7.1:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rollup@4.18.0:
@@ -2481,8 +2484,8 @@ packages:
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
 
-  ventojs@0.12.7:
-    resolution: {integrity: sha512-9rrjzTHBcHRFZYsLYOYCDgxQhFrH6oY8Rco1+UkClA3nfW2AcQcizy29R5kk7klVzyJuS0PwY+4kC3DaFJmLwA==}
+  ventojs@0.12.8:
+    resolution: {integrity: sha512-KvalJEW/ccYY5HazB2xDvO+B/1Mt9JKkDvU15QerMDy3h7b8DlY2wtCcQMp17Slgm3QHFabcYetA5ElyGpCIhA==}
 
   vite-node@1.6.0:
     resolution: {integrity: sha512-de6HJgzC+TFzOu0NTC4RAIsyf/DY/ibWDYQUcuEA84EMHhcefTUGkjFHKKEJhQN4A+6I0u++kr3l36ZF2d7XRw==}
@@ -5131,7 +5134,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  ventojs@0.12.7:
+  ventojs@0.12.8:
     dependencies:
       '@deno/shim-deno': 0.18.2
       estree-walker: 3.0.3
