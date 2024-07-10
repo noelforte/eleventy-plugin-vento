@@ -1,3 +1,9 @@
 {
-	"extends": ["github>noelforte/renovate-config", "group:allNonMajor"]
+	"extends": ["github>noelforte/renovate-config"],
+	"packageRules": [
+		{
+			"matchDepTypes": ["dependencies"],
+			"semanticCommitType": "upstream"
+		}
+	]
 }
