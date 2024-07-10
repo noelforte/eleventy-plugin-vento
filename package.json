@@ -39,11 +39,11 @@
 		"ventojs": "0.12.8"
 	},
 	"devDependencies": {
-		"@11ty/eleventy": "3.0.0-alpha.16",
+		"@11ty/eleventy": "3.0.0-alpha.14",
 		"conventional-changelog-conventionalcommits": "8.0.0",
+		"eslint": "9.6.0",
 		"eslint-config-flat-gitignore": "0.1.7",
 		"eslint-config-prettier": "9.1.0",
-		"eslint": "9.6.0",
 		"globals": "15.8.0",
 		"semantic-release": "24.0.0",
 		"vitest": "1.6.0"
