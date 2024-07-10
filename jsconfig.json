@@ -4,7 +4,8 @@
 		"moduleResolution": "NodeNext",
 		"baseUrl": ".",
 		"paths": {
-			"#lib/*": ["./lib/*"]
+			"#lib/*": ["./lib/*"],
+			"#test-instance": ["./tests/get-instance.js"]
 		}
 	}
 }

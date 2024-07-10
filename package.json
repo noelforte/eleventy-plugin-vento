@@ -13,7 +13,8 @@
 	},
 	"main": "./VentoPlugin.js",
 	"imports": {
-		"#lib/*": "./lib/*"
+		"#lib/*": "./lib/*",
+		"#test-instance": "./tests/get-instance.js"
 	},
 	"exports": {
 		".": "./VentoPlugin.js"

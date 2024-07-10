@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { runBuild } from '../get-instance.js';
+import { runBuild } from '#test-instance';
 
 const results = await runBuild(import.meta.dirname);
 
