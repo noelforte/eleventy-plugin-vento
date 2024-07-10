@@ -87,7 +87,7 @@ export function VentoPlugin(eleventyConfig, userOptions = {}) {
 						const filter = eleventyConfig.getFilter(name);
 						const filterWithContext = function (...args) {
 							const fn = eleventyConfig.augmentFunctionContext(filter, {
-								source: this.data,
+								source: data,
 								overwrite: false,
 							});
 
