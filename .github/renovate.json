@@ -3,7 +3,11 @@
 	"packageRules": [
 		{
 			"matchDepTypes": ["dependencies"],
-			"semanticCommitType": "upstream"
+			"semanticCommitType": "upstream",
+			"semanticCommitScope": null
+		},
+		{
+			"matchDepTypes": ["devDependencies"]
 		}
 	]
 }
