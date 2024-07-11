@@ -39,7 +39,7 @@
 		"ventojs": "0.12.9"
 	},
 	"devDependencies": {
-		"@11ty/eleventy": "3.0.0-alpha.14",
+		"@11ty/eleventy": "3.0.0-alpha.16",
 		"@changesets/cli": "2.27.8",
 		"eslint": "9.9.0",
 		"eslint-config-flat-gitignore": "0.1.8",
@@ -53,10 +53,5 @@
 		"singleQuote": true,
 		"semi": true,
 		"trailingComma": "es5"
-	},
-	"pnpm": {
-		"overrides": {
-			"@11ty/eleventy": "github:11ty/eleventy#26d26b7a4fe1e8a7a9431283ff437998a5468cf4"
-		}
 	}
 }

@@ -80,18 +80,22 @@ export function VentoPlugin(eleventyConfig, userOptions = {}) {
 
 		// Main compile function
 		async compile(inputContent, inputPath) {
-			return async (data) => {
+			return async function (data) {
 				if (options.useEleventyFeatures) {
 					// Add context to filters
 					for (const name in eleventyConfig.getFilters()) {
+						// Retrieve filter
 						const filter = eleventyConfig.getFilter(name);
-						const filterWithContext = function (...args) {
-							const fn = eleventyConfig.augmentFunctionContext(filter, { source: data });
 
-							return fn(...args);
+						// Wrap filter with a function that augments the filter function
+						// with the data from Vento to extract `page` and `eleventy`
+						// values, then returns a call to that filter with the original arguments
+						ventoEnv.filters[name] = function (...filterArguments) {
+							const filterWithContext = eleventyConfig.augmentFunctionContext(filter, {
+								source: this.data,
+							});
+							return filterWithContext(...filterArguments);
 						};
-
-						ventoEnv.filters[name] = filterWithContext;
 					}
 				}
 

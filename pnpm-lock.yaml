@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@11ty/eleventy': github:11ty/eleventy#26d26b7a4fe1e8a7a9431283ff437998a5468cf4
-
 importers:
 
   .:
@@ -16,8 +13,8 @@ importers:
         version: 0.12.9
     devDependencies:
       '@11ty/eleventy':
-        specifier: github:11ty/eleventy#26d26b7a4fe1e8a7a9431283ff437998a5468cf4
-        version: https://codeload.github.com/11ty/eleventy/tar.gz/26d26b7a4fe1e8a7a9431283ff437998a5468cf4
+        specifier: 3.0.0-alpha.16
+        version: 3.0.0-alpha.16
       '@changesets/cli':
         specifier: 2.27.8
         version: 2.27.8
@@ -61,9 +58,8 @@ packages:
     resolution: {integrity: sha512-nULO91om7vQw4Y/UBjM8i7nJ1xl+/nyK4rImZ41lFxiY2d+XUz7ChAj1CDYFjrLZeu0utAYJTZ45LlcHTkUG4g==}
     engines: {node: '>=12'}
 
-  '@11ty/eleventy@https://codeload.github.com/11ty/eleventy/tar.gz/26d26b7a4fe1e8a7a9431283ff437998a5468cf4':
-    resolution: {tarball: https://codeload.github.com/11ty/eleventy/tar.gz/26d26b7a4fe1e8a7a9431283ff437998a5468cf4}
-    version: 3.0.0-alpha.14
+  '@11ty/eleventy@3.0.0-alpha.16':
+    resolution: {integrity: sha512-nHqFoRWe2xfzMk0HjfQ2D1nFn/p/hLadMIZB0AqVvDJ/NQqDnlOR5LBLJtZf6npflYBWdZG65YjuuF5ENYvMBg==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -1806,7 +1802,7 @@ snapshots:
     dependencies:
       normalize-path: 3.0.0
 
-  '@11ty/eleventy@https://codeload.github.com/11ty/eleventy/tar.gz/26d26b7a4fe1e8a7a9431283ff437998a5468cf4':
+  '@11ty/eleventy@3.0.0-alpha.16':
     dependencies:
       '@11ty/dependency-tree': 3.0.1
       '@11ty/dependency-tree-esm': 1.0.0
