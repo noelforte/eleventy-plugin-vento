@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       ventojs:
-        specifier: 0.12.8
-        version: 0.12.8
+        specifier: 0.12.9
+        version: 0.12.9
     devDependencies:
       '@11ty/eleventy':
         specifier: 3.0.0-alpha.14
@@ -2484,8 +2484,8 @@ packages:
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
 
-  ventojs@0.12.8:
-    resolution: {integrity: sha512-KvalJEW/ccYY5HazB2xDvO+B/1Mt9JKkDvU15QerMDy3h7b8DlY2wtCcQMp17Slgm3QHFabcYetA5ElyGpCIhA==}
+  ventojs@0.12.9:
+    resolution: {integrity: sha512-XZCV7aYlHR+QhST5pbOfRXMah+hBmvxkDfJ/XpbEu76TfHBbnlrPyMchJlGtuFzqSqR8iPBUHidHKqP9Vjo1mg==}
 
   vite-node@1.6.0:
     resolution: {integrity: sha512-de6HJgzC+TFzOu0NTC4RAIsyf/DY/ibWDYQUcuEA84EMHhcefTUGkjFHKKEJhQN4A+6I0u++kr3l36ZF2d7XRw==}
@@ -5134,7 +5134,7 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  ventojs@0.12.8:
+  ventojs@0.12.9:
     dependencies:
       '@deno/shim-deno': 0.18.2
       estree-walker: 3.0.3
