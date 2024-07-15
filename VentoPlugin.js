@@ -115,6 +115,10 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 
 				const result = await env.runString(inputContent, data, inputPath);
 
+				if (data.page?.rawInput !== inputContent) {
+					env.cache.delete(inputPath);
+				}
+
 				return result.content;
 			};
 		},
