@@ -84,6 +84,8 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 	eleventyConfig.addExtension('vto', {
 		outputFileExtension: 'html',
 
+		read: true,
+
 		async compile(inputContent, inputPath) {
 			return async (data) => {
 				if (options.addHelpers) {
