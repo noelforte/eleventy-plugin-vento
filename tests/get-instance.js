@@ -1,10 +1,13 @@
+import path from 'node:path';
 import { VentoPlugin } from 'eleventy-plugin-vento';
 import Eleventy from '@11ty/eleventy';
 
 /**
+ * @typedef {import('@11ty/eleventy/src/UserConfig.js').default} EleventyUserConfig
+ *
  * @typedef {object} ExtensionsOptions
  * @property {import('eleventy-plugin-vento').VentoPluginOptions} vento
- * @property {import('@11ty/eleventy/src/UserConfig.js')} eleventy
+ * @property {(configApi: EleventyUserConfig) => void} eleventy
  *
  * @typedef {{ url: string, inputPath: string, outputPath: string, rawInput: string, content: string }} PageObject
  * @typedef {PageObject[]} EleventyOutput
@@ -18,13 +21,13 @@ export async function runBuild(fromInput, extensions = {}) {
 	const instance = new Eleventy(fromInput, '_site', {
 		quiet: true,
 
-		/** @param {import('@11ty/eleventy/src/UserConfig.js').default} eleventyConfig */
+		configPath: path.join(fromInput, 'eleventy.config.js'),
+
+		/** @param {EleventyUserConfig} eleventyConfig */
 		config(eleventyConfig) {
 			eleventyConfig.addPlugin(VentoPlugin, extensions.vento || {});
 
 			eleventyConfig.ignores.add('**/__snapshots__/**');
-
-			if (extensions.eleventy) extensions.eleventy.call(this, eleventyConfig);
 		},
 	});
 

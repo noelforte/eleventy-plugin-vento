@@ -1,12 +1,7 @@
 import { expect, test } from 'vitest';
 import { runBuild } from '#test-instance';
 
-const results = await runBuild(import.meta.dirname, {
-	eleventy(configApi) {
-		configApi.addShortcode('helloWorld', () => 'Hello world!');
-		configApi.addShortcode('possumPosse', (number = 'the') => `Release ${number} possums!!!`);
-	},
-});
+const results = await runBuild(import.meta.dirname);
 
 test('shortcode without argument', () => {
 	const page = results.find(({ url }) => url === '/basic/');

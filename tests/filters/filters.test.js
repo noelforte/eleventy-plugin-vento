@@ -1,21 +1,7 @@
 import { expect, test } from 'vitest';
 import { runBuild } from '#test-instance';
 
-const results = await runBuild(import.meta.dirname, {
-	eleventy(configApi) {
-		configApi.addFilter(
-			'uppercase',
-			/** @param {string} content */
-			(content) => content.toUpperCase()
-		);
-
-		configApi.addFilter('wrapWith', (content, tag) => `<${tag}>${content}</${tag}>`);
-
-		configApi.addFilter('pageUrlCompare', function (url) {
-			return url === this.page.url;
-		});
-	},
-});
+const results = await runBuild(import.meta.dirname);
 
 test('transforms string with built-in method', async () => {
 	const page = results.find(({ url }) => url === '/basic/');
