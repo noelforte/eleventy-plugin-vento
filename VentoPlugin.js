@@ -82,10 +82,13 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 	// Add vto as a template format and create a custom template for it
 	eleventyConfig.addTemplateFormats('vto');
 	eleventyConfig.addExtension('vto', {
+		// Set output extension
 		outputFileExtension: 'html',
 
+		// Read vto files into eleventy
 		read: true,
 
+		// Main compile function
 		async compile(inputContent, inputPath) {
 			return async (data) => {
 				if (options.addHelpers) {
@@ -124,6 +127,7 @@ export function VentoPlugin(eleventyConfig, options = {}) {
 		},
 
 		compileOptions: {
+			// Custom permalink compilation
 			permalink(linkContents) {
 				if (typeof linkContents !== 'string') return linkContents;
 				return async (data) => {
