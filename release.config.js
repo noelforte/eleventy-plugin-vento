@@ -14,7 +14,7 @@ const presetConfig = {
 
 const releaseRules = [
 	{ breaking: true, release: 'major' },
-	{ type: 'upstream', release: 'minor' },
+	{ type: 'upstream', release: 'patch' },
 ];
 
 /** @type {import('semantic-release').Options} */
