@@ -11,13 +11,13 @@
 		"lint": "eslint **/*.js --config ./eslint.config.js",
 		"ci:version": "node ./scripts/generate-changesets.js && changeset version"
 	},
-	"main": "./VentoPlugin.js",
+	"main": "./index.js",
 	"imports": {
 		"#lib/*": "./lib/*",
 		"#test-instance": "./tests/get-instance.js"
 	},
 	"exports": {
-		".": "./VentoPlugin.js"
+		".": "./index.js"
 	},
 	"repository": "git@github.com:noelforte/eleventy-plugin-vento.git",
 	"bugs": {
