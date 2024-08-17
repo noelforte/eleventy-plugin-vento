@@ -30,11 +30,7 @@ export { ventoDefaultTrimTags };
  * @param {VentoPluginOptions} userOptions
  */
 export function VentoPlugin(eleventyConfig, userOptions = {}) {
-	if (!('addExtension' in eleventyConfig)) {
-		console.log(
-			`[eleventy-plugin-vento] WARN Eleventy plugin compatibility: Custom templates are required for this plugin, please use Eleventy v1.0 or newer.`
-		);
-	}
+	eleventyConfig.versionCheck('>= 3.0.0-beta.1');
 
 	/** @type {VentoPluginOptions} */
 	const options = {
@@ -102,7 +98,7 @@ export function VentoPlugin(eleventyConfig, userOptions = {}) {
 				const result = await ventoEnv.runString(inputContent, data, inputPath);
 
 				if (data.page?.rawInput !== inputContent) {
-					env.cache.delete(inputPath);
+					ventoEnv.cache.delete(inputPath);
 				}
 
 				return result.content;

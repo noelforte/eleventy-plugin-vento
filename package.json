@@ -39,7 +39,7 @@
 		"ventojs": "1.12.10"
 	},
 	"devDependencies": {
-		"@11ty/eleventy": "3.0.0-alpha.16",
+		"@11ty/eleventy": "3.0.0-beta.1",
 		"@changesets/cli": "2.27.8",
 		"eslint": "9.9.0",
 		"eslint-config-flat-gitignore": "0.1.8",
