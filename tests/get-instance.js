@@ -1,4 +1,5 @@
 import path from 'node:path';
+import { existsSync } from 'node:fs';
 import { VentoPlugin } from 'eleventy-plugin-vento';
 import Eleventy from '@11ty/eleventy';
 
@@ -18,10 +19,12 @@ import Eleventy from '@11ty/eleventy';
  * @param {ExtensionsOptions} [extensions={}]
  */
 export async function runBuild(fromInput, extensions = {}) {
+	const configPath = path.join(fromInput, 'eleventy.config.js');
+
 	const instance = new Eleventy(fromInput, '_site', {
 		quiet: true,
 
-		configPath: path.join(fromInput, 'eleventy.config.js'),
+		configPath: existsSync(configPath) && configPath,
 
 		/** @param {EleventyUserConfig} eleventyConfig */
 		config(eleventyConfig) {
