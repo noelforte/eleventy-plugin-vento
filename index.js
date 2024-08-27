@@ -26,7 +26,7 @@ import {
 export { ventoDefaultTrimTags };
 
 /**
- * @param {import('@11ty/eleventy/src/UserConfig.js').default} eleventyConfig
+ * @param {import('@11ty/eleventy').UserConfig} eleventyConfig
  * @param {VentoPluginOptions} userOptions
  */
 export function VentoPlugin(eleventyConfig, userOptions = {}) {

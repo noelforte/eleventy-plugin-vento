@@ -4,9 +4,7 @@ import { VentoPlugin } from 'eleventy-plugin-vento';
 import Eleventy from '@11ty/eleventy';
 
 /**
- * @typedef {import('@11ty/eleventy').UserConfig} EleventyUserConfig
- *
- * @typedef {object} TestOverrides
+ * @typedef TestOverrides
  * @property {import('eleventy-plugin-vento').VentoPluginOptions} vento
  *
  * @typedef {{ url: string, inputPath: string, outputPath: string, rawInput: string, content: string }} PageObject
@@ -25,7 +23,7 @@ export async function runBuild(fromInput, overrides) {
 
 		configPath: existsSync(configPath) && configPath,
 
-		/** @param {EleventyUserConfig} eleventyConfig */
+		/** @param {import('@11ty/eleventy').UserConfig} eleventyConfig */
 		config(eleventyConfig) {
 			eleventyConfig.addPlugin(VentoPlugin, overrides?.vento);
 			eleventyConfig.ignores.add('**/__snapshots__/**');
