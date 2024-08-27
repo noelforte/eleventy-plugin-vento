@@ -6,8 +6,9 @@
  * @prop {boolean} [useEleventyFeatures=true]
  * Whether Eleventy features should be enabled in templates. If true, will create tags and filters
  * from Eleventy shortcodes and filters.
- * @prop {boolean|string[]} [trimTags=false] Whether to automatically trim tags from output. Uses Vento's
- * [autoTrim](https://vento.js.org/plugins/auto-trim/) plugin under the hood.
+ * @prop {boolean|{tags: string[], extend: boolean}} [autotrim=false] Whether to automatically
+ * trim tags from output. Uses Vento's [autoTrim](https://vento.js.org/plugins/auto-trim/) plugin under
+ * the hood.
  * @prop {boolean} [useSsrPlugin=true] Whether to load the SSR-specific syntax into Vento.
  * If true, the `{{! ... }}` tag wont be removed from the output and instead kept as is. Helpful for
  * hybrid rendering of pre-rendered and server-side templates.
@@ -23,7 +24,6 @@ import {
 	default as autoTrim,
 	defaultTags as ventoDefaultTrimTags,
 } from 'ventojs/plugins/auto_trim.js';
-export { ventoDefaultTrimTags };
 
 /**
  * @param {import('@11ty/eleventy').UserConfig} eleventyConfig
@@ -35,7 +35,7 @@ export function VentoPlugin(eleventyConfig, userOptions = {}) {
 	/** @type {VentoPluginOptions} */
 	const options = {
 		// Define defaults
-		trimTags: false,
+		autotrim: false,
 		plugins: [],
 		useSsrPlugin: true,
 		useEleventyFeatures: true,
@@ -58,8 +58,10 @@ export function VentoPlugin(eleventyConfig, userOptions = {}) {
 	ventoEnv.use(ssr);
 
 	// Add autotrim plugin if enabled
-	if (userOptions.trimTags === true) ventoEnv.use(autoTrim());
-	else if (userOptions.trimTags) ventoEnv.use(autoTrim({ tags: userOptions.trimTags }));
+	if (Array.isArray(options.autotrim.tags)) {
+		if (options.autotrim.extend) options.autotrim.tags.push(...ventoDefaultTrimTags);
+		ventoEnv.use(autoTrim({ tags: [...new Set(options.autotrim.tags)] }));
+	} else if (options.trimTags === true) ventoEnv.use(autoTrim());
 
 	eleventyConfig.on('eleventy.before', () => ventoEnv.cache.clear());
 
