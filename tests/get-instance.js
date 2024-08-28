@@ -31,7 +31,5 @@ export async function runBuild(fromInput, overrides) {
 	});
 
 	/** @type {Promise<EleventyOutput>} */
-	const results = await instance.toJSON();
-
-	return results;
+	return instance.toJSON();
 }
