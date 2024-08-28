@@ -17,7 +17,7 @@
  */
 
 import VentoJs from 'ventojs';
-import { ssr } from '#lib/ssr.js';
+import { ssr } from 'dist/modules/ssr.js';
 
 // Expose autotrim plugin defaults
 import {
