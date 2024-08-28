@@ -17,12 +17,12 @@
  */
 
 import VentoJs from 'ventojs';
-import { ssr } from 'dist/modules/ssr.js';
+import { ssrPlugin } from './modules/ssr.js';
 
 // Expose autotrim plugin defaults
 import {
-	default as autoTrim,
-	defaultTags as ventoDefaultTrimTags,
+	default as autotrimPlugin,
+	defaultTags as autotrimDefaultTags,
 } from 'ventojs/plugins/auto_trim.js';
 
 /**
@@ -51,17 +51,17 @@ export function VentoPlugin(eleventyConfig, userOptions = {}) {
 	// Init vento
 	const ventoEnv = VentoJs(options.ventoOptions);
 
+	// Add ssr plugin to plugin list
+	if (options.useSsrPlugin) options.plugins.push(ssrPlugin);
+
 	// Load user-defined plugins into vento
 	for (const plugin of options.plugins) ventoEnv.use(plugin);
 
-	// Load ssr plugin
-	ventoEnv.use(ssr);
-
 	// Add autotrim plugin if enabled
-	if (Array.isArray(options.autotrim.tags)) {
-		if (options.autotrim.extend) options.autotrim.tags.push(...ventoDefaultTrimTags);
-		ventoEnv.use(autoTrim({ tags: [...new Set(options.autotrim.tags)] }));
-	} else if (options.trimTags === true) ventoEnv.use(autoTrim());
+	if (Array.isArray(options.autotrim?.tags)) {
+		if (options.autotrim.extend) options.autotrim.tags.push(...autotrimDefaultTags);
+		ventoEnv.use(autotrimPlugin({ tags: [...new Set(options.autotrim.tags)] }));
+	} else if (options.autotrim === true) ventoEnv.use(autotrimPlugin);
 
 	eleventyConfig.on('eleventy.before', () => ventoEnv.cache.clear());
 

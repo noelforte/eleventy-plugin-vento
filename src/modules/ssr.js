@@ -4,7 +4,7 @@
  */
 
 /** @param {Environment} env */
-export function ssr(env) {
+export function ssrPlugin(env) {
 	env.tags.push(ssrTag);
 }
 
