@@ -5,6 +5,7 @@ import gitignore from 'eslint-config-flat-gitignore';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
 // Plugins
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
 
 export default [
@@ -13,6 +14,7 @@ export default [
 
 	// Import configuration presets
 	js.configs.recommended,
+	eslintPluginUnicorn.configs['flat/recommended'],
 	eslintConfigPrettier,
 
 	// Configure ignores
