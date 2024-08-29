@@ -19,6 +19,12 @@ test('render a page at a dynamic permalink', async () => {
 	expect(page).toBeDefined();
 });
 
+test('render a page at a dynamic permalink with js', async () => {
+	const page = results.find(({ url }) => url === '/directory-data-test-page-js.html');
+
+	expect(page).toBeDefined();
+});
+
 test('skips rendering a file', () => {
 	const writtenTemplates = results.filter(({ url }) => Boolean(url));
 	expect(writtenTemplates.length).toBe(4);
