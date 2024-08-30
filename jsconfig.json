@@ -2,9 +2,6 @@
 	"compilerOptions": {
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
-		"baseUrl": ".",
-		"paths": {
-			"#test-instance": ["./tests/get-instance.js"]
-		}
+		"baseUrl": "."
 	}
 }

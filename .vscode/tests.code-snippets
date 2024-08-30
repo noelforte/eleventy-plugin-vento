@@ -1,16 +1,29 @@
 {
 	"New test suite": {
 		"scope": "javascript",
-		"prefix": "VentoPluginTest",
+		"prefix": "#new-test-suite",
 		"body": [
-			"import { expect, test } from 'vitest';",
-			"import { runBuild } from '#test-instance';\n",
-			"const results = await runBuild(import.meta.dirname, {",
-			"\t${1:eleventy(configApi) {\\}},",
-			"\t${2:vento: {\\}},",
+			"import { EleventyTest } from './_eleventy-test.js';",
+			"import { test } from 'vitest';\n",
+			"const testRun = new EleventyTest('${1:./path-to-test/}');\n",
+			"test('${2:test name}', async ({ expect }) => {",
+			"\tconst { content } = await testRun.getBuildResultForUrl('${3:/page-url/}');",
+			"\tawait expect(content).toMatchFileSnapshot('./_results/${4:output.html}');",
 			"});"
 		],
 		"description": "Create a new test suite for eleventy-plugin-vento",
 		"isFileTemplate": true
+	},
+
+	"New test": {
+		"scope": "javascript",
+		"prefix": "#new-test",
+		"body": [
+			"test('${1:test name}', async ({ expect }) => {",
+			"\tconst { content } = await testRun.getBuildResultForUrl('${2:/page-url/}');",
+			"\tawait expect(content).toMatchFileSnapshot('./_results/${3:output.html}');",
+			"});"
+		],
+		"description": "Create a new test for eleventy-plugin-vento"
 	}
 }

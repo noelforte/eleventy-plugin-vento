@@ -12,9 +12,6 @@
 		"ci:version": "node ./scripts/generate-changesets.js && changeset version"
 	},
 	"main": "./src/index.js",
-	"imports": {
-		"#test-instance": "./tests/get-instance.js"
-	},
 	"exports": {
 		".": "./src/index.js"
 	},
