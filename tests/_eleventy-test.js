@@ -1,6 +1,6 @@
 /**
  * @typedef TestOptions
- * @property {import('eleventy-plugin-vento').VentoPluginOptions} vento
+ * @property {import('eleventy-plugin-vento').VentoPluginOptions} pluginOptions
  * @property {boolean} useEleventyConfig
  *
  * @typedef {{ url: string, inputPath: string, outputPath: string, rawInput: string, content: string }} PageObject
@@ -30,7 +30,7 @@ class EleventyTest extends Eleventy {
 
 			/** @param {import('@11ty/eleventy').UserConfig} eleventyConfig */
 			config(eleventyConfig) {
-				eleventyConfig.addPlugin(VentoPlugin, options?.vento);
+				eleventyConfig.addPlugin(VentoPlugin, options?.pluginOptions);
 			},
 		});
 

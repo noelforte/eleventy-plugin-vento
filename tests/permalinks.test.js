@@ -3,8 +3,6 @@ import { test } from 'vitest';
 
 const testRun = new EleventyTest('./permalinks/');
 
-console.log(await testRun._buildResults);
-
 test('render a page at a nested permalink', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/page/at/nested/permalink/');
 	await expect(content).toMatchFileSnapshot('./_results/permalink-nested.html');
