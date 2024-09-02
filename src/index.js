@@ -16,10 +16,10 @@
  * that will be merged with default options.
  */
 
-import VentoJs from 'ventojs';
-import { ssrPlugin } from './modules/ssr.js';
+import { VentoEngine } from './engine.js';
 
-// Expose autotrim plugin defaults
+// Additional plugins
+import { ssrPlugin } from './modules/ssr.js';
 import {
 	default as autotrimPlugin,
 	defaultTags as autotrimDefaultTags,
@@ -48,72 +48,42 @@ export function VentoPlugin(eleventyConfig, userOptions = {}) {
 		...userOptions,
 	};
 
-	// Init vento
-	const ventoEnv = VentoJs(options.ventoOptions);
-
 	// Add ssr plugin to plugin list
 	if (options.useSsrPlugin) options.plugins.push(ssrPlugin);
 
-	// Load user-defined plugins into vento
-	for (const plugin of options.plugins) ventoEnv.use(plugin);
-
 	// Add autotrim plugin if enabled
-	if (Array.isArray(options.autotrim?.tags)) {
-		if (options.autotrim.extend) options.autotrim.tags.push(...autotrimDefaultTags);
-		ventoEnv.use(autotrimPlugin({ tags: [...new Set(options.autotrim.tags)] }));
-	} else if (options.autotrim === true) ventoEnv.use(autotrimPlugin);
+	if (options.autotrim) {
+		const tagSet = new Set(options.autotrim?.tags || autotrimDefaultTags);
+		if (options.autotrim.extend) for (const tag of autotrimDefaultTags) tagSet.add(tag);
+		options.plugins.push(autotrimPlugin({ tags: [...tagSet] }));
+	}
 
-	eleventyConfig.on('eleventy.before', () => ventoEnv.cache.clear());
+	// Start the vento engine instance
+	const vento = new VentoEngine(options.ventoOptions);
+
+	vento.emptyCache(); // Ensure cache is empty
+	vento.loadPlugins(options.plugins); // Load plugin functions
+	if (options.useEleventyFeatures) vento.loadFilters(eleventyConfig.getFilters()); // Load filters
 
 	// Add vto as a template format
 	eleventyConfig.addTemplateFormats('vto');
 
 	// Add vto extension handling
 	eleventyConfig.addExtension('vto', {
-		// Set output extension
 		outputFileExtension: 'html',
-
-		// Read vto files into eleventy
 		read: true,
 
 		// Main compile function
 		async compile(inputContent, inputPath) {
-			return async function (data) {
-				if (options.useEleventyFeatures) {
-					// Add context to filters
-					for (const name in eleventyConfig.getFilters()) {
-						// Retrieve filter
-						const filter = eleventyConfig.getFilter(name);
-
-						// Wrap filter with a function that augments the filter function
-						// with the data from Vento to extract `page` and `eleventy`
-						// values, then returns a call to that filter with the original arguments
-						ventoEnv.filters[name] = function (...filterArguments) {
-							const filterWithContext = eleventyConfig.augmentFunctionContext(filter, {
-								source: this.data,
-							});
-							return filterWithContext(...filterArguments);
-						};
-					}
-				}
-
-				const result = await ventoEnv.runString(inputContent, data, inputPath);
-
-				if (data.page?.rawInput !== inputContent) {
-					ventoEnv.cache.delete(inputPath);
-				}
-
-				return result.content;
-			};
+			return async (data) => vento.process(data, inputContent, inputPath);
 		},
 
+		// Custom permalink compilation
 		compileOptions: {
-			// Custom permalink compilation
 			permalink(linkContents) {
 				if (typeof linkContents !== 'string') return linkContents;
-				return async (data) => {
-					const result = await ventoEnv.runString(linkContents, data);
-					return result.content;
+				return async function (data) {
+					return vento.process(data, linkContents);
 				};
 			},
 		},
