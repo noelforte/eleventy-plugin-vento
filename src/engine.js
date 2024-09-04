@@ -1,9 +1,7 @@
 /**
- * @file Isolated definition for vento library
+ * @file Class to facilitate ventojs processing
  *
- * @typedef {import('ventojs/src/environment.js').Tag} VentoTag
- * @typedef {import('ventojs/src/environment.js').Filter} VentoFilter
- * @typedef {import('ventojs/src/environment.js').Plugin} VentoPlugin
+ * @typedef {{eleventy?: Record<string, unknown>, page?: Record<string, unknown>, [K: string]: unknown}} PageData
  */
 
 import vento from 'ventojs';
@@ -13,47 +11,49 @@ const DATA_KEYS = ['page', 'eleventy'];
 
 export class VentoEngine {
 	#context = {};
+	env;
 
 	/** @param {import('ventojs').Options} options */
 	constructor(options) {
 		this.env = vento(options);
 	}
 
-	/** @param {string} key */
+	/** @param {string?} key */
 	emptyCache(key) {
 		return key ? this.env.cache.delete(key) : this.env.cache.clear();
 	}
 
-	/** @param {VentoPlugin[]} plugins  */
+	/** @param {import('ventojs/src/environment.js').Plugin[]} plugins */
 	loadPlugins(plugins) {
 		for (const plugin of plugins) {
 			this.env.use(plugin);
 		}
 	}
 
-	/** @param {Object<string, VentoFilter>} filters */
+	/** @param {Record<string, import('ventojs/src/environment.js').Filter>} filters */
 	loadFilters(filters) {
 		for (const name in filters) {
 			this.env.filters[name] = filters[name].bind(this.#context);
 		}
 	}
 
-	/**
-	 * A simplified version of
-	 * [ContextAugmenter.js](../node_modules/@11ty/Eleventy/src/Engines/Util/ContextAugmenter.js)
-	 * @param {{page?: Object<string, any>, eleventy?: Object<string, any>}} newContext
-	 */
+	/** @param {PageData} newContext  */
 	loadContext(newContext) {
 		for (const key of DATA_KEYS) {
 			this.#context[key] = newContext[key];
 		}
 	}
 
+	/**
+	 * @param {PageData} data
+	 * @param {string} content
+	 * @param {string} path
+	 */
 	async process(data, content, path) {
 		// Reload context
 		this.loadContext(data);
 
-		// Process the template
+		// Process the templates
 		const result = await this.env.runString(content, data, path);
 
 		// Clear the cache for this path if the input doesn't match
