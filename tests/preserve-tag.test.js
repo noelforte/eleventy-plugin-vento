@@ -1,7 +1,11 @@
 import { EleventyTest } from './_eleventy-test.js';
 import { test } from 'vitest';
 
-const testRun = new EleventyTest('./ssr/');
+const testRun = new EleventyTest('./preserve-tag/', {
+	pluginOptions: {
+		usePreserveTag: true,
+	},
+});
 
 test('render if (ssr)', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/if/');
