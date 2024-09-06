@@ -11,29 +11,29 @@ const DATA_KEYS = ['page', 'eleventy'];
 
 export class VentoEngine {
 	#context = {};
-	env;
+	#env;
 
 	/** @param {import('ventojs').Options} options */
 	constructor(options) {
-		this.env = vento(options);
+		this.#env = vento(options);
 	}
 
 	/** @param {string?} key */
 	emptyCache(key) {
-		return key ? this.env.cache.delete(key) : this.env.cache.clear();
+		return key ? this.#env.cache.delete(key) : this.#env.cache.clear();
 	}
 
 	/** @param {import('ventojs/src/environment.js').Plugin[]} plugins */
 	loadPlugins(plugins) {
 		for (const plugin of plugins) {
-			this.env.use(plugin);
+			this.#env.use(plugin);
 		}
 	}
 
 	/** @param {Record<string, import('ventojs/src/environment.js').Filter>} filters */
 	loadFilters(filters) {
 		for (const name in filters) {
-			this.env.filters[name] = filters[name].bind(this.#context);
+			this.#env.filters[name] = filters[name].bind(this.#context);
 		}
 	}
 
@@ -54,10 +54,10 @@ export class VentoEngine {
 		this.loadContext(data);
 
 		// Process the templates
-		const result = await this.env.runString(content, data, path);
+		const result = await this.#env.runString(content, data, path);
 
 		// Clear the cache for this path if the input doesn't match
-		if (data.page?.rawInput !== content) this.env.cache.clear();
+		if (data.page?.rawInput !== content) this.#env.cache.clear();
 
 		return result.content;
 	}
