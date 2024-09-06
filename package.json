@@ -23,6 +23,11 @@
 	"bugs": {
 		"url": "https://github.com/noelforte/eleventy-plugin-vento/issues"
 	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/",
+		"provenance": true
+	},
 	"keywords": [
 		"eleventy",
 		"eleventy-plugin",
