@@ -1,7 +1,8 @@
 /**
  * @file Class to facilitate ventojs processing
  *
- * @typedef {{eleventy?: Record<string, unknown>, page?: Record<string, unknown>, [K: string]: unknown}} PageData
+ * @typedef {{eleventy?: Record<string, unknown>, page?: Record<string, unknown>}} Context
+ * @typedef {Context & {[K: string]: unknown}} PageData
  */
 
 import vento from 'ventojs';
@@ -10,6 +11,7 @@ import vento from 'ventojs';
 const DATA_KEYS = ['page', 'eleventy'];
 
 export class VentoEngine {
+	/** @type {Context} */
 	#context = {};
 	#env;
 
