@@ -5,7 +5,11 @@
  * @typedef {Context & {[K: string]: unknown}} PageData
  */
 
+// External library
 import vento from 'ventojs';
+
+// Local modules
+import { createVentoFilter } from './modules/create-filter.js';
 
 // TODO: Update this if it becomes possible to import `augmentKeys` from Eleventy.
 const DATA_KEYS = ['page', 'eleventy'];
@@ -35,7 +39,7 @@ export class VentoEngine {
 	/** @param {Record<string, import('ventojs/src/environment.js').Filter>} filters */
 	loadFilters(filters) {
 		for (const name in filters) {
-			this.#env.filters[name] = filters[name].bind(this.#context);
+			this.#env.filters[name] = createVentoFilter(filters[name], this.#context);
 		}
 	}
 

@@ -16,6 +16,10 @@ test('transforms string with passed arguments', async ({ expect }) => {
 });
 
 test('verify page context in scoped data', async ({ expect }) => {
-	const { content } = await testRun.getBuildResultForUrl('/with-this/');
-	expect(content).toBe('true\n');
+	const result = [
+		await testRun.getBuildResultForUrl('/with-this-example-1/'),
+		await testRun.getBuildResultForUrl('/with-this-example-2/'),
+	].every(({ content }) => content === 'true');
+
+	expect(result).toBeTruthy();
 });
