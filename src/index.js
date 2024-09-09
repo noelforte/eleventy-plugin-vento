@@ -41,6 +41,7 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 		autotrim: false,
 		plugins: [],
 		useEleventyFeatures: true,
+		usePreserveTag: true,
 		ventoOptions: {
 			includes: eleventyConfig.directories.includes,
 			autoescape: false,
@@ -69,7 +70,10 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 
 	vento.emptyCache(); // Ensure cache is empty
 	vento.loadPlugins(options.plugins); // Load plugin functions
-	if (options.useEleventyFeatures) vento.loadFilters(eleventyConfig.getFilters()); // Load filters
+	if (options.useEleventyFeatures) {
+		vento.loadFilters(eleventyConfig.getFilters()); // Load filters
+		vento.loadShortcodes(eleventyConfig.getShortcodes());
+	}
 
 	// Add vto as a template format
 	eleventyConfig.addTemplateFormats('vto');

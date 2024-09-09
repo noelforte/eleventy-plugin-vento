@@ -3,7 +3,7 @@
  */
 
 /** @type {import('ventojs/src/environment.js').Tag} */
-function defineTag(env, code, output, tokens) {
+function preserveTag(_env, code, output, _tokens) {
 	if (!code.startsWith('!')) return;
 	const compiled = `{{${code.replace(/!(>?)\s+/, '$1 ')}}}`;
 	return `${output} += "${compiled}";`;
@@ -11,5 +11,5 @@ function defineTag(env, code, output, tokens) {
 
 /** @type {import('ventojs/src/environment.js').Plugin} */
 export function preserveTagPlugin(env) {
-	env.tags.push(defineTag);
+	env.tags.push(preserveTag);
 }
