@@ -3,7 +3,7 @@
 	"version": "0.0.0-semrel-managed",
 	"description": "Adds support for the Vento templating language to Eleventy.",
 	"type": "module",
-	"packageManager": "pnpm@9.9.0",
+	"packageManager": "pnpm@9.10.0",
 	"engines": {
 		"node": ">=16"
 	},
