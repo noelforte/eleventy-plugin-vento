@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main, alpha, beta, next, renovate/**]
+    branches: [main, renovate/**]
 
 jobs:
   test:
@@ -18,6 +18,8 @@ jobs:
         run: pnpm test
 
   release:
+    concurrency:
+      group: release-${{ github.workflow }}-${{ github.ref }}
     needs: [test]
     name: Release
     runs-on: ubuntu-latest
@@ -38,8 +40,14 @@ jobs:
       - name: Verify provenance attestations and registry signatures
         run: npm audit signatures
 
+      - name: Generate changeset files for renovate commits
+        run: node ./scripts/generate-changesets.js
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm exec semantic-release
+        uses: changesets/action@v1
+        with:
+          publish: pnpm changeset publish
+          version: pnpm changeset version

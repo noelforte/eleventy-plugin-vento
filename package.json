@@ -1,6 +1,6 @@
 {
 	"name": "eleventy-plugin-vento",
-	"version": "0.0.0-semrel-managed",
+	"version": "2.6.0",
 	"description": "Adds support for the Vento templating language to Eleventy.",
 	"type": "module",
 	"engines": {
@@ -44,12 +44,12 @@
 	},
 	"devDependencies": {
 		"@11ty/eleventy": "3.0.0-alpha.14",
-		"conventional-changelog-conventionalcommits": "8.0.0",
+		"@changesets/cli": "2.27.8",
 		"eslint": "9.9.0",
 		"eslint-config-flat-gitignore": "0.1.8",
 		"eslint-config-prettier": "9.1.0",
 		"globals": "15.9.0",
-		"semantic-release": "24.1.0",
+		"tinyexec": "0.3.0",
 		"vitest": "2.0.5"
 	},
 	"prettier": {

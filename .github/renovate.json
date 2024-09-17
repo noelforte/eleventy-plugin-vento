@@ -1,13 +1,4 @@
 {
 	"extends": ["github>noelforte/renovate-config"],
-	"packageRules": [
-		{
-			"matchDepTypes": ["dependencies"],
-			"semanticCommitType": "upstream",
-			"semanticCommitScope": null
-		},
-		{
-			"matchDepTypes": ["devDependencies"]
-		}
-	]
+	"semanticCommits": "disabled"
 }
