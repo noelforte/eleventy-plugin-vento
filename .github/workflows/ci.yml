@@ -44,10 +44,11 @@ jobs:
         run: node ./scripts/generate-changesets.js
 
       - name: Release
+        uses: changesets/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        uses: changesets/action@v1
+          NPM_CONFIG_PROVENANCE: true
         with:
           version: 'pnpm ci:version'
-          publish: 'pnpm publish --provenance'
+          publish: 'pnpm changeset publish'
