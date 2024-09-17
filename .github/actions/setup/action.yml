@@ -1,24 +1,17 @@
 name: Setup
-description: Setup project with pnpm
+description: Setup project with mise
 
 outputs:
   cache-hit:
     description: 'Whether restoring the cache was successful or not'
-    value: ${{ steps.setup-node.outputs.cache-hit }}
+    value: ${{ steps.mise-install.outputs.cache-hit }}
 
 runs:
   using: composite
   steps:
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v4
-
-    - name: Setup node
-      id: setup-node
-      uses: actions/setup-node@v4
-      with:
-        node-version-file: .node-version
-        cache: pnpm
-        cache-dependency-path: pnpm-lock.yaml
+    - name: Install tools
+      id: mise-install
+      uses: jdx/mise-action@v2
 
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
