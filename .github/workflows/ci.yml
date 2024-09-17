@@ -49,5 +49,5 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         uses: changesets/action@v1
         with:
-          publish: 'pnpm publish'
-          version: pnpm changeset version
+          version: 'pnpm ci:version'
+          publish: 'pnpm publish --provenance'

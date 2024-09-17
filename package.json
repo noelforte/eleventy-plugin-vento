@@ -8,7 +8,8 @@
 	},
 	"scripts": {
 		"test": "vitest",
-		"lint": "eslint **/*.js --config ./eslint.config.js"
+		"lint": "eslint **/*.js --config ./eslint.config.js",
+		"ci:version": "node ./scripts/generate-changesets.js && changeset version"
 	},
 	"main": "./VentoPlugin.js",
 	"imports": {
@@ -21,11 +22,6 @@
 	"repository": "git@github.com:noelforte/eleventy-plugin-vento.git",
 	"bugs": {
 		"url": "https://github.com/noelforte/eleventy-plugin-vento/issues"
-	},
-	"publishConfig": {
-		"access": "public",
-		"registry": "https://registry.npmjs.org/",
-		"provenance": true
 	},
 	"keywords": [
 		"eleventy",
