@@ -11,9 +11,10 @@
 		"lint": "eslint **/*.js --config ./eslint.config.js",
 		"ci:version": "node ./scripts/generate-changesets.js && changeset version"
 	},
-	"main": "./src/index.js",
 	"exports": {
-		".": "./src/index.js"
+		".": {
+			"import": "./src/index.js"
+		}
 	},
 	"repository": "git@github.com:noelforte/eleventy-plugin-vento.git",
 	"bugs": {
