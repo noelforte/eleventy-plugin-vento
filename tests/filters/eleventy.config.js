@@ -1,4 +1,4 @@
-export default function (eleventyConfig) {
+export default function eleventy(eleventyConfig) {
 	eleventyConfig.addFilter(
 		'uppercase',
 		/** @param {string} content */
