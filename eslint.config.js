@@ -19,7 +19,7 @@ export default [
 
 	// Configure ignores
 	{
-		ignores: ['**/node_modules'],
+		ignores: ['**/node_modules/**'],
 	},
 
 	// Configure defaults

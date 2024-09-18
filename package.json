@@ -7,8 +7,8 @@
 		"node": ">=16"
 	},
 	"scripts": {
-		"test": "vitest",
-		"lint": "eslint **/*.js --config ./eslint.config.js",
+		"test": "vitest --run",
+		"lint": "eslint '**/*.js'",
 		"ci:version": "node ./scripts/generate-changesets.js && changeset version"
 	},
 	"exports": {
@@ -51,10 +51,5 @@
 		"singleQuote": true,
 		"semi": true,
 		"trailingComma": "es5"
-	},
-	"pnpm": {
-		"overrides": {
-			"liquidjs": "10.16.4"
-		}
 	}
 }
