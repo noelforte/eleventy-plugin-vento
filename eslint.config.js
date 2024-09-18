@@ -54,6 +54,7 @@ export default [
 			'object-shorthand': ['error', 'always'],
 			'arrow-body-style': ['error', 'as-needed'],
 			eqeqeq: ['error', 'smart'],
+			'unicorn/prevent-abbreviations': 'off',
 		},
 	},
 
