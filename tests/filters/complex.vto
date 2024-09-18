@@ -1,0 +1,3 @@
+{{ set pangram = 'The quick brown fox jumps over the lazy dog.' }}
+
+{{ pangram |> split('') |> reverse |> join('') }}
