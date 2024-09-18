@@ -2,7 +2,7 @@
 
 <a href="https://github.com/noelforte/eleventy-plugin-vento/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/noelforte/eleventy-plugin-vento/ci.yml?branch=main&style=flat-square&logo=github&logoColor=fff&label=Tests&labelColor=333" alt="Github Actions Status"></a>
 <a href="https://npmjs.com/package/eleventy-plugin-vento"><img src="https://img.shields.io/npm/v/eleventy-plugin-vento?style=flat-square&logo=npm&logoColor=fff&labelColor=333" alt="eleventy-plugin-vento on npm"></a>
-<a href="https://github.com/semantic-release/semantic-release"><img src="https://img.shields.io/badge/semantic--release-Conventional_Commits-fa6673?style=flat-square&logo=semanticrelease&logoColor=fff&labelColor=333" alt="semantic-release"></a>
+<a href="https://github.com/changesets/changesets/"><img src="https://img.shields.io/badge/🦋_Changesets-333?style=flat-square" alt="changesets"></a>
 
 An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://vento.js.org/) templates.
 
@@ -48,7 +48,7 @@ import { VentoPlugin } from 'eleventy-plugin-vento';
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(VentoPlugin, {
-    // An array of Vento plugins to load
+    // An array of Vento plugins to use when compiling
     plugins: [],
 
     // Define whether Javascript Functions should be added
@@ -57,14 +57,14 @@ export default function (eleventyConfig) {
 
     // Define tags that should be trimmed, or set to true
     // to trim the default tags (see section on Auto-trimming)
-    trimTags: [],
+    autotrim: false,
 
     // Enable/disable ignore tag syntax (see section on ignoring tags)
     ignoreTag: false,
 
     // A Vento configuration object
     ventoOptions: {
-      includes: '...', // defaults to the Eleventy 'includes' directory
+      includes: eleventyConfig.directories.includes,
       autoescape: false,
     },
   });
@@ -77,11 +77,17 @@ View the [full list of options](https://vento.js.org/configuration/#options/) to
 
 Filters that are added using Eleventy's `.addFilter()` or `.addAsyncFilter()` methods will be automatically loaded into Vento. Since Vento filters and Eleventy filters follow the same syntax for filters (content as first argument), the implementation is 1:1.
 
-[More information about Vento filters](https://vento.js.org/configuration/#filters)
+If you'd prefer to set filters yourself (via a plugin or other method) set `enableFilters: false` in the plugin options.
 
-[More information about Eleventy filters](https://www.11ty.dev/docs/filters/)
+### Relevant documentation
+
+Vento: See [Filters](https://vento.js.org/configuration/#filters) and [Pipe Syntax](https://vento.js.org/syntax/pipes/)
+
+Eleventy: See [Filters](https://www.11ty.dev/docs/filters/)
 
 ## Vento Plugins
+
+_Note: The `auto_trim` plugin that ships with Vento has a specific implementation in the scope of this plugin. See [Auto-Trimming Tags](#auto-trimming-tags) for more details._
 
 If you'd like to extend the Vento library with any plugins, include them in an array passed to the `plugins` option.
 
@@ -94,7 +100,7 @@ function myCustomPlugin() {
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(VentoPlugin, {
-    plugins: [myCustomPlugin()],
+    plugins: [myCustomPlugin],
   });
 }
 ```
@@ -111,7 +117,7 @@ eleventyConfig.addPlugin(VentoPlugin, {
 });
 ```
 
-The default set of tags that are trimmed are [defined in Vento](https://github.com/ventojs/vento/blob/8c767d45441c2d5a90b6b2b4e33bec56018807d3/plugins/auto_trim.ts#L4-L20). To set your own tags, set `autotrim` to an object with a `tags` key.
+The default set of tags that are trimmed are [defined by Vento itself](https://github.com/ventojs/vento/blob/8c767d45441c2d5a90b6b2b4e33bec56018807d3/plugins/auto_trim.ts#L4-L20). To set your own list of tags, set `autotrim` to an object with a `tags` key.
 
 ```js
 eleventyConfig.addPlugin(VentoPlugin, {
@@ -134,7 +140,9 @@ eleventyConfig.addPlugin(VentoPlugin, {
 });
 ```
 
-For more information on the auto-trim plugin, consult the [plugin documentation](https://vento.js.org/plugins/auto-trim/).
+### Relevant documentation
+
+Vento: See [Auto Trim Plugin](https://vento.js.org/plugins/auto-trim/).
 
 ## JavaScript Helpers
 

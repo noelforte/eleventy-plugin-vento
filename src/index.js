@@ -3,9 +3,9 @@
  *
  * @typedef VentoPluginOptions
  * @prop {import('ventojs/src/environment.js').Plugin[]} plugins
- * Array of plugins to load into vento
+ * Array of vento plugins to use when compiling templates
  * @prop {boolean|AutotrimConfig} autotrim
- * Whether to use Vento's [`autoTrim`](https://vento.js.org/plugins/auto-trim/)
+ * Enable Vento's [`autoTrim`](https://vento.js.org/plugins/auto-trim/)
  * plugin to remove whitespace from tags in output
  * @prop {boolean} [shortcodes=true]
  * Create vento tags for Eleventy [Shortcodes](https://www.11ty.dev/docs/shortcodes/)
