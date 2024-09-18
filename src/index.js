@@ -7,11 +7,11 @@
  * @prop {boolean|AutotrimConfig} autotrim
  * Whether to use Vento's [`autoTrim`](https://vento.js.org/plugins/auto-trim/)
  * plugin to remove whitespace from tags in output
- * @prop {boolean} usePreserveTag
- * Enables/disables tag preservation (`{{! ... }}`) syntax in templates
  * @prop {boolean} useEleventyFeatures
  * Enables/disables Eleventy features. If true, will create tags and filters
  * for all corresponding Eleventy shortcodes and filters
+ * @prop {boolean} [ignoreTag=false]
+ * Enables/disables tag ignore (`{{! ... }}`) syntax in templates
  * @prop {import('ventojs').Options} ventoOptions
  * Options to pass on to the `ventojs` engine.
  * (See [Vento Docs](https://vento.js.org/configuration/#options))
@@ -26,7 +26,7 @@ import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plug
 
 // Local modules
 import { VentoEngine } from './engine.js';
-import { preserveTagPlugin } from './modules/preserve-tag.js';
+import { ignoreTagPlugin } from './modules/ignore-tag.js';
 
 /**
  * @param {import('@11ty/eleventy').UserConfig} eleventyConfig
@@ -41,7 +41,7 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 		autotrim: false,
 		plugins: [],
 		useEleventyFeatures: true,
-		usePreserveTag: true,
+		ignoreTag: false,
 		ventoOptions: {
 			includes: eleventyConfig.directories.includes,
 			autoescape: false,
@@ -63,7 +63,7 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 	}
 
 	// Add preserve tag plugin if enabled
-	if (options.usePreserveTag) options.plugins.push(preserveTagPlugin);
+	if (options.ignoreTag) options.plugins.push(ignoreTagPlugin);
 
 	// Create the vento engine instance
 	const vento = new VentoEngine(options.ventoOptions);

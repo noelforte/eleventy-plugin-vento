@@ -15,7 +15,7 @@ An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://ve
 [Vento Plugins](#vento-plugins)<br>
 [Auto-Trimming Tags](#auto-trimming-tags)<br>
 [JavaScript Helpers](#javascript-helpers)<br>
-[Hybrid Rendering](#hybrid-rendering)<br>
+[Ignoring Tags](#ignoring-tags)<br>
 
 ## Installing
 
@@ -58,6 +58,9 @@ export default function (eleventyConfig) {
     // Define tags that should be trimmed, or set to true
     // to trim the default tags (see section on Auto-trimming)
     trimTags: [],
+
+    // Enable/disable ignore tag syntax (see section on ignoring tags)
+    ignoreTag: false,
 
     // A Vento configuration object
     ventoOptions: {
@@ -189,9 +192,17 @@ eleventyConfig.addPlugin(VentoPlugin, {
 });
 ```
 
-## Hybrid Rendering
+## Ignoring Tags
 
 Exclusive to this plugin is the ability to skip processing a vento tag entirely and instead preserve the tag in the markup. This could be useful if you're doing some hybrid rendering and would like to defer certain tags from being processed until load time, so they can be rendered on the server.
+
+This feature is enabled through use of the `enableIgnoreTag` plugin option.
+
+```js
+eleventyConfig.addPlugin(VentoPlugin, {
+  enableIgnoreTag: true,
+});
+```
 
 To skip over a tag, add a `!` directly after the opening tag.
 

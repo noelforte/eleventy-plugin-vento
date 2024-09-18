@@ -3,13 +3,13 @@
  */
 
 /** @type {import('ventojs/src/environment.js').Tag} */
-function preserveTag(_env, code, output, _tokens) {
+function ignoreTag(_env, code, output, _tokens) {
 	if (!code.startsWith('!')) return;
 	const compiled = `{{${code.replace(/!(>?)\s+/, '$1 ')}}}`;
 	return `${output} += "${compiled}";`;
 }
 
 /** @type {import('ventojs/src/environment.js').Plugin} */
-export function preserveTagPlugin(env) {
-	env.tags.push(preserveTag);
+export function ignoreTagPlugin(env) {
+	env.tags.push(ignoreTag);
 }

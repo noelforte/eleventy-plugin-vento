@@ -3,7 +3,7 @@ import { test } from 'vitest';
 
 const testRun = new EleventyTest('./preserve-tag/', {
 	pluginOptions: {
-		usePreserveTag: true,
+		ignoreTag: true,
 	},
 });
 
