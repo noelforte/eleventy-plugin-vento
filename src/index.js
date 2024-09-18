@@ -7,9 +7,12 @@
  * @prop {boolean|AutotrimConfig} autotrim
  * Whether to use Vento's [`autoTrim`](https://vento.js.org/plugins/auto-trim/)
  * plugin to remove whitespace from tags in output
- * @prop {boolean} useEleventyFeatures
- * Enables/disables Eleventy features. If true, will create tags and filters
- * for all corresponding Eleventy shortcodes and filters
+ * @prop {boolean} [shortcodes=true]
+ * Create vento tags for Eleventy [Shortcodes](https://www.11ty.dev/docs/shortcodes/)
+ * @prop {boolean} [pairedShortcodes=true]
+ * Create vento tags for Eleventy [Paired Shortcodes](https://www.11ty.dev/docs/shortcodes/#paired-shortcodes)
+ * @prop {boolean} [filters=true]
+ * Create vento filters for Eleventy [Filters](https://www.11ty.dev/docs/filters/)
  * @prop {boolean} [ignoreTag=false]
  * Enables/disables tag ignore (`{{! ... }}`) syntax in templates
  * @prop {import('ventojs').Options} ventoOptions
@@ -40,7 +43,9 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 		// Define defaults
 		autotrim: false,
 		plugins: [],
-		useEleventyFeatures: true,
+		filters: true,
+		shortcodes: true,
+		pairedShortcodes: true,
 		ignoreTag: false,
 		ventoOptions: {
 			includes: eleventyConfig.directories.includes,
@@ -70,10 +75,9 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 
 	vento.emptyCache(); // Ensure cache is empty
 	vento.loadPlugins(options.plugins); // Load plugin functions
-	if (options.useEleventyFeatures) {
-		vento.loadFilters(eleventyConfig.getFilters()); // Load filters
-		vento.loadShortcodes(eleventyConfig.getShortcodes());
-	}
+
+	if (options.filters) vento.loadFilters(eleventyConfig.getFilters());
+	if (options.shortcodes) vento.loadShortcodes(eleventyConfig.getShortcodes());
 
 	// Add vto as a template format
 	eleventyConfig.addTemplateFormats('vto');
