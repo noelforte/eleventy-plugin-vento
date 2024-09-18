@@ -1,33 +1,33 @@
 import { EleventyTest } from './_eleventy-test.js';
 import { test } from 'vitest';
 
-const testRun = new EleventyTest('./preserve-tag/', {
+const testRun = new EleventyTest('./ignore-tag/', {
 	pluginOptions: {
 		ignoreTag: true,
 	},
 });
 
-test('render if (ssr)', async ({ expect }) => {
+test('render if (ignore tag)', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/if/');
-	await expect(content).toMatchFileSnapshot('./_results/ssr-if.html');
+	await expect(content).toMatchFileSnapshot('./_results/ignore-if.html');
 });
 
-test('render data (ssr)', async ({ expect }) => {
+test('render data (ignore tag)', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/data/');
-	await expect(content).toMatchFileSnapshot('./_results/ssr-data.html');
+	await expect(content).toMatchFileSnapshot('./_results/ignore-data.html');
 });
 
-test('render for (ssr)', async ({ expect }) => {
+test('render for (ignore tag)', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/for/');
-	await expect(content).toMatchFileSnapshot('./_results/ssr-for.html');
+	await expect(content).toMatchFileSnapshot('./_results/ignore-for.html');
 });
 
-test('render echo (ssr)', async ({ expect }) => {
+test('render echo (ignore tag)', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/echo/');
-	await expect(content).toMatchFileSnapshot('./_results/ssr-echo.html');
+	await expect(content).toMatchFileSnapshot('./_results/ignore-echo.html');
 });
 
-test('render exec (ssr)', async ({ expect }) => {
+test('render exec (ignore tag)', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/exec/');
-	await expect(content).toMatchFileSnapshot('./_results/ssr-exec.html');
+	await expect(content).toMatchFileSnapshot('./_results/ignore-exec.html');
 });
