@@ -10,7 +10,8 @@
 	"scripts": {
 		"test": "vitest --run",
 		"lint": "eslint '**/*.js'",
-		"ci:version": "node ./scripts/generate-changesets.js && changeset version"
+		"ci:version": "changeset version",
+		"ci:publish": "changeset publish"
 	},
 	"exports": {
 		".": {

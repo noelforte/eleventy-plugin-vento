@@ -77,4 +77,4 @@ jobs:
           NPM_CONFIG_PROVENANCE: true
         with:
           version: 'pnpm ci:version'
-          publish: 'pnpm changeset publish'
+          publish: 'pnpm ci:publish'
