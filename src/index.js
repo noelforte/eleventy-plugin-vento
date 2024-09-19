@@ -67,17 +67,30 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 		options.plugins.push(autotrimPlugin({ tags: [...tagSet] }));
 	}
 
-	// Add preserve tag plugin if enabled
-	if (options.ignoreTag) options.plugins.push(ignoreTagPlugin);
+	// Add ignore tag plugin if enabled
+	if (options.ignoreTag) {
+		options.plugins.push(ignoreTagPlugin);
+	}
 
 	// Create the vento engine instance
 	const vento = new VentoEngine(options.ventoOptions);
 
-	vento.emptyCache(); // Ensure cache is empty
-	vento.loadPlugins(options.plugins); // Load plugin functions
+	// Ensure cache is empty
+	vento.emptyCache();
 
-	if (options.filters) vento.loadFilters(eleventyConfig.getFilters());
-	if (options.shortcodes) vento.loadShortcodes(eleventyConfig.getShortcodes());
+	// Load plugins
+	vento.loadPlugins(options.plugins);
+
+	// Add filters, single and paired shortcodes if enabled
+	if (options.filters) {
+		vento.loadFilters(eleventyConfig.getFilters());
+	}
+	if (options.shortcodes) {
+		vento.loadShortcodes(eleventyConfig.getShortcodes(), false);
+	}
+	if (options.pairedShortcodes) {
+		vento.loadShortcodes(eleventyConfig.getPairedShortcodes(), true);
+	}
 
 	// Add vto as a template format
 	eleventyConfig.addTemplateFormats('vto');
