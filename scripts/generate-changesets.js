@@ -10,24 +10,28 @@ const LATEST_TAG = await x('git', ['describe', '--tags', '--abbrev=0']).then(({ 
 console.log(`Checking for renovate commits since ${LATEST_TAG} tag...\n`);
 
 const writeChangesets = Object.keys(pkg.dependencies).map(async (dependencyName) => {
-	const { author, hash, body } = await x('git', [
+	const { stdout: commit } = await x('git', [
 		'log',
 		'-1',
 		'-G',
 		`"${dependencyName}":`,
-		'--format={"hash":"%h","author":"%an","body":"%B"}',
-		`${LATEST_TAG}..HEAD`,
+		'--format=commit %h%nauthor %an%n%n%B',
+		`v2.4.0..v2.6.0`,
 		'package.json',
-	]).then(({ stdout }) => (stdout ? JSON.parse(stdout) : {}));
+	]);
 
-	if (author !== 'renovate[bot]') {
+	const match = /^commit (?<hash>[\da-f]+)\nauthor renovate\[bot]\n\n(?<body>[\S\s]+)$/gm.exec(
+		commit
+	);
+
+	if (!match) {
 		console.log(`No renovate commits for '${dependencyName}'`);
 		return;
 	}
 
-	const data = `---\neleventy-plugin-vento: minor\n---\n\n${body}`;
+	const data = `---\neleventy-plugin-vento: minor\n---\n\n${match.groups.body}`;
 
-	await writeFile(`./.changeset/renovate-${dependencyName}-${hash}.md`, data, 'utf8');
+	await writeFile(`./.changeset/renovate-${dependencyName}-${match.groups.hash}.md`, data, 'utf8');
 
 	return true;
 });
