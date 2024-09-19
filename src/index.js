@@ -30,13 +30,14 @@ import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plug
 // Local modules
 import { VentoEngine } from './engine.js';
 import { ignoreTagPlugin } from './modules/ignore-tag.js';
+import { runCompatibilityCheck } from './modules/utils.js';
 
 /**
  * @param {import('@11ty/eleventy').UserConfig} eleventyConfig
  * @param {Partial<VentoPluginOptions>} userOptions
  */
 export function VentoPlugin(eleventyConfig, userOptions) {
-	eleventyConfig.versionCheck('>= 3.0.0-beta.1');
+	runCompatibilityCheck(eleventyConfig);
 
 	/** @type {VentoPluginOptions} */
 	const options = {
@@ -49,7 +50,6 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 		ignoreTag: false,
 		ventoOptions: {
 			includes: eleventyConfig.directories.includes,
-			autoescape: false,
 		},
 
 		// Merge in user-provided options

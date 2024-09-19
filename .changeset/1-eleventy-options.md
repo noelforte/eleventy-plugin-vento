@@ -24,8 +24,6 @@ Of course, the big news is that **paired** shortcodes are now officially support
 {{ /blockquote }}
 ```
 
-This functionality became possible with the addition of the `getShortcodes()` and `getPairedShortcodes()` functions that were added in [Eleventy v3.0.0-alpha.15](https://github.com/11ty/eleventy/releases/tag/v3.0.0-alpha.15). Because of dependence on these features, Eleventy 3.0.0-alpha.15 is now the **minimum required version** in order to use this plugin.
-
 Because these changes removed direct dependence on Eleventy JavaScript functions, the `addHelpers` option has been replaced with 3 new options: `shortcodes`, `pairedShortcodes` and `filters`. **All of them are enabled by default** but can be disabled in your plugin config like so.
 
 ```diff
