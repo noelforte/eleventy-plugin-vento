@@ -12,7 +12,7 @@ import { VentoPlugin } from 'eleventy-plugin-vento';
 
 class EleventyTest extends Eleventy {
 	/** @type {Promise<PageObject[]>} */
-	#_buildResults;
+	buildResults;
 
 	/**
 	 * @param {string} pathname
@@ -35,16 +35,16 @@ class EleventyTest extends Eleventy {
 		});
 
 		// Perform a build
-		this.#_buildResults = this.toJSON();
+		this.buildResults = this.toJSON();
 	}
 
 	async getBuildResultForUrl(url) {
-		const results = await this.#_buildResults;
+		const results = await this.buildResults;
 		return results.find((page) => page.url === url);
 	}
 
 	async countResultPages() {
-		const results = await this.#_buildResults;
+		const results = await this.buildResults;
 		return results.filter(({ outputPath }) => Boolean(outputPath)).length;
 	}
 }

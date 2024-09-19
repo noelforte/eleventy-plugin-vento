@@ -1,11 +1,5 @@
 export default function eleventy(eleventyConfig) {
-	eleventyConfig.addFilter(
-		'uppercase',
-		/** @param {string} content */
-		(content) => content.toUpperCase()
-	);
-
-	eleventyConfig.addFilter('wrapWith', (content, tag) => `<${tag}>${content}</${tag}>`);
+	eleventyConfig.addFilter('wrapWith', (content, tag = 'span') => `<${tag}>${content}</${tag}>`);
 
 	eleventyConfig.addFilter('pageUrlCompare', function (url) {
 		return this.page.url === url;

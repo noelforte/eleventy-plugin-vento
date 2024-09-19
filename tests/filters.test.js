@@ -5,7 +5,7 @@ const testRun = new EleventyTest('./filters/', {
 	useEleventyConfig: true,
 });
 
-test('transform string with built-in method', async ({ expect }) => {
+test('transform string with built-ins', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/basic/');
 	await expect(content).toMatchFileSnapshot('./_results/filters-built-in-basic.html');
 });
@@ -15,16 +15,16 @@ test('transform string with multiple methods', async ({ expect }) => {
 	await expect(content).toMatchFileSnapshot('./_results/filters-built-in-complex.html');
 });
 
-test('transforms string with passed arguments', async ({ expect }) => {
-	const { content } = await testRun.getBuildResultForUrl('/with-arguments/');
+test('transforms string with custom filter', async ({ expect }) => {
+	const { content } = await testRun.getBuildResultForUrl('/custom/');
 	await expect(content).toMatchFileSnapshot('./_results/filters-arguments.html');
 });
 
-test('verify page context in scoped data', async ({ expect }) => {
+test('transform string using context data (this.page)', async ({ expect }) => {
 	const result = [
 		await testRun.getBuildResultForUrl('/with-this-example-1/'),
 		await testRun.getBuildResultForUrl('/with-this-example-2/'),
 	].every(({ content }) => content === 'true');
 
-	expect(result).toBeTruthy();
+	expect(result).toBe(true);
 });

@@ -1,0 +1,19 @@
+---
+title: Basic Page
+---
+
+Local Key:
+<h1>{{ title }}</h1>
+<p>This is a standalone page.</p>
+
+Directory Data:
+<p>{{ awesome }}</p>
+
+Built-ins:
+<p>Built with {{ pkg.name }}</p>
+
+Global Data:
+<p>{{ page.url }}</p>
+
+Global Data Function:
+<p>{{ listTypes(100n, true, () => {}, 100, {}, '', Symbol(), undefined) }}</p>
