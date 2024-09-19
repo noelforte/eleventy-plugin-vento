@@ -38,13 +38,13 @@
 	"devDependencies": {
 		"@11ty/eleventy": "3.0.0-beta.1",
 		"@changesets/cli": "2.27.8",
-		"eslint": "9.9.0",
-		"eslint-config-flat-gitignore": "0.1.8",
+		"eslint": "9.10.0",
+		"eslint-config-flat-gitignore": "0.3.0",
 		"eslint-config-prettier": "9.1.0",
 		"eslint-plugin-unicorn": "55.0.0",
 		"globals": "15.9.0",
 		"tinyexec": "0.3.0",
-		"vitest": "2.0.5"
+		"vitest": "2.1.1"
 	},
 	"prettier": {
 		"bracketSameLine": true,
