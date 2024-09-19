@@ -1,8 +1,9 @@
 # eleventy-plugin-vento 🌬️🎈🐀
 
+<img src="https://img.shields.io/badge/Eleventy-v3_&amp;_later_-333?style=flat-square&logo=eleventy&logoColor=fff&labelColor=333&color=111" alt="Eleventy v3 and later">
 <a href="https://github.com/noelforte/eleventy-plugin-vento/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/noelforte/eleventy-plugin-vento/ci.yml?branch=main&style=flat-square&logo=github&logoColor=fff&label=Tests&labelColor=333" alt="Github Actions Status"></a>
 <a href="https://npmjs.com/package/eleventy-plugin-vento"><img src="https://img.shields.io/npm/v/eleventy-plugin-vento?style=flat-square&logo=npm&logoColor=fff&labelColor=333" alt="eleventy-plugin-vento on npm"></a>
-<a href="https://github.com/changesets/changesets/"><img src="https://img.shields.io/badge/🦋_Changesets-333?style=flat-square" alt="changesets"></a>
+<a href="https://github.com/changesets/changesets/"><img src="https://img.shields.io/badge/🦋_Changesets-333?style=flat-square" alt="changesets on GitHub"></a>
 
 An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://vento.js.org/) templates.
 
@@ -12,9 +13,9 @@ An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://ve
 [Usage](#usage)<br>
 [Plugin Options](#plugin-options)<br>
 [Filters](#filters)<br>
+[Shortcodes (Single & Paired)](#shortcodes-single--paired)<br>
 [Vento Plugins](#vento-plugins)<br>
 [Auto-Trimming Tags](#auto-trimming-tags)<br>
-[JavaScript Helpers](#javascript-helpers)<br>
 [Ignoring Tags](#ignoring-tags)<br>
 
 ## Installing
@@ -25,9 +26,9 @@ npm install eleventy-plugin-vento
 
 ## Usage
 
-This plugin is ESM only and cannot be required from CommonJS. As such, it's best used with Eleventy v3.0.0.
+This plugin is ESM only and cannot be required from CommonJS.
 
-If you're using CommonJS and loading it asynchronously (ie `await import`), you will need at minimum Eleventy v1.0.0 which added support for [Custom Templates](https://www.11ty.dev/docs/languages/custom/).
+If you're using CommonJS and loading it asynchronously (ie `await import`), you will need at **minimum** Eleventy v3.0.0-alpha.15 which provides internal methods this plugin uses to get Eleventy stuff from the config API.
 
 In your Eleventy config:
 
@@ -51,9 +52,11 @@ export default function (eleventyConfig) {
     // An array of Vento plugins to use when compiling
     plugins: [],
 
-    // Define whether Javascript Functions should be added
-    // to page data. See below for usage notes on this.
-    addHelpers: true,
+    // Enable/disable Eleventy Shortcodes, Paired Shortcodes,
+    // and Filters in .vto templates
+    shortcodes: true,
+    pairedShortcodes: true,
+    filters: true,
 
     // Define tags that should be trimmed, or set to true
     // to trim the default tags (see section on Auto-trimming)
@@ -65,7 +68,6 @@ export default function (eleventyConfig) {
     // A Vento configuration object
     ventoOptions: {
       includes: eleventyConfig.directories.includes,
-      autoescape: false,
     },
   });
 }
@@ -75,15 +77,70 @@ View the [full list of options](https://vento.js.org/configuration/#options/) to
 
 ## Filters
 
-Filters that are added using Eleventy's `.addFilter()` or `.addAsyncFilter()` methods will be automatically loaded into Vento. Since Vento filters and Eleventy filters follow the same syntax for filters (content as first argument), the implementation is 1:1.
+> [!NOTE]
+> Remember, Vento can pipe any JS data type to any built-in global as the first-argument or any `.prototype` method in addition to declared filters. For instance to print the `eleventy` variable as JSON you could use the following snippet:
+>
+> ```nunjucks
+> {{ eleventy |> JSON.stringify }}
+> ```
+>
+> In these cases, Eleventy filters may not be needed depending on your usage.
 
-If you'd prefer to set filters yourself (via a plugin or other method) set `enableFilters: false` in the plugin options.
+Filters that are added via Eleventy's `.addFilter()` or `.addAsyncFilter()` methods will be automatically loaded into Vento. Since Vento filters and Eleventy filters follow the same syntax for filters (content as first argument), the implementation is 1:1.
+
+If you'd prefer to set filters yourself (via a plugin or other method) or prevent Eleventy from loading filters into Vento, set `filters: false` in the plugin options.
 
 ### Relevant documentation
 
-Vento: See [Filters](https://vento.js.org/configuration/#filters) and [Pipe Syntax](https://vento.js.org/syntax/pipes/)
+Vento: See [Filters](https://vento.js.org/configuration/#filters) and [Pipes](https://vento.js.org/syntax/pipes/)
 
 Eleventy: See [Filters](https://www.11ty.dev/docs/filters/)
+
+## Shortcodes (Single & Paired)
+
+> [!NOTE]
+> Remember, Vento can print any return value from a Javascript expression, as well as [run arbitrary JavaScript](https://vento.js.org/syntax/javascript/) in templates through its `{{> ...}}` operator. In these cases, shortcodes may not be needed depending on your usage.
+
+Single and Paired Shortcodes added via Eleventy's `.addShortcode()`, `addAsyncShortcode()`, `addPairedShortcode()` or `.addAsyncPairedShortcode()` will be automatically loaded into Vento.
+
+When using shortcodes in your templates, write them like any other Vento tag:
+
+```nunjucks
+{{ myShortcode }}
+```
+
+To pass arguments, add a space and your arguments, comma-separated. Arguments are interpreted as JavaScript so type-safety should be considered (quote strings, use booleans if your shortcode expects them, etc.)
+
+```nunjucks
+{{ myShortcode 'arg1', 'arg2' }}
+{{ myBooleanShortcode false, false, true }}
+{{ myNumberShortcode 10, 20, 0 }}
+{{ myObjectShortcode { key1: 'val1', key2: 'val2' } }}
+```
+
+For paired shortcodes, the syntax is the same, just add a closing tag. Paired shortcodes also accept arguments and can re-process nested Vento tags (including other shortcodes).
+
+```nunjucks
+{{ codeBlock 'css' }} <!-- takes arguments too -->
+  a {
+    color: red;
+  }
+{{ /codeBlock }}
+
+{{ blockQuote }}
+  To be or not to be, that is the question.
+  {{ attribute 'William Shakespeare' }} <!-- you can use vento syntax here too -->
+{{ /blockQuote }}
+```
+
+If you'd prefer to set shortcodes yourself (via a plugin or other method) or prevent Eleventy from loading shortcodes into Vento, set `shortcodes: false` and/or `pairedShortcodes: false` in the plugin options.
+
+> [!CAUTION]
+> While it's straightforward to load filters via a Vento plugin that appends filters to the filters object as `env.filters.[filter_name]()`, creating custom tags in Vento is more involved. It's highly advised to keep these two options enabled unless you know what you're doing.
+
+### Relevant Documentation
+
+Eleventy: See [Shortcodes](https://www.11ty.dev/docs/shortcodes/) and the sub-section on [Paired Shortcodes](https://www.11ty.dev/docs/shortcodes/#paired-shortcodes).
 
 ## Vento Plugins
 
@@ -143,62 +200,6 @@ eleventyConfig.addPlugin(VentoPlugin, {
 ### Relevant documentation
 
 Vento: See [Auto Trim Plugin](https://vento.js.org/plugins/auto-trim/).
-
-## JavaScript Helpers
-
-Vento can [run arbitrary JavaScript](https://vento.js.org/syntax/javascript/) in templates through its `{{> ...}}` operator, which evaluates at the time the template is run. However, you may want to use Eleventy Shortcodes and Filters in your templates as well.
-
-By setting `addHelpers` in the plugin options (defaults to `true`), all JavaScript functions (which includes any Universal Shortcodes) are exposed as functions in page data. This feature functions very similarly to WebC's ["helper functions"](https://www.11ty.dev/docs/languages/javascript/#javascript-template-functions) feature.
-
-As an example:
-
-```js
-export default function (eleventyConfig) {
-  // via Universal Filter...
-  eleventyConfig.addFilter('italicize', (content) => `<em>${content}</em>`);
-
-  // ...or via Universal Shortcode
-  eleventyConfig.addShortcode('greeting', (name) => `My name is ${name}`);
-
-  // ...or via JavaScript Template Function
-  eleventyConfig.addJavaScriptFunction('possumPosse', () => 'Release the possums!!!');
-}
-```
-
-```hbs
-<p>This is something {{ italicize('really') }} important.</p>
-<p>{{ possumPosse() }}</p>
-
-<!-- renders as: -->
-
-<p>This is something <em>really</em> important.</p>
-<p>Release the possums!!!</p>
-
-```
-
-Alternatively, if you'd rather keep functions namespaced in your page data, pass a string to `addHelpers`. Your functions will be namespaced under this property name in page data.
-
-```js
-addPlugin(VentoPlugin, { addHelpers: 'functions' });
-```
-
-```nunjucks
-<!-- With the above, this: -->
-<p>This is something {{ italicize('really') }} important.</p>
-<p>{{ possumPosse() }}</p>
-
-<!-- should be written as: -->
-<p>This is something {{ functions.italicize('really') }} important.</p>
-<p>{{ functions.possumPosse() }}</p>
-```
-
-Finally, if you'd like to disable populating helper functions at all, set `addHelpers` to false:
-
-```js
-eleventyConfig.addPlugin(VentoPlugin, {
-  addHelpers: false,
-});
-```
 
 ## Ignoring Tags
 
@@ -264,6 +265,6 @@ Rather than having to do multiple `{{ /echo }} ... {{ echo }}` statements, the p
 {{ if someCondition }}
   <p>{{ getServerData }}</p>
 
-  <p>Page built on: 04-08-2024</p>
+  <p>Page built on: 09-19-2024</p>
 {{ /if }}
 ```
