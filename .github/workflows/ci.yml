@@ -23,12 +23,40 @@ jobs:
       - name: Test
         run: pnpm test
 
+  changesets:
+    name: Sync Changesets
+    runs-on: ubuntu-latest
+    concurrency:
+      group: sync-${{ github.workflow }}-${{ github.ref }}
+    if: startsWith(github.ref_name, 'renovate/')
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Sync changesets
+        id: sync
+        run: node ./scripts/generate-changesets.js
+
+      - run: git rev-parse --abbrev-ref HEAD
+
+      - name: Push changesets
+        if: steps.sync.outputs.changesets-created == true
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -C HEAD --amend --no-edit
+          git push
+
   release:
+    name: Release
+    runs-on: ubuntu-latest
     concurrency:
       group: release-${{ github.workflow }}-${{ github.ref }}
     needs: [test]
-    name: Release
-    runs-on: ubuntu-latest
     if: contains(fromJSON('["main", "alpha", "beta", "next"]'), github.ref_name)
     steps:
       - uses: actions/checkout@v4
@@ -40,9 +68,6 @@ jobs:
 
       - name: Verify provenance attestations and registry signatures
         run: npm audit signatures
-
-      - name: Generate changeset files for renovate commits
-        run: node ./scripts/generate-changesets.js
 
       - name: Release
         uses: changesets/action@v1
