@@ -16,7 +16,7 @@ const writeChangesets = Object.keys(pkg.dependencies).map(async (dependencyName)
 		'-G',
 		`"${dependencyName}":`,
 		'--format=commit %h%nauthor %an%n%n%B',
-		`v2.4.0..v2.6.0`,
+		`${LATEST_TAG}..HEAD`,
 		'package.json',
 	]);
 
