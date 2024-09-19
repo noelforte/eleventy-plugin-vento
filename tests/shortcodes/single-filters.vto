@@ -1,0 +1,13 @@
+Shortcode call with filter:
+{{ possumPosse |> toUpperCase }}
+
+Shortcode call with argument and filter:
+{{ possumPosse '5 million' |> toUpperCase}}
+{{ possumPosse 100 |> toUpperCase}}
+
+Shortcode call with different data types and filter:
+{{ types 'hello world!', 100, true |> toUpperCase }}
+
+Shortcode call with page data and filter:
+{{ pageUrlCompare page.url |> toUpperCase }}
+

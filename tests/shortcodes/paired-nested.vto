@@ -1,0 +1,30 @@
+{{ sectionWrap 'some-class' }}
+
+	Plaintext content
+
+	{{ possumPosse '5 million' }}
+	{{ possumPosse '15 million' }}
+	{{ possumPosse '50 million' }}
+
+	{{ codeBlock 'js' }}
+		const text = 'This is some js code.';
+	{{ /codeBlock }}
+
+	{{ sectionWrap 'another-class' }}
+		Some content
+	{{ /sectionWrap }}
+
+	More plaintext content.
+
+	{{ sectionWrap }}
+		A third section, no class here though.
+		{{ sectionWrap }}
+			Sub-sub-section
+		{{ /sectionWrap }}
+	{{ /sectionWrap }}
+
+	{{ sectionWrap |> toUpperCase }}
+		All the capital letters!!
+	{{ /sectionWrap }}
+
+{{ /sectionWrap }}

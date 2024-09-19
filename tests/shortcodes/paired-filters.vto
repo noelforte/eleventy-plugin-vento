@@ -1,0 +1,16 @@
+Paired shortcode call with filter:
+{{ codeBlock }}
+	This is some plaintext.
+{{ /codeBlock }}
+
+Paired shortcode call with argument and filter:
+{{ codeBlock 'html' |> toUpperCase }}
+	<h1>Who puts tags in all uppercase anyway?</h1>
+{{ /codeBlock }}
+
+Paired shortcode call with page data and filter:
+{{ appendPageUrl |> toUpperCase }}
+	<p>This is a paragraph</p>
+	<p>And this is another one</p>
+	<p>One more for luck</p>
+{{ /appendPageUrl }}
