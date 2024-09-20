@@ -18,6 +18,18 @@
 			<p>This is {{ current }}</p>
 		</section>
 	{{ /for }}
+	{{ for num of numbers }}
+		<section>
+			<h1>{{ num }}</h1>
+			<p>This is {{ current }}</p>
+		</section>
+	{{ /for }}
+	{{ button 'https://11ty.dev/', 'Link to Eleventy Homepage' }}
+	<p>Here's a block of text with some	{{ highlight '#BADA55' }}really cool{{ /highlight }} text.</p>
+	{{ card 'A data card', 'Find out more', 'https://example.com/', 'magic' }}
+		<p>Here's some card content.</p>
+		<p>And here's some more card content.</p>
+	{{ /card }}
 	</main>
 </body>
 </html>

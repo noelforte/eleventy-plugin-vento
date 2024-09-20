@@ -25,7 +25,7 @@ export function createVentoTag(name, paired) {
 		if (paired) {
 			args.unshift(env.compileFilters(tokens, varname, env.options.autoescape));
 			compiled.push(
-				`{ // START paired-${name}`,
+				'{',
 				`let ${varname} = "";`,
 				...env.compileTokens(tokens, varname, [`/${name}`])
 			);
@@ -39,13 +39,15 @@ export function createVentoTag(name, paired) {
 		args = args.some(Boolean) ? `, ${args.filter(Boolean).join(', ')}` : '';
 
 		compiled.push(
-			`{ // START ${name}`,
+			'{',
 			`const __shortcode_result = await ${fn}.call(${ctx + args});`,
 			`${output} += ${env.compileFilters(tokens, '__shortcode_result', env.options.autoescape)}`,
-			`} // END ${name}`
+			'}'
 		);
 
-		if (paired) compiled.push(`} // END paired-${name}`);
+		if (paired) compiled.push('}');
+
+		// console.log(compiled);
 
 		return compiled.join('\n');
 	};

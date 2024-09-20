@@ -4,7 +4,7 @@
  * @typedef VentoPluginOptions
  * @prop {import('ventojs/src/environment.js').Plugin[]} plugins
  * Array of vento plugins to use when compiling templates
- * @prop {boolean|AutotrimConfig} autotrim
+ * @prop {boolean|string[]} autotrim
  * Enable Vento's [`autoTrim`](https://vento.js.org/plugins/auto-trim/)
  * plugin to remove whitespace from tags in output
  * @prop {boolean} [shortcodes=true]
@@ -18,10 +18,6 @@
  * @prop {import('ventojs').Options} ventoOptions
  * Options to pass on to the `ventojs` engine.
  * (See [Vento Docs](https://vento.js.org/configuration/#options))
- *
- * @typedef AutotrimConfig
- * @prop {Array<string>} tags
- * @prop {boolean?} extend
  */
 
 // External modules
@@ -30,7 +26,7 @@ import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plug
 // Local modules
 import { VentoEngine } from './engine.js';
 import { ignoreTagPlugin } from './modules/ignore-tag.js';
-import { runCompatibilityCheck } from './modules/utils.js';
+import { runCompatibilityCheck, logError } from './modules/utils.js';
 
 /**
  * @param {import('@11ty/eleventy').UserConfig} eleventyConfig
@@ -56,12 +52,30 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 		...userOptions,
 	};
 
+	// Get list of filters, shortcodes and paired shortcodes
+	const filters = eleventyConfig.getFilters();
+	const shortcodes = eleventyConfig.getShortcodes();
+	const pairedShortcodes = eleventyConfig.getPairedShortcodes();
+
 	// Add autotrim plugin if enabled
 	if (options.autotrim) {
+		const defaults = ['@vento', '@11ty'];
+
 		/** @type {Set<string>} */
-		const tagSet = new Set(options.autotrim?.tags ?? autotrimDefaultTags);
-		if (options.autotrim?.extend) {
-			for (const tag of autotrimDefaultTags) tagSet.add(tag);
+		const tagSet = new Set(options.autotrim === true ? defaults : options.autotrim);
+
+		if (tagSet.has('@vento')) {
+			tagSet.delete('@vento');
+			for (const name of autotrimDefaultTags) {
+				tagSet.add(name);
+			}
+		}
+
+		if (tagSet.has('@11ty')) {
+			tagSet.delete('@11ty');
+			for (const name in pairedShortcodes) {
+				tagSet.add(name);
+			}
 		}
 
 		options.plugins.push(autotrimPlugin({ tags: [...tagSet] }));
@@ -83,13 +97,13 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 
 	// Add filters, single and paired shortcodes if enabled
 	if (options.filters) {
-		vento.loadFilters(eleventyConfig.getFilters());
+		vento.loadFilters(filters);
 	}
 	if (options.shortcodes) {
-		vento.loadShortcodes(eleventyConfig.getShortcodes(), false);
+		vento.loadShortcodes(shortcodes, false);
 	}
 	if (options.pairedShortcodes) {
-		vento.loadShortcodes(eleventyConfig.getPairedShortcodes(), true);
+		vento.loadShortcodes(pairedShortcodes, true);
 	}
 
 	// Add vto as a template format

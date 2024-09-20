@@ -21,13 +21,12 @@ Additionally, the eleventy plugin no longer re-exports `defaultTags` from `vento
 - import { ventoDefaultTrimTags } from 'eleventy-plugin-vento';
 ```
 
-To extend the default tags list, this plugin now provides a new way to declare a configuration for the `auto_trim` plugin in the form of an object like so:
+To extend the default tags list, this plugin now provides a 2 placeholder values for your array of tags, `@vento` and `@11ty`. When the plugin executes, `@vento` will be expanded to the default vento tags list, and `@11ty` will be expanded to the names of all paired shortcodes.
 
 ```js
 eleventyConfig.addPlugin(VentoPlugin, {
-  autotrim: {
-    tags: string[], // tags you'd like to trim
-    extend: boolean, // whether to extend or replace the default tags
-  }
+  autotrim: ['@vento', '@11ty', 'tag1', 'tag2'],
 });
 ```
+
+Setting `autotrim: true` is the same as `autotrim: ['@vento', '@11ty']`.

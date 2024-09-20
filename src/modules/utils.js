@@ -6,7 +6,7 @@ const REQUIRED_API_METHODS = [
 	['addExtension', 'v1.0.0'],
 ];
 
-export function error(message) {
+export function logError(message) {
 	console.error(`[eleventy-plugin-vento] ${message}`);
 }
 
@@ -14,7 +14,7 @@ export function error(message) {
 export function runCompatibilityCheck(configApi) {
 	for (const [method, version] of REQUIRED_API_METHODS) {
 		if (!configApi?.[method]) {
-			error(
+			logError(
 				`Eleventy plugin compatibility error: '${method}' not available. Use Eleventy ${version} or later.`
 			);
 		}

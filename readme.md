@@ -166,7 +166,7 @@ export default function (eleventyConfig) {
 
 One exception to Vento plugins is the `autoTrim` plugin which is bundled with Vento, and by extension, this plugin. This plugin provides a convenient way to control whitespace in the output by collapsing spaces left behind when Vento's tags are removed.
 
-To trim the default tags, set the `autotrim` plugin option to `true`.
+To trim space around the default tags and all Eleventy paired shortcodes, set the `autotrim` plugin option to `true`.
 
 ```js
 eleventyConfig.addPlugin(VentoPlugin, {
@@ -174,25 +174,22 @@ eleventyConfig.addPlugin(VentoPlugin, {
 });
 ```
 
-The default set of tags that are trimmed are [defined by Vento itself](https://github.com/ventojs/vento/blob/8c767d45441c2d5a90b6b2b4e33bec56018807d3/plugins/auto_trim.ts#L4-L20). To set your own list of tags, set `autotrim` to an object with a `tags` key.
+The default set of tags that are trimmed are [defined by Vento itself](https://github.com/ventojs/vento/blob/8c767d45441c2d5a90b6b2b4e33bec56018807d3/plugins/auto_trim.ts#L4-L20). To set your own list of tags, set `autotrim` to an array of tags:
 
 ```js
 eleventyConfig.addPlugin(VentoPlugin, {
-  autotrim: {
-    tags: ['set', 'if', 'for'],
-  },
+  autotrim: ['set', 'if', 'for'],
 });
 ```
 
-If instead, you'd like to extend instead of replace the default tag list, set `autotrim.extend` to true.
+If instead, you'd like to extend instead of replace the default tag list, add the value `@vento` and/or `@11ty`. These placeholders will expand to the Vento default tags and Eleventy paired shortcode tags when the plugin executes.
 
 ```js
 import { VentoPlugin } from 'eleventy-plugin-vento';
 
 eleventyConfig.addPlugin(VentoPlugin, {
   autotrim: {
-    tags: ['tag'],
-    extend: true,
+    tags: ['@vento', '@11ty', 'tag'],
   },
 });
 ```
