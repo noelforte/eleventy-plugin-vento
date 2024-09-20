@@ -40,16 +40,14 @@ jobs:
         id: sync
         run: node ./scripts/generate-changesets.js
 
-      - run: git rev-parse --abbrev-ref HEAD
-
       - name: Push changesets
         if: steps.sync.outputs.changesets-created == true
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -C HEAD --amend --no-edit
-          git push
+          git commit -m '[ci] sync changesets\n\n[skip ci]'
+          git push --force
 
   release:
     name: Release
@@ -78,3 +76,5 @@ jobs:
         with:
           version: 'pnpm ci:version'
           publish: 'pnpm ci:publish'
+          commit: '[ci] release'
+          title: '[ci] release'

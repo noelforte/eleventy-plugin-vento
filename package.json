@@ -11,7 +11,8 @@
 		"test": "vitest --run",
 		"lint": "eslint '**/*.js'",
 		"ci:version": "changeset version",
-		"ci:publish": "changeset publish"
+		"ci:publish": "changeset publish",
+		"ci:generate-changesets": "zx ./scripts/generate-changesets.mjs"
 	},
 	"exports": {
 		".": {
@@ -49,8 +50,8 @@
 		"eslint-config-prettier": "9.1.0",
 		"eslint-plugin-unicorn": "55.0.0",
 		"globals": "15.9.0",
-		"tinyexec": "0.3.0",
-		"vitest": "2.1.1"
+		"vitest": "2.1.1",
+		"zx": "8.1.8"
 	},
 	"prettier": {
 		"bracketSameLine": true,
