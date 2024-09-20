@@ -34,6 +34,10 @@
 		"url": "https://forte.is/"
 	},
 	"license": "MIT",
+	"files": [
+		"src/*",
+		"CHANGELOG.md"
+	],
 	"dependencies": {
 		"ventojs": "1.12.10"
 	},
