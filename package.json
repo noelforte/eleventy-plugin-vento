@@ -10,7 +10,7 @@
 	"scripts": {
 		"test": "vitest --run",
 		"lint": "eslint '**/*.js'",
-		"ci:version": "changeset version && pnpm install --no-frozen-lockfile",
+		"ci:version": "npm audit signatures && changeset version && pnpm install --no-frozen-lockfile",
 		"ci:publish": "changeset publish",
 		"ci:generate-changesets": "node ./scripts/generate-changesets.mjs",
 		"format": "pnpm dlx prettier --config ./package.json --write ."

@@ -2,11 +2,11 @@ name: CI
 
 on:
   workflow_call:
-  push:
-    branches: [renovate/**]
-
-permissions:
-  contents: write # allow writing to repository
+    outputs:
+      run-release:
+        value: ${{ jobs.changesets.outputs.run-release }}
+  pull_request:
+    branches: [main]
 
 jobs:
   test:
@@ -28,25 +28,29 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Test
+      - name: Lint
         run: pnpm lint
 
   changesets:
-    needs: [test, lint]
+    outputs:
+      run-release: ${{ steps.status.outputs.run-release }}
     runs-on: ubuntu-latest
-    if: startsWith(github.ref_name, 'renovate/')
     steps:
       - uses: actions/checkout@v4
 
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Sync changesets
-        id: sync
-        run: node ./scripts/generate-changesets.js
+      - name: Set Changeset Status
+        id: status
+        shell: bash
+        run: |
+          pnpm changeset status --output ./status.json
 
-      - name: Push
-        if: steps.sync.outputs.generated == 'true'
-        uses: ./.github/actions/commit-sync
-        with:
-          amend: 'true'
+          if $(
+            jq '(.changesets | length != 0) or (.releases | length != 0)' status.json
+          ); then
+            echo "run-release=true" >> $GITHUB_OUTPUT
+          else
+            echo "run-release=false" >> $GITHUB_OUTPUT
+          fi

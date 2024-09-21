@@ -1,5 +1,6 @@
 {
 	"extends": ["github>noelforte/renovate-config"],
 	"semanticCommits": "disabled",
-	"gitIgnoredAuthors": ["github-actions[bot]@users.noreply.github.com>"]
+	"gitIgnoredAuthors": ["github-actions[bot]@users.noreply.github.com>"],
+	"automergeType": "pr"
 }
