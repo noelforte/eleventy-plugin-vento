@@ -16,7 +16,7 @@ concurrency:
 jobs:
   test:
     name: Check
-    uses: ./.github/workflows/test.yml
+    uses: ./.github/workflows/ci.yml
 
   publish:
     name: Run Changesets
