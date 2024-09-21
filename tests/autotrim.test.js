@@ -18,8 +18,6 @@ test('trim a single tag', async ({ expect }) => {
 	});
 	const { content } = await testRun.getBuildResultForUrl('/');
 
-	await testRun.write('./_site');
-
 	await expect(content).toMatchFileSnapshot('./_results/autotrim-default-single.html');
 });
 
