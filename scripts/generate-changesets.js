@@ -1,4 +1,5 @@
-import 'zx/globals';
+import process from 'node:process';
+import { $, echo, fs, chalk } from 'zx';
 
 const pkg = await fs.readJSON('./package.json');
 
@@ -13,7 +14,7 @@ const writeChangesets = await Promise.all(
 	Object.keys(pkg.dependencies).map(async (dependencyName) => {
 		const flags = ['-1', '--pretty=format:commit %h%n%an%n%n%B', '-G', `"${dependencyName}":`];
 
-		const lastCommit = await $`git log ${flags} v2.0.0..v2.4.0 package.json`;
+		const lastCommit = await $`git log ${flags} ${latestTag}..HEAD package.json`;
 		const match = /commit (?<hash>[\da-f]+)\n(?<author>[^\n]+)\n\n(?<message>.+)/s.exec(
 			lastCommit.stdout
 		).groups;
@@ -37,14 +38,10 @@ const writeChangesets = await Promise.all(
 	})
 );
 
-echo(chalk.dim(`[generate-changesets] Wrote ${writeChangesets.length} file(s).`));
+echo(chalk.dim(`[generate-changesets] Wrote ${writeChangesets.filter(Boolean).length} file(s).`));
 
-if (!process.env['GITHUB_ENV']) {
-	process.exit(0);
-}
-
-if (writeChangesets.length > 0) {
-	await $`echo "changesets-generated=true" >> $GITHUB_OUTPUT`;
-} else {
-	await $`echo "changesets-generated=false" >> $GITHUB_OUTPUT`;
+if (writeChangesets.length > 0 && process.env['GITHUB_OUTPUT']) {
+	await $`echo "generated=true" >> $GITHUB_OUTPUT`;
+} else if (process.env['GITHUB_OUTPUT']) {
+	await $`echo "generated=false" >> $GITHUB_OUTPUT`;
 }

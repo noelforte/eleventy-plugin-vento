@@ -10,9 +10,10 @@
 	"scripts": {
 		"test": "vitest --run",
 		"lint": "eslint '**/*.js'",
-		"ci:version": "changeset version",
+		"ci:version": "changeset version && pnpm install --no-frozen-lockfile",
 		"ci:publish": "changeset publish",
-		"ci:generate-changesets": "zx ./scripts/generate-changesets.mjs"
+		"ci:generate-changesets": "node ./scripts/generate-changesets.mjs",
+		"format": "pnpm dlx prettier --config ./package.json --write ."
 	},
 	"exports": {
 		".": {
@@ -45,7 +46,7 @@
 	"devDependencies": {
 		"@11ty/eleventy": "3.0.0-beta.1",
 		"@changesets/cli": "2.27.8",
-		"eslint": "9.10.0",
+		"eslint": "9.11.0",
 		"eslint-config-flat-gitignore": "0.3.0",
 		"eslint-config-prettier": "9.1.0",
 		"eslint-plugin-unicorn": "55.0.0",

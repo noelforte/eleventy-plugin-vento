@@ -26,7 +26,7 @@ import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plug
 // Local modules
 import { VentoEngine } from './engine.js';
 import { ignoreTagPlugin } from './modules/ignore-tag.js';
-import { runCompatibilityCheck, logError } from './modules/utils.js';
+import { runCompatibilityCheck } from './modules/utils.js';
 
 /**
  * @param {import('@11ty/eleventy').UserConfig} eleventyConfig

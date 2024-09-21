@@ -1,18 +1,15 @@
 name: CI
 
 on:
+  workflow_call:
   push:
-    branches: [main, renovate/**]
+    branches: [renovate/**]
 
 permissions:
-  contents: write # to be able to publish a GitHub release
-  id-token: write # to enable use of OIDC for npm provenance
-  issues: write # to be able to comment on released issues
-  pull-requests: write # to be able to comment on released pull requests
+  contents: write # allow writing to repository
 
 jobs:
   test:
-    name: Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,13 +20,21 @@ jobs:
       - name: Test
         run: pnpm test
 
-  changesets:
-    name: Sync Changesets
+  lint:
     runs-on: ubuntu-latest
-    concurrency:
-      group: sync-${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Test
+        run: pnpm lint
+
+  changesets:
+    needs: [test, lint]
+    runs-on: ubuntu-latest
     if: startsWith(github.ref_name, 'renovate/')
-    needs: [test]
     steps:
       - uses: actions/checkout@v4
 
@@ -40,41 +45,8 @@ jobs:
         id: sync
         run: node ./scripts/generate-changesets.js
 
-      - name: Push changesets
-        if: steps.sync.outputs.changesets-created == true
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m '[ci] sync changesets\n\n[skip ci]'
-          git push --force
-
-  release:
-    name: Release
-    runs-on: ubuntu-latest
-    concurrency:
-      group: release-${{ github.workflow }}-${{ github.ref }}
-    needs: [test]
-    if: contains(fromJSON('["main", "alpha", "beta", "next"]'), github.ref_name)
-    steps:
-      - uses: actions/checkout@v4
+      - name: Push
+        if: steps.sync.outputs.generated == 'true'
+        uses: ./.github/actions/commit-sync
         with:
-          fetch-depth: 0
-
-      - name: Setup
-        uses: ./.github/actions/setup
-
-      - name: Verify provenance attestations and registry signatures
-        run: npm audit signatures
-
-      - name: Release
-        uses: changesets/action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
-        with:
-          version: 'pnpm ci:version'
-          publish: 'pnpm ci:publish'
-          commit: '[ci] release'
-          title: '[ci] release'
+          amend: 'true'

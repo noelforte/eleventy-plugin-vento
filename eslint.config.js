@@ -7,7 +7,6 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 // Plugins
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import globals from 'globals';
-import zxGlobals from 'zx/globals';
 
 export default [
 	// Set ignores from gitignore
@@ -65,16 +64,6 @@ export default [
 		languageOptions: {
 			globals: {
 				...globals.node,
-			},
-		},
-	},
-
-	// Match zx files
-	{
-		files: ['scripts/**/*.js'],
-		languageOptions: {
-			globals: {
-				...zxGlobals,
 			},
 		},
 	},
