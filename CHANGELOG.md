@@ -1,5 +1,97 @@
 # eleventy-plugin-vento
 
+## 3.0.0
+
+### Major Changes
+
+- 668700c: Enforce new minimum version — [Eleventy v3.0.0-alpha.15](https://github.com/11ty/eleventy/releases/tag/v3.0.0-alpha.15) or later is now **required** for this plugin to function.
+
+  Although this goes against the _backwards compatibility_ ethos of Eleventy, the addition of the `getShortcodes()` and `getPairedShortcodes()` functions that were added in `alpha.15` are now utilized in this plugin to bring even more goodness to your templates.
+
+  Thanks [@zachleat](https://github.com/zachleat) for making this possible!
+
+- 9d8eb8a: Adds complete support for Eleventy shortcodes and filters within Vento. Shortcodes are now loaded by default as Vento tags and will no longer be exposed as functions in your page data.
+
+  The implementation of single shortcodes remains largely similar, just replace function-like calls with Vento tags.
+
+  ```diff
+  - {{ nametag('Noel', 'Forte') }}
+  + {{ nametag 'Noel', 'Forte' }}
+  ```
+
+  Of course, the big news is that **paired** shortcodes are now officially supported by this plugin!! Prior to this release, paired shortcodes were exposed just like regular shortcodes, but were plain JS functions. With this release you can now use paired shortcodes just like any other tag.
+
+  ```hbs
+  <!-- Before: everything is jammed into the function call :( -->
+  {{ blockquote("<p>Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.</p>\n<p>It is a way I have of driving off the spleen and regulating the circulation.</p>", "Herman Melville", "1851") }}
+
+  <!-- After: opening and closing tags with arguments separated :) -->
+  {{ blockquote 'Herman Melville', '1851' }}
+    <p>Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.</p>
+    <p>It is a way I have of driving off the spleen and regulating the circulation.</p>
+  {{ /blockquote }}
+  ```
+
+  Because these changes removed direct dependence on Eleventy JavaScript functions, the `addHelpers` option has been replaced with 3 new options: `shortcodes`, `pairedShortcodes` and `filters`. **All of them are enabled by default** but can be disabled in your plugin config like so.
+
+  ```diff
+  eleventyConfig.addPlugin(VentoPlugin, {
+  - addHelpers: false,
+  + shortcodes: false,
+  + pairedShortcodes: false,
+  + filters: false,
+  });
+  ```
+
+- 516cd2f: Modifications to `auto_trim` functionality
+
+  Starting with this release the way the `auto_trim` plugin is implemented is a bit different.
+
+  The plugin option `trimTags` is now `autotrim`. Be sure to update your plugin options object accordingly:
+
+  ```diff
+  eleventyConfig.addPlugin(VentoPlugin, {
+  - trimTags: true
+  + autotrim: true
+  });
+  ```
+
+  Additionally, the eleventy plugin no longer re-exports `defaultTags` from `ventojs`. Be sure to remove any imports from your config:
+
+  ```diff
+  - import { ventoDefaultTrimTags } from 'eleventy-plugin-vento';
+  ```
+
+  To extend the default tags list, this plugin now provides a 2 placeholder values for your array of tags, `@vento` and `@11ty`. When the plugin executes, `@vento` will be expanded to the default vento tags list, and `@11ty` will be expanded to the names of all paired shortcodes.
+
+  ```js
+  eleventyConfig.addPlugin(VentoPlugin, {
+    autotrim: ['@vento', '@11ty', 'tag1', 'tag2'],
+  });
+  ```
+
+  Setting `autotrim: true` is the same as `autotrim: ['@vento', '@11ty']`.
+
+### Minor Changes
+
+- ff75e09: Add option to explicitly enable tag ignore syntax.
+
+  Prior to this release this feature was referred to as the "SSR" or "hybrid-rendering" syntax. It's purpose was to skip over processing a tag like Vento's built-in `{{ echo }}` tag, but with a much shorter syntax: `{{! ... }}`. Any code following a `!` in your markup is wrapped in `{{ }}` and output as-is.
+
+  ```hbs
+  {{!> console.log('Hello world'); }} <!-- tag remains in output -->
+  ```
+
+  In this release, this behavior is now explicitly opt-in. To enable it, include `ignoreTag: true` in the plugin options:
+
+  ```js
+  eleventyConfig.addPlugin(VentoPlugin, {
+    ignoreTag: true,
+  });
+  ```
+
+- b9e8232: Update ventojs to 1.12.10
+
 ## 2.6.0
 
 ### New Features
