@@ -33,7 +33,7 @@ jobs:
 
   changesets:
     outputs:
-      run-release: ${{ steps.status.outputs.run-release }}
+      run-release: ${{ steps.write.outputs.generated }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -43,16 +43,12 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Set Changeset Status
-        id: status
-        shell: bash
-        run: |
-          pnpm changeset status --output ./status.json
+      - name: Write Changesets
+        id: write
+        run: pnpm ci:generate-changesets
 
-          if $(
-            jq '(.changesets | length != 0) or (.releases | length != 0)' status.json
-          ); then
-            echo "run-release=true" >> $GITHUB_OUTPUT
-          else
-            echo "run-release=false" >> $GITHUB_OUTPUT
-          fi
+      - name: Push
+        uses: ./.github/actions/commit-sync
+        if: steps.write.outputs.generated == 'true'
+        with:
+          amend: true
