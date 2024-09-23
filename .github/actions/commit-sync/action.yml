@@ -11,6 +11,9 @@ inputs:
   email:
     description: Git user email
     default: github-actions[bot]@users.noreply.github.com
+  path:
+    description: Path to commit
+    default: '.'
   amend:
     description: Whether to ammend the last commit
     default: 'false'
@@ -26,7 +29,7 @@ runs:
 
     - name: Check in all changes
       shell: bash
-      run: git add -A
+      run: git add -A ${{ inputs.path }}
 
     - name: Commit and push (new commit)
       shell: bash

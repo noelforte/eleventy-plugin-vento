@@ -3,7 +3,6 @@
 	"version": "3.0.0",
 	"description": "Adds support for the Vento templating language to Eleventy.",
 	"type": "module",
-	"packageManager": "pnpm@9.11.0",
 	"engines": {
 		"node": ">=16"
 	},
