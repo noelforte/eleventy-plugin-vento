@@ -51,10 +51,12 @@ jobs:
         uses: ./.github/actions/commit-sync
         if: steps.write.outputs.generated == 'true'
         with:
+          path: '.changeset'
           amend: true
 
       - name: Check Changesets Status
         id: status
+        if: github.event_name != 'pull_request'
         run: |
           pnpm changeset status --since origin/main --output ./status.json
 
