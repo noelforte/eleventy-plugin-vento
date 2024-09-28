@@ -11,8 +11,8 @@ export function createVentoTag(name, paired) {
 		if (!code.startsWith(name)) return;
 
 		// Declare helper object path strings
-		const fn = `__env._11ty.functions.${name}`;
-		const ctx = '__env._11ty.ctx';
+		const fn = `__env.utils._11ty.functions.${name}`;
+		const ctx = '__env.utils._11ty.ctx';
 		let args = [code.replace(name, '').trim()];
 
 		const varname = output.startsWith('__shortcode_content')

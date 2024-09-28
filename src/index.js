@@ -24,7 +24,7 @@
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
 
 // Local modules
-import { VentoEngine } from './engine.js';
+import { createVentoEngine } from './engine.js';
 import { ignoreTagPlugin } from './modules/ignore-tag.js';
 import { runCompatibilityCheck } from './modules/utils.js';
 
@@ -87,23 +87,20 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 	}
 
 	// Create the vento engine instance
-	const vento = new VentoEngine(options.ventoOptions);
-
-	// Ensure cache is empty
-	vento.emptyCache();
+	const engine = createVentoEngine(options.ventoOptions);
 
 	// Load plugins
-	vento.loadPlugins(options.plugins);
+	engine.loadPlugins(options.plugins);
 
 	// Add filters, single and paired shortcodes if enabled
 	if (options.filters) {
-		vento.loadFilters(filters);
+		engine.loadFilters(filters);
 	}
 	if (options.shortcodes) {
-		vento.loadShortcodes(shortcodes, false);
+		engine.loadShortcodes(shortcodes, false);
 	}
 	if (options.pairedShortcodes) {
-		vento.loadShortcodes(pairedShortcodes, true);
+		engine.loadShortcodes(pairedShortcodes, true);
 	}
 
 	// Add vto as a template format
@@ -116,14 +113,17 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 
 		// Main compile function
 		async compile(inputContent, inputPath) {
-			return async (data) => vento.process(data, inputContent, inputPath);
+			return async (data) => engine.process(data, inputContent, inputPath);
 		},
 
 		// Custom permalink compilation
 		compileOptions: {
 			permalink(linkContents) {
-				if (typeof linkContents !== 'string') return linkContents;
-				return async (data) => vento.process(data, linkContents);
+				if (typeof linkContents !== 'string') {
+					return linkContents;
+				}
+
+				return async (data) => engine.process(data, linkContents);
 			},
 		},
 	});
