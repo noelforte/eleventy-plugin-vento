@@ -58,7 +58,7 @@ jobs:
         id: status
         if: github.event_name != 'pull_request'
         run: |
-          pnpm changeset status --since origin/main --output ./status.json
+          pnpm changeset status --output ./status.json
 
           if $(
             jq '(.changesets | length != 0) or (.releases | length != 0)' status.json
