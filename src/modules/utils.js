@@ -1,4 +1,4 @@
-// DECLARE CONSTANTS
+// Project-wide constants
 export const REQUIRED_API_METHODS = [
 	['getShortcodes', 'v3.0.0-alpha.15'],
 	['getPairedShortcodes', 'v3.0.0-alpha.15'],
@@ -8,7 +8,7 @@ export const REQUIRED_API_METHODS = [
 
 export const CONTEXT_DATA_KEYS = ['page', 'eleventy'];
 
-// DECLARE HELPER FUNCTIONS
+// Project-wide helper functions
 export function logError(message) {
 	console.error(`[eleventy-plugin-vento] ${message}`);
 }
