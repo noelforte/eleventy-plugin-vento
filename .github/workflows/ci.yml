@@ -4,7 +4,7 @@ on:
   workflow_call:
     outputs:
       run-release:
-        value: ${{ jobs.changesets.outputs.run-release }}
+        value: ${{ jobs.sync-changesets.outputs.run-release }}
   pull_request:
     branches: [main]
 
