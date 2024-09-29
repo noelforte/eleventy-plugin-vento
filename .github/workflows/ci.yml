@@ -2,9 +2,6 @@ name: CI
 
 on:
   workflow_call:
-    outputs:
-      run-release:
-        value: ${{ jobs.sync-changesets.outputs.run-release }}
   pull_request:
     branches: [main]
 
@@ -30,46 +27,3 @@ jobs:
 
       - name: Lint
         run: pnpm lint
-
-  sync-changesets:
-    outputs:
-      run-release: ${{ steps.status.outputs.run-release }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup
-        uses: ./.github/actions/setup
-
-      - name: Get latest tag
-        id: tag
-        run: echo "name=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
-
-      - name: Write Changesets
-        id: write
-        env:
-          LATEST_TAG: ${{ steps.tag.outputs.name }}
-        run: pnpm ci:generate-changesets
-
-      - name: Push
-        uses: ./.github/actions/commit-sync
-        if: steps.write.outputs.generated == 'true'
-        with:
-          path: '.changeset'
-          amend: true
-
-      - name: Check Changesets Status
-        id: status
-        if: github.event_name != 'pull_request'
-        run: |
-          pnpm changeset status --since ${{ steps.tag.outputs.name }} --output ./status.json
-
-          if $(
-            jq '(.changesets | length != 0) or (.releases | length != 0)' status.json
-          ); then
-            echo "run-release=true" >> $GITHUB_OUTPUT
-          else
-            echo "run-release=false" >> $GITHUB_OUTPUT
-          fi
