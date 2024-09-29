@@ -1,20 +1,20 @@
-import process from 'node:process';
+import { env } from 'node:process';
 import { $, echo, fs, chalk } from 'zx';
 
 const pkg = await fs.readJSON('./package.json');
 
-const latestTag = await $`git describe --tags --abbrev=0`;
+const { LATEST_TAG } = env;
 
 echo(
 	chalk.dim('[generate-changesets]'),
-	chalk.blue(`Checking for renovate commits since ${latestTag.valueOf()} tag...`)
+	chalk.blue(`Checking for renovate commits since ${LATEST_TAG} tag...`)
 );
 
 const writeChangesets = await Promise.all(
 	Object.keys(pkg.dependencies).map(async (dependencyName) => {
 		const flags = ['-1', '--pretty=format:commit %h%n%an%n%n%B', '-G', `"${dependencyName}":`];
 
-		const lastCommit = await $`git log ${flags} ${latestTag}..HEAD package.json`;
+		const lastCommit = await $`git log ${flags} ${LATEST_TAG}..HEAD package.json`;
 		const match = /commit (?<hash>[\da-f]+)\n(?<author>[^\n]+)\n\n(?<message>.+)/s.exec(
 			lastCommit.stdout
 		)?.groups;
@@ -42,8 +42,8 @@ const changesetCount = writeChangesets.filter(Boolean).length;
 
 echo(chalk.dim(`[generate-changesets] Wrote ${changesetCount} file(s).`));
 
-if (changesetCount > 0 && process.env['GITHUB_OUTPUT']) {
+if (changesetCount > 0 && env.GITHUB_OUTPUT) {
 	await $`echo "generated=true" >> $GITHUB_OUTPUT`;
-} else if (process.env['GITHUB_OUTPUT']) {
+} else if (env.GITHUB_OUTPUT) {
 	await $`echo "generated=false" >> $GITHUB_OUTPUT`;
 }

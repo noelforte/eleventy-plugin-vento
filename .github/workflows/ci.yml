@@ -31,7 +31,7 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-  changesets:
+  sync-changesets:
     outputs:
       run-release: ${{ steps.status.outputs.run-release }}
     runs-on: ubuntu-latest
@@ -43,8 +43,14 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: Get latest tag
+        id: tag
+        run: echo "name=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
+
       - name: Write Changesets
         id: write
+        env:
+          LATEST_TAG: ${{ steps.tag.outputs.name }}
         run: pnpm ci:generate-changesets
 
       - name: Push
@@ -58,7 +64,7 @@ jobs:
         id: status
         if: github.event_name != 'pull_request'
         run: |
-          pnpm changeset status --output ./status.json
+          pnpm changeset status --since ${{ steps.tag.outputs.name }} --output ./status.json
 
           if $(
             jq '(.changesets | length != 0) or (.releases | length != 0)' status.json
