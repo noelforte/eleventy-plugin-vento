@@ -8,4 +8,4 @@ Various Refactors - These changes shouldn't have any observable effect on your t
 
 - `DATA_KEYS` (used internally) moved into utils file alongside other utilities (like compatibility checks) and renamed to `CONTEXT_DATA_KEYS`.
 
-- Moved internal Vento/11ty data from env.\_11ty => env.utils.\_11ty. Previous versions mutated the Vento `env` object by adding an `_11ty` key with everything that needed accessing from within a template compile (shortcodes, filters, etc.). We've moved this back to `env.utils._11ty` since this is where custom helpers should live to stay out of the main object.
+- Moved internal Vento/11ty data from env.\_11ty => env.utils.\_11ty. Previous versions mutated the Vento `env` object by adding an `_11ty` key with everything that needed accessing from within a template compile (shortcodes, filters, etc.). This was moved this back to `env.utils._11ty` since it's probably a more appropriate place to store these functions.
