@@ -28,6 +28,9 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
+      - name: 'Verify Integrity of Dependencies'
+        run: npm audit signatures
+
       - name: Create pull request or publish packages
         uses: changesets/action@v1
         env:
