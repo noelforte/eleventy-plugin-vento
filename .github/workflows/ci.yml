@@ -2,8 +2,10 @@ name: CI
 
 on:
   workflow_call:
-  pull_request:
-    branches: [main]
+  pull_request_review:
+    types: [submitted, edited]
+  push:
+    branches: ['renovate/**']
 
 jobs:
   test:
