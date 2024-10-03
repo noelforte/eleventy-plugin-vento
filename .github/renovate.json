@@ -1,12 +1,10 @@
 {
 	"extends": ["github>noelforte/renovate-config"],
 	"semanticCommits": "disabled",
-	"assignAutomerge": true,
 	"packageRules": [
 		{
 			"matchDepNames": ["ventojs"],
-			"reviewers": ["noelforte"],
-			"automergeType": "pr"
+			"automerge": false
 		}
 	]
 }
