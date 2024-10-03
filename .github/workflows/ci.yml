@@ -2,12 +2,23 @@ name: CI
 
 on:
   workflow_call:
-  pull_request_review:
-    types: [submitted, edited]
   push:
     branches: ['renovate/**']
+  pull_request:
+    branches: [main]
 
 jobs:
+  changesets:
+    if: github.event_name == 'pull_request' && !startsWith('renovate/', github.head_ref)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - run: pnpm changeset status --since=main
+
   test:
     runs-on: ubuntu-latest
     steps:
