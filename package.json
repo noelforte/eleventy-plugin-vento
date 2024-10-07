@@ -51,7 +51,7 @@
 		"eslint-plugin-unicorn": "55.0.0",
 		"globals": "15.10.0",
 		"vitest": "2.1.2",
-		"zx": "8.1.8"
+		"zx": "8.1.9"
 	},
 	"prettier": {
 		"bracketSameLine": true,
