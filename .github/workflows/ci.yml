@@ -2,17 +2,17 @@ name: CI
 
 on:
   workflow_call:
-  push:
-    branches: ['renovate/**']
   pull_request:
     branches: [main]
 
 jobs:
   changesets:
-    if: github.event_name == 'pull_request' && !startsWith('renovate/', github.head_ref)
+    if: github.event_name == 'pull_request' && startsWith('renovate/', github.head_ref) == 'false'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup
         uses: ./.github/actions/setup
