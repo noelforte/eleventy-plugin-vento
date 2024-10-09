@@ -31,8 +31,8 @@ importers:
         specifier: 56.0.0
         version: 56.0.0(eslint@9.12.0)
       globals:
-        specifier: 15.10.0
-        version: 15.10.0
+        specifier: 15.11.0
+        version: 15.11.0
       vitest:
         specifier: 2.1.2
         version: 2.1.2(@types/node@22.7.4)
@@ -1069,8 +1069,8 @@ packages:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
     engines: {node: '>=18'}
 
-  globals@15.10.0:
-    resolution: {integrity: sha512-tqFIbz83w4Y5TCbtgjZjApohbuh7K9BxGYFm7ifwDR240tvdb7P9x+/9VvUKlmkPoiknoJtanI8UOrqxS3a7lQ==}
+  globals@15.11.0:
+    resolution: {integrity: sha512-yeyNSjdbyVaWurlwCpcA6XNBrHTMIeDdj0/hnvX/OLJ9ekOXYbLsLinH/MucQyGvNnXhidTdNhTtJaffL2sMfw==}
     engines: {node: '>=18'}
 
   globby@11.1.0:
@@ -2916,7 +2916,7 @@ snapshots:
       core-js-compat: 3.38.1
       eslint: 9.12.0
       esquery: 1.6.0
-      globals: 15.10.0
+      globals: 15.11.0
       indent-string: 4.0.0
       is-builtin-module: 3.2.1
       jsesc: 3.0.2
@@ -3130,7 +3130,7 @@ snapshots:
 
   globals@14.0.0: {}
 
-  globals@15.10.0: {}
+  globals@15.11.0: {}
 
   globby@11.1.0:
     dependencies:
