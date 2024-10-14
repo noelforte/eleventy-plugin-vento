@@ -113,17 +113,25 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 
 		// Main compile function
 		async compile(inputContent, inputPath) {
-			return async (data) => engine.process(data, inputContent, inputPath);
+			return async (data) => await engine.process({ data, source: inputContent, path: inputPath });
 		},
 
 		// Custom permalink compilation
 		compileOptions: {
+			cache: true,
+			getCacheKey(inputContent, inputPath) {
+				if (engine.getCachedSource(inputPath) !== inputContent) {
+					engine.emptyCache(inputPath);
+				}
+
+				return engine.getCachedSource(inputPath);
+			},
 			permalink(linkContents) {
 				if (typeof linkContents !== 'string') {
 					return linkContents;
 				}
 
-				return async (data) => engine.process(data, linkContents);
+				return async (data) => engine.process({ data, source: linkContents });
 			},
 		},
 	});

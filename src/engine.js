@@ -25,9 +25,14 @@ export function createVentoEngine(options) {
 	env.utils._11ty = { ctx: {}, functions: {} };
 
 	return {
-		/** @param {string?} key */
-		emptyCache(key) {
-			return key ? env.cache.delete(key) : env.cache.clear();
+		/** @param {string} path */
+		getCachedSource(path) {
+			return env.cache.get(path)?.source;
+		},
+
+		/** @param {string} path */
+		emptyCache(path) {
+			return path ? env.cache.delete(path) : env.cache.clear();
 		},
 
 		/** @param {import('ventojs/src/environment.js').Plugin[]} plugins */
@@ -63,20 +68,13 @@ export function createVentoEngine(options) {
 			}
 		},
 
-		/**
-		 * @param {PageData} data
-		 * @param {string} content
-		 * @param {string} path
-		 */
-		async process(data, content, path) {
+		/** @param {{data: PageData, source: string, path: string}} input */
+		async process(input) {
 			// Reload context
-			this.loadContext(data);
+			this.loadContext(input.data);
 
 			// Process the templates
-			const result = await env.runString(content, data, path);
-
-			// Clear the cache for this path if the input doesn't match
-			if (data.page?.rawInput !== content) env.cache.clear(path);
+			const result = await env.runString(input.source, input.data, input.path);
 
 			return result.content;
 		},
