@@ -1,6 +1,6 @@
 {
 	"name": "eleventy-plugin-vento",
-	"version": "3.0.1",
+	"version": "3.0.2",
 	"description": "Adds support for the Vento templating language to Eleventy.",
 	"type": "module",
 	"engines": {
