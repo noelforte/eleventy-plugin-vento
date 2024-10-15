@@ -1,0 +1,40 @@
+name: ':bulb: I have an idea for a feature!'
+description: >
+  Is there a Vento feature you'd like supported? An Eleventy integration you'd
+  like to see handled by this plugin? Submit your feature request here!
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: ':zap: **Please search open issues before filing a feature
+        request, thank you!!**'
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Is your feature request related to a problem?
+      description: e.g. "I'm frustrated by the fact that this plugin..."
+      placeholder: Describe the issue you're having...
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Describe the solution you'd like this plugin to provide.
+      description: What would you like this plugin to do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives/workarounds
+      description: >
+        Are there any alternative approaches you've considered? Workarounds you
+        have in place because this feature doesn't exist? Please describe.
+
+  - type: textarea
+    id: Context
+    attributes:
+      label: Any additional information or context you'd like to share?
+      description: >
+        Add any other context or screenshots about the feature request here.
