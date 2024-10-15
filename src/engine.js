@@ -73,6 +73,11 @@ export function createVentoEngine(options) {
 			// Reload context
 			this.loadContext(input.data);
 
+			// Before we compile, empty the cache if the input content doesn't match
+			if (env.cache.get(input.path)?.source !== input.source) {
+				env.cache.delete(input.path);
+			}
+
 			// Process the templates
 			const result = await env.runString(input.source, input.data, input.path);
 
