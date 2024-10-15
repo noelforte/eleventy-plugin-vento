@@ -15,6 +15,7 @@ body:
         In order to better determine what might be causing the bug, please fill
         out the form below.
 
+
         ---'
 
   - type: textarea
