@@ -118,14 +118,6 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 
 		// Custom permalink compilation
 		compileOptions: {
-			cache: true,
-			getCacheKey(inputContent, inputPath) {
-				if (engine.getCachedSource(inputPath) !== inputContent) {
-					engine.emptyCache(inputPath);
-				}
-
-				return engine.getCachedSource(inputPath);
-			},
 			permalink(linkContents) {
 				if (typeof linkContents !== 'string') {
 					return linkContents;
