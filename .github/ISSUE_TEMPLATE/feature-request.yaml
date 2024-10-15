@@ -7,9 +7,9 @@ body:
   - type: markdown
     attributes:
       value:
-        "### Note:\nPlease search open issues before filing a feature
-        request, thank you!!\n\nUse the form below to provide information about
-        the feature you're requesting.\n\n---"
+        "Use the form below to provide information about the feature you're
+        requesting.\n\n**Please search open issues** before filing a new
+        bug report, thank you!!\n\n---"
 
   - type: textarea
     id: problem
