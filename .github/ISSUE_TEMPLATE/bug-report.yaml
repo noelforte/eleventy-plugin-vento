@@ -1,0 +1,89 @@
+name: ":disappointed: I'm having trouble with this plugin!"
+description: Problems? It might be a bug! Use this template to report it.
+title: '[Bug]: <title>'
+assignees: [noelforte]
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: ":warning: **Please search open issues before filing a new bug
+        report, thank you!!**
+
+        In order to better determine what might be causing the bug, please fill
+        out the form below."
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Provide steps to reproduce the behavior that occured.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect would happen?
+      placeholder: |
+        For example: "Expected build to run with no issues and output .html files"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What was the behavior that you observed? Be clear and concise.
+      placeholder: |
+        For example: "Got error `Error: Invalid data` with the following log..."
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Plugin version
+      description: What version of `eleventy-plugin-vento` are you using?
+      placeholder: 'x.x.x'
+    validations:
+      required: true
+
+  - type: input
+    id: eleventy
+    attributes:
+      label: Eleventy version
+      description: In case this is an upstream issue, what version of Eleventy are you using?
+      placeholder: 'x.x.x'
+    validations:
+      required: true
+
+  - type: input
+    id: repro-url
+    attributes:
+      label: Reduced Test Case URL
+      description: >
+        Optional: A URL to the **public** repository for a reproduction of this
+        bug. While not required, being able to reproduce the bug you're
+        experiencing as you did *might* help me resolve this issue quicker.
+        _[parser:url]_
+      placeholder: e.g. https://github.com/noelforte/eleventy-plugin-vento/
+    validations:
+      required: false
+
+  - type: input
+    id: additional
+    attributes:
+      label: Additional information
+      description: >
+        Anything else you'd like to add? Feel free to include screenshots, OS
+        info, Node.js/Deno/Bun version information, etc. that you feel might be
+        relevant. Thanks!
+      placeholder: Add anything else here...
+    validations:
+      required: false
