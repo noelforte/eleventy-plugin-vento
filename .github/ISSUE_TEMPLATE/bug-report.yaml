@@ -1,4 +1,4 @@
-name: ":disappointed: I'm having trouble with this plugin!"
+name: "😞 I'm having trouble with this plugin!"
 description: Problems? It might be a bug! Use this template to report it.
 title: '[Bug]: <title>'
 assignees: [noelforte]
@@ -6,7 +6,7 @@ labels: [bug]
 body:
   - type: markdown
     attributes:
-      value: ":warning: **Please search open issues before filing a new bug
+      value: ":warn: **Please search open issues before filing a new bug
         report, thank you!!**
 
         In order to better determine what might be causing the bug, please fill
