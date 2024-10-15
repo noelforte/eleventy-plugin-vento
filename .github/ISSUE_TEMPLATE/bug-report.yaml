@@ -6,11 +6,12 @@ labels: [bug]
 body:
   - type: markdown
     attributes:
-      value: ":warn: **Please search open issues before filing a new bug
+      value: '⚠️ **Please search open issues before filing a new bug
         report, thank you!!**
 
+
         In order to better determine what might be causing the bug, please fill
-        out the form below."
+        out the form below.'
 
   - type: textarea
     id: reproduce

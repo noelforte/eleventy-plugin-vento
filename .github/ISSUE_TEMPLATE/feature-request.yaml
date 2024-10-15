@@ -6,7 +6,7 @@ labels: [enhancement]
 body:
   - type: markdown
     attributes:
-      value: ':zap: **Please search open issues before filing a feature
+      value: '⚡️ **Please search open issues before filing a feature
         request, thank you!!**'
 
   - type: textarea
