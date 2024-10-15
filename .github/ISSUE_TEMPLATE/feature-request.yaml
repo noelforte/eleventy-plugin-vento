@@ -6,8 +6,12 @@ labels: [enhancement]
 body:
   - type: markdown
     attributes:
-      value: '⚡️ **Please search open issues before filing a feature
-        request, thank you!!**'
+      value:
+        '---
+
+        ⚡️ **Please search open issues before filing a feature request, thank you!!**
+
+        ---'
 
   - type: textarea
     id: problem
