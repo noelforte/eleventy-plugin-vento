@@ -6,17 +6,9 @@ labels: [bug]
 body:
   - type: markdown
     attributes:
-      value: '---
-
-        ⚠️ **Please search open issues before filing a new bug
-        report, thank you!!**
-
-
-        In order to better determine what might be causing the bug, please fill
-        out the form below.
-
-
-        ---'
+      value: "### Heads up!\nPlease search open issues before filing a new bug
+        report, thank you!!\n\nIn order to better determine what might be
+        causing the bug, please fill out the form below.\n\n---"
 
   - type: textarea
     id: reproduce
