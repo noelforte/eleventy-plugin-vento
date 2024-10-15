@@ -1,6 +1,5 @@
 name: "😞 I'm having trouble with this plugin!"
 description: Problems? It might be a bug! Use this template to report it.
-title: '[Bug]: <title>'
 assignees: [noelforte]
 labels: [bug]
 body:
