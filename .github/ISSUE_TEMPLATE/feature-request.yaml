@@ -7,13 +7,9 @@ body:
   - type: markdown
     attributes:
       value:
-        '---
-
-
-        ⚡️ **Please search open issues before filing a feature request, thank you!!**
-
-
-        ---'
+        "### Note:\nPlease search open issues before filing a feature
+        request, thank you!!\n\nUse the form below to provide information about
+        the feature you're requesting.\n\n---"
 
   - type: textarea
     id: problem
