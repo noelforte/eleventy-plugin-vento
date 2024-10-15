@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 3.0.3
+
+### Patch Changes
+
+- e811123: Partially reverts e46ce6ea, refine caching logic. Pre-compile, the plugin checks the Vento cache to see what source needs compiling and if that matches what was already compiled. If not, then the cache is cleared so Vento can recompile.
+
 ## 3.0.2
 
 ### Patch Changes
