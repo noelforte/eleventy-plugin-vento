@@ -1,9 +1,7 @@
-import { EleventyTest } from './_eleventy-test.js';
+import { EleventyTest } from '#11ty-test';
 import { test } from 'vitest';
 
-const testRun = new EleventyTest('./filters/', {
-	useEleventyConfig: true,
-});
+const testRun = new EleventyTest('./filters/');
 
 test('transform string with built-ins', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/basic/');

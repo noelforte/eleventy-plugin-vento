@@ -1,9 +1,7 @@
-import { EleventyTest } from './_eleventy-test.js';
+import { EleventyTest } from '#11ty-test';
 import { test } from 'vitest';
 
-const testRun = new EleventyTest('./shortcodes/', {
-	useEleventyConfig: true,
-});
+const testRun = new EleventyTest('./shortcodes/');
 
 test('run single shortcodes', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/single/');

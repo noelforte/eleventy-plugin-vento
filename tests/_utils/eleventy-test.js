@@ -1,12 +1,12 @@
 /**
  * @typedef TestOptions
  * @property {import('eleventy-plugin-vento').VentoPluginOptions} pluginOptions
- * @property {boolean} useEleventyConfig
  *
  * @typedef {{ url: string, inputPath: string, outputPath: string, rawInput: string, content: string }} PageObject
  */
 
 import path from 'node:path';
+import fs from 'node:fs';
 import Eleventy from '@11ty/eleventy';
 import { VentoPlugin } from 'eleventy-plugin-vento';
 
@@ -19,33 +19,36 @@ class EleventyTest extends Eleventy {
 	 * @param {TestOptions} options
 	 */
 	constructor(inputPathname, options) {
-		const inputPath = path.resolve(import.meta.dirname, inputPathname);
+		const inputPath = path.resolve(import.meta.dirname, '..', inputPathname);
 		const outputPath = path.resolve(inputPath, '_site');
+		const maybeConfigPath = path.join(inputPath, 'eleventy.config.js');
 
 		// Initialize parent class
 		super(inputPath, outputPath, {
 			quietMode: true,
 
-			configPath: options?.useEleventyConfig && path.join(inputPath, 'eleventy.config.js'),
+			configPath: fs.existsSync(maybeConfigPath) && maybeConfigPath,
 
 			/** @param {import('@11ty/eleventy').UserConfig} eleventyConfig */
 			config(eleventyConfig) {
 				eleventyConfig.addPlugin(VentoPlugin, options?.pluginOptions);
 			},
 		});
+	}
 
-		// Perform a build
-		this.buildResults = this.toJSON();
+	async rebuild() {
+		this.buildResults = await this.toJSON();
+		return this.buildResults;
 	}
 
 	async getBuildResultForUrl(url) {
-		const results = await this.buildResults;
-		return results.find((page) => page.url === url);
+		this.buildResults ??= await this.rebuild();
+		return this.buildResults.find((page) => page.url === url);
 	}
 
 	async countResultPages() {
-		const results = await this.buildResults;
-		return results.filter(({ outputPath }) => Boolean(outputPath)).length;
+		this.buildResults ??= await this.rebuild();
+		return this.buildResults.filter(({ outputPath }) => Boolean(outputPath)).length;
 	}
 }
 
