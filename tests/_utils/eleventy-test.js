@@ -15,11 +15,11 @@ class EleventyTest extends Eleventy {
 	buildResults;
 
 	/**
-	 * @param {string} pathname
+	 * @param {string} inputPathname
 	 * @param {TestOptions} options
 	 */
-	constructor(pathname, options) {
-		const inputPath = path.resolve(import.meta.dirname, pathname);
+	constructor(inputPathname, options) {
+		const inputPath = path.resolve(import.meta.dirname, inputPathname);
 		const outputPath = path.resolve(inputPath, '_site');
 
 		// Initialize parent class
