@@ -2,4 +2,4 @@
 'eleventy-plugin-vento': patch
 ---
 
-Clear vento cache on every template change
+Clear Vento cache on every template change, to help with #38. Resolution is still WIP.
