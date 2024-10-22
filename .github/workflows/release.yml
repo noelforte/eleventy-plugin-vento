@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    branches: [main]
+    branches: [main, next, alpha, beta]
 
 permissions:
   contents: write # to be able to publish a GitHub release
