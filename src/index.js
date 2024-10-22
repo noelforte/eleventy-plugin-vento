@@ -103,6 +103,9 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 		engine.loadShortcodes(pairedShortcodes, true);
 	}
 
+	// HACK: Clear entire vento cache on rebuild to force updates
+	eleventyConfig.on('eleventy.before', () => engine.emptyCache());
+
 	// Add vto as a template format
 	eleventyConfig.addTemplateFormats('vto');
 
