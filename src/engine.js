@@ -16,7 +16,7 @@ import ventojs from 'ventojs';
 
 // Internal modules
 import { createVentoTag } from './modules/create-vento-tag.js';
-import { CONTEXT_DATA_KEYS } from './modules/utils.js';
+import { DEBUG, CONTEXT_DATA_KEYS } from './modules/utils.js';
 
 /** @param {import('ventojs').Options} options */
 export function createVentoEngine(options) {
@@ -72,6 +72,7 @@ export function createVentoEngine(options) {
 		async process(input) {
 			// Reload context
 			this.loadContext(input.data);
+			DEBUG.setup('Reloaded Eleventy/Vento context. New value: %o', env.utils._11ty.ctx);
 
 			// Before we compile, empty the cache if the input content doesn't match
 			if (env.cache.get(input.path)?.source !== input.source) {

@@ -26,13 +26,15 @@ import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plug
 // Local modules
 import { createVentoEngine } from './engine.js';
 import { ignoreTagPlugin } from './modules/ignore-tag.js';
-import { runCompatibilityCheck } from './modules/utils.js';
+import { DEBUG, runCompatibilityCheck } from './modules/utils.js';
 
 /**
  * @param {import('@11ty/eleventy').UserConfig} eleventyConfig
  * @param {Partial<VentoPluginOptions>} userOptions
  */
 export function VentoPlugin(eleventyConfig, userOptions) {
+	DEBUG.setup('Initializing eleventy-plugin-vento');
+	DEBUG.setup('Run compatibility check');
 	runCompatibilityCheck(eleventyConfig);
 
 	/** @type {VentoPluginOptions} */
@@ -52,10 +54,17 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 		...userOptions,
 	};
 
+	DEBUG.setup('Merged default and user config: %O', options);
+
 	// Get list of filters, shortcodes and paired shortcodes
 	const filters = eleventyConfig.getFilters();
+	DEBUG.setup('Reading filters from Eleventy: %o', filters);
+
 	const shortcodes = eleventyConfig.getShortcodes();
+	DEBUG.setup('Reading shortcodes from Eleventy: %o', shortcodes);
+
 	const pairedShortcodes = eleventyConfig.getPairedShortcodes();
+	DEBUG.setup('Reading paired shortcodes from Eleventy: %o', pairedShortcodes);
 
 	// Add autotrim plugin if enabled
 	if (options.autotrim) {
@@ -78,28 +87,36 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 			}
 		}
 
+		DEBUG.setup('Enabled autotrim for tags: %o', tagSet);
+
 		options.plugins.push(autotrimPlugin({ tags: [...tagSet] }));
 	}
 
 	// Add ignore tag plugin if enabled
 	if (options.ignoreTag) {
+		DEBUG.setup('Enabling `{{! ... }}` tag syntax');
 		options.plugins.push(ignoreTagPlugin);
 	}
 
 	// Create the vento engine instance
+	DEBUG.setup('Initializing Vento environment');
 	const engine = createVentoEngine(options.ventoOptions);
 
 	// Load plugins
+	DEBUG.setup('Loading plugins: %o', options.plugins);
 	engine.loadPlugins(options.plugins);
 
 	// Add filters, single and paired shortcodes if enabled
 	if (options.filters) {
+		DEBUG.setup('Loading filters: %o', filters);
 		engine.loadFilters(filters);
 	}
 	if (options.shortcodes) {
+		DEBUG.setup('Loading shortcodes: %o', shortcodes);
 		engine.loadShortcodes(shortcodes, false);
 	}
 	if (options.pairedShortcodes) {
+		DEBUG.setup('Loading paired shortcodes: %o', pairedShortcodes);
 		engine.loadShortcodes(pairedShortcodes, true);
 	}
 
@@ -107,9 +124,11 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 	eleventyConfig.on('eleventy.before', () => engine.emptyCache());
 
 	// Add vto as a template format
+	DEBUG.setup('Registering .vto as a template format');
 	eleventyConfig.addTemplateFormats('vto');
 
 	// Add extension handling
+	DEBUG.setup('Registering .vto extension with eleventy');
 	eleventyConfig.addExtension('vto', {
 		outputFileExtension: 'html',
 		read: true,
@@ -130,4 +149,5 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 			},
 		},
 	});
+	DEBUG.setup('eleventy-plugin-vento initialized');
 }

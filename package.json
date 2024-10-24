@@ -43,6 +43,7 @@
 		"CHANGELOG.md"
 	],
 	"dependencies": {
+		"debug": "4.3.7",
 		"ventojs": "1.12.10"
 	},
 	"devDependencies": {
