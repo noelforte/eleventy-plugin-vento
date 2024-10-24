@@ -22,7 +22,7 @@ import { DEBUG, CONTEXT_DATA_KEYS } from './modules/utils.js';
 export function createVentoEngine(options) {
 	/** @type {EleventyVentoEnvironment} */
 	const env = ventojs(options);
-	env.utils._11ty = { ctx: {}, functions: {} };
+	env.utils._11ty = { ctx: {}, shortcodes: {}, pairedShortcodes: {} };
 
 	return {
 		/** @param {string} path */
@@ -57,14 +57,19 @@ export function createVentoEngine(options) {
 			}
 		},
 
-		/**
-		 * @param {Record<string, EleventyFunction>} shortcodes
-		 * @param {boolean} paired
-		 */
-		loadShortcodes(shortcodes, paired = false) {
+		/** @param {Record<string, EleventyFunction>} shortcodes */
+		loadShortcodes(shortcodes) {
 			for (const [name, fn] of Object.entries(shortcodes)) {
-				env.utils._11ty.functions[name] = fn;
-				env.tags.push(createVentoTag(name, paired));
+				env.utils._11ty.shortcodes[name] = fn;
+				env.tags.push(createVentoTag({ name, group: 'shortcodes' }));
+			}
+		},
+
+		/** @param {Record<string, EleventyFunction>} pairedShortcodes */
+		loadPairedShortcodes(pairedShortcodes) {
+			for (const [name, fn] of Object.entries(pairedShortcodes)) {
+				env.utils._11ty.pairedShortcodes[name] = fn;
+				env.tags.push(createVentoTag({ name, group: 'pairedShortcodes' }));
 			}
 		},
 

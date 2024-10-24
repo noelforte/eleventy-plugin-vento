@@ -1,19 +1,20 @@
 /**
  * @file Helper function that creates vento tags from eleventy functions
  *
- * @param {string} name
- * @param {boolean} paired
+ * @param {{name: string, group: 'shortcodes' | 'pairedShortcodes' }} options
  */
 
-export function createVentoTag(name, paired) {
+export function createVentoTag(options) {
+	const IS_PAIRED = options.group === 'pairedShortcodes';
+
 	/** @type {import("ventojs/src/environment.js").Tag} */
 	const tag = (env, code, output, tokens) => {
-		if (!code.startsWith(name)) return;
+		if (!code.startsWith(options.name)) return;
 
-		// Declare helper object path strings
-		const fn = `__env.utils._11ty.functions.${name}`;
+		// Declare helper variables for repeated strings in template
+		const fn = `__env.utils._11ty.${options.group}.${options.name}`;
 		const ctx = '__env.utils._11ty.ctx';
-		let args = [code.replace(name, '').trim()];
+		const args = [code.replace(options.name, '').trim()];
 
 		const varname = output.startsWith('__shortcode_content')
 			? `${output}_precomp`
@@ -22,35 +23,38 @@ export function createVentoTag(name, paired) {
 		// Create an array to hold compiled template code
 		const compiled = [];
 
-		if (paired) {
+		if (IS_PAIRED) {
 			args.unshift(env.compileFilters(tokens, varname, env.options.autoescape));
 			compiled.push(
 				'{',
 				`let ${varname} = "";`,
-				...env.compileTokens(tokens, varname, [`/${name}`])
+				...env.compileTokens(tokens, varname, [`/${options.name}`])
 			);
-			if (tokens.length > 0 && (tokens[0][0] !== 'tag' || tokens[0][1] !== `/${name}`)) {
-				throw new Error(`Missing closing tag for ${name} tag: ${code}`);
+			if (tokens.length > 0 && (tokens[0][0] !== 'tag' || tokens[0][1] !== `/${options.name}`)) {
+				throw new Error(`Vento: Missing closing tag for ${options.name} tag: ${code}`);
 			}
 			tokens.shift();
 		}
 
-		// Compile arguments into a string
-		args = args.some(Boolean) ? `, ${args.filter(Boolean).join(', ')}` : '';
+		args.unshift(ctx);
 
 		compiled.push(
 			'{',
-			`const __shortcode_result = await ${fn}.call(${ctx + args});`,
+			`const __shortcode_result = await ${fn}.call(${args.filter(Boolean).join(', ')});`,
 			`${output} += ${env.compileFilters(tokens, '__shortcode_result', env.options.autoescape)}`,
 			'}'
 		);
 
-		if (paired) compiled.push('}');
+		if (IS_PAIRED) {
+			compiled.push('}');
+		}
 
-		// console.log(compiled);
+		const compiledTag = compiled.join('\n');
 
-		return compiled.join('\n');
+		return compiledTag;
 	};
 
-	return Object.defineProperty(tag, 'name', { value: paired ? `${name}PairedTag` : `${name}Tag` });
+	return Object.defineProperty(tag, 'name', {
+		value: options.name + IS_PAIRED ? `PairedTag` : `Tag`,
+	});
 }

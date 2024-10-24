@@ -123,11 +123,11 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 	}
 	if (options.shortcodes) {
 		DEBUG.setup('Loading shortcodes: %o', shortcodes);
-		engine.loadShortcodes(shortcodes, false);
+		engine.loadShortcodes(shortcodes);
 	}
 	if (options.pairedShortcodes) {
 		DEBUG.setup('Loading paired shortcodes: %o', pairedShortcodes);
-		engine.loadShortcodes(pairedShortcodes, true);
+		engine.loadPairedShortcodes(pairedShortcodes);
 	}
 
 	// HACK: Clear entire vento cache on rebuild to force updates
