@@ -133,8 +133,15 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 		engine.loadPairedShortcodes(pairedShortcodes);
 	}
 
-	// HACK: Clear entire vento cache on rebuild to force updates
-	eleventyConfig.on('eleventy.before', () => engine.emptyCache());
+	// Handle emptying the cache when files are updated
+	DEBUG.setup('Registering Vento cache handler on eleventy.beforeWatch event');
+	eleventyConfig.on('eleventy.beforeWatch', async (updatedFiles) => {
+		for (let file of updatedFiles) {
+			file = path.normalize(file);
+			DEBUG.cache('Delete cache entry for %s', file);
+			engine.cache.delete(file);
+		}
+	});
 
 	// Add vto as a template format
 	DEBUG.setup('Registering .vto as a template format');
