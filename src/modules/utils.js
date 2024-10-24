@@ -16,3 +16,5 @@ export const REQUIRED_API_METHODS = [
 ];
 
 export const CONTEXT_DATA_KEYS = ['page', 'eleventy'];
+
+export const PERMALINK_PREFIX = 'EleventyVentoPermalink:';

@@ -29,7 +29,7 @@ import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plug
 // Local modules
 import { createVentoEngine } from './engine.js';
 import { ignoreTagPlugin } from './modules/ignore-tag.js';
-import { DEBUG, REQUIRED_API_METHODS } from './modules/utils.js';
+import { DEBUG, PERMALINK_PREFIX, REQUIRED_API_METHODS } from './modules/utils.js';
 
 /**
  * @param {import('@11ty/eleventy').UserConfig} eleventyConfig
@@ -163,12 +163,14 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 			// Defer all caching to Vento
 			cache: false,
 			// Custom permalink compilation
-			permalink(linkContents) {
-				if (typeof linkContents !== 'string') {
-					return linkContents;
+			permalink(source, file) {
+				// Short circuit if input isn't a string and doesn't look like a vento template
+				if (typeof source === 'string' && /\{\{\s+.+\s+\}\}/.test(source)) {
+					file = PERMALINK_PREFIX + path.normalize(file);
+					return async (data) => engine.process({ source, data, file });
 				}
 
-				return async (data) => engine.process({ data, source: linkContents });
+				return source;
 			},
 		},
 	});
