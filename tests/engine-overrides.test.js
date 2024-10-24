@@ -1,9 +1,7 @@
-import { EleventyTest } from './_eleventy-test.js';
+import { EleventyTest } from '#11ty-test';
 import { test } from 'vitest';
 
-const testRun = new EleventyTest('./engine-overrides/', {
-	useEleventyConfig: true,
-});
+const testRun = new EleventyTest('./engine-overrides/');
 
 test('use vento as html engine', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/as-html-engine/');

@@ -1,6 +1,6 @@
 {
 	"name": "eleventy-plugin-vento",
-	"version": "3.0.2",
+	"version": "3.0.3-next.0",
 	"description": "Adds support for the Vento templating language to Eleventy.",
 	"type": "module",
 	"engines": {
@@ -13,6 +13,9 @@
 		"ci:publish": "changeset publish",
 		"ci:generate-changesets": "node ./scripts/generate-changesets.js",
 		"format": "pnpm dlx prettier --config ./package.json --write ."
+	},
+	"imports": {
+		"#11ty-test": "./tests/_utils/eleventy-test.js"
 	},
 	"exports": {
 		".": {

@@ -1,4 +1,4 @@
-import { EleventyTest } from './_eleventy-test.js';
+import { EleventyTest } from '#11ty-test';
 import { test } from 'vitest';
 
 const testRun = new EleventyTest('./layouts/');

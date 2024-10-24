@@ -2,6 +2,9 @@
 	"compilerOptions": {
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
-		"baseUrl": "./"
+		"baseUrl": "./",
+		"paths": {
+			"#11ty-test": ["./tests/_utils/eleventy-test.js"]
+		}
 	}
 }

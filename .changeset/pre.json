@@ -1,0 +1,11 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "eleventy-plugin-vento": "3.0.2"
+  },
+  "changesets": [
+    "honest-shrimps-drive",
+    "hungry-swans-float"
+  ]
+}
