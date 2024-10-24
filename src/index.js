@@ -20,6 +20,9 @@
  * (See [Vento Docs](https://vento.js.org/configuration/#options))
  */
 
+// Built-ins
+import path from 'node:path';
+
 // External modules
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
 
@@ -144,12 +147,15 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 		read: true,
 
 		// Main compile function
-		async compile(inputContent, inputPath) {
-			return async (data) => await engine.process({ data, source: inputContent, path: inputPath });
+		async compile(source, file) {
+			file = path.normalize(file);
+			return async (data) => await engine.process({ source, data, file });
 		},
 
-		// Custom permalink compilation
 		compileOptions: {
+			// Defer all caching to Vento
+			cache: false,
+			// Custom permalink compilation
 			permalink(linkContents) {
 				if (typeof linkContents !== 'string') {
 					return linkContents;

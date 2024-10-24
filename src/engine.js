@@ -25,15 +25,7 @@ export function createVentoEngine(options) {
 	env.utils._11ty = { ctx: {}, shortcodes: {}, pairedShortcodes: {} };
 
 	return {
-		/** @param {string} path */
-		getCachedSource(path) {
-			return env.cache.get(path)?.source;
-		},
-
-		/** @param {string} path */
-		emptyCache(path) {
-			return path ? env.cache.delete(path) : env.cache.clear();
-		},
+		cache: env.cache,
 
 		/** @param {import('ventojs/src/environment.js').Plugin[]} plugins */
 		loadPlugins(plugins) {
@@ -73,21 +65,31 @@ export function createVentoEngine(options) {
 			}
 		},
 
-		/** @param {{data: PageData, source: string, path: string}} input */
+		/** @param {{ source: string, data: PageData, file?: string }} input */
 		async process(input) {
 			// Reload context
 			this.loadContext(input.data);
 			DEBUG.setup('Reloaded Eleventy/Vento context. New value: %o', env.utils._11ty.ctx);
 
-			// Before we compile, empty the cache if the input content doesn't match
-			if (env.cache.get(input.path)?.source !== input.source) {
-				env.cache.delete(input.path);
+			// Retrieve the template from the cache
+			let template = env.cache.get(input.file);
+
+			if (template?.source === input.source) {
+				DEBUG.cache('Cache HIT for `%s`, used precompiled template', input.file);
+			} else {
+				template = env.compile(input.source, input.file);
+
+				if (input.file) {
+					DEBUG.cache('Cache MISS for `%s`, compiled new template', input.file);
+					env.cache.set(input.file, template);
+				}
 			}
 
-			// Process the templates
-			const result = await env.runString(input.source, input.data, input.path);
+			// Run the template
+			DEBUG.template(template.code);
+			const { content } = await template(input.data);
 
-			return result.content;
+			return content;
 		},
 	};
 }
