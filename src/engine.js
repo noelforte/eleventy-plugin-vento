@@ -3,11 +3,15 @@
  * a simple API for Eleventy to interface with.
  *
  * @typedef {{eleventy?: Record<string, unknown>, page?: Record<string, unknown>}} EleventyContext
- * @typedef {Context & Record<string, unknown>} EleventyData
+ * @typedef {EleventyContext & Record<string, unknown>} EleventyData
  * @typedef {(...args: unknown[]) => unknown} EleventyFunction
+ * @typedef {Record<string, EleventyFunction>} EleventyFunctionSet
  * @typedef {import('ventojs/src/environment.js').Environment} VentoEnvironment
  * @typedef {VentoEnvironment & {
- *   utils: { _11ty: { ctx: Context, tags: Record<string, EleventyFunction> } }
+ *  utils: {
+ * 	_11tyFns: { shortcodes: EleventyFunctionSet, pairedShortcodes: EleventyFunctionSet }
+ * 	_11tyCtx: EleventyContext
+ * }
  * }} EleventyVentoEnvironment
  */
 
@@ -16,55 +20,60 @@ import ventojs from 'ventojs';
 
 // Internal modules
 import { createVentoTag } from './modules/create-vento-tag.js';
-import { DEBUG, CONTEXT_DATA_KEYS } from './modules/utils.js';
+import { CONTEXT_DATA_KEYS, DEBUG } from './modules/utils.js';
 
 /** @param {import('ventojs').Options} options */
 export function createVentoEngine(options) {
 	/** @type {EleventyVentoEnvironment} */
 	const env = ventojs(options);
-	env.utils._11ty = { ctx: {}, shortcodes: {}, pairedShortcodes: {} };
+	env.utils._11tyFns = { shortcodes: {}, pairedShortcodes: {} };
+	env.utils._11tyCtx = {};
+
+	/** @param {EleventyData} newContext */
+	function setContext(newContext) {
+		if (env.utils._11tyCtx?.page?.inputPath === newContext?.page?.inputPath) {
+			return;
+		}
+
+		for (const K of CONTEXT_DATA_KEYS) {
+			env.utils._11tyCtx[K] = newContext[K];
+		}
+
+		DEBUG.setup('Reload context, new context is: %o', env.utils._11tyCtx);
+	}
+
+	/** @param {import('ventojs/src/environment.js').Plugin[]} plugins */
+	function loadPlugins(plugins) {
+		for (const plugin of plugins) {
+			env.use(plugin);
+		}
+	}
+
+	/** @param {Record<string, EleventyFunction>} filters */
+	function loadFilters(filters) {
+		for (const [name, fn] of Object.entries(filters)) {
+			env.filters[name] = fn.bind(env.utils._11tyCtx);
+		}
+	}
+
+	/** @param {Record<string, EleventyFunction>} shortcodes */
+	function loadShortcodes(shortcodes) {
+		for (const [name, fn] of Object.entries(shortcodes)) {
+			env.utils._11tyFns.shortcodes[name] = fn;
+			env.tags.push(createVentoTag({ name, group: 'shortcodes' }));
+		}
+	}
+
+	/** @param {Record<string, EleventyFunction>} pairedShortcodes */
+	function loadPairedShortcodes(pairedShortcodes) {
+		for (const [name, fn] of Object.entries(pairedShortcodes)) {
+			env.utils._11tyFns.pairedShortcodes[name] = fn;
+			env.tags.push(createVentoTag({ name, group: 'pairedShortcodes' }));
+		}
+	}
 
 	return {
 		cache: env.cache,
-
-		/** @param {import('ventojs/src/environment.js').Plugin[]} plugins */
-		loadPlugins(plugins) {
-			for (const plugin of plugins) {
-				env.use(plugin);
-			}
-		},
-
-		/** @param {PageData} newContext  */
-		loadContext(newContext) {
-			// Loop through allowed keys and load those into the context
-			for (const K of CONTEXT_DATA_KEYS) {
-				env.utils._11ty.ctx[K] = newContext[K];
-			}
-		},
-
-		/** @param {Record<string, EleventyFunction>} filters */
-		loadFilters(filters) {
-			for (const [name, fn] of Object.entries(filters)) {
-				env.filters[name] = (...args) => fn.apply(env.utils._11ty.ctx, args);
-			}
-		},
-
-		/** @param {Record<string, EleventyFunction>} shortcodes */
-		loadShortcodes(shortcodes) {
-			for (const [name, fn] of Object.entries(shortcodes)) {
-				env.utils._11ty.shortcodes[name] = fn;
-				env.tags.push(createVentoTag({ name, group: 'shortcodes' }));
-			}
-		},
-
-		/** @param {Record<string, EleventyFunction>} pairedShortcodes */
-		loadPairedShortcodes(pairedShortcodes) {
-			for (const [name, fn] of Object.entries(pairedShortcodes)) {
-				env.utils._11ty.pairedShortcodes[name] = fn;
-				env.tags.push(createVentoTag({ name, group: 'pairedShortcodes' }));
-			}
-		},
-
 		/** @param {{ source: string, data: PageData, file?: string }} input */
 		async process(input) {
 			// Reload context
@@ -91,5 +100,9 @@ export function createVentoEngine(options) {
 
 			return content;
 		},
+		loadPlugins,
+		loadFilters,
+		loadShortcodes,
+		loadPairedShortcodes,
 	};
 }

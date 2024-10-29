@@ -17,6 +17,7 @@ An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://ve
 [Vento Plugins](#vento-plugins)<br>
 [Auto-Trimming Tags](#auto-trimming-tags)<br>
 [Ignoring Tags](#ignoring-tags)<br>
+[Debugging](#debugging)<br>
 
 ## Installing
 
@@ -28,7 +29,7 @@ npm install eleventy-plugin-vento
 
 This plugin is ESM only and cannot be required from CommonJS.
 
-If you're using CommonJS and loading it asynchronously (ie `await import`), you will need at **minimum** Eleventy v3.0.0-alpha.15 which provides internal methods this plugin uses to get Eleventy stuff from the config API.
+If you're using CommonJS and loading it asynchronously (ie `await import`), you will need at **minimum** Eleventy v3.0.0-alpha.15 which provides internal methods this plugin uses to retrieve Eleventy features from the config API.
 
 In your Eleventy config:
 
@@ -101,7 +102,7 @@ Eleventy: See [Filters](https://www.11ty.dev/docs/filters/)
 > [!NOTE]
 > Remember, Vento can print any return value from a Javascript expression, as well as [run arbitrary JavaScript](https://vento.js.org/syntax/javascript/) in templates through its `{{> ...}}` operator. In these cases, shortcodes may not be needed depending on your usage.
 
-Single and Paired Shortcodes added via Eleventy's `.addShortcode()`, `addAsyncShortcode()`, `addPairedShortcode()` or `.addAsyncPairedShortcode()` will be automatically loaded into Vento.
+Single and Paired Shortcodes added via Eleventy's `.addShortcode()`, `.addAsyncShortcode()`, `.addPairedShortcode()` or `.addAsyncPairedShortcode()` will be automatically loaded into Vento.
 
 When using shortcodes in your templates, write them like any other Vento tag:
 
@@ -272,7 +273,7 @@ Like Eleventy, this plugin uses the [`debug`](https://www.npmjs.com/package/debu
 
 - `Eleventy:Vento:Setup` - Logs initial setup of the plugin, loading features, pre-page compile setup steps (like changing `page` and `eleventy` objects)
 - `Eleventy:Vento:Cache` - Logs updates to Vento's own internal cache, which is used in tandem with Eleventy's cache.
-- `Eleventy:Vento:Template` - Logs rendered templates and other template related actions
+- `Eleventy:Vento:Render` - Logs when templates are rendered
 
 Because it is a child of the `Eleventy:` namespace, the following command will include output from this plugin as well:
 

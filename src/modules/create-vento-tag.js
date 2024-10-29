@@ -12,8 +12,8 @@ export function createVentoTag(options) {
 		if (!code.startsWith(options.name)) return;
 
 		// Declare helper variables for repeated strings in template
-		const fn = `__env.utils._11ty.${options.group}.${options.name}`;
-		const ctx = '__env.utils._11ty.ctx';
+		const fn = `__env.utils._11tyFns.${options.group}.${options.name}`;
+		const ctx = '__env.utils._11tyCtx';
 		const args = [code.replace(options.name, '').trim()];
 
 		const varname = output.startsWith('__shortcode_content')

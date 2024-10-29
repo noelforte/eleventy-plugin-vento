@@ -29,7 +29,7 @@ import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plug
 // Local modules
 import { createVentoEngine } from './engine.js';
 import { ignoreTagPlugin } from './modules/ignore-tag.js';
-import { DEBUG, PERMALINK_PREFIX, REQUIRED_API_METHODS } from './modules/utils.js';
+import { DEBUG, PERMALINK_PREFIX, runCompatibilityCheck } from './modules/utils.js';
 
 /**
  * @param {import('@11ty/eleventy').UserConfig} eleventyConfig
@@ -37,18 +37,7 @@ import { DEBUG, PERMALINK_PREFIX, REQUIRED_API_METHODS } from './modules/utils.j
  */
 export function VentoPlugin(eleventyConfig, userOptions) {
 	DEBUG.setup('Initializing eleventy-plugin-vento');
-	DEBUG.setup('Run compatibility check');
-	for (const [method, version] of REQUIRED_API_METHODS) {
-		if (!eleventyConfig?.[method]) {
-			console.error(
-				'[eleventy-plugin-vento] Plugin compatibility error:',
-				`\`${method}\``,
-				'not found. Please use Eleventy',
-				version,
-				'or later.'
-			);
-		}
-	}
+	runCompatibilityCheck(eleventyConfig);
 
 	/** @type {VentoPluginOptions} */
 	const options = {
@@ -174,5 +163,6 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 			},
 		},
 	});
+
 	DEBUG.setup('eleventy-plugin-vento initialized');
 }
