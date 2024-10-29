@@ -15,12 +15,11 @@ class EleventyTest extends Eleventy {
 	buildResults;
 
 	/**
-	 * @param {string} inputPathname
+	 * @param {string} inputPath
 	 * @param {TestOptions} options
 	 */
-	constructor(inputPathname, options) {
-		const inputPath = path.resolve(import.meta.dirname, '..', inputPathname);
-		const outputPath = path.resolve(inputPath, '_site');
+	constructor(inputPath, options) {
+		const outputPath = path.join(inputPath, '_site');
 		const maybeConfigPath = path.join(inputPath, 'eleventy.config.js');
 
 		// Initialize parent class
@@ -41,9 +40,16 @@ class EleventyTest extends Eleventy {
 		return this.buildResults;
 	}
 
+	/** @returns {Promise<PageObject|undefined>} */
 	async getBuildResultForUrl(url) {
 		this.buildResults ??= await this.rebuild();
 		return this.buildResults.find((page) => page.url === url);
+	}
+
+	/** @returns {Promise<PageObject|undefined>} */
+	async getPageWithInput(content) {
+		this.buildResults ??= await this.rebuild();
+		return this.buildResults.find((page) => page.rawInput === content);
 	}
 
 	async countResultPages() {

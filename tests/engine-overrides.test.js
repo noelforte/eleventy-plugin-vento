@@ -1,7 +1,7 @@
 import { EleventyTest } from '#11ty-test';
 import { test } from 'vitest';
 
-const testRun = new EleventyTest('./engine-overrides/');
+const testRun = new EleventyTest('./tests/stubs-engine-overrides/');
 
 await testRun.rebuild();
 

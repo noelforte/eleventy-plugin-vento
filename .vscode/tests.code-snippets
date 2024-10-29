@@ -3,16 +3,11 @@
 		"scope": "javascript",
 		"prefix": "#new-test-suite",
 		"body": [
-			"import { EleventyTest } from '#11ty-test';",
-			"import { test } from 'vitest';\n",
-			"const testRun = new EleventyTest('${1:./path-to-test/}');\n",
-			"test('${2:test name}', async ({ expect }) => {",
-			"\tconst { content } = await testRun.getBuildResultForUrl('${3:/page-url/}');",
-			"\tawait expect(content).toMatchFileSnapshot('./_results/${4:output.html}');",
+			"describe('${1:suite name}', ${2:{ concurrent: true \\} ,} () => {",
+			"\t${0}",
 			"});"
 		],
 		"description": "Create a new test suite for eleventy-plugin-vento",
-		"isFileTemplate": true
 	},
 
 	"New test": {
@@ -20,7 +15,7 @@
 		"prefix": "#new-test",
 		"body": [
 			"test('${1:test name}', async ({ expect }) => {",
-			"\tconst { content } = await testRun.getBuildResultForUrl('${2:/page-url/}');",
+			"\tconst { content } = await testInstance.getBuildResultForUrl('${2:/page-url/}');",
 			"\tawait expect(content).toMatchFileSnapshot('./_results/${3:output.html}');",
 			"});"
 		],

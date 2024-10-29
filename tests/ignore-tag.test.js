@@ -1,7 +1,7 @@
 import { EleventyTest } from '#11ty-test';
 import { test } from 'vitest';
 
-const testRun = new EleventyTest('./ignore-tag/', {
+const testRun = new EleventyTest('./tests/stubs-ignore-tag/', {
 	pluginOptions: {
 		ignoreTag: true,
 	},
