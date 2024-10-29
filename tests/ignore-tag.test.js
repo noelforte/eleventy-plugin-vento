@@ -1,5 +1,5 @@
-import { EleventyTest } from '#11ty-test';
-import { test } from 'vitest';
+import { EleventyTest } from './_eleventy-test-instance.js';
+import { describe, test } from 'vitest';
 
 const testRun = new EleventyTest('./tests/stubs-ignore-tag/', {
 	pluginOptions: {
@@ -9,27 +9,29 @@ const testRun = new EleventyTest('./tests/stubs-ignore-tag/', {
 
 await testRun.rebuild();
 
-test('render if (ignore tag)', async ({ expect }) => {
-	const { content } = await testRun.getBuildResultForUrl('/if/');
-	await expect(content).toMatchFileSnapshot('./_results/ignore-if.html');
-});
+describe('Can skip tags with `{{! ... }}` syntax', { concurrent: true }, () => {
+	test('if', async ({ expect }) => {
+		const { content } = await testRun.getBuildResultForUrl('/if/');
+		await expect(content).toMatchFileSnapshot('./_results/ignore-if.html');
+	});
 
-test('render data (ignore tag)', async ({ expect }) => {
-	const { content } = await testRun.getBuildResultForUrl('/data/');
-	await expect(content).toMatchFileSnapshot('./_results/ignore-data.html');
-});
+	test('data', async ({ expect }) => {
+		const { content } = await testRun.getBuildResultForUrl('/data/');
+		await expect(content).toMatchFileSnapshot('./_results/ignore-data.html');
+	});
 
-test('render for (ignore tag)', async ({ expect }) => {
-	const { content } = await testRun.getBuildResultForUrl('/for/');
-	await expect(content).toMatchFileSnapshot('./_results/ignore-for.html');
-});
+	test('for', async ({ expect }) => {
+		const { content } = await testRun.getBuildResultForUrl('/for/');
+		await expect(content).toMatchFileSnapshot('./_results/ignore-for.html');
+	});
 
-test('render echo (ignore tag)', async ({ expect }) => {
-	const { content } = await testRun.getBuildResultForUrl('/echo/');
-	await expect(content).toMatchFileSnapshot('./_results/ignore-echo.html');
-});
+	test('echo', async ({ expect }) => {
+		const { content } = await testRun.getBuildResultForUrl('/echo/');
+		await expect(content).toMatchFileSnapshot('./_results/ignore-echo.html');
+	});
 
-test('render exec (ignore tag)', async ({ expect }) => {
-	const { content } = await testRun.getBuildResultForUrl('/exec/');
-	await expect(content).toMatchFileSnapshot('./_results/ignore-exec.html');
+	test('exec', async ({ expect }) => {
+		const { content } = await testRun.getBuildResultForUrl('/exec/');
+		await expect(content).toMatchFileSnapshot('./_results/ignore-exec.html');
+	});
 });

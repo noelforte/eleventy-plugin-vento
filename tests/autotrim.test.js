@@ -1,4 +1,4 @@
-import { EleventyTest } from '#11ty-test';
+import { EleventyTest } from './_eleventy-test-instance.js';
 import { test } from 'vitest';
 
 test('trim all tags', async ({ expect }) => {
