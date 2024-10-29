@@ -3,6 +3,8 @@ import { test } from 'vitest';
 
 const testRun = new EleventyTest('./shortcodes/');
 
+await testRun.rebuild();
+
 test('run single shortcodes', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/single/');
 	await expect(content).toMatchFileSnapshot('./_results/shortcodes-single.html');

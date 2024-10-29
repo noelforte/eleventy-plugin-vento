@@ -7,6 +7,8 @@ const testRun = new EleventyTest('./ignore-tag/', {
 	},
 });
 
+await testRun.rebuild();
+
 test('render if (ignore tag)', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/if/');
 	await expect(content).toMatchFileSnapshot('./_results/ignore-if.html');

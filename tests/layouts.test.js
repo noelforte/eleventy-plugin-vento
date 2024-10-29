@@ -3,6 +3,8 @@ import { test } from 'vitest';
 
 const testRun = new EleventyTest('./layouts/');
 
+await testRun.rebuild();
+
 test('render page with example layout 1', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/page1/');
 	await expect(content).toMatchFileSnapshot('./_results/layouts-example-1.html');

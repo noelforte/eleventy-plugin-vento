@@ -3,6 +3,8 @@ import { test } from 'vitest';
 
 const testRun = new EleventyTest('./engine-overrides/');
 
+await testRun.rebuild();
+
 test('use vento as html engine', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/as-html-engine/');
 	await expect(content).toMatchFileSnapshot('./_results/override.html-engine.html');

@@ -3,6 +3,8 @@ import { test } from 'vitest';
 
 const testRun = new EleventyTest('./filters/');
 
+await testRun.rebuild();
+
 test('transform string with built-ins', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/basic/');
 	await expect(content).toMatchFileSnapshot('./_results/filters-built-in-basic.html');

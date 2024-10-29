@@ -3,6 +3,8 @@ import { test } from 'vitest';
 
 const testRun = new EleventyTest('./includes/');
 
+await testRun.rebuild();
+
 test('include a page', async ({ expect }) => {
 	const { content } = await testRun.getBuildResultForUrl('/basic/');
 	await expect(content).toMatchFileSnapshot('./_results/includes-basic.html');
