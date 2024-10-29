@@ -29,7 +29,7 @@ import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plug
 // Local modules
 import { createVentoEngine } from './engine.js';
 import { ignoreTagPlugin } from './modules/ignore-tag.js';
-import { DEBUG, PERMALINK_PREFIX, runCompatibilityCheck } from './modules/utils.js';
+import { DEBUG, runCompatibilityCheck } from './modules/utils.js';
 
 /**
  * @param {import('@11ty/eleventy').UserConfig} eleventyConfig
@@ -142,24 +142,33 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 		outputFileExtension: 'html',
 		read: true,
 
-		// Main compile function
-		async compile(source, file) {
-			file = path.normalize(file);
-			return async (data) => await engine.process({ source, data, file });
+		compile(inputContent, inputPath) {
+			// Normalize input path
+			inputPath = path.normalize(inputPath);
+
+			// Retrieve the template function
+			const template = engine.getTemplateFunction(inputContent, inputPath, false);
+
+			// Return a render function
+			return async (data) => await engine.render(template, data, inputPath);
 		},
 
 		compileOptions: {
-			// Defer all caching to Vento
-			cache: false,
 			// Custom permalink compilation
-			permalink(source, file) {
+			permalink(permalinkContent, inputPath) {
 				// Short circuit if input isn't a string and doesn't look like a vento template
-				if (typeof source === 'string' && /\{\{\s+.+\s+\}\}/.test(source)) {
-					file = PERMALINK_PREFIX + path.normalize(file);
-					return async (data) => engine.process({ source, data, file });
+				if (typeof permalinkContent === 'string' && /\{\{\s+.+\s+\}\}/.test(permalinkContent)) {
+					// Normalize input path
+					inputPath = 'Permalink::' + path.normalize(inputPath);
+
+					// Retrieve the template function
+					const template = engine.getTemplateFunction(permalinkContent, inputPath);
+
+					// Return a render function
+					return async (data) => await engine.render(template, data, inputPath);
 				}
 
-				return source;
+				return permalinkContent;
 			},
 		},
 	});

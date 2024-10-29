@@ -72,37 +72,55 @@ export function createVentoEngine(options) {
 		}
 	}
 
+	/**
+	 * @param {string} source
+	 * @param {string} file
+	 * @param {boolean} [useVentoCache=true]
+	 */
+	function getTemplateFunction(source, file, useVentoCache = true) {
+		// Attempt to retrieve template function from cache
+		let template = env.cache.get(file);
+
+		if (template?.source === source) {
+			DEBUG.cache('Cache HIT for `%s`, used precompiled template', file);
+		} else {
+			template = env.compile(source, file);
+
+			DEBUG.cache(
+				`Cache MISS for \`%s\`, compiled new template:\nUse Vento cache: %o\n\n${template}`,
+				file,
+				useVentoCache
+			);
+			if (useVentoCache) {
+				env.cache.set(file, template);
+			}
+		}
+
+		return template;
+	}
+
+	/**
+	 * @param {import('ventojs/src/environment.js').Template} template
+	 * @param {EleventyData} data
+	 * @param {string} from
+	 */
+	async function render(template, data, from) {
+		// Load new context
+		setContext(data);
+
+		// Render template
+		DEBUG.render('Rendering `%s`', from);
+		const { content } = await template(data);
+		return content;
+	}
+
 	return {
 		cache: env.cache,
-		/** @param {{ source: string, data: PageData, file?: string }} input */
-		async process(input) {
-			// Reload context
-			this.loadContext(input.data);
-			DEBUG.setup('Reloaded Eleventy/Vento context. New value: %o', env.utils._11ty.ctx);
-
-			// Retrieve the template from the cache
-			let template = env.cache.get(input.file);
-
-			if (template?.source === input.source) {
-				DEBUG.cache('Cache HIT for `%s`, used precompiled template', input.file);
-			} else {
-				template = env.compile(input.source, input.file);
-
-				if (input.file) {
-					DEBUG.cache('Cache MISS for `%s`, compiled new template', input.file);
-					env.cache.set(input.file, template);
-				}
-			}
-
-			// Run the template
-			DEBUG.template(template.code);
-			const { content } = await template(input.data);
-
-			return content;
-		},
 		loadPlugins,
 		loadFilters,
 		loadShortcodes,
 		loadPairedShortcodes,
+		getTemplateFunction,
+		render,
 	};
 }

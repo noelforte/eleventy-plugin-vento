@@ -17,8 +17,6 @@ export const REQUIRED_API_METHODS = [
 
 export const CONTEXT_DATA_KEYS = ['page', 'eleventy'];
 
-export const PERMALINK_PREFIX = 'EleventyVentoPermalink:';
-
 // Helper functions
 export function runCompatibilityCheck(config) {
 	DEBUG.setup('Run compatibility check');
