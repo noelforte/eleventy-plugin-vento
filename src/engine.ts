@@ -6,7 +6,7 @@
 // External library
 import { default as ventojs, type Options } from 'ventojs';
 import type { Plugin, Environment, Template } from 'ventojs/src/environment.js';
-import type { EleventyContext, EleventyFunctionSet, EleventyData } from '@11ty/eleventy';
+import type { EleventyContext, EleventyFunctionSet, EleventyData } from '#localtypes/11ty.js';
 
 // Internal modules
 import { createVentoTag } from './modules/create-vento-tag.js';

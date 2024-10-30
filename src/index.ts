@@ -6,7 +6,7 @@
 import path from 'node:path';
 
 // External modules
-import type { UserConfig, EleventyData } from '@11ty/eleventy';
+import type { UserConfig, EleventyData } from '#localtypes/11ty.js';
 import type { Options } from 'ventojs';
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
 import type { Plugin } from 'ventojs/src/environment.js';

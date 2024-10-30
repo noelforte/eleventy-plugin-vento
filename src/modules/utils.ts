@@ -1,5 +1,5 @@
 // Set up debugger global
-import type { UserConfig } from '@11ty/eleventy';
+import type { UserConfig } from '#localtypes/11ty.js';
 import createDebugger from 'debug';
 
 const debugBaseNamespace = 'Eleventy:Vento';

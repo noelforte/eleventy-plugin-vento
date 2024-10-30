@@ -1,8 +1,8 @@
 {
 	"include": ["**/*.ts", "eslint.config.js"],
 	"exclude": ["**/node_modules/**", "dist"],
-	"compileOnSave": false,
 	"compilerOptions": {
+		"paths": { "#localtypes/*": ["./types/*"] },
 		"strict": true,
 		"checkJs": true,
 		"target": "ES2021",
