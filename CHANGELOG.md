@@ -1,5 +1,23 @@
 # eleventy-plugin-vento
 
+## 3.2.0
+
+### Minor Changes
+
+- f9388e1: Further refine caching between Eleventy and Vento: commit ec02a765 deferred **all** caching to Vento and turned off Eleventy's cache (released in 3.1.0). This release allows Vento to cache only the templates that Eleventy can't cache (permalinks, includes, etc.), and Eleventy caches everything else.
+
+  A performance oversight has also been resolved by this change. Now, template functions are pre-compiled and saved by Eleventy, only running the template on render without having to go through a re-compile or get a template from the cache.
+
+### Patch Changes
+
+- 693e1a2: Refactored the following features internally:
+
+  - Reverts 2c3548c1 for modularity: The compatibility check has moved back to `modules/utils.js`
+  - Revises caching further: Instead of deferring to Vento for everything, permalink templates and templates loaded by Vento (like includes) are cached by Vento. Everything else is cached by Eleventy.
+  - Rename some internal variables to help with readability (`_11ty.ctx => _11Ctx`)
+  - `DEBUG` key `Eleventy:Vento:Template` renamed to `Eleventy:Vento:Render`
+  - Declare engine functions separately and return as an object after everything has been declared.
+
 ## 3.1.0
 
 ### Minor Changes
