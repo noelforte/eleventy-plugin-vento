@@ -136,7 +136,7 @@ For paired shortcodes, the syntax is the same, just add a closing tag. Paired sh
 
 If you'd prefer to set shortcodes yourself (via a plugin or other method) or prevent Eleventy from loading shortcodes into Vento, set `shortcodes: false` and/or `pairedShortcodes: false` in the plugin options.
 
-> [!CAUTION]
+> [!IMPORTANT]
 > While it's straightforward to load filters via a Vento plugin that appends filters to the filters object as `env.filters.[filter_name]()`, creating custom tags in Vento is more involved. It's highly advised to keep these two options enabled unless you know what you're doing.
 
 ### Relevant Documentation
@@ -200,6 +200,9 @@ eleventyConfig.addPlugin(VentoPlugin, {
 Vento: See [Auto Trim Plugin](https://vento.js.org/plugins/auto-trim/).
 
 ## Ignoring Tags
+
+> [!WARNING]
+> This feature is now deprecated as of version 3.3.0. I added it primarily for my own use case, however it can cause more issues than it solves (conflict with `!` negation syntax in JS, ambiguity between ignoring a tag and negating an expression in a template). See the 3.3.0 release notes for more information.
 
 Exclusive to this plugin is the ability to skip processing a vento tag entirely and instead preserve the tag in the markup. This could be useful if you're doing some hybrid rendering and would like to defer certain tags from being processed until load time, so they can be rendered on the server.
 

@@ -58,6 +58,14 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 
 	DEBUG.setup('Merged default and user config: %O', options);
 
+	if (options.ignoreTag) {
+		console.error(
+			'[eleventy-plugin-vento] DEPRECATION NOTICE:',
+			'Plugin was called with `ignoreTag` option, which has been deprecated.',
+			'For more information, see: https://github.com/noelforte/eleventy-plugin-vento/blob/main/readme.md#ignoring-tags'
+		);
+	}
+
 	// Get list of filters, shortcodes and paired shortcodes
 	const filters = eleventyConfig.getFilters();
 	DEBUG.setup('Reading filters from Eleventy: %o', filters);
