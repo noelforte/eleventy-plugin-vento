@@ -1,5 +1,28 @@
+export const config = {
+	dir: {
+		layouts: '_layouts',
+	},
+};
+
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default function eleventy(eleventyConfig) {
+	// Global data
+	eleventyConfig.addGlobalData('listTypes', () => listTypes);
+
+	// Virtual templates
+	const filterTests = ['with-this-example-1', 'with-this-example-2'];
+
+	for (const slug of filterTests) {
+		eleventyConfig.addTemplate(`filters/${slug}.vto`, '{{ page.url |> pageUrlCompare }}');
+	}
+
+	// Filters
+	eleventyConfig.addFilter('wrapWith', (content, tag = 'span') => `<${tag}>${content}</${tag}>`);
+
+	eleventyConfig.addFilter('pageUrlCompare', function (url) {
+		return this.page.url === url;
+	});
+
 	// Shortcodes
 	eleventyConfig.addShortcode('helloWorld', () => 'Hello world!');
 	eleventyConfig.addShortcode('possumPosse', (number = 'the') => `Release ${number} possums!!!`);
@@ -34,4 +57,8 @@ export default function eleventy(eleventyConfig) {
 	eleventyConfig.addPairedShortcode('appendPageUrl', function (content) {
 		return `${content}\n<span class="url">${this.page.url}</span>`;
 	});
+}
+
+function listTypes(...args) {
+	return args.map((arg, index) => `Type of args[${index}]: '${typeof arg}'`).join('<br>\n');
 }

@@ -14,9 +14,6 @@
 		"ci:generate-changesets": "node ./scripts/generate-changesets.js",
 		"format": "pnpm dlx prettier --config ./package.json --write ."
 	},
-	"imports": {
-		"#11ty-test": "./tests/_utils/eleventy-test.js"
-	},
 	"exports": {
 		".": {
 			"import": "./src/index.js"
