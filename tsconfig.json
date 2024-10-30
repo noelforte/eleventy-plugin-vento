@@ -1,0 +1,16 @@
+{
+	"include": ["**/*.ts", "eslint.config.js"],
+	"exclude": ["**/node_modules/**", "dist"],
+	"compileOnSave": false,
+	"compilerOptions": {
+		"strict": true,
+		"checkJs": true,
+		"target": "ES2021",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true
+	}
+}

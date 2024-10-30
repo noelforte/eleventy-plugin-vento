@@ -1,46 +1,37 @@
 /**
  * @file Main plugin declaration
- *
- * @typedef VentoPluginOptions
- * @prop {import('ventojs/src/environment.js').Plugin[]} plugins
- * Array of vento plugins to use when compiling templates
- * @prop {boolean|string[]} autotrim
- * Enable Vento's [`autoTrim`](https://vento.js.org/plugins/auto-trim/)
- * plugin to remove whitespace from tags in output
- * @prop {boolean} [shortcodes=true]
- * Create vento tags for Eleventy [Shortcodes](https://www.11ty.dev/docs/shortcodes/)
- * @prop {boolean} [pairedShortcodes=true]
- * Create vento tags for Eleventy [Paired Shortcodes](https://www.11ty.dev/docs/shortcodes/#paired-shortcodes)
- * @prop {boolean} [filters=true]
- * Create vento filters for Eleventy [Filters](https://www.11ty.dev/docs/filters/)
- * @prop {boolean} [ignoreTag=false]
- * Enables/disables tag ignore (`{{! ... }}`) syntax in templates
- * @prop {import('ventojs').Options} ventoOptions
- * Options to pass on to the `ventojs` engine.
- * (See [Vento Docs](https://vento.js.org/configuration/#options))
  */
 
 // Built-ins
 import path from 'node:path';
 
 // External modules
+import type { UserConfig, EleventyData } from '@11ty/eleventy';
+import type { Options } from 'ventojs';
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
+import type { Plugin } from 'ventojs/src/environment.js';
 
 // Local modules
 import { createVentoEngine } from './engine.js';
 import { ignoreTagPlugin } from './modules/ignore-tag.js';
 import { DEBUG, runCompatibilityCheck } from './modules/utils.js';
 
-/**
- * @param {import('@11ty/eleventy').UserConfig} eleventyConfig
- * @param {Partial<VentoPluginOptions>} userOptions
- */
-export function VentoPlugin(eleventyConfig, userOptions) {
+export interface VentoPluginOptions {
+	plugins: Plugin[];
+	autotrim: boolean | string[];
+	filters: boolean;
+	shortcodes: boolean;
+	pairedShortcodes: boolean;
+	/** @deprecated */
+	ignoreTag: boolean;
+	ventoOptions: Options;
+}
+
+export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<VentoPluginOptions>) {
 	DEBUG.setup('Initializing eleventy-plugin-vento');
 	runCompatibilityCheck(eleventyConfig);
 
-	/** @type {VentoPluginOptions} */
-	const options = {
+	const options: VentoPluginOptions = {
 		// Define defaults
 		autotrim: false,
 		plugins: [],
@@ -80,8 +71,7 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 	if (options.autotrim) {
 		const defaults = ['@vento', '@11ty'];
 
-		/** @type {Set<string>} */
-		const tagSet = new Set(options.autotrim === true ? defaults : options.autotrim);
+		const tagSet: Set<string> = new Set(options.autotrim === true ? defaults : options.autotrim);
 
 		if (tagSet.has('@vento')) {
 			tagSet.delete('@vento');
@@ -132,7 +122,7 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 
 	// Handle emptying the cache when files are updated
 	DEBUG.setup('Registering Vento cache handler on eleventy.beforeWatch event');
-	eleventyConfig.on('eleventy.beforeWatch', async (updatedFiles) => {
+	eleventyConfig.on('eleventy.beforeWatch', async (updatedFiles: string[]) => {
 		for (let file of updatedFiles) {
 			file = path.normalize(file);
 			DEBUG.cache('Delete cache entry for %s', file);
@@ -150,7 +140,7 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 		outputFileExtension: 'html',
 		read: true,
 
-		compile(inputContent, inputPath) {
+		compile(inputContent: string, inputPath: string) {
 			// Normalize input path
 			inputPath = path.normalize(inputPath);
 
@@ -158,12 +148,12 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 			const template = engine.getTemplateFunction(inputContent, inputPath, false);
 
 			// Return a render function
-			return async (data) => await engine.render(template, data, inputPath);
+			return async (data: EleventyData) => await engine.render(template, data, inputPath);
 		},
 
 		compileOptions: {
 			// Custom permalink compilation
-			permalink(permalinkContent, inputPath) {
+			permalink(permalinkContent: string, inputPath: string) {
 				// Short circuit if input isn't a string and doesn't look like a vento template
 				if (typeof permalinkContent === 'string' && /\{\{\s+.+\s+\}\}/.test(permalinkContent)) {
 					// Normalize input path
@@ -173,7 +163,7 @@ export function VentoPlugin(eleventyConfig, userOptions) {
 					const template = engine.getTemplateFunction(permalinkContent, inputPath);
 
 					// Return a render function
-					return async (data) => await engine.render(template, data, inputPath);
+					return async (data: EleventyData) => await engine.render(template, data, inputPath);
 				}
 
 				return permalinkContent;

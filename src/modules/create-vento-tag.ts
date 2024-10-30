@@ -1,20 +1,24 @@
 /**
  * @file Helper function that creates vento tags from eleventy functions
- *
- * @param {{name: string, group: 'shortcodes' | 'pairedShortcodes' }} options
  */
 
-export function createVentoTag(options) {
-	const IS_PAIRED = options.group === 'pairedShortcodes';
+import type { Tag } from 'ventojs/src/environment.js';
 
-	/** @type {import("ventojs/src/environment.js").Tag} */
-	const tag = (env, code, output, tokens) => {
-		if (!code.startsWith(options.name)) return;
+interface TagSpec {
+	name: string;
+	group: 'shortcodes' | 'pairedShortcodes';
+}
+
+export function createVentoTag(spec: TagSpec) {
+	const IS_PAIRED = spec.group === 'pairedShortcodes';
+
+	const tag: Tag = (env, code, output, tokens) => {
+		if (!code.startsWith(spec.name)) return;
 
 		// Declare helper variables for repeated strings in template
-		const fn = `__env.utils._11tyFns.${options.group}.${options.name}`;
+		const fn = `__env.utils._11tyFns.${spec.group}.${spec.name}`;
 		const ctx = '__env.utils._11tyCtx';
-		const args = [code.replace(options.name, '').trim()];
+		const args = [code.replace(spec.name, '').trim()];
 
 		const varname = output.startsWith('__shortcode_content')
 			? `${output}_precomp`
@@ -28,10 +32,10 @@ export function createVentoTag(options) {
 			compiled.push(
 				'{',
 				`let ${varname} = "";`,
-				...env.compileTokens(tokens, varname, [`/${options.name}`])
+				...env.compileTokens(tokens, varname, [`/${spec.name}`])
 			);
-			if (tokens.length > 0 && (tokens[0][0] !== 'tag' || tokens[0][1] !== `/${options.name}`)) {
-				throw new Error(`Vento: Missing closing tag for ${options.name} tag: ${code}`);
+			if (tokens.length > 0 && (tokens[0][0] !== 'tag' || tokens[0][1] !== `/${spec.name}`)) {
+				throw new Error(`Vento: Missing closing tag for ${spec.name} tag: ${code}`);
 			}
 			tokens.shift();
 		}
@@ -55,6 +59,6 @@ export function createVentoTag(options) {
 	};
 
 	return Object.defineProperty(tag, 'name', {
-		value: options.name + IS_PAIRED ? `PairedTag` : `Tag`,
+		value: spec.name + IS_PAIRED ? `PairedTag` : `Tag`,
 	});
 }
