@@ -39,24 +39,22 @@ class EleventyTest extends Eleventy {
 	}
 
 	async rebuild() {
-		this.buildResults = await this.toJSON();
-		return this.buildResults;
+		const newResults = await this.toJSON();
+		this.buildResults = newResults;
 	}
 
-	/** @returns {Promise<PageObject|undefined>} */
-	async getBuildResultForUrl(url) {
-		this.buildResults ??= await this.rebuild();
+	/** @returns {PageObject|undefined} */
+	getBuildResultForUrl(url) {
 		return this.buildResults.find((page) => page.url === url);
 	}
 
-	/** @returns {Promise<PageObject|undefined>} */
-	async getPageWithInput(content) {
-		this.buildResults ??= await this.rebuild();
+	/** @returns {PageObject|undefined} */
+	getPageWithInput(content) {
 		return this.buildResults.find((page) => page.rawInput === content);
 	}
 
+	/** @returns {number} */
 	async countResultPages() {
-		this.buildResults ??= await this.rebuild();
 		return this.buildResults.filter(({ outputPath }) => Boolean(outputPath)).length;
 	}
 }

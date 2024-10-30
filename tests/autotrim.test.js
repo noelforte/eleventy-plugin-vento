@@ -1,50 +1,38 @@
 import { EleventyTest } from './_eleventy-test-instance.js';
 import { test } from 'vitest';
 
-test('trim all tags', async ({ expect }) => {
+const matrix = [
+	{
+		label: 'All tags',
+		autotrim: true,
+		slug: 'all',
+	},
+	{
+		label: 'Single tag',
+		autotrim: ['set'],
+		slug: 'default-single',
+	},
+	{
+		label: 'All tags (with extends)',
+		autotrim: ['@vento', 'tag1', 'tag2'],
+		slug: 'default-extends',
+	},
+	{ label: 'Single custom tag', autotrim: ['button'], slug: 'custom-single' },
+	{
+		label: 'All custom tags (with extends)',
+		autotrim: ['@11ty', 'tag1', 'tag2'],
+		slug: 'custom-extends',
+	},
+];
+
+test.for(matrix)('%s', async ({ autotrim, slug }, { expect }) => {
 	const testInstance = new EleventyTest('./tests/stubs-autotrim/', {
-		pluginOptions: { autotrim: true },
+		pluginOptions: { autotrim },
 	});
 
-	const { content } = await testInstance.getBuildResultForUrl('/');
+	await testInstance.rebuild();
 
-	await expect(content).toMatchFileSnapshot('./_results/autotrim-all.html');
-});
+	const { content } = testInstance.getBuildResultForUrl('/');
 
-test('trim a single tag', async ({ expect }) => {
-	const testInstance = new EleventyTest('./tests/stubs-autotrim/', {
-		pluginOptions: { autotrim: ['set'] },
-	});
-
-	const { content } = await testInstance.getBuildResultForUrl('/');
-
-	await expect(content).toMatchFileSnapshot('./_results/autotrim-default-single.html');
-});
-
-test('trim all default tags (extends)', async ({ expect }) => {
-	const testInstance = new EleventyTest('./tests/stubs-autotrim/', {
-		pluginOptions: { autotrim: ['@vento', 'tag1', 'tag2'] },
-	});
-
-	const { content } = await testInstance.getBuildResultForUrl('/');
-
-	await expect(content).toMatchFileSnapshot('./_results/autotrim-default-extends.html');
-});
-
-test('trim a single custom tag', async ({ expect }) => {
-	const testInstance = new EleventyTest('./tests/stubs-autotrim/', {
-		pluginOptions: { autotrim: ['button'] },
-	});
-
-	const { content } = await testInstance.getBuildResultForUrl('/');
-	await expect(content).toMatchFileSnapshot('./_results/autotrim-custom-single.html');
-});
-
-test('trim all custom tags (extends)', async ({ expect }) => {
-	const testInstance = new EleventyTest('./tests/stubs-autotrim/', {
-		pluginOptions: { autotrim: ['@11ty', 'tag1', 'tag2'] },
-	});
-
-	const { content } = await testInstance.getBuildResultForUrl('/');
-	await expect(content).toMatchFileSnapshot('./_results/autotrim-custom-extends.html');
+	await expect(content).toMatchFileSnapshot(`./_results/autotrim-${slug}.html`);
 });
