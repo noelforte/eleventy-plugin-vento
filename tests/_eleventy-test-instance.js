@@ -1,6 +1,7 @@
 /**
  * @typedef TestOptions
  * @property {import('eleventy-plugin-vento').VentoPluginOptions} pluginOptions
+ * @property {object} eleventy
  *
  * @typedef {{ url: string, inputPath: string, outputPath: string, rawInput: string, content: string }} PageObject
  */
@@ -18,12 +19,14 @@ class EleventyTest extends Eleventy {
 	 * @param {string} inputPath
 	 * @param {TestOptions} options
 	 */
-	constructor(inputPath, options) {
+	constructor(inputPath, options = {}) {
 		const outputPath = path.join(inputPath, '_site');
 		const maybeConfigPath = path.join(inputPath, 'eleventy.config.js');
 
 		// Initialize parent class
 		super(inputPath, outputPath, {
+			...options.eleventy,
+
 			quietMode: true,
 
 			configPath: fs.existsSync(maybeConfigPath) && maybeConfigPath,
