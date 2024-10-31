@@ -1,7 +1,8 @@
+import type { AutotrimConfig } from '../src/types.js';
 import { EleventyTest } from './_eleventy-test-instance.js';
 import { test } from 'vitest';
 
-const matrix = [
+const matrix: [string, AutotrimConfig, string][] = [
 	['All tags', true, 'all'],
 	['Single tag', ['set'], 'default-single'],
 	['All tags (with extends)', ['@vento', 'tag1', 'tag2'], 'default-extends'],
@@ -16,7 +17,7 @@ test.for(matrix)('%s', async ([_label, autotrim, slug], { expect }) => {
 
 	await testInstance.rebuild();
 
-	const { content } = testInstance.getBuildResultForUrl('/');
+	const result = testInstance.getBuildResultForUrl('/');
 
-	await expect(content).toMatchFileSnapshot(`./_results/autotrim-${slug}.html`);
+	await expect(result?.content).toMatchFileSnapshot(`./_results/autotrim-${slug}.html`);
 });
