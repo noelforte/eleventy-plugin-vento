@@ -15,6 +15,9 @@ importers:
         specifier: 1.12.10
         version: 1.12.10
     devDependencies:
+      11ty.ts:
+        specifier: 0.0.5
+        version: 0.0.5(@11ty/eleventy@3.0.0)
       '@11ty/eleventy':
         specifier: 3.0.0
         version: 3.0.0
@@ -45,11 +48,8 @@ importers:
       eslint-plugin-unicorn:
         specifier: 56.0.0
         version: 56.0.0(eslint@9.13.0)
-      globals:
-        specifier: 15.11.0
-        version: 15.11.0
       tsup:
-        specifier: ^8.3.5
+        specifier: 8.3.5
         version: 8.3.5(postcss@8.4.47)(typescript@5.6.3)
       typescript:
         specifier: 5.6.3
@@ -62,6 +62,11 @@ importers:
         version: 2.1.4(@types/node@22.8.4)
 
 packages:
+
+  11ty.ts@0.0.5:
+    resolution: {integrity: sha512-KctAFaK0Iin2bCkGSiOSTYWEKHMwnV/0bazCef0q8NXT5mahr4OJqqcs6r29BW7gIzKxXpNDro5sfGDKxinL0g==}
+    peerDependencies:
+      '@11ty/eleventy': ^2.0.1
 
   '@11ty/dependency-tree-esm@1.0.0':
     resolution: {integrity: sha512-Z3KN1Fkv50UM/ZzTR3VBbyOY52HnmhIVCsAV1hn2UzFsGAjyF1Cw8uohhVtheDOSuBR7ZSeo1unwkz1HxFlUtQ==}
@@ -2366,6 +2371,10 @@ packages:
     engines: {node: '>=10'}
 
 snapshots:
+
+  11ty.ts@0.0.5(@11ty/eleventy@3.0.0):
+    dependencies:
+      '@11ty/eleventy': 3.0.0
 
   '@11ty/dependency-tree-esm@1.0.0':
     dependencies:

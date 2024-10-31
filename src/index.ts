@@ -6,7 +6,7 @@
 import path from 'node:path';
 
 // External modules
-import type { UserConfig, EleventyData } from '#localtypes/eleventy.js';
+import type { PageData, UserConfig } from '@11ty/eleventy';
 import type { Options } from 'ventojs';
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
 import type { Plugin } from 'ventojs/src/environment.js';
@@ -49,14 +49,6 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<Ven
 
 	DEBUG.setup('Merged default and user config: %O', options);
 
-	if (options.ignoreTag) {
-		console.error(
-			'[eleventy-plugin-vento] DEPRECATION NOTICE:',
-			'Plugin was called with `ignoreTag` option, which has been deprecated.',
-			'For more information, see: https://github.com/noelforte/eleventy-plugin-vento/blob/main/readme.md#ignoring-tags'
-		);
-	}
-
 	// Get list of filters, shortcodes and paired shortcodes
 	const filters = eleventyConfig.getFilters();
 	DEBUG.setup('Reading filters from Eleventy: %o', filters);
@@ -94,6 +86,11 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<Ven
 
 	// Add ignore tag plugin if enabled
 	if (options.ignoreTag) {
+		console.error(
+			'[eleventy-plugin-vento] DEPRECATION NOTICE:',
+			'Plugin was called with `ignoreTag` option, which has been deprecated.',
+			'For more information, see: https://github.com/noelforte/eleventy-plugin-vento/blob/main/readme.md#ignoring-tags'
+		);
 		DEBUG.setup('Enabling `{{! ... }}` tag syntax');
 		options.plugins.push(ignoreTagPlugin);
 	}
@@ -148,7 +145,7 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<Ven
 			const template = engine.getTemplateFunction(inputContent, inputPath, false);
 
 			// Return a render function
-			return async (data: EleventyData) => await engine.render(template, data, inputPath);
+			return async (data: PageData) => await engine.render(template, data, inputPath);
 		},
 
 		compileOptions: {
@@ -163,7 +160,7 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<Ven
 					const template = engine.getTemplateFunction(permalinkContent, inputPath);
 
 					// Return a render function
-					return async (data: EleventyData) => await engine.render(template, data, inputPath);
+					return async (data: PageData) => await engine.render(template, data, inputPath);
 				}
 
 				return permalinkContent;

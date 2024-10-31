@@ -6,14 +6,17 @@
 // External library
 import { default as ventojs, type Options } from 'ventojs';
 import type { Plugin, Environment, Template } from 'ventojs/src/environment.js';
-import type { EleventyContext, EleventyFunctionSet, EleventyData } from '#localtypes/eleventy.js';
+import type { EleventyContext, EleventyFunctionMap } from '@11ty/eleventy';
 
 // Internal modules
 import { createVentoTag } from './modules/create-vento-tag.js';
 import { CONTEXT_DATA_KEYS, DEBUG } from './modules/utils.js';
 
 interface EleventyUtils {
-	_11tyFns: { shortcodes: EleventyFunctionSet; pairedShortcodes: EleventyFunctionSet };
+	_11tyFns: {
+		shortcodes: EleventyFunctionMap;
+		pairedShortcodes: EleventyFunctionMap;
+	};
 	_11tyCtx: EleventyContext;
 }
 
@@ -22,7 +25,7 @@ export function createVentoEngine(options: Options) {
 	env.utils._11tyFns = { shortcodes: {}, pairedShortcodes: {} };
 	env.utils._11tyCtx = {};
 
-	function setContext(newContext: EleventyData) {
+	function setContext(newContext: EleventyContext) {
 		if (env.utils._11tyCtx?.page?.inputPath === newContext?.page?.inputPath) {
 			return;
 		}
@@ -40,20 +43,20 @@ export function createVentoEngine(options: Options) {
 		}
 	}
 
-	function loadFilters(filters: EleventyFunctionSet) {
+	function loadFilters(filters: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(filters)) {
 			env.filters[name] = fn.bind(env.utils._11tyCtx);
 		}
 	}
 
-	function loadShortcodes(shortcodes: EleventyFunctionSet) {
+	function loadShortcodes(shortcodes: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(shortcodes)) {
 			env.utils._11tyFns.shortcodes[name] = fn;
 			env.tags.push(createVentoTag({ name, group: 'shortcodes' }));
 		}
 	}
 
-	function loadPairedShortcodes(pairedShortcodes: EleventyFunctionSet) {
+	function loadPairedShortcodes(pairedShortcodes: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(pairedShortcodes)) {
 			env.utils._11tyFns.pairedShortcodes[name] = fn;
 			env.tags.push(createVentoTag({ name, group: 'pairedShortcodes' }));
@@ -82,7 +85,7 @@ export function createVentoEngine(options: Options) {
 		return template;
 	}
 
-	async function render(template: Template, data: EleventyData, from: string) {
+	async function render(template: Template, data: EleventyContext, from: string) {
 		// Load new context
 		setContext(data);
 
