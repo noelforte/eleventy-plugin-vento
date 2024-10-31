@@ -30,10 +30,7 @@ jobs:
       - name: Test
         run: pnpm test
 
-      - name: Type checks
-        run: pnpm tsc
-
-      - name: Test build
+      - name: Test Build
         run: pnpm tsup
 
   lint:
@@ -44,5 +41,5 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Lint
-        run: pnpm lint && pnpm type-check
+      - name: Lint and Type Check
+        run: pnpm check

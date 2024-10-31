@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    branches: [main, next, alpha, beta]
+    branches: [main, beta]
 
 permissions:
   contents: write # to be able to publish a GitHub release
@@ -28,13 +28,13 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Verify integrity of dependencies
+      - name: Verify Integrity of Dependencies
         run: npm audit signatures
 
       - name: Build Package
         run: pnpm tsup
 
-      - name: Create pull request or publish packages
+      - name: Create Pull Request or Publish Packages
         uses: changesets/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
