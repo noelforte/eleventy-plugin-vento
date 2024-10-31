@@ -7,10 +7,10 @@
 		"node": ">=18"
 	},
 	"scripts": {
-		"test": "vitest",
+		"test": "vitest --run",
+		"check": "pnpm --color run '/type-check|lint/'",
 		"lint": "eslint '.'",
 		"type-check": "tsc",
-		"build": "tsup",
 		"ci:version": "changeset version && pnpm install --no-frozen-lockfile",
 		"ci:publish": "changeset publish",
 		"ci:generate-changesets": "node ./scripts/generate-changesets.js",
@@ -26,8 +26,10 @@
 		}
 	},
 	"files": [
-		"src/*",
-		"CHANGELOG.md"
+		"dist/*",
+		"LICENSE",
+		"CHANGELOG.md",
+		"readme.md"
 	],
 	"repository": "git@github.com:noelforte/eleventy-plugin-vento.git",
 	"bugs": {

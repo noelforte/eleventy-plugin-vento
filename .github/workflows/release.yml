@@ -28,8 +28,11 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: 'Verify Integrity of Dependencies'
+      - name: Verify integrity of dependencies
         run: npm audit signatures
+
+      - name: Build Package
+        run: pnpm tsup
 
       - name: Create pull request or publish packages
         uses: changesets/action@v1
