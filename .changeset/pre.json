@@ -4,5 +4,8 @@
   "initialVersions": {
     "eleventy-plugin-vento": "3.3.0"
   },
-  "changesets": []
+  "changesets": [
+    "red-stingrays-cross",
+    "stupid-bats-occur"
+  ]
 }
