@@ -8,16 +8,14 @@
 	},
 	"scripts": {
 		"test": "vitest --run",
-		"check": "pnpm --color run '/type-check|lint/'",
+		"check": "pnpm --color run '/ts-check|lint/'",
 		"lint": "eslint '.'",
-		"type-check": "tsc",
+		"ts-check": "tsc --noEmit",
+		"build": "tsup",
 		"ci:version": "changeset version && pnpm install --no-frozen-lockfile",
 		"ci:publish": "changeset publish",
 		"ci:generate-changesets": "node ./scripts/generate-changesets.js",
 		"format": "pnpm dlx prettier --config ./package.json --write ."
-	},
-	"imports": {
-		"#localtypes/*": "./types/*"
 	},
 	"exports": {
 		".": {
