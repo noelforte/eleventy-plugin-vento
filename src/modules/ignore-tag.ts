@@ -2,7 +2,7 @@
  * @file Definition for tag that preserves vento syntax in output
  */
 
-import type { Environment, Tag } from 'ventojs/src/environment.js';
+import type { Environment, Tag } from '../types.js';
 
 const tag: Tag = (_env, code, output, _tokens) => {
 	if (!code.startsWith('!')) return;

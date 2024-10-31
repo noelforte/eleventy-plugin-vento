@@ -6,26 +6,15 @@
 import path from 'node:path';
 
 // External modules
-import type { PageData, UserConfig } from '@11ty/eleventy';
-import type { Options } from 'ventojs';
+import type { UserConfig } from '@11ty/eleventy';
+import type { PageData } from './types.js';
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
-import type { Plugin } from 'ventojs/src/environment.js';
 
 // Local modules
 import { createVentoEngine } from './engine.js';
 import { ignoreTagPlugin } from './modules/ignore-tag.js';
 import { DEBUG, runCompatibilityCheck } from './modules/utils.js';
-
-export interface VentoPluginOptions {
-	plugins: Plugin[];
-	autotrim: boolean | string[];
-	filters: boolean;
-	shortcodes: boolean;
-	pairedShortcodes: boolean;
-	/** @deprecated */
-	ignoreTag: boolean;
-	ventoOptions: Options;
-}
+import type { VentoPluginOptions } from './types.js';
 
 export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<VentoPluginOptions>) {
 	DEBUG.setup('Initializing eleventy-plugin-vento');
@@ -40,7 +29,7 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<Ven
 		pairedShortcodes: true,
 		ignoreTag: false,
 		ventoOptions: {
-			includes: eleventyConfig.directories.includes,
+			includes: (eleventyConfig.directories as Record<string, string>).includes,
 		},
 
 		// Merge in user-provided options

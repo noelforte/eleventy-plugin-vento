@@ -6,19 +6,12 @@
 // External library
 import { default as ventojs, type Options } from 'ventojs';
 import type { Plugin, Environment, Template } from 'ventojs/src/environment.js';
-import type { EleventyContext, EleventyFunctionMap } from '@11ty/eleventy';
+import type { EleventyContext, EleventyFunctionMap } from './types.js';
 
 // Internal modules
 import { createVentoTag } from './modules/create-vento-tag.js';
 import { CONTEXT_DATA_KEYS, DEBUG } from './modules/utils.js';
-
-interface EleventyUtils {
-	_11tyFns: {
-		shortcodes: EleventyFunctionMap;
-		pairedShortcodes: EleventyFunctionMap;
-	};
-	_11tyCtx: EleventyContext;
-}
+import type { EleventyUtils } from './types.js';
 
 export function createVentoEngine(options: Options) {
 	const env = ventojs(options) as Environment & { utils: EleventyUtils };

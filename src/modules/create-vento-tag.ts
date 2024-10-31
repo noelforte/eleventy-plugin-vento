@@ -2,12 +2,7 @@
  * @file Helper function that creates vento tags from eleventy functions
  */
 
-import type { Tag } from 'ventojs/src/environment.js';
-
-interface TagSpec {
-	name: string;
-	group: 'shortcodes' | 'pairedShortcodes';
-}
+import type { Tag, TagSpec } from '../types.js';
 
 export function createVentoTag(spec: TagSpec) {
 	const IS_PAIRED = spec.group === 'pairedShortcodes';

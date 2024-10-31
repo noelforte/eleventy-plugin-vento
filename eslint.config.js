@@ -1,3 +1,5 @@
+// @ts-check
+
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 
@@ -14,13 +16,14 @@ export default tseslint.config(
 	eslintPluginUnicorn.configs['flat/recommended'],
 	eslintConfigPrettier,
 
-	// Configure ignores
+	// Configure files
 	{
-		ignores: ['**/node_modules/**', 'dist'],
+		ignores: ['**/node_modules/**', '**/dist/**'],
 	},
 
 	// Configure defaults
 	{
+		files: ['**/*.{js,ts}'],
 		languageOptions: {
 			ecmaVersion: 'latest',
 		},
