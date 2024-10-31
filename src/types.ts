@@ -51,11 +51,6 @@ export interface VentoPluginOptions {
 	/** Enable use of Eleventy paired shortcodes */
 	pairedShortcodes: boolean;
 	/**
-	 * Enable tag-ignore `{{! ... }}` syntax.
-	 * @deprecated See https://github.com/noelforte/eleventy-plugin-vento/releases/tag/v3.3.0
-	 */
-	ignoreTag: boolean;
-	/**
 	 * A Vento configuration object.
 	 *
 	 * **Note that `ventoOptions.includes` defaults to

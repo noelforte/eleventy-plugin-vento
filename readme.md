@@ -16,7 +16,6 @@ An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://ve
 [Shortcodes (Single & Paired)](#shortcodes-single--paired)<br>
 [Vento Plugins](#vento-plugins)<br>
 [Auto-Trimming Tags](#auto-trimming-tags)<br>
-[Ignoring Tags](#ignoring-tags)<br>
 [Debugging](#debugging)<br>
 
 ## Installing
@@ -198,77 +197,6 @@ eleventyConfig.addPlugin(VentoPlugin, {
 ### Relevant documentation
 
 Vento: See [Auto Trim Plugin](https://vento.js.org/plugins/auto-trim/).
-
-## Ignoring Tags
-
-> [!WARNING]
-> This feature is now deprecated as of version 3.3.0. I added it primarily for my own use case, however it can cause more issues than it solves (conflict with `!` negation syntax in JS, ambiguity between ignoring a tag and negating an expression in a template). See the 3.3.0 release notes for more information.
-
-Exclusive to this plugin is the ability to skip processing a vento tag entirely and instead preserve the tag in the markup. This could be useful if you're doing some hybrid rendering and would like to defer certain tags from being processed until load time, so they can be rendered on the server.
-
-This feature is enabled through use of the `enableIgnoreTag` plugin option.
-
-```js
-eleventyConfig.addPlugin(VentoPlugin, {
-  enableIgnoreTag: true,
-});
-```
-
-To skip over a tag, add a `!` directly after the opening tag.
-
-```nunjucks
-<!-- This: -->
-{{! doSomeServerSideStuff() }}
-
-<!-- Renders as: -->
-{{ doSomeServerSideStuff() }}
-```
-
-Works with JS expressions too:
-
-```nunjucks
-{{!> 2 + 2 }}
-
-<!-- Renders as: -->
-{{> 2 + 2 }}
-```
-
-The Vento language offers similar functionality via the [`echo` tag](https://vento.js.org/syntax/print/#echo) which works great for blocks, but can be verbose for 1-off tags.
-
-Consider the following:
-
-```nunjucks
-{{ echo }}
-  <!-- Will be preserved in output -->
-  {{ if someCondition }}
-    <p>{{ getServerData }}</p>
-{{ /echo }}
-
-    <!-- Can't render this without exiting and re-entering echo -->
-    <p>Page built on: {{ localBuildTime }}</p>
-
-{{ echo }}
-  {{ /if }}
-{{ /echo }}
-```
-
-Rather than having to do multiple `{{ /echo }} ... {{ echo }}` statements, the previous can be rewritten as such:
-
-```nunjucks
-<!-- This: -->
-{{! if someCondition }}
-  <p>{{! getServerData }}</p>
-
-  <p>Page built on: {{ localBuildTime }}</p>
-{{! /if }}
-
-<!-- Renders as: -->
-{{ if someCondition }}
-  <p>{{ getServerData }}</p>
-
-  <p>Page built on: 09-19-2024</p>
-{{ /if }}
-```
 
 ## Debugging
 

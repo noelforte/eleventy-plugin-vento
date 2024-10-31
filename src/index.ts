@@ -12,7 +12,6 @@ import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plug
 
 // Local modules
 import { createVentoEngine } from './engine.js';
-import { ignoreTagPlugin } from './modules/ignore-tag.js';
 import { DEBUG, runCompatibilityCheck } from './modules/utils.js';
 import type { VentoPluginOptions } from './types.js';
 
@@ -27,7 +26,6 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<Ven
 		filters: true,
 		shortcodes: true,
 		pairedShortcodes: true,
-		ignoreTag: false,
 		ventoOptions: {
 			includes: (eleventyConfig.directories as Record<string, string>).includes,
 		},
@@ -71,17 +69,6 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<Ven
 		DEBUG.setup('Enabled autotrim for tags: %o', tagSet);
 
 		options.plugins.push(autotrimPlugin({ tags: [...tagSet] }));
-	}
-
-	// Add ignore tag plugin if enabled
-	if (options.ignoreTag) {
-		console.error(
-			'[eleventy-plugin-vento] DEPRECATION NOTICE:',
-			'Plugin was called with `ignoreTag` option, which has been deprecated.',
-			'For more information, see: https://github.com/noelforte/eleventy-plugin-vento/blob/main/readme.md#ignoring-tags'
-		);
-		DEBUG.setup('Enabling `{{! ... }}` tag syntax');
-		options.plugins.push(ignoreTagPlugin);
 	}
 
 	// Create the vento engine instance
