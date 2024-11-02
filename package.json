@@ -46,8 +46,8 @@
 	"devDependencies": {
 		"@11ty/eleventy": "3.0.0",
 		"@changesets/cli": "2.27.9",
-		"@eslint/js": "9.13.0",
-		"eslint": "9.13.0",
+		"@eslint/js": "9.14.0",
+		"eslint": "9.14.0",
 		"eslint-config-flat-gitignore": "0.3.0",
 		"eslint-config-prettier": "9.1.0",
 		"eslint-plugin-unicorn": "56.0.0",
