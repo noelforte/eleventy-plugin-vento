@@ -9,11 +9,11 @@ import type { Plugin, Environment, Template } from 'ventojs/src/environment.js';
 import type { EleventyContext, EleventyFunctionMap } from './types.js';
 
 // Internal modules
-import { createVentoTag } from './modules/create-vento-tag.js';
-import { CONTEXT_DATA_KEYS, DEBUG } from './modules/utils.js';
+import { createVentoTag } from './create-vento-tag.js';
+import { CONTEXT_DATA_KEYS, DEBUG } from './utils.js';
 import type { EleventyUtils } from './types.js';
 
-export function createVentoEngine(options: Options) {
+export function createVentoInterface(options: Options) {
 	const env = ventojs(options) as Environment & { utils: EleventyUtils };
 	env.utils._11tyFns = { shortcodes: {}, pairedShortcodes: {} };
 	env.utils._11tyCtx = {};

@@ -11,8 +11,8 @@ import type { PageData } from './types.js';
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
 
 // Local modules
-import { createVentoEngine } from './engine.js';
-import { DEBUG, runCompatibilityCheck } from './modules/utils.js';
+import { createVentoInterface } from './create-vento-interface.js';
+import { DEBUG, runCompatibilityCheck } from './utils.js';
 import type { VentoPluginOptions } from './types.js';
 
 export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<VentoPluginOptions>) {
@@ -73,7 +73,7 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<Ven
 
 	// Create the vento engine instance
 	DEBUG.setup('Initializing Vento environment');
-	const engine = createVentoEngine(options.ventoOptions);
+	const engine = createVentoInterface(options.ventoOptions);
 
 	// Load plugins
 	DEBUG.setup('Loading plugins: %o', options.plugins);
