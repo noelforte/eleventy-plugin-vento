@@ -13,7 +13,7 @@
   + {{ '{{ if condition }}' }}
       do something
   - {{! /if }}
-  - {{ '{{ /if }}' }}
+  + {{ '{{ /if }}' }}
   ```
 
   While more verbose, this change ensures that there isn't any ambiguity between a tag that needs ignoring and JS negation expressions.
