@@ -12,8 +12,8 @@ importers:
         specifier: 4.3.7
         version: 4.3.7
       ventojs:
-        specifier: 1.12.10
-        version: 1.12.10
+        specifier: 1.12.11
+        version: 1.12.11
     devDependencies:
       '@11ty/eleventy':
         specifier: 3.0.0
@@ -1317,9 +1317,9 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
 
-  meriyah@4.5.0:
-    resolution: {integrity: sha512-Rbiu0QPIxTXgOXwiIpRVJfZRQ2FWyfzYrOGBs9SN5RbaXg1CN5ELn/plodwWwluX93yzc4qO/bNIen1ThGFCxw==}
-    engines: {node: '>=10.4.0'}
+  meriyah@6.0.3:
+    resolution: {integrity: sha512-NqUbuQIjIH8dxUBPTMHS1kwIHd6n6nF3F7oeLXGWqBkpVP2lZxVHdab5JxbFBisIB4axZ9b/lT4HLJfZxmFK7Q==}
+    engines: {node: '>=18.0.0'}
 
   micromatch@4.0.8:
     resolution: {integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==}
@@ -1854,8 +1854,8 @@ packages:
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
 
-  ventojs@1.12.10:
-    resolution: {integrity: sha512-qGhlQM6tP6s4R3Jzqtsa5+SxXwe07X4FHNTm9/cySddvH7LW4/A7biDyULBgxEbcIg9kmhnRoRbvccUx5xqHFA==}
+  ventojs@1.12.11:
+    resolution: {integrity: sha512-76lCfS0/7dFV40fCTz5tTcruCoSCl+preV2upitB2pvh6ntGS5VikCQ4YPgqR+/BfVDxZRF4IQGJ2hmDWF6KhA==}
 
   vite-node@2.1.4:
     resolution: {integrity: sha512-kqa9v+oi4HwkG6g8ufRnb5AeplcRw8jUF6/7/Qz1qRQOXHImG8YnLbB+LLszENwFnoBl9xIf9nVdCFzNd7GQEg==}
@@ -3305,7 +3305,7 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  meriyah@4.5.0: {}
+  meriyah@6.0.3: {}
 
   micromatch@4.0.8:
     dependencies:
@@ -3779,11 +3779,11 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  ventojs@1.12.10:
+  ventojs@1.12.11:
     dependencies:
       '@deno/shim-deno': 0.18.2
       estree-walker: 3.0.3
-      meriyah: 4.5.0
+      meriyah: 6.0.3
 
   vite-node@2.1.4:
     dependencies:
