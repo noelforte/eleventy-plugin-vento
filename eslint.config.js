@@ -1,34 +1,34 @@
-import js from '@eslint/js';
+// @ts-check
+
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
 
 // Configs
-import gitignore from 'eslint-config-flat-gitignore';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
 // Plugins
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
-import globals from 'globals';
 
-export default [
-	// Set ignores from gitignore
-	gitignore(),
-
+export default tseslint.config(
 	// Import configuration presets
-	js.configs.recommended,
+	eslint.configs.recommended,
+	...tseslint.configs.recommended,
 	eslintPluginUnicorn.configs['flat/recommended'],
 	eslintConfigPrettier,
 
-	// Configure ignores
+	// Configure files
 	{
-		ignores: ['**/node_modules/**'],
+		ignores: ['**/node_modules/**', '**/dist/**'],
 	},
 
 	// Configure defaults
 	{
+		files: ['**/*.{js,ts}'],
 		languageOptions: {
 			ecmaVersion: 'latest',
 		},
 		rules: {
-			'no-unused-vars': [
+			'@typescript-eslint/no-unused-vars': [
 				'error',
 				{
 					argsIgnorePattern: '^_',
@@ -56,15 +56,5 @@ export default [
 			eqeqeq: ['error', 'smart'],
 			'unicorn/prevent-abbreviations': 'off',
 		},
-	},
-
-	// Match all node-files
-	{
-		files: ['**/*.js'],
-		languageOptions: {
-			globals: {
-				...globals.node,
-			},
-		},
-	},
-];
+	}
+);

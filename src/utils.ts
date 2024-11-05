@@ -1,6 +1,9 @@
 // Set up debugger global
+import type { UserConfig } from '@11ty/eleventy';
 import createDebugger from 'debug';
+
 const debugBaseNamespace = 'Eleventy:Vento';
+
 export const DEBUG = {
 	setup: createDebugger(`${debugBaseNamespace}:Setup`),
 	cache: createDebugger(`${debugBaseNamespace}:Cache`),
@@ -18,10 +21,10 @@ export const REQUIRED_API_METHODS = [
 export const CONTEXT_DATA_KEYS = ['page', 'eleventy'];
 
 // Helper functions
-export function runCompatibilityCheck(config) {
+export function runCompatibilityCheck(config: UserConfig): void {
 	DEBUG.setup('Run compatibility check');
 	for (const [method, version] of REQUIRED_API_METHODS) {
-		if (!config?.[method]) {
+		if (!(method in config)) {
 			console.error(
 				'[eleventy-plugin-vento] Plugin compatibility error:',
 				`\`${method}\``,

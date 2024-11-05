@@ -1,0 +1,11 @@
+{
+  "mode": "exit",
+  "tag": "beta",
+  "initialVersions": {
+    "eleventy-plugin-vento": "3.3.0"
+  },
+  "changesets": [
+    "red-stingrays-cross",
+    "stupid-bats-occur"
+  ]
+}

@@ -30,6 +30,9 @@ jobs:
       - name: Test
         run: pnpm test
 
+      - name: Test Build
+        run: pnpm tsup
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -38,5 +41,5 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Lint
-        run: pnpm lint
+      - name: Lint and Type Check
+        run: pnpm check

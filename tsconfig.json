@@ -1,0 +1,17 @@
+{
+	"include": ["src/**/*", "tests/**/*.ts"],
+	"exclude": ["**/node_modules/**", "dist"],
+	"compilerOptions": {
+		"rootDir": ".",
+		"strict": true,
+		"allowJs": true,
+		"maxNodeModuleJsDepth": 2,
+		"target": "ES2021",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"esModuleInterop": true,
+		"skipDefaultLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true
+	}
+}

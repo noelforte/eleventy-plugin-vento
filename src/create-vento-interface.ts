@@ -1,36 +1,24 @@
 /**
  * @file Function that handles creating the Vento environment. Exposes
  * a simple API for Eleventy to interface with.
- *
- * @typedef {{eleventy?: Record<string, unknown>, page?: Record<string, unknown>}} EleventyContext
- * @typedef {EleventyContext & Record<string, unknown>} EleventyData
- * @typedef {(...args: unknown[]) => unknown} EleventyFunction
- * @typedef {Record<string, EleventyFunction>} EleventyFunctionSet
- * @typedef {import('ventojs/src/environment.js').Environment} VentoEnvironment
- * @typedef {VentoEnvironment & {
- *  utils: {
- * 	_11tyFns: { shortcodes: EleventyFunctionSet, pairedShortcodes: EleventyFunctionSet }
- * 	_11tyCtx: EleventyContext
- * }
- * }} EleventyVentoEnvironment
  */
 
 // External library
-import ventojs from 'ventojs';
+import { default as ventojs, type Options } from 'ventojs';
+import type { Plugin, Environment, Template } from 'ventojs/src/environment.js';
+import type { EleventyContext, EleventyFunctionMap } from './types.js';
 
 // Internal modules
-import { createVentoTag } from './modules/create-vento-tag.js';
-import { CONTEXT_DATA_KEYS, DEBUG } from './modules/utils.js';
+import { createVentoTag } from './create-vento-tag.js';
+import { CONTEXT_DATA_KEYS, DEBUG } from './utils.js';
+import type { EleventyUtils } from './types.js';
 
-/** @param {import('ventojs').Options} options */
-export function createVentoEngine(options) {
-	/** @type {EleventyVentoEnvironment} */
-	const env = ventojs(options);
+export function createVentoInterface(options: Options) {
+	const env = ventojs(options) as Environment & { utils: EleventyUtils };
 	env.utils._11tyFns = { shortcodes: {}, pairedShortcodes: {} };
 	env.utils._11tyCtx = {};
 
-	/** @param {EleventyData} newContext */
-	function setContext(newContext) {
+	function setContext(newContext: EleventyContext) {
 		if (env.utils._11tyCtx?.page?.inputPath === newContext?.page?.inputPath) {
 			return;
 		}
@@ -42,42 +30,33 @@ export function createVentoEngine(options) {
 		DEBUG.setup('Reload context, new context is: %o', env.utils._11tyCtx);
 	}
 
-	/** @param {import('ventojs/src/environment.js').Plugin[]} plugins */
-	function loadPlugins(plugins) {
+	function loadPlugins(plugins: Plugin[]) {
 		for (const plugin of plugins) {
 			env.use(plugin);
 		}
 	}
 
-	/** @param {Record<string, EleventyFunction>} filters */
-	function loadFilters(filters) {
+	function loadFilters(filters: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(filters)) {
 			env.filters[name] = fn.bind(env.utils._11tyCtx);
 		}
 	}
 
-	/** @param {Record<string, EleventyFunction>} shortcodes */
-	function loadShortcodes(shortcodes) {
+	function loadShortcodes(shortcodes: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(shortcodes)) {
 			env.utils._11tyFns.shortcodes[name] = fn;
 			env.tags.push(createVentoTag({ name, group: 'shortcodes' }));
 		}
 	}
 
-	/** @param {Record<string, EleventyFunction>} pairedShortcodes */
-	function loadPairedShortcodes(pairedShortcodes) {
+	function loadPairedShortcodes(pairedShortcodes: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(pairedShortcodes)) {
 			env.utils._11tyFns.pairedShortcodes[name] = fn;
 			env.tags.push(createVentoTag({ name, group: 'pairedShortcodes' }));
 		}
 	}
 
-	/**
-	 * @param {string} source
-	 * @param {string} file
-	 * @param {boolean} [useVentoCache=true]
-	 */
-	function getTemplateFunction(source, file, useVentoCache = true) {
+	function getTemplateFunction(source: string, file: string, useVentoCache: boolean = true) {
 		// Attempt to retrieve template function from cache
 		let template = env.cache.get(file);
 
@@ -99,12 +78,7 @@ export function createVentoEngine(options) {
 		return template;
 	}
 
-	/**
-	 * @param {import('ventojs/src/environment.js').Template} template
-	 * @param {EleventyData} data
-	 * @param {string} from
-	 */
-	async function render(template, data, from) {
+	async function render(template: Template, data: EleventyContext, from: string) {
 		// Load new context
 		setContext(data);
 

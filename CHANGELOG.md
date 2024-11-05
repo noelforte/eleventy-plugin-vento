@@ -1,5 +1,29 @@
 # eleventy-plugin-vento
 
+## 4.0.0-beta.0
+
+### Major Changes
+
+- fc80b5f: Removed ignore tag `{{! ... }}` syntax. As mentioned in the 3.3.0 release notes, the now preferred way to "pass through" tags is with string literals.
+
+  You should update code with `{{! ... }}` to be `{{ '{{ }}' }}` like so:
+
+  ```diff
+  - {{! if condition }}
+  + {{ '{{ if condition }}' }}
+      do something
+  - {{! /if }}
+  + {{ '{{ /if }}' }}
+  ```
+
+  While more verbose, this change ensures that there isn't any ambiguity between a tag that needs ignoring and JS negation expressions.
+
+### Minor Changes
+
+- 2b5f337: Rewrite project in Typescript and add a build/packaging step for releases and testing.
+
+  These changes also include `.d.ts` generation as part of the build step. If you're using `11ty.ts`'s `defineConfig` function, it will pick the types from this plugin up automatically. (resolves #22)
+
 ## 3.4.0
 
 ### Minor Changes
