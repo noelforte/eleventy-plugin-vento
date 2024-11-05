@@ -41,7 +41,7 @@
 	],
 	"dependencies": {
 		"debug": "4.3.7",
-		"ventojs": "1.12.10"
+		"ventojs": "1.12.11"
 	},
 	"devDependencies": {
 		"@11ty/eleventy": "3.0.0",
