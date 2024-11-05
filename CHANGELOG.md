@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 3.4.0
+
+### Minor Changes
+
+- 8c6b8a2: Update `ventojs` to v1.12.11
+
 ## 3.3.0
 
 ### Minor Changes
