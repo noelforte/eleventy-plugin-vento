@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 4.0.1
+
+### Patch Changes
+
+- - hotfix - include `types` field in package.json to declare bundled types
+
 ## 4.0.0
 
 ### Major Changes
