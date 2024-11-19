@@ -13,7 +13,7 @@ import { createVentoTag } from './create-vento-tag.js';
 import { CONTEXT_DATA_KEYS, DEBUG } from './utils.js';
 import type { EleventyUtils } from './types.js';
 
-export function createVentoInterface(options: Options) {
+export function createVentoEngine(options: Options) {
 	const env = ventojs(options) as Environment & { utils: EleventyUtils };
 	env.utils._11tyFns = { shortcodes: {}, pairedShortcodes: {} };
 	env.utils._11tyCtx = {};
@@ -27,7 +27,7 @@ export function createVentoInterface(options: Options) {
 			env.utils._11tyCtx[K] = newContext[K];
 		}
 
-		DEBUG.setup('Reload context, new context is: %o', env.utils._11tyCtx);
+		DEBUG.main('Reload context, new context is: %o', env.utils._11tyCtx);
 	}
 
 	function loadPlugins(plugins: Plugin[]) {
