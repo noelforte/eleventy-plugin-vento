@@ -12,6 +12,7 @@
 		"lint": "eslint '.'",
 		"ts-check": "tsc --noEmit",
 		"build": "tsup",
+		"dev": "tsup --watch",
 		"ci:version": "changeset version && pnpm install --no-frozen-lockfile",
 		"ci:publish": "changeset publish",
 		"ci:generate-changesets": "node ./scripts/generate-changesets.js",
