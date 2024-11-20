@@ -8,5 +8,12 @@
 			"automerge": false,
 			"assignees": ["noelforte"]
 		}
-	]
+	],
+	"vulnerabilityAlerts": {
+		"labels": ["security"],
+		"automerge": true,
+		"assignees": ["noelforte"],
+		"vulnerabilityFixStrategy": "highest"
+	},
+	"osvVulnerabilityAlerts": true
 }
