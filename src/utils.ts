@@ -5,7 +5,7 @@ import createDebugger from 'debug';
 const debugBaseNamespace = 'Eleventy:Vento';
 
 export const DEBUG = {
-	setup: createDebugger(`${debugBaseNamespace}:Setup`),
+	main: createDebugger(debugBaseNamespace),
 	cache: createDebugger(`${debugBaseNamespace}:Cache`),
 	render: createDebugger(`${debugBaseNamespace}:Render`),
 };
@@ -22,7 +22,7 @@ export const CONTEXT_DATA_KEYS = ['page', 'eleventy'];
 
 // Helper functions
 export function runCompatibilityCheck(config: UserConfig): void {
-	DEBUG.setup('Run compatibility check');
+	DEBUG.main('Run compatibility check');
 	for (const [method, version] of REQUIRED_API_METHODS) {
 		if (!(method in config)) {
 			console.error(
