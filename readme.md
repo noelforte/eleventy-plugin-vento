@@ -90,7 +90,9 @@ Filters that are added via Eleventy's `.addFilter()` or `.addAsyncFilter()` meth
 
 If you'd prefer to set filters yourself (via a plugin or other method) or prevent Eleventy from loading filters into Vento, set `filters: false` in the plugin options.
 
-(_Upcoming in 4.1.0_) This plugin merges the keys normally expected from `this` with the `FilterThis` object Vento provides to filters. The final bound `this` object for filters is as follows:
+### Filters and `this` (_Upcoming in 4.1.0_)
+
+This plugin merges the keys normally expected from `this` with the `FilterThis` object Vento provides to filters. The final bound `this` object for filters is as follows:
 
 ```ts
 {
@@ -102,6 +104,15 @@ If you'd prefer to set filters yourself (via a plugin or other method) or preven
 ```
 
 This feature enables re-use of the Vento environment this plugin provides, within Eleventy filters. As an example use case, you could create a filter that compiles dynamic data and cache it with Vento's own cache:
+
+```js
+eleventyConfig.addFilter('vento', function (content) {
+  const res = this.env.runString(content, this.data);
+  return res.content;
+});
+```
+
+Because re-compilation introduces some overhead, you may want to cache your template strings compiled via a filter. With access to `this.env` you can use Vento's own cache:
 
 ```js
 import 'hash' from 'node:crypto'; // since Node v20.12.0
@@ -159,6 +170,8 @@ For paired shortcodes, the syntax is the same, just add a closing tag. Paired sh
 ```
 
 If you'd prefer to set shortcodes yourself (via a plugin or other method) or prevent Eleventy from loading shortcodes into Vento, set `shortcodes: false` and/or `pairedShortcodes: false` in the plugin options.
+
+As with filters, `env`, `data`, `page` and `eleventy` are bound to `this` in all shortcode functions when executed by Vento. See the section on [Filters and `this`](#filters-and-this-upcoming-in-410) for more information.
 
 > [!IMPORTANT]
 > While it's straightforward to load filters via a Vento plugin that appends filters to the filters object as `env.filters.[filter_name]()`, creating custom tags in Vento is more involved. It's highly advised to keep these two options enabled unless you know what you're doing.
