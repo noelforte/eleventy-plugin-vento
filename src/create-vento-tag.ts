@@ -10,9 +10,17 @@ export function createVentoTag(spec: TagSpec) {
 	const tag: Tag = (env, code, output, tokens) => {
 		if (!code.startsWith(spec.name)) return;
 
+		// Grab data variable name
+		const { dataVarname } = env.options;
+
+		// Construct an object for `this`
+		const thisArg = `{
+			page: ${dataVarname}.page,
+			eleventy: ${dataVarname}.eleventy
+		}`;
+
 		// Declare helper variables for repeated strings in template
 		const fn = `__env.utils._11tyFns.${spec.group}.${spec.name}`;
-		const ctx = '__env.utils._11tyCtx';
 		const args = [code.replace(spec.name, '').trim()];
 
 		const varname = output.startsWith('__shortcode_content')
@@ -35,7 +43,7 @@ export function createVentoTag(spec: TagSpec) {
 			tokens.shift();
 		}
 
-		args.unshift(ctx);
+		args.unshift(thisArg);
 
 		compiled.push(
 			'{',
