@@ -39,7 +39,8 @@ export function createVentoEngine(options: Options) {
 	function loadFilters(filters: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(filters)) {
 			env.filters[name] = async function (...args) {
-				return await fn.apply({ ...this, ...env.utils._11tyCtx }, args);
+				Object.assign(this, { page: this.data.page, eleventy: this.data.eleventy });
+				return await fn.apply(this, args);
 			};
 		}
 	}
