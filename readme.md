@@ -171,8 +171,6 @@ For paired shortcodes, the syntax is the same, just add a closing tag. Paired sh
 
 If you'd prefer to set shortcodes yourself (via a plugin or other method) or prevent Eleventy from loading shortcodes into Vento, set `shortcodes: false` and/or `pairedShortcodes: false` in the plugin options.
 
-As with filters, `env`, `data`, `page` and `eleventy` are bound to `this` in all shortcode functions when executed by Vento. See the section on [Filters and `this`](#filters-and-this-upcoming-in-410) for more information.
-
 > [!IMPORTANT]
 > While it's straightforward to load filters via a Vento plugin that appends filters to the filters object as `env.filters.[filter_name]()`, creating custom tags in Vento is more involved. It's highly advised to keep these two options enabled unless you know what you're doing.
 
