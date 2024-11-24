@@ -11,7 +11,7 @@ import type { PageData } from './types.js';
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
 
 // Local modules
-import { createVentoEngine, renderTemplate } from './create-vento-engine.js';
+import { createVentoEngine, renderTemplate } from './engine.js';
 import { DEBUG, runCompatibilityCheck } from './utils.js';
 import type { VentoPluginOptions } from './types.js';
 
