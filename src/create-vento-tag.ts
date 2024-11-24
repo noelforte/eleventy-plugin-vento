@@ -20,7 +20,7 @@ export function createVentoTag(spec: TagSpec) {
 		}`;
 
 		// Declare helper variables for repeated strings in template
-		const fn = `__env.utils._11tyFns.${spec.group}.${spec.name}`;
+		const fn = `__env.utils.eleventyFunctions.${spec.group}.${spec.name}`;
 		const args = [code.replace(spec.name, '').trim()];
 
 		const varname = output.startsWith('__shortcode_content')

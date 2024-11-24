@@ -19,11 +19,10 @@ export interface TagSpec {
 }
 
 export interface EleventyUtils {
-	_11tyFns: {
+	eleventyFunctions: {
 		shortcodes: EleventyFunctionMap;
 		pairedShortcodes: EleventyFunctionMap;
 	};
-	_11tyCtx: EleventyContext;
 }
 
 export interface VentoPluginOptions {

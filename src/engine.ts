@@ -15,7 +15,7 @@ import type { EleventyUtils } from './types.js';
 
 export function createVentoEngine(options: Options) {
 	const env = ventojs(options) as Environment & { utils: EleventyUtils };
-	env.utils._11tyFns = { shortcodes: {}, pairedShortcodes: {} };
+	env.utils.eleventyFunctions = { shortcodes: {}, pairedShortcodes: {} };
 	env.utils._11tyCtx = {};
 
 	function loadPlugins(plugins: Plugin[]) {
@@ -35,14 +35,14 @@ export function createVentoEngine(options: Options) {
 
 	function loadShortcodes(shortcodes: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(shortcodes)) {
-			env.utils._11tyFns.shortcodes[name] = fn;
+			env.utils.eleventyFunctions.shortcodes[name] = fn;
 			env.tags.push(createVentoTag({ name, group: 'shortcodes' }));
 		}
 	}
 
 	function loadPairedShortcodes(pairedShortcodes: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(pairedShortcodes)) {
-			env.utils._11tyFns.pairedShortcodes[name] = fn;
+			env.utils.eleventyFunctions.pairedShortcodes[name] = fn;
 			env.tags.push(createVentoTag({ name, group: 'pairedShortcodes' }));
 		}
 	}
