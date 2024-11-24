@@ -90,7 +90,7 @@ Filters that are added via Eleventy's `.addFilter()` or `.addAsyncFilter()` meth
 
 If you'd prefer to set filters yourself (via a plugin or other method) or prevent Eleventy from loading filters into Vento, set `filters: false` in the plugin options.
 
-This plugin merges the keys normally expected from `this` with the `FilterThis` object Vento provides to filters. The final bound `this` object for filters is as follows:
+(_Upcoming in 4.1.0_) This plugin merges the keys normally expected from `this` with the `FilterThis` object Vento provides to filters. The final bound `this` object for filters is as follows:
 
 ```ts
 {
