@@ -90,6 +90,31 @@ Filters that are added via Eleventy's `.addFilter()` or `.addAsyncFilter()` meth
 
 If you'd prefer to set filters yourself (via a plugin or other method) or prevent Eleventy from loading filters into Vento, set `filters: false` in the plugin options.
 
+This plugin merges the keys normally expected from `this` with the `FilterThis` object Vento provides to filters. The final bound `this` object for filters is as follows:
+
+```ts
+{
+  env, // Vento environment
+  data, // all template global data
+  page, // this.page
+  eleventy, // this.eleventy
+}
+```
+
+This feature enables re-use of the Vento environment this plugin provides, within Eleventy filters. As an example use case, you could create a filter that compiles dynamic data and cache it with Vento's own cache:
+
+```js
+import 'hash' from 'node:crypto'; // since Node v20.12.0
+
+const sha1Hash(str) => hash('sha1', str, 'hex');
+
+eleventyConfig.addFilter('vento', function (content) {
+  const file = `dynamicString:${sha1Hash(content)}`;
+  const res = this.env.runString(content, this.data, file);
+  return res.content;
+});
+```
+
 ### Relevant documentation
 
 Vento: See [Filters](https://vento.js.org/configuration/#filters) and [Pipes](https://vento.js.org/syntax/pipes/)
