@@ -6,7 +6,7 @@
 // External library
 import { default as ventojs, type Options } from 'ventojs';
 import type { Plugin, Environment, Template } from 'ventojs/src/environment.js';
-import type { EleventyContext, EleventyFunctionMap } from './types.js';
+import type { EleventyFunctionMap, PageData } from './types.js';
 
 // Internal modules
 import { createVentoTag } from './create-vento-tag.js';
@@ -79,7 +79,7 @@ export function createVentoEngine(options: Options) {
 	};
 }
 
-export async function renderTemplate(template: Template, data: EleventyContext, from: string) {
+export async function renderVentoTemplate(template: Template, data: PageData, from: string) {
 	DEBUG.render('Rendering `%s`', from);
 	const { content } = await template(data);
 	return content;
