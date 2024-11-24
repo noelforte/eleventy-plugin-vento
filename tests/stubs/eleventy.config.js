@@ -16,11 +16,18 @@ export default function eleventy(eleventyConfig) {
 		eleventyConfig.addTemplate(`filters/${slug}.vto`, '{{ page.url |> pageUrlCompare }}');
 	}
 
+	eleventyConfig.addTemplate('filters/with-env-compile.vto', "{{ '{{ 2 + 2 }}' |> vento }}");
+
 	// Filters
 	eleventyConfig.addFilter('wrapWith', (content, tag = 'span') => `<${tag}>${content}</${tag}>`);
 
 	eleventyConfig.addFilter('pageUrlCompare', function (url) {
 		return this.page.url === url;
+	});
+
+	eleventyConfig.addFilter('vento', async function (content) {
+		const result = await this.env.runString(content);
+		return result.content;
 	});
 
 	// Shortcodes

@@ -89,6 +89,11 @@ describe('Can run Vento filters', { concurrent: true }, () => {
 
 		expect(result).toBe(true);
 	});
+
+	test('use context env (this.env)', async ({ expect }) => {
+		const result = testInstance.getBuildResultForUrl('/filters/with-env-compile/');
+		expect(result?.content).toBe('4');
+	});
 });
 
 describe('Can run Eleventy shortcodes as Vento tags', { concurrent: true }, () => {
