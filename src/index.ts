@@ -129,18 +129,19 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<Ven
 			// Custom permalink compilation
 			permalink(permalinkContent: string, inputPath: string) {
 				// Short circuit if input isn't a string and doesn't look like a vento template
-				if (typeof permalinkContent === 'string' && /\{\{\s+.+\s+\}\}/.test(permalinkContent)) {
-					// Normalize input path
-					inputPath = 'Permalink::' + path.normalize(inputPath);
-
-					// Retrieve the template function
-					const template = engine.getTemplateFunction(permalinkContent, inputPath);
-
-					// Return a render function
-					return async (data: PageData) => await renderTemplate(template, data, inputPath);
+				if (typeof permalinkContent !== 'string' || !/\{\{\s+.+\s+\}\}/.test(permalinkContent)) {
+					return permalinkContent;
 				}
 
-				return permalinkContent;
+				// Normalize input path
+				inputPath = 'Permalink::' + path.normalize(inputPath);
+
+				// Retrieve the template function
+				DEBUG.main('Getting template function for `%s`', inputPath);
+				const template = engine.getTemplateFunction(permalinkContent, inputPath);
+
+				// Return a render function
+				return async (data: PageData) => await renderTemplate(template, data, inputPath);
 			},
 		},
 	});
