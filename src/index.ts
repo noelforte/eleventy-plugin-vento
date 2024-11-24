@@ -11,7 +11,7 @@ import type { PageData } from './types.js';
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
 
 // Local modules
-import { createVentoEngine } from './create-vento-engine.js';
+import { createVentoEngine, renderTemplate } from './create-vento-engine.js';
 import { DEBUG, runCompatibilityCheck } from './utils.js';
 import type { VentoPluginOptions } from './types.js';
 
@@ -122,7 +122,7 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<Ven
 			const template = engine.getTemplateFunction(inputContent, inputPath, false);
 
 			// Return a render function
-			return async (data: PageData) => await engine.render(template, data, inputPath);
+			return async (data: PageData) => await renderTemplate(template, data, inputPath);
 		},
 
 		compileOptions: {
@@ -137,7 +137,7 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<Ven
 					const template = engine.getTemplateFunction(permalinkContent, inputPath);
 
 					// Return a render function
-					return async (data: PageData) => await engine.render(template, data, inputPath);
+					return async (data: PageData) => await renderTemplate(template, data, inputPath);
 				}
 
 				return permalinkContent;

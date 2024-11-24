@@ -18,8 +18,6 @@ export const REQUIRED_API_METHODS = [
 	['addExtension', 'v1.0.0'],
 ];
 
-export const CONTEXT_DATA_KEYS = ['page', 'eleventy'];
-
 // Helper functions
 export function runCompatibilityCheck(config: UserConfig): void {
 	DEBUG.main('Run compatibility check');

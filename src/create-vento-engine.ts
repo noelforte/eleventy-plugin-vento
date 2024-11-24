@@ -10,25 +10,13 @@ import type { EleventyContext, EleventyFunctionMap } from './types.js';
 
 // Internal modules
 import { createVentoTag } from './create-vento-tag.js';
-import { CONTEXT_DATA_KEYS, DEBUG } from './utils.js';
+import { DEBUG } from './utils.js';
 import type { EleventyUtils } from './types.js';
 
 export function createVentoEngine(options: Options) {
 	const env = ventojs(options) as Environment & { utils: EleventyUtils };
 	env.utils._11tyFns = { shortcodes: {}, pairedShortcodes: {} };
 	env.utils._11tyCtx = {};
-
-	function setContext(newContext: EleventyContext) {
-		if (env.utils._11tyCtx?.page?.inputPath === newContext?.page?.inputPath) {
-			return;
-		}
-
-		for (const K of CONTEXT_DATA_KEYS) {
-			env.utils._11tyCtx[K] = newContext[K];
-		}
-
-		DEBUG.main('Reload context, new context is: %o', env.utils._11tyCtx);
-	}
 
 	function loadPlugins(plugins: Plugin[]) {
 		for (const plugin of plugins) {
@@ -81,16 +69,6 @@ export function createVentoEngine(options: Options) {
 		return template;
 	}
 
-	async function render(template: Template, data: EleventyContext, from: string) {
-		// Load new context
-		setContext(data);
-
-		// Render template
-		DEBUG.render('Rendering `%s`', from);
-		const { content } = await template(data);
-		return content;
-	}
-
 	return {
 		cache: env.cache,
 		loadPlugins,
@@ -98,6 +76,11 @@ export function createVentoEngine(options: Options) {
 		loadShortcodes,
 		loadPairedShortcodes,
 		getTemplateFunction,
-		render,
 	};
+}
+
+export async function renderTemplate(template: Template, data: EleventyContext, from: string) {
+	DEBUG.render('Rendering `%s`', from);
+	const { content } = await template(data);
+	return content;
 }
