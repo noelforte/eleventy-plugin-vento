@@ -62,9 +62,6 @@ export default function (eleventyConfig) {
     // to trim the default tags (see section on Auto-trimming)
     autotrim: false,
 
-    // Enable/disable ignore tag syntax (see section on ignoring tags)
-    ignoreTag: false,
-
     // A Vento configuration object
     ventoOptions: {
       includes: eleventyConfig.directories.includes,
