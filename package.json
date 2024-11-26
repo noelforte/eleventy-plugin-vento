@@ -18,11 +18,11 @@
 		"ci:generate-changesets": "node ./scripts/generate-changesets.js",
 		"format": "pnpm dlx prettier --config ./package.json --write ."
 	},
-	"types": "./dist/index.d.ts",
+	"types": "./dist/plugin.d.ts",
 	"exports": {
 		".": {
-			"import": "./dist/index.js",
-			"types": "./dist/index.d.ts"
+			"import": "./dist/plugin.js",
+			"types": "./dist/plugin.d.ts"
 		}
 	},
 	"files": [

@@ -18,7 +18,7 @@ interface TestOptions {
 
 import path from 'node:path';
 import fs from 'node:fs';
-import { VentoPlugin } from '../src/index.js';
+import { VentoPlugin } from '../src/plugin.js';
 
 class EleventyTest extends Eleventy {
 	buildResults: JsonResult[] = [];
