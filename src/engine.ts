@@ -1,19 +1,19 @@
 /**
  * @file Function that handles creating the Vento environment. Exposes
- * a simple API for Eleventy to interface with.
+ * a small API for Eleventy to interface with.
  */
 
 // External library
 import { default as ventojs, type Options } from 'ventojs';
-import type { Environment, Plugin, Template } from 'ventojs/src/environment.js';
-import type { EleventyFunctionMap, EleventyVentoUtils, PageData } from './types.js';
+import type { Plugin, Template } from 'ventojs/src/environment.js';
+import type { EleventyFunctionMap, EleventyVentoEnv, PageData } from './types.js';
 
 // Internal modules
 import { createVentoTag } from './create-vento-tag.js';
 import { DEBUG } from './utils.js';
 
 export function createVentoEngine(options: Options) {
-	const env = ventojs(options) as Environment & { utils: EleventyVentoUtils };
+	const env = ventojs(options) as EleventyVentoEnv;
 	env.utils.eleventyFunctions = { shortcodes: {}, pairedShortcodes: {} };
 	env.utils._11tyCtx = {};
 

@@ -2,7 +2,7 @@
 
 import type { EleventyScope } from '11ty.ts';
 import type { Options } from 'ventojs';
-import type { Plugin } from 'ventojs/src/environment.js';
+import type { Environment, Plugin } from 'ventojs/src/environment.js';
 
 type MaybePromise<T> = T | Promise<T>;
 
@@ -13,14 +13,16 @@ export type PageData = EleventyContext & Record<string, unknown>;
 export type EleventyFunction = (...args: unknown[]) => MaybePromise<string | void>;
 export type EleventyFunctionMap = Record<string, EleventyFunction>;
 
+export type EleventyVentoEnv = Environment & {
+	utils: {
+		eleventyFunctions: Record<TagSpec['group'], EleventyFunctionMap>;
+		[x: string]: unknown;
+	};
+};
+
 export interface TagSpec {
 	name: string;
 	group: 'shortcodes' | 'pairedShortcodes';
-}
-
-export interface EleventyVentoUtils {
-	eleventyFunctions: Record<TagSpec['group'], EleventyFunctionMap>;
-	[x: string]: unknown;
 }
 
 export interface VentoPluginOptions {
