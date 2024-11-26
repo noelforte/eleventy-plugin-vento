@@ -5,16 +5,15 @@
 
 // External library
 import { default as ventojs, type Options } from 'ventojs';
-import type { Plugin, Environment, Template } from 'ventojs/src/environment.js';
-import type { EleventyFunctionMap, PageData } from './types.js';
+import type { Environment, Plugin, Template } from 'ventojs/src/environment.js';
+import type { EleventyFunctionMap, EleventyVentoUtils, PageData } from './types.js';
 
 // Internal modules
 import { createVentoTag } from './create-vento-tag.js';
 import { DEBUG } from './utils.js';
-import type { EleventyUtils } from './types.js';
 
 export function createVentoEngine(options: Options) {
-	const env = ventojs(options) as Environment & { utils: EleventyUtils };
+	const env = ventojs(options) as Environment & { utils: EleventyVentoUtils };
 	env.utils.eleventyFunctions = { shortcodes: {}, pairedShortcodes: {} };
 	env.utils._11tyCtx = {};
 
@@ -35,15 +34,23 @@ export function createVentoEngine(options: Options) {
 
 	function loadShortcodes(shortcodes: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(shortcodes)) {
+			// Add shortcode function to environment
 			env.utils.eleventyFunctions.shortcodes[name] = fn;
-			env.tags.push(createVentoTag({ name, group: 'shortcodes' }));
+
+			// Create tag for shortcode and add it to the environment
+			const shortcodeTag = createVentoTag({ name, group: 'shortcodes' });
+			env.tags.push(shortcodeTag);
 		}
 	}
 
 	function loadPairedShortcodes(pairedShortcodes: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(pairedShortcodes)) {
+			// Add shortcode function to environment
 			env.utils.eleventyFunctions.pairedShortcodes[name] = fn;
-			env.tags.push(createVentoTag({ name, group: 'pairedShortcodes' }));
+
+			// Create tag for paired shortcode and add it to the environment
+			const shortcodeTag = createVentoTag({ name, group: 'pairedShortcodes' });
+			env.tags.push(shortcodeTag);
 		}
 	}
 

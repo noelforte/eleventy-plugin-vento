@@ -4,13 +4,13 @@ import type { EleventyScope } from '11ty.ts';
 import type { Options } from 'ventojs';
 import type { Plugin } from 'ventojs/src/environment.js';
 
-export type { Tag, Environment } from 'ventojs/src/environment.js';
+type MaybePromise<T> = T | Promise<T>;
 
 export type AutotrimConfig = boolean | ('@11ty' | '@vento' | (string & Record<never, never>))[];
 
 export type EleventyContext = Partial<EleventyScope> & Record<string, unknown>;
 export type PageData = EleventyContext & Record<string, unknown>;
-export type EleventyFunction = (...args: unknown[]) => unknown;
+export type EleventyFunction = (...args: unknown[]) => MaybePromise<string | void>;
 export type EleventyFunctionMap = Record<string, EleventyFunction>;
 
 export interface TagSpec {
@@ -18,11 +18,9 @@ export interface TagSpec {
 	group: 'shortcodes' | 'pairedShortcodes';
 }
 
-export interface EleventyUtils {
-	eleventyFunctions: {
-		shortcodes: EleventyFunctionMap;
-		pairedShortcodes: EleventyFunctionMap;
-	};
+export interface EleventyVentoUtils {
+	eleventyFunctions: Record<TagSpec['group'], EleventyFunctionMap>;
+	[x: string]: unknown;
 }
 
 export interface VentoPluginOptions {
