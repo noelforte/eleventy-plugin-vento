@@ -4,11 +4,9 @@ import createDebugger from 'debug';
 
 const debugBaseNamespace = 'Eleventy:Vento';
 
-export const DEBUG = {
-	main: createDebugger(debugBaseNamespace),
-	cache: createDebugger(`${debugBaseNamespace}:Cache`),
-	render: createDebugger(`${debugBaseNamespace}:Render`),
-};
+export const debugMain = createDebugger(debugBaseNamespace);
+export const debugCache = createDebugger(`${debugBaseNamespace}:Cache`);
+export const debugRender = createDebugger(`${debugBaseNamespace}:Render`);
 
 // Project-wide constants
 export const REQUIRED_API_METHODS = [
@@ -19,8 +17,8 @@ export const REQUIRED_API_METHODS = [
 ];
 
 // Helper functions
-export function runCompatibilityCheck(config: UserConfig): void {
-	DEBUG.main('Run compatibility check');
+export function compatibilityCheck(config: UserConfig): void {
+	debugMain('Run compatibility check');
 	for (const [method, version] of REQUIRED_API_METHODS) {
 		if (!(method in config)) {
 			console.error(

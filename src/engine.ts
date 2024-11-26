@@ -10,7 +10,7 @@ import type { EleventyFunctionMap, EleventyVentoEnv, PageData } from './types.js
 
 // Internal modules
 import { createVentoTag } from './create-vento-tag.js';
-import { DEBUG } from './utils.js';
+import { debugCache, debugRender } from './utils.js';
 
 export function createVentoEngine(options: Options) {
 	const env = ventojs(options) as EleventyVentoEnv;
@@ -59,11 +59,11 @@ export function createVentoEngine(options: Options) {
 		let template = env.cache.get(file);
 
 		if (template?.source === source) {
-			DEBUG.cache('Cache HIT for `%s`, used precompiled template', file);
+			debugCache('Cache HIT for `%s`, used precompiled template', file);
 		} else {
 			template = env.compile(source, file);
 
-			DEBUG.cache(
+			debugCache(
 				`Cache MISS for \`%s\`, compiled new template:\nUse Vento cache: %o\n\n${template}`,
 				file,
 				useVentoCache
@@ -87,7 +87,7 @@ export function createVentoEngine(options: Options) {
 }
 
 export async function renderVentoTemplate(template: Template, data: PageData, from: string) {
-	DEBUG.render('Rendering `%s`', from);
+	debugRender('Rendering `%s`', from);
 	const { content } = await template(data);
 	return content;
 }
