@@ -15,7 +15,6 @@
 		"dev": "tsup --watch ./src",
 		"ci:version": "changeset version && pnpm install --no-frozen-lockfile",
 		"ci:publish": "changeset publish",
-		"ci:generate-changesets": "node ./scripts/generate-changesets.js",
 		"format": "pnpm dlx prettier --config ./package.json --write ."
 	},
 	"types": "./dist/plugin.d.ts",
