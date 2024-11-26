@@ -9,8 +9,8 @@ import type { Plugin, Template } from 'ventojs/src/environment.js';
 import type { EleventyFunctionMap, EleventyVentoEnv, PageData } from './types.js';
 
 // Internal modules
-import { createVentoTag } from './create-vento-tag.js';
-import { debugCache, debugRender } from './utils.js';
+import { createVentoTag } from './utils/create-vento-tag.js';
+import { debugCache, debugRender } from './utils/debuggers.js';
 
 export function createVentoEngine(options: Options) {
 	const env = ventojs(options) as EleventyVentoEnv;

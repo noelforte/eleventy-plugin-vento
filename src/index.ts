@@ -3,13 +3,14 @@ import path from 'node:path';
 
 // External modules
 import type { UserConfig } from '@11ty/eleventy';
-import type { PageData } from './types.js';
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
+import type { PageData } from './types.js';
 
 // Local modules
 import { createVentoEngine, renderVentoTemplate } from './engine.js';
-import { debugMain, debugCache, compatibilityCheck } from './utils.js';
 import type { VentoPluginOptions } from './types.js';
+import { compatibilityCheck } from './utils/compat-check.js';
+import { debugCache, debugMain } from './utils/debuggers.js';
 
 export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<VentoPluginOptions>) {
 	debugMain('Initializing eleventy-plugin-vento');

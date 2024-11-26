@@ -3,7 +3,7 @@
  */
 
 import type { Tag } from 'ventojs/src/environment.js';
-import type { TagSpec } from './types.js';
+import type { TagSpec } from '../types.js';
 
 export function createVentoTag(spec: TagSpec) {
 	const IS_PAIRED = spec.group === 'pairedShortcodes';

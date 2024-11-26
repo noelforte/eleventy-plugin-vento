@@ -1,12 +1,6 @@
 // Set up debugger global
 import type { UserConfig } from '@11ty/eleventy';
-import createDebugger from 'debug';
-
-const debugBaseNamespace = 'Eleventy:Vento';
-
-export const debugMain = createDebugger(debugBaseNamespace);
-export const debugCache = createDebugger(`${debugBaseNamespace}:Cache`);
-export const debugRender = createDebugger(`${debugBaseNamespace}:Render`);
+import { debugMain } from './debuggers.js';
 
 // Project-wide constants
 export const REQUIRED_API_METHODS = [
