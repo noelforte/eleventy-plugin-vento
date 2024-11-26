@@ -1,11 +1,12 @@
 /**
- * @file Helper function that creates vento tags from eleventy functions
+ * @file Factory function that creates vento tags from eleventy functions
  */
 
 import type { Tag, TagSpec } from './types.js';
 
 export function createVentoTag(spec: TagSpec) {
 	const IS_PAIRED = spec.group === 'pairedShortcodes';
+	let INT = 0;
 
 	const tag: Tag = (env, code, output, tokens) => {
 		if (!code.startsWith(spec.name)) return;
@@ -23,19 +24,17 @@ export function createVentoTag(spec: TagSpec) {
 		const fn = `__env.utils.eleventyFunctions.${spec.group}.${spec.name}`;
 		const args = [code.replace(spec.name, '').trim()];
 
-		const varname = output.startsWith('__shortcode_content')
-			? `${output}_precomp`
-			: '__shortcode_content';
-
 		// Create an array to hold compiled template code
 		const compiled = [];
 
 		if (IS_PAIRED) {
-			args.unshift(env.compileFilters(tokens, varname, env.options.autoescape));
+			const nestedVarname = `__arg${INT++}`;
+
+			args.unshift(env.compileFilters(tokens, nestedVarname, env.options.autoescape));
 			compiled.push(
 				'{',
-				`let ${varname} = "";`,
-				...env.compileTokens(tokens, varname, [`/${spec.name}`])
+				`let ${nestedVarname} = "";`,
+				...env.compileTokens(tokens, nestedVarname, [`/${spec.name}`])
 			);
 			if (tokens.length > 0 && (tokens[0][0] !== 'tag' || tokens[0][1] !== `/${spec.name}`)) {
 				throw new Error(`Vento: Missing closing tag for ${spec.name} tag: ${code}`);
@@ -47,8 +46,8 @@ export function createVentoTag(spec: TagSpec) {
 
 		compiled.push(
 			'{',
-			`const __shortcode_result = await ${fn}.call(${args.filter(Boolean).join(', ')});`,
-			`${output} += ${env.compileFilters(tokens, '__shortcode_result', env.options.autoescape)}`,
+			`const __result = await ${fn}.call(${args.filter(Boolean).join(', ')});`,
+			`${output} += ${env.compileFilters(tokens, '__result', env.options.autoescape)}`,
 			'}'
 		);
 
@@ -56,9 +55,7 @@ export function createVentoTag(spec: TagSpec) {
 			compiled.push('}');
 		}
 
-		const compiledTag = compiled.join('\n');
-
-		return compiledTag;
+		return compiled.join('\n');
 	};
 
 	return Object.defineProperty(tag, 'name', {
