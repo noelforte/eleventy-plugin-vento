@@ -66,7 +66,7 @@
 		"type-fest": "4.28.1",
 		"typescript": "5.7.2",
 		"typescript-eslint": "8.16.0",
-		"vitest": "2.1.5"
+		"vitest": "2.1.6"
 	},
 	"prettier": {
 		"bracketSameLine": true,
