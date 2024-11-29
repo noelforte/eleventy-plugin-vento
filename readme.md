@@ -100,16 +100,7 @@ This plugin merges the keys normally expected from `this` with the `FilterThis` 
 }
 ```
 
-This feature enables re-use of the Vento environment this plugin provides, within Eleventy filters. As an example use case, you could create a filter that compiles dynamic data and cache it with Vento's own cache:
-
-```js
-eleventyConfig.addFilter('vento', function (content) {
-  const res = this.env.runString(content, this.data);
-  return res.content;
-});
-```
-
-Because re-compilation introduces some overhead, you may want to cache your template strings compiled via a filter. With access to `this.env` you can use Vento's own cache:
+This feature enables re-use of the Vento environment this plugin provides, within Eleventy filters. As an example use case, you could create a filter that compiles dynamic data and cache it with Vento's own cache to improve performance:
 
 ```js
 import 'hash' from 'node:crypto'; // since Node v20.12.0
@@ -177,7 +168,8 @@ Eleventy: See [Shortcodes](https://www.11ty.dev/docs/shortcodes/) and the sub-se
 
 ## Vento Plugins
 
-_Note: The `auto_trim` plugin that ships with Vento has a specific implementation in the scope of this plugin. See [Auto-Trimming Tags](#auto-trimming-tags) for more details._
+> [!NOTE]
+> The `auto_trim` plugin that ships with Vento has a specific implementation in the scope of this plugin. See [Auto-Trimming Tags](#auto-trimming-tags) for more details.\_
 
 If you'd like to extend the Vento library with any plugins, include them in an array passed to the `plugins` option.
 
