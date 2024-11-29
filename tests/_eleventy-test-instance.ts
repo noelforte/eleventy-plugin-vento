@@ -1,7 +1,10 @@
-import type { VentoPluginOptions } from '../src/types.ts';
-import type { UserConfig } from '@11ty/eleventy';
+import Eleventy, { type UserConfig } from '@11ty/eleventy';
 
-import Eleventy from '@11ty/eleventy';
+import path from 'node:path';
+import fs from 'node:fs';
+
+import { VentoPlugin } from '../src/plugin.js';
+import type { PluginOptions } from '../src/types/options.js';
 
 interface JsonResult {
 	url: string | false;
@@ -12,13 +15,9 @@ interface JsonResult {
 }
 
 interface TestOptions {
-	pluginOptions?: Partial<VentoPluginOptions>;
+	pluginOptions?: PluginOptions;
 	eleventy?: Partial<UserConfig>;
 }
-
-import path from 'node:path';
-import fs from 'node:fs';
-import { VentoPlugin } from '../src/plugin.js';
 
 class EleventyTest extends Eleventy {
 	buildResults: JsonResult[] = [];

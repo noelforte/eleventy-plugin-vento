@@ -4,18 +4,17 @@
  */
 
 // External library
-import { default as ventojs, type Options } from 'ventojs';
+import createVentoEnv, * as ventojs from 'ventojs';
 import type { Plugin, Template } from 'ventojs/src/environment.js';
-import type { EleventyFunctionMap, EleventyVentoEnv, PageData } from './types.js';
+import type { EleventyFunctionMap, EleventyDataCascade } from './types/eleventy.js';
 
 // Internal modules
 import { createVentoTag } from './utils/create-vento-tag.js';
 import { debugCache, debugRender } from './utils/debuggers.js';
 
-export function createVentoEngine(options: Options) {
-	const env = ventojs(options) as EleventyVentoEnv;
+export function createVentoEngine(options: ventojs.Options) {
+	const env = createVentoEnv(options);
 	env.utils.eleventyFunctions = { shortcodes: {}, pairedShortcodes: {} };
-	env.utils._11tyCtx = {};
 
 	function loadPlugins(plugins: Plugin[]) {
 		for (const plugin of plugins) {
@@ -26,8 +25,9 @@ export function createVentoEngine(options: Options) {
 	function loadFilters(filters: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(filters)) {
 			env.filters[name] = async function (...args) {
-				Object.assign(this, { page: this.data.page, eleventy: this.data.eleventy });
-				return await fn.apply(this, args);
+				const { page, eleventy } = this.data;
+				const filterResult = await fn.apply({ ...this, page, eleventy }, args);
+				return filterResult;
 			};
 		}
 	}
@@ -86,7 +86,11 @@ export function createVentoEngine(options: Options) {
 	};
 }
 
-export async function renderVentoTemplate(template: Template, data: PageData, from: string) {
+export async function renderVentoTemplate(
+	template: Template,
+	data: EleventyDataCascade,
+	from: string
+) {
 	debugRender('Rendering `%s`', from);
 	const { content } = await template(data);
 	return content;

@@ -4,19 +4,19 @@ import path from 'node:path';
 // External modules
 import type { UserConfig } from '@11ty/eleventy';
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
-import type { PageData } from './types.js';
 
 // Local modules
 import { createVentoEngine, renderVentoTemplate } from './engine.js';
-import type { VentoPluginOptions } from './types.js';
+import type { EleventyDataCascade } from './types/eleventy.js';
+import type { PluginOptions } from './types/options.js';
 import { compatibilityCheck } from './utils/compat-check.js';
 import { debugCache, debugMain } from './utils/debuggers.js';
 
-export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<VentoPluginOptions>) {
+export function VentoPlugin(eleventyConfig: UserConfig, userOptions: PluginOptions) {
 	debugMain('Initializing eleventy-plugin-vento');
 	compatibilityCheck(eleventyConfig);
 
-	const options: VentoPluginOptions = {
+	const options = {
 		// Define defaults
 		autotrim: false,
 		plugins: [],
@@ -119,7 +119,8 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<Ven
 			const template = engine.getTemplateFunction(inputContent, inputPath, false);
 
 			// Return a render function
-			return async (data: PageData) => await renderVentoTemplate(template, data, inputPath);
+			return async (data: EleventyDataCascade) =>
+				await renderVentoTemplate(template, data, inputPath);
 		},
 
 		compileOptions: {
@@ -138,7 +139,8 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: Partial<Ven
 				const template = engine.getTemplateFunction(permalinkContent, inputPath);
 
 				// Return a render function
-				return async (data: PageData) => await renderVentoTemplate(template, data, inputPath);
+				return async (data: EleventyDataCascade) =>
+					await renderVentoTemplate(template, data, inputPath);
 			},
 		},
 	});

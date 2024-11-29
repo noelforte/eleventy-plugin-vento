@@ -2,15 +2,19 @@
  * @file Factory function that creates vento tags from eleventy functions
  */
 
-import type { Tag } from 'ventojs/src/environment.js';
-import type { TagSpec } from '../types.js';
+import type { EleventyTag } from '../types/vento.js';
 
-export function createVentoTag(spec: TagSpec) {
-	const IS_PAIRED = spec.group === 'pairedShortcodes';
+export interface EleventyTagInfo {
+	name: string;
+	group: 'shortcodes' | 'pairedShortcodes';
+}
+
+export function createVentoTag(tagInfo: EleventyTagInfo) {
+	const IS_PAIRED = tagInfo.group === 'pairedShortcodes';
 	let INT = 0;
 
-	const tag: Tag = (env, code, output, tokens) => {
-		if (!code.startsWith(spec.name)) return;
+	const tag: EleventyTag = (env, code, output, tokens) => {
+		if (!code.startsWith(tagInfo.name)) return;
 
 		// Grab data variable name
 		const { dataVarname } = env.options;
@@ -22,8 +26,8 @@ export function createVentoTag(spec: TagSpec) {
 		}`;
 
 		// Declare helper variables for repeated strings in template
-		const fn = `__env.utils.eleventyFunctions.${spec.group}.${spec.name}`;
-		const args = [code.replace(spec.name, '').trim()];
+		const fn = `__env.utils.eleventyFunctions.${tagInfo.group}.${tagInfo.name}`;
+		const args = [code.replace(tagInfo.name, '').trim()];
 
 		// Create an array to hold compiled template code
 		const compiled = [];
@@ -35,10 +39,10 @@ export function createVentoTag(spec: TagSpec) {
 			compiled.push(
 				'{',
 				`let ${nestedVarname} = "";`,
-				...env.compileTokens(tokens, nestedVarname, [`/${spec.name}`])
+				...env.compileTokens(tokens, nestedVarname, [`/${tagInfo.name}`])
 			);
-			if (tokens.length > 0 && (tokens[0][0] !== 'tag' || tokens[0][1] !== `/${spec.name}`)) {
-				throw new Error(`Vento: Missing closing tag for ${spec.name} tag: ${code}`);
+			if (tokens.length > 0 && (tokens[0][0] !== 'tag' || tokens[0][1] !== `/${tagInfo.name}`)) {
+				throw new Error(`Vento: Missing closing tag for ${tagInfo.name} tag: ${code}`);
 			}
 			tokens.shift();
 		}
@@ -60,6 +64,6 @@ export function createVentoTag(spec: TagSpec) {
 	};
 
 	return Object.defineProperty(tag, 'name', {
-		value: spec.name + IS_PAIRED ? `PairedTag` : `Tag`,
+		value: tagInfo.name + IS_PAIRED ? `PairedTag` : `Tag`,
 	});
 }

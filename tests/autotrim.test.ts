@@ -1,8 +1,8 @@
-import type { AutotrimConfig } from '../src/types.js';
+import { PluginOptions } from '../src/types/options.js';
 import { EleventyTest } from './_eleventy-test-instance.js';
 import { test } from 'vitest';
 
-const matrix: [string, AutotrimConfig, string][] = [
+const matrix: [string, PluginOptions['autotrim'], string][] = [
 	['All tags', true, 'all'],
 	['Single tag', ['set'], 'default-single'],
 	['All tags (with extends)', ['@vento', 'tag1', 'tag2'], 'default-extends'],
