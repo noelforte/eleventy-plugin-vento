@@ -89,16 +89,7 @@ If you'd prefer to set filters yourself (via a plugin or other method) or preven
 
 ### Filters and `this`
 
-This plugin merges the keys normally expected from `this` with the `FilterThis` object Vento provides to filters. The final bound `this` object for filters is as follows:
-
-```ts
-{
-  env, // Vento environment
-  data, // all template global data
-  page, // this.page
-  eleventy, // this.eleventy
-}
-```
+Eleventy provides filters with scoped data via the `this.page` and `this.eleventy` objects (see [Filters#Scoped data in Filters](https://www.11ty.dev/docs/filters/#scoped-data-in-filters) in Eleventy's docs for more details). Likewise, Vento provides filters with `this.env` and `this.data` representing the Vento environment and the current template data. This plugin merges both objects together to make `this.page` (and `eleventy`/`env`/`data`) available on all filters processed by Vento.
 
 This feature enables re-use of the Vento environment this plugin provides, within Eleventy filters. As an example use case, you could create a filter that compiles dynamic data and cache it with Vento's own cache to improve performance:
 
