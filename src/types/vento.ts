@@ -3,10 +3,10 @@ import type { Environment, Tag } from 'ventojs/src/environment.js';
 import type { Token } from 'ventojs/src/tokenizer.js';
 
 import type { EleventyTagInfo } from '../utils/create-vento-tag.ts';
-import type { EleventyFunctionMap, EleventyDataCascade } from './eleventy.ts';
+import type { EleventyFunctionMap, EleventyDataCascade, EleventyFunction } from './eleventy.ts';
 
 export type EleventyVentoEnvironment = Merge<Environment, VentoOverrides>;
-type EleventyVentoFilter = (this: EleventyVentoFilterThis, ...args: unknown[]) => unknown;
+type EleventyVentoFilter = EleventyFunction<EleventyVentoFilterThis>;
 
 type VentoOverrides = {
 	tags: (Tag | EleventyTag)[];
