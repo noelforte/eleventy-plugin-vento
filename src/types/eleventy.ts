@@ -6,7 +6,11 @@ type UnknownData = Record<string, unknown>;
 
 type EleventyDataCascade = Merge<EleventyScope, UnknownData>;
 
-type EleventyFunction = (this: EleventyScope, ...args: unknown[]) => Promisable<string | undefined>;
+type EleventyFunction = (
+	this: EleventyScope,
+	content?: string,
+	...restArgs: unknown[]
+) => Promisable<unknown>;
 
 type EleventyFunctionMap = Record<string, EleventyFunction>;
 
