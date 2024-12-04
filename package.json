@@ -8,9 +8,9 @@
 	},
 	"scripts": {
 		"test": "vitest --run",
-		"check": "pnpm --color run '/ts-check|lint/'",
-		"lint": "eslint '.'",
-		"ts-check": "tsc --noEmit",
+		"check": "pnpm --color run '/^check:/'",
+		"check:lint": "eslint '.'",
+		"check:types": "tsc --noEmit",
 		"build": "tsup",
 		"dev": "tsup --watch ./src",
 		"ci:version": "changeset version && pnpm install --no-frozen-lockfile",
