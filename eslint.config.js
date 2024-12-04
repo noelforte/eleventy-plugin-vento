@@ -1,6 +1,6 @@
 // @ts-check
-
 import eslint from '@eslint/js';
+import { node } from 'globals';
 import tseslint from 'typescript-eslint';
 
 // Configs
@@ -26,6 +26,8 @@ export default tseslint.config(
 		files: ['**/*.{js,ts}'],
 		languageOptions: {
 			ecmaVersion: 'latest',
+			sourceType: 'module',
+			globals: node,
 		},
 		rules: {
 			'@typescript-eslint/no-unused-vars': [

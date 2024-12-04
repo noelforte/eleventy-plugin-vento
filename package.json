@@ -62,6 +62,7 @@
 		"eslint": "9.16.0",
 		"eslint-config-prettier": "9.1.0",
 		"eslint-plugin-unicorn": "56.0.1",
+		"globals": "15.13.0",
 		"tsup": "8.3.5",
 		"type-fest": "4.30.0",
 		"typescript": "5.7.2",
