@@ -1,13 +1,19 @@
-import type { Merge } from 'type-fest';
+// Vento library augmentations
+import type { MergeDeep } from 'type-fest';
 import type { Environment, Tag } from 'ventojs/src/environment.js';
-import type { Token } from 'ventojs/src/tokenizer.js';
 
-import type { EleventyTagInfo } from '../utils/create-vento-tag.ts';
+import type { EleventyTagInfo, EleventyTag } from '../utils/create-vento-tag.ts';
 import type { EleventyFunctionMap, EleventyDataCascade, EleventyFunction } from './eleventy.ts';
 
-export type EleventyVentoEnvironment = Merge<Environment, VentoOverrides>;
+// Filters
+type EleventyVentoFilterThis = {
+	data: EleventyDataCascade;
+	env: EleventyVentoEnvironment;
+};
+
 type EleventyVentoFilter = EleventyFunction<EleventyVentoFilterThis>;
 
+// Environment overrides
 type VentoOverrides = {
 	tags: (Tag | EleventyTag)[];
 	filters: Record<string, EleventyVentoFilter>;
@@ -17,18 +23,9 @@ type VentoOverrides = {
 	};
 };
 
-export type EleventyVentoFilterThis = {
-	data: EleventyDataCascade;
-	env: EleventyVentoEnvironment;
-};
+export type EleventyVentoEnvironment = MergeDeep<Environment, VentoOverrides>;
 
-export type EleventyTag = (
-	env: EleventyVentoEnvironment,
-	code: string,
-	output: string,
-	tokens: Token[]
-) => string | undefined;
-
+// Redeclare vento's default export declaration so we can use EleventyVentoEnvironment instead
 declare module 'ventojs' {
-	export default function (options: Options): Merge<Environment, VentoOverrides>;
+	export default function (options: Options): EleventyVentoEnvironment;
 }
