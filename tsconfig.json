@@ -6,11 +6,11 @@
 		"strict": true,
 		"allowJs": true,
 		"maxNodeModuleJsDepth": 2,
-		"target": "ES2021",
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext",
+		"lib": ["ES2023"],
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
 		"esModuleInterop": true,
-		"skipDefaultLibCheck": true,
+		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
 		"noEmit": true
 	}
