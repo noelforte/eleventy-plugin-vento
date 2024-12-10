@@ -4,5 +4,10 @@
   "initialVersions": {
     "eleventy-plugin-vento": "4.1.0"
   },
-  "changesets": []
+  "changesets": [
+    "khaki-mirrors-dream",
+    "many-grapes-hug",
+    "plenty-taxis-remember",
+    "renames"
+  ]
 }
