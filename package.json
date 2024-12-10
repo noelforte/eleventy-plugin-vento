@@ -48,7 +48,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"debug": "4.3.7",
-		"ventojs": "1.12.12"
+		"ventojs": "1.12.13"
 	},
 	"devDependencies": {
 		"11ty.ts": "0.0.5",
