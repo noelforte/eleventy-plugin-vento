@@ -1,0 +1,8 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "eleventy-plugin-vento": "4.1.0"
+  },
+  "changesets": []
+}
