@@ -6,7 +6,7 @@
 		{
 			"matchDepNames": ["ventojs", "debug"],
 			"reviewers": ["noelforte"],
-            "automerge": false
+			"automerge": false
 		}
 	],
 	"vulnerabilityAlerts": {
