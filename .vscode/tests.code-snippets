@@ -1,6 +1,6 @@
 {
 	"New test suite": {
-		"scope": "javascript",
+		"scope": "javascript,typescript",
 		"prefix": "#new-test-suite",
 		"body": [
 			"describe('${1:suite name}', ${2:{ concurrent: true \\} ,} () => {",
@@ -11,7 +11,7 @@
 	},
 
 	"New test": {
-		"scope": "javascript",
+		"scope": "javascript,typescript",
 		"prefix": "#new-test",
 		"body": [
 			"test('${1:test name}', async ({ expect }) => {",
