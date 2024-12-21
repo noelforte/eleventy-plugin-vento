@@ -1,0 +1,59 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Can iterate through loops in templates 1`] = `
+"Eleventy keys:
+version
+generator
+env
+directories
+
+Page keys:
+inputPath
+fileSlug
+filePathStem
+outputFileExtension
+templateSyntax
+date
+rawInput
+url
+outputPath
+"
+`;
+
+exports[`Can print exported values in templates 1`] = `
+"
+Release the possums!
+
+
+
+	Release 5 million possums!
+
+
+
+"
+`;
+
+exports[`Can print imported values in templates 1`] = `
+"
+Release the possums!
+	Release 20 million possums!
+
+"
+`;
+
+exports[`Can run functions in templates 1`] = `
+"
+
+	Hello, world!
+
+
+	Release the possums!
+
+"
+`;
+
+exports[`Can set/print variables in templates 1`] = `
+"
+my val
+"
+`;

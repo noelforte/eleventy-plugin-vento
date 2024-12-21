@@ -8,8 +8,8 @@ await testInstance.rebuild();
 const matrix = ['html', 'md'];
 
 describe('Can run .md files and .html file as Vento templates', { concurrent: true }, () => {
-	test.for(matrix)('Use Vento as .%s engine', async (ext, { expect }) => {
+	test.for(matrix)('Use Vento as `.%s` engine', async (ext, { expect }) => {
 		const result = testInstance.getBuildResultForUrl(`/as-${ext}-engine/`);
-		await expect(result?.content).toMatchFileSnapshot(`./_results/override.${ext}-engine.html`);
+		expect(result?.content).toMatchSnapshot(`override-${ext}-engine`);
 	});
 });
