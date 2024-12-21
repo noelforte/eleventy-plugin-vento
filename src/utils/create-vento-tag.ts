@@ -12,10 +12,10 @@ export type EleventyTag = (
 	tokens: Token[]
 ) => string | undefined;
 
-export interface EleventyTagInfo {
+export type EleventyTagInfo = {
 	name: string;
 	group: 'shortcodes' | 'pairedShortcodes';
-}
+};
 
 export function createVentoTag(tagInfo: EleventyTagInfo) {
 	const IS_PAIRED = tagInfo.group === 'pairedShortcodes';
@@ -72,6 +72,6 @@ export function createVentoTag(tagInfo: EleventyTagInfo) {
 	};
 
 	return Object.defineProperty(tag, 'name', {
-		value: tagInfo.name + IS_PAIRED ? `PairedTag` : `Tag`,
+		value: `${tagInfo.name}_${IS_PAIRED ? `EleventyPairedTag` : `EleventyTag`}`,
 	});
 }
