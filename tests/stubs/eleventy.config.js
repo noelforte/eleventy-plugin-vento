@@ -16,7 +16,7 @@ export default function eleventy(eleventyConfig) {
 		eleventyConfig.addTemplate(`filters/${slug}.vto`, '{{ page.url |> pageUrlCompare }}');
 	}
 
-	eleventyConfig.addTemplate('filters/with-env-compile.vto', "{{ '{{ 2 + 2 }}' |> vento }}");
+	eleventyConfig.addTemplate('filters/with-env-compile.vto', "{{ '{{ 2 + 2 }}' |> await vento }}");
 
 	// Filters
 	eleventyConfig.addFilter('wrapWith', (content, tag = 'span') => `<${tag}>${content}</${tag}>`);
