@@ -5,7 +5,7 @@ import type { Environment, Tag } from 'ventojs/src/environment.js';
 import type { EleventyTagInfo, EleventyTag } from '../utils/create-vento-tag.ts';
 import type { EleventyFunctionMap, EleventyDataCascade, EleventyFunction } from './eleventy.ts';
 
-// Filters
+// Filter overrides
 type EleventyVentoFilterThis = {
 	data: EleventyDataCascade;
 	env: EleventyVentoEnvironment;

@@ -10,7 +10,7 @@ type EleventyFunction<Context = EleventyScope> = (
 	this: Context,
 	content?: string,
 	...restArgs: unknown[]
-) => Promisable<unknown>;
+) => Promisable<void | string>;
 
 type EleventyFunctionMap = Record<string, EleventyFunction>;
 
