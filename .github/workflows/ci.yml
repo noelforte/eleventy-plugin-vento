@@ -8,7 +8,7 @@ on:
 jobs:
   changesets:
     if: github.event_name == 'pull_request' && startsWith('renovate/', github.head_ref) == 'false'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,7 +34,7 @@ jobs:
         run: pnpm tsup
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
