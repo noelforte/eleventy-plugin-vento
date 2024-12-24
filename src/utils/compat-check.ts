@@ -1,4 +1,4 @@
-import type { UserConfig } from '@11ty/eleventy';
+import type UserConfig from '@11ty/eleventy/UserConfig';
 import { debugMain } from './debuggers.js';
 
 export const REQUIRED_API_METHODS = [

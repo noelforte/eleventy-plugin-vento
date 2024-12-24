@@ -2,7 +2,7 @@
 import path from 'node:path';
 
 // External modules
-import type { UserConfig } from '@11ty/eleventy';
+import type UserConfig from '@11ty/eleventy/UserConfig';
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
 
 // Local modules

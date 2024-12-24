@@ -1,4 +1,5 @@
-import Eleventy, { type UserConfig } from '@11ty/eleventy';
+import Eleventy from '@11ty/eleventy';
+import type UserConfig from '@11ty/eleventy/UserConfig';
 
 import path from 'node:path';
 import fs from 'node:fs';
