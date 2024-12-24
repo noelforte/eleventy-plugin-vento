@@ -17,10 +17,10 @@ importers:
     devDependencies:
       11ty.ts:
         specifier: 0.0.5
-        version: 0.0.5(@11ty/eleventy@3.0.0)
+        version: 0.0.5(@11ty/eleventy@3.0.1-alpha.1)
       '@11ty/eleventy':
-        specifier: 3.0.0
-        version: 3.0.0
+        specifier: 3.0.1-alpha.1
+        version: 3.0.1-alpha.1
       '@changesets/cli':
         specifier: 2.27.11
         version: 2.27.11
@@ -93,8 +93,12 @@ packages:
     resolution: {integrity: sha512-nULO91om7vQw4Y/UBjM8i7nJ1xl+/nyK4rImZ41lFxiY2d+XUz7ChAj1CDYFjrLZeu0utAYJTZ45LlcHTkUG4g==}
     engines: {node: '>=12'}
 
-  '@11ty/eleventy@3.0.0':
-    resolution: {integrity: sha512-0P0ZsJXVW2QiNdhd7z+GYy6n+ivh0enx1DRdua5ta6NlzY2AhbkeWBY6U+FKA8lPS3H4+XsTpfLLfIScpPZLaQ==}
+  '@11ty/eleventy-utils@2.0.0':
+    resolution: {integrity: sha512-rKny6X7+ARuke0TaA6FwNv2PWJCNSdPQqbqDgaZgi+bPXwnPRTEi3CWzvr6vVgh/1XpO1G4FhRPreLhtcwHUyg==}
+    engines: {node: '>=18'}
+
+  '@11ty/eleventy@3.0.1-alpha.1':
+    resolution: {integrity: sha512-Z/RCpYzRbWWjWU3e5732tgjOf4hsuXrpx3zXW9Bf4/VGFd2uM4zoJkIOa8LFRLaocXWSNfapirudZNdFdjQZSA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -932,9 +936,6 @@ packages:
   chardet@0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
 
-  chardet@2.0.0:
-    resolution: {integrity: sha512-xVgPpulCooDjY6zH4m9YW3jbkaBe3FKIAvF5sj5t7aBNsVl2ljIE+xwJ4iNgiDZHFQvNIpjdKdVOQvvk5ZfxbQ==}
-
   check-error@2.1.1:
     resolution: {integrity: sha512-OAlb+T7V4Op9OwdkjmguYRqncdlx5JiofwOAUkmTF+jNdHwzTaTs4sRAGpzLF3oOz5xAyDGrPgeIDFQmDOTiJw==}
     engines: {node: '>= 16'}
@@ -1759,6 +1760,10 @@ packages:
     resolution: {integrity: sha512-y3b8Kpd8OAN444hxfBbFfj1FY/RjtTd8tzYwhUqNYXx0fXx2iX4maP4Qr6qhIKbQXI02wTLAda4fYUbDagTUFw==}
     engines: {node: '>=6'}
 
+  p-map@7.0.3:
+    resolution: {integrity: sha512-VkndIv2fIB99swvQoA65bm+fsmt6UNdGeIB0oxBs+WhAhdh08QA04JXpI7rbB9r08/nkbysKoya9rtDERYOYMA==}
+    engines: {node: '>=18'}
+
   p-try@2.2.0:
     resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}
     engines: {node: '>=6'}
@@ -2364,9 +2369,9 @@ packages:
 
 snapshots:
 
-  11ty.ts@0.0.5(@11ty/eleventy@3.0.0):
+  11ty.ts@0.0.5(@11ty/eleventy@3.0.1-alpha.1):
     dependencies:
-      '@11ty/eleventy': 3.0.0
+      '@11ty/eleventy': 3.0.1-alpha.1
 
   '@11ty/dependency-tree-esm@1.0.1':
     dependencies:
@@ -2411,19 +2416,20 @@ snapshots:
     dependencies:
       normalize-path: 3.0.0
 
-  '@11ty/eleventy@3.0.0':
+  '@11ty/eleventy-utils@2.0.0': {}
+
+  '@11ty/eleventy@3.0.1-alpha.1':
     dependencies:
       '@11ty/dependency-tree': 3.0.1
       '@11ty/dependency-tree-esm': 1.0.1
       '@11ty/eleventy-dev-server': 2.0.4
       '@11ty/eleventy-plugin-bundle': 3.0.0(posthtml@0.16.6)
-      '@11ty/eleventy-utils': 1.0.3
+      '@11ty/eleventy-utils': 2.0.0
       '@11ty/lodash-custom': 4.17.21
       '@11ty/posthtml-urls': 1.0.0
       '@11ty/recursive-copy': 3.0.1
       '@sindresorhus/slugify': 2.2.1
       bcp-47-normalize: 2.3.0
-      chardet: 2.0.0
       chokidar: 3.6.0
       cross-spawn: 7.0.6
       debug: 4.4.0
@@ -2444,8 +2450,8 @@ snapshots:
       minimist: 1.2.8
       moo: 0.5.2
       node-retrieve-globals: 6.0.0
-      normalize-path: 3.0.0
       nunjucks: 3.2.4(chokidar@3.6.0)
+      p-map: 7.0.3
       please-upgrade-node: 3.2.0
       posthtml: 0.16.6
       posthtml-match-helper: 2.0.3(posthtml@0.16.6)
@@ -3246,8 +3252,6 @@ snapshots:
       supports-color: 7.2.0
 
   chardet@0.7.0: {}
-
-  chardet@2.0.0: {}
 
   check-error@2.1.1: {}
 
@@ -4060,6 +4064,8 @@ snapshots:
       p-limit: 3.1.0
 
   p-map@2.1.0: {}
+
+  p-map@7.0.3: {}
 
   p-try@2.2.0: {}
 
