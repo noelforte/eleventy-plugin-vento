@@ -5,7 +5,7 @@
 	"packageRules": [
 		{
 			"matchDepNames": ["ventojs", "debug"],
-			"reviewers": ["noelforte"],
+			"assignees": ["noelforte"],
 			"automerge": false
 		}
 	],
