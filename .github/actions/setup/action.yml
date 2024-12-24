@@ -10,7 +10,7 @@ runs:
   using: composite
   steps:
     - name: Setup tools
-      uses: jdx/mise-action@v2.1.8
+      uses: jdx/mise-action@v2.1.10
 
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
