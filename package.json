@@ -64,7 +64,7 @@
 		"eslint-plugin-unicorn": "56.0.1",
 		"globals": "15.14.0",
 		"tsup": "8.3.5",
-		"type-fest": "4.30.2",
+		"type-fest": "4.31.0",
 		"typescript": "5.7.2",
 		"typescript-eslint": "8.18.2",
 		"vitest": "2.1.8"
