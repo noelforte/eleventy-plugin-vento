@@ -1,5 +1,44 @@
 # eleventy-plugin-vento
 
+## 4.1.1
+
+### Patch Changes
+
+- 335f21e: Select type updates (shouldn't affect compilation, however should improve DX)
+
+  Changes are:
+
+  - split types into separate files
+  - namespace `ventojs` type imports
+  - make `PluginOptions` optional by default
+  - make Eleventy types more readable
+  - declare a special (`EleventyVentoEnvironment`) for this plugin to replace Vento's own `Environment`
+
+- 070109a: Refactored files and functions internally that shouldn't have any impact on usage or performance:
+
+  - Split `debug` functions into separate exports, renamed `runCompatiblityCheck -> compatibilityCheck` (dd4c379b)
+  - Utilities are now split into separate files (e06a83ab)
+  - Main file renamed from `index.ts` to `plugin.ts` (1b122d2a)
+
+- c382be0: Wrap all filters as regular synchronous functions to avoid ambiguity with sync and async handling. (fixes #96)
+
+  This change enforces explicit use of the `await` keyword to unwrap returned values from filters before chaining more or printing the result.
+
+  ```diff
+  <!-- Single filters -->
+  - {{ "Hello, async!" |> someAsyncFilter }}
+  + {{ "Hello, async!" |> await someAsyncFilter }}
+
+  <!-- Filter chains -->
+  - {{ "Hello, async!" |> someAsyncFilter |> someSyncFilter }}
+  + {{ "Hello, async!" |> await someAsyncFilter |> someSyncFilter }}
+  ```
+
+  See the [Vento docs on async chains](https://vento.js.org/syntax/pipes/#chain-pipes) for more information.
+
+- 9eaa059: Update `debug` to v4.4.0
+- 0b0f96a: Update ventojs to v1.12.14
+
 ## 4.1.1-beta.0
 
 ### Patch Changes
