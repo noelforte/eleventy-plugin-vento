@@ -24,10 +24,9 @@ export function createVentoEngine(options: ventojs.Options) {
 
 	function loadFilters(filters: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(filters)) {
-			env.filters[name] = async function (...args) {
+			env.filters[name] = function (...args) {
 				const { page, eleventy } = this.data;
-				const filterResult = await fn.apply({ ...this, page, eleventy }, args);
-				return filterResult;
+				return fn.apply({ ...this, page, eleventy }, args);
 			};
 		}
 	}
