@@ -17,10 +17,10 @@ importers:
     devDependencies:
       11ty.ts:
         specifier: 0.0.5
-        version: 0.0.5(@11ty/eleventy@3.0.1-alpha.1)
+        version: 0.0.5(@11ty/eleventy@3.0.1-alpha.3)
       '@11ty/eleventy':
-        specifier: 3.0.1-alpha.1
-        version: 3.0.1-alpha.1
+        specifier: 3.0.1-alpha.3
+        version: 3.0.1-alpha.3
       '@changesets/cli':
         specifier: 2.27.11
         version: 2.27.11
@@ -74,8 +74,8 @@ packages:
     peerDependencies:
       '@11ty/eleventy': ^2.0.1
 
-  '@11ty/dependency-tree-esm@1.0.1':
-    resolution: {integrity: sha512-CaCD5dTwyJlQqzzIVMR7Bqa3JApjmILl6+VfOrA1gDjDO+7J5EPhTxE/b7nyGICMc1UtcUnvKputl+EfLpP/PA==}
+  '@11ty/dependency-tree-esm@1.0.2':
+    resolution: {integrity: sha512-dM0ncKfMMWyz+xxujrB5xO4sf8DJygkmzb8OyXWP5AYY0kLMGrumYTf+YKyQHsoZli2rfjxrlEYLEXOt0utUqA==}
 
   '@11ty/dependency-tree@3.0.1':
     resolution: {integrity: sha512-aZizxcL4Z/clm3KPRx8i9ohW9R2gLssXfUSy7qQmQRXb4CUOyvmqk2gKeJqRmXIfMi2bB9w03SgtN5v1YwqpiA==}
@@ -97,8 +97,8 @@ packages:
     resolution: {integrity: sha512-rKny6X7+ARuke0TaA6FwNv2PWJCNSdPQqbqDgaZgi+bPXwnPRTEi3CWzvr6vVgh/1XpO1G4FhRPreLhtcwHUyg==}
     engines: {node: '>=18'}
 
-  '@11ty/eleventy@3.0.1-alpha.1':
-    resolution: {integrity: sha512-Z/RCpYzRbWWjWU3e5732tgjOf4hsuXrpx3zXW9Bf4/VGFd2uM4zoJkIOa8LFRLaocXWSNfapirudZNdFdjQZSA==}
+  '@11ty/eleventy@3.0.1-alpha.3':
+    resolution: {integrity: sha512-t416AuK1/Cwk8Vi5RmT6ovKLGcnWuw+LF7VW8arXkEGebjv/DXBvAvUwx4TSFBZVqxTKomW4KwwM5yuQjSJj0g==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -1101,8 +1101,8 @@ packages:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
     engines: {node: '>=0.12'}
 
-  entities@5.0.0:
-    resolution: {integrity: sha512-BeJFvFRJddxobhvEdm5GqHzRV/X+ACeuw0/BuuxsCh1EUZcAIz8+kYmBp/LrQuloy6K1f3a0M7+IhmZ7QnkISA==}
+  entities@6.0.0:
+    resolution: {integrity: sha512-aKstq2TDOndCn4diEyp9Uq/Flu2i1GlLkc6XIDQSDMuaFE3OPW5OphLCyQ5SpSJZTb4reN+kTcYru5yIfXoRPw==}
     engines: {node: '>=0.12'}
 
   errno@0.1.8:
@@ -2373,11 +2373,11 @@ packages:
 
 snapshots:
 
-  11ty.ts@0.0.5(@11ty/eleventy@3.0.1-alpha.1):
+  11ty.ts@0.0.5(@11ty/eleventy@3.0.1-alpha.3):
     dependencies:
-      '@11ty/eleventy': 3.0.1-alpha.1
+      '@11ty/eleventy': 3.0.1-alpha.3
 
-  '@11ty/dependency-tree-esm@1.0.1':
+  '@11ty/dependency-tree-esm@1.0.2':
     dependencies:
       '@11ty/eleventy-utils': 1.0.3
       acorn: 8.14.0
@@ -2422,10 +2422,10 @@ snapshots:
 
   '@11ty/eleventy-utils@2.0.0': {}
 
-  '@11ty/eleventy@3.0.1-alpha.1':
+  '@11ty/eleventy@3.0.1-alpha.3':
     dependencies:
       '@11ty/dependency-tree': 3.0.1
-      '@11ty/dependency-tree-esm': 1.0.1
+      '@11ty/dependency-tree-esm': 1.0.2
       '@11ty/eleventy-dev-server': 2.0.4
       '@11ty/eleventy-plugin-bundle': 3.0.0(posthtml@0.16.6)
       '@11ty/eleventy-utils': 2.0.0
@@ -2438,7 +2438,7 @@ snapshots:
       cross-spawn: 7.0.6
       debug: 4.4.0
       dependency-graph: 1.0.0
-      entities: 5.0.0
+      entities: 6.0.0
       fast-glob: 3.3.3
       filesize: 10.1.6
       graceful-fs: 4.2.11
@@ -3395,7 +3395,7 @@ snapshots:
 
   entities@4.5.0: {}
 
-  entities@5.0.0: {}
+  entities@6.0.0: {}
 
   errno@0.1.8:
     dependencies:
