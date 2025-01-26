@@ -7,7 +7,6 @@ on:
 
 jobs:
   changesets:
-    if: github.event_name == 'pull_request' && startsWith('renovate/', github.head_ref) == 'false'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -17,7 +16,13 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - run: pnpm changeset status --since=main
+      - name: Add changesets from renovate
+        id: sync-changesets
+        if: startsWith('renovate/', github.head_ref)
+        run: pnpm ci:generate-changesets
+
+      - if: steps.sync-changesets.conclusion == 'skipped'
+        run: pnpm changeset status --since=main
 
   test:
     runs-on: ubuntu-24.04
