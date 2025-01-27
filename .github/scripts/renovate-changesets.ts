@@ -20,13 +20,20 @@ function exit(message: string, code = 0, color?: ColorNames) {
 // Config
 const dependencies = new Set(['debug', 'ventojs']);
 
+log('Detecting branch...', 'dim');
+const branchName = await $`git rev-parse --abbrev-ref HEAD`.then(({ stdout }) => stdout.trim());
+
+if (!branchName.startsWith('renovate/')) {
+	exit(`\`${branchName}\` is not a renovate branch`, 0, 'red');
+}
+
 // Get file diffs
 log('Diffing changes...', 'dim');
 const diffOutput = await $`git diff --stat --name-only HEAD~1`;
 const diffFiles = diffOutput.stdout.split('\n');
 
 if (!diffFiles.includes('package.json')) {
-	exit('`package.json` not modified in latest commit', 0);
+	exit('`package.json` not modified in latest commit', 0, 'red');
 }
 
 // Create a map for bumped package versions

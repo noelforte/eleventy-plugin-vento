@@ -8,7 +8,6 @@ on:
 jobs:
   changesets:
     runs-on: ubuntu-24.04
-    if: startsWith('renovate/', github.ref_name)
     steps:
       - uses: actions/checkout@v4
 
