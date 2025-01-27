@@ -12,8 +12,8 @@ importers:
         specifier: 4.4.0
         version: 4.4.0
       ventojs:
-        specifier: 1.12.14
-        version: 1.12.14
+        specifier: 1.12.15
+        version: 1.12.15
     devDependencies:
       11ty.ts:
         specifier: 0.0.5
@@ -1585,8 +1585,8 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
 
-  meriyah@6.0.3:
-    resolution: {integrity: sha512-NqUbuQIjIH8dxUBPTMHS1kwIHd6n6nF3F7oeLXGWqBkpVP2lZxVHdab5JxbFBisIB4axZ9b/lT4HLJfZxmFK7Q==}
+  meriyah@6.0.5:
+    resolution: {integrity: sha512-SrMqQCox7TTwtftWKHy/ZaVe+ZRpRl20pAgDo+PS9hzcAJrMjYsBJQPPiLXTnjztrqdfGS+Zz99r6Bwvydta1w==}
     engines: {node: '>=18.0.0'}
 
   micromatch@4.0.8:
@@ -2224,8 +2224,8 @@ packages:
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
 
-  ventojs@1.12.14:
-    resolution: {integrity: sha512-Frlrkgc9X92q6H/kEY+VfASf10i4xiZ7EFkKSh7Da3n1dWxVH+1gEq1NKzflhpIKx8d+uGfopRrgNdnDoBBLew==}
+  ventojs@1.12.15:
+    resolution: {integrity: sha512-c4xRuqcAcVr50OnleepwEA+IR0U4WBZ80+POJ2yi+ZtlO1UEL1rEYFsP1a+Ze0JzP/AQsnw1UxXia/0CgI68sQ==}
 
   vite-node@3.0.4:
     resolution: {integrity: sha512-7JZKEzcYV2Nx3u6rlvN8qdo3QV7Fxyt6hx+CCKz9fbWxdX5IvUOmTWEAxMrWxaiSf7CKGLJQ5rFu8prb/jBjOA==}
@@ -3873,7 +3873,7 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  meriyah@6.0.3: {}
+  meriyah@6.0.5: {}
 
   micromatch@4.0.8:
     dependencies:
@@ -4438,11 +4438,11 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  ventojs@1.12.14:
+  ventojs@1.12.15:
     dependencies:
       '@deno/shim-deno': 0.18.2
       estree-walker: 3.0.3
-      meriyah: 6.0.3
+      meriyah: 6.0.5
 
   vite-node@3.0.4(@types/node@22.10.10)(tsx@4.19.2):
     dependencies:
