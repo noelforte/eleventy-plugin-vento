@@ -19,7 +19,7 @@ jobs:
       - name: Add changesets from renovate
         id: sync-changesets
         if: startsWith('renovate/', github.head_ref)
-        run: pnpm ci:generate-changesets
+        run: pnpm ci:generate-renovate-changesets
 
       - if: steps.sync-changesets.conclusion == 'skipped'
         run: pnpm changeset status --since=main

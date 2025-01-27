@@ -1,35 +1,38 @@
 import process from 'node:process';
-import path from 'path';
-import type { PackageJson } from 'type-fest';
-import { $, chalk, echo, fs } from 'zx';
+import path from 'node:path';
+import { promises as fsp } from 'node:fs';
+import { $ } from 'execa';
+import pc from 'picocolors';
+import { Except } from 'type-fest';
+import type { Colors } from 'picocolors/types';
+type ColorNames = keyof Except<Colors, 'isColorSupported'>;
 
-function exit(message: string, code = 0, color?: typeof chalk) {
-	echo(color ? color(message) : message);
+function log(message: string, color: ColorNames = 'dim') {
+	console.log(color ? pc[color](message) : message);
+}
+
+function exit(message: string, code = 0, color?: ColorNames) {
+	log(message, color);
 	process.stdout.write('\n');
 	process.exit(code);
 }
 
 // Config
-const dependencies = ['debug', 'ventojs'];
-
-// Get package.json information
-const pkg: PackageJson = fs.readJSONSync('./package.json');
+const dependencies = new Set(['debug', 'ventojs']);
 
 // Get file diffs
-echo(chalk.dim('Diffing changes...'));
+log('Diffing changes...', 'dim');
 const diffOutput = await $`git diff --stat --name-only HEAD~1`;
 const diffFiles = diffOutput.stdout.split('\n');
 
 if (!diffFiles.includes('package.json')) {
-	exit('`package.json` not modified in latest commit', 0, chalk.red);
+	exit('`package.json` not modified in latest commit', 0);
 }
 
 // Create a map for bumped package versions
-echo(chalk.dim('Indexing changes...'));
+log('Indexing changes...');
 const bumpedVersions: Map<string, string> = new Map();
-const changes = await $`git show --format='' package.json`;
-
-process.stdout.write('\n');
+const changes = await $`git show --format= package.json`;
 
 for (const change of changes.stdout.split('\n')) {
 	const match = /^\+.*"(.+)": ?"([\d.]+)"/m.exec(change);
@@ -40,38 +43,38 @@ for (const change of changes.stdout.split('\n')) {
 }
 
 for (const [name, version] of bumpedVersions) {
-	echo`${chalk.blue(name)} was updated to ${chalk.green(version)}`;
+	log(`${pc.blue(name)} was updated to ${pc.green(version)}`);
 
-	if (!dependencies.includes(name)) {
+	if (!dependencies.has(name)) {
 		bumpedVersions.delete(name);
 	}
 }
 
-process.stdout.write('\n');
-
 if (bumpedVersions.size === 0) {
-	exit('No changesets to write.', 0, chalk.dim);
+	exit('No changesets to write.', 0, 'red');
 }
 
-process.stdout.write(chalk.dim(`Writing ${bumpedVersions.size} changeset file(s) ... `));
-const writers = Array.from(bumpedVersions, async ([name, version]) => {
+process.stdout.write(pc.dim(`Writing ${bumpedVersions.size} changeset file(s) ... `));
+const writers = [...bumpedVersions].map(async ([name, version]) => {
 	const filepath = path.join('.changeset', `00-renovate-update-${name}.md`);
 	const contents = `---\n'eleventy-plugin-vento': minor\n---\n\nUpdate \`${name}\` to ${version}`;
 
-	return fs.promises.writeFile(filepath, contents, 'utf8');
+	return await fsp.writeFile(filepath, contents, 'utf8');
 });
 
 await Promise.all(writers);
 
-process.stdout.write(chalk.dim('[ ') + chalk.green('DONE') + chalk.dim(' ]\n'));
+process.stdout.write(pc.dim('[ ') + pc.green('DONE') + pc.dim(' ]\n'));
 
-echo(chalk.dim('Staging changes...'));
-$`git add .changeset`;
+if (process.env.CI !== 'true' || process.env.GITHUB_ACTIONS !== 'true') {
+	exit('Not running on CI.', 0, 'red');
+}
 
-echo(chalk.dim('Committing...'));
-$`git commit --author='github-actions[bot] <github-actions[bot]@users.noreply.github.com>' -m 'Add changesets for renovate changes'`;
+log('Staging changes...');
+await $`git add .changeset`;
 
-echo(chalk.dim('Pushing changes...'));
-$`git push`;
+log('Committing...');
+await $`git commit --author='github-actions[bot] <github-actions[bot]@users.noreply.github.com>' -m 'Add changesets for renovate updates'`;
 
-process.stdout.write('\n');
+log('Pushing changes...');
+await $`git push`;
