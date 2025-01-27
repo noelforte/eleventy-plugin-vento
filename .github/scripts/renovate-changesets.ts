@@ -78,7 +78,7 @@ log('Staging changes...', 'dim');
 await spawn('git', ['add', '.changeset']);
 
 log('Committing...', 'dim');
-await spawn('git', ['commit', '-m', 'Add changesets for renovate updates']);
+await spawn('git', ['commit', '--amend', '--no-edit']);
 
 log('Pushing changes...', 'dim');
-await spawn('git', ['push']);
+await spawn('git', ['push', '--force']);
