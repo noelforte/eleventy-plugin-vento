@@ -1,7 +1,7 @@
 import process from 'node:process';
 import path from 'node:path';
 import { promises as fsp } from 'node:fs';
-import { $ } from 'execa';
+import spawn from 'nano-spawn';
 import pc from 'picocolors';
 import { Except } from 'type-fest';
 import type { Colors } from 'picocolors/types';
@@ -22,7 +22,7 @@ const dependencies = new Set(['debug', 'ventojs']);
 
 // Get file diffs
 log('Diffing changes...', 'dim');
-const diffOutput = await $`git diff --stat --name-only HEAD~1`;
+const diffOutput = await spawn('git', ['diff', '--stat', '--name-only', 'HEAD~1']);
 const diffFiles = diffOutput.stdout.split('\n');
 
 if (!diffFiles.includes('package.json')) {
@@ -32,7 +32,7 @@ if (!diffFiles.includes('package.json')) {
 // Create a map for bumped package versions
 log('Indexing changes...', 'dim');
 const bumpedVersions: Map<string, string> = new Map();
-const changes = await $`git diff HEAD~1 package.json`;
+const changes = await spawn('git', ['diff', 'HEAD~1', 'package.json']);
 
 for (const change of changes.stdout.split('\n')) {
 	const match = /^\+.*"(.+)": ?"([\d.]+)"/m.exec(change);
@@ -71,10 +71,16 @@ if (process.env.CI !== 'true' || process.env.GITHUB_ACTIONS !== 'true') {
 }
 
 log('Staging changes...', 'dim');
-await $`git add .changeset`;
+await spawn('git', ['add', '.changeset']);
 
 log('Committing...', 'dim');
-await $`git commit --author='github-actions[bot] <github-actions[bot]@users.noreply.github.com>' -m 'Add changesets for renovate updates'`;
+await spawn('git', [
+	'commit',
+	'--author',
+	'github-actions[bot] <github-actions[bot]@users.noreply.github.com>',
+	'-m',
+	'Add changesets for renovate updates',
+]);
 
 log('Pushing changes...', 'dim');
-await $`git push`;
+await spawn('git', ['push']);
