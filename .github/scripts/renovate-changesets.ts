@@ -7,7 +7,7 @@ import { Except } from 'type-fest';
 import type { Colors } from 'picocolors/types';
 type ColorNames = keyof Except<Colors, 'isColorSupported'>;
 
-function log(message: string, color: ColorNames = 'dim') {
+function log(message: string, color?: ColorNames) {
 	console.log(color ? pc[color](message) : message);
 }
 
@@ -30,9 +30,9 @@ if (!diffFiles.includes('package.json')) {
 }
 
 // Create a map for bumped package versions
-log('Indexing changes...');
+log('Indexing changes...', 'dim');
 const bumpedVersions: Map<string, string> = new Map();
-const changes = await $`git show --format= package.json`;
+const changes = await $`git diff HEAD~1 package.json`;
 
 for (const change of changes.stdout.split('\n')) {
 	const match = /^\+.*"(.+)": ?"([\d.]+)"/m.exec(change);
@@ -70,11 +70,11 @@ if (process.env.CI !== 'true' || process.env.GITHUB_ACTIONS !== 'true') {
 	exit('Not running on CI.', 0, 'red');
 }
 
-log('Staging changes...');
+log('Staging changes...', 'dim');
 await $`git add .changeset`;
 
-log('Committing...');
+log('Committing...', 'dim');
 await $`git commit --author='github-actions[bot] <github-actions[bot]@users.noreply.github.com>' -m 'Add changesets for renovate updates'`;
 
-log('Pushing changes...');
+log('Pushing changes...', 'dim');
 await $`git push`;
