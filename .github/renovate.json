@@ -3,13 +3,6 @@
 	"semanticCommits": "disabled",
 	"gitIgnoredAuthors": ["github-actions[bot]@users.noreply.github.com>"],
 	"automergeType": "pr",
-	"packageRules": [
-		{
-			"matchDepNames": ["ventojs", "debug"],
-			"assignees": ["noelforte"],
-			"automerge": false
-		}
-	],
 	"vulnerabilityAlerts": {
 		"labels": ["security"],
 		"automerge": true,
