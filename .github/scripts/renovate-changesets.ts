@@ -70,17 +70,15 @@ if (process.env.CI !== 'true' || process.env.GITHUB_ACTIONS !== 'true') {
 	exit('Not running on CI.', 0, 'red');
 }
 
+log('Setting up git user...', 'dim');
+await spawn('git', ['config', 'user.name', `"github-actions[bot]"`]);
+await spawn('git', ['config', 'user.email', `"github-actions[bot]@users.noreply.github.com"`]);
+
 log('Staging changes...', 'dim');
 await spawn('git', ['add', '.changeset']);
 
 log('Committing...', 'dim');
-await spawn('git', [
-	'commit',
-	'--author',
-	'github-actions[bot] <github-actions[bot]@users.noreply.github.com>',
-	'-m',
-	'Add changesets for renovate updates',
-]);
+await spawn('git', ['commit', '-m', 'Add changesets for renovate updates']);
 
 log('Pushing changes...', 'dim');
 await spawn('git', ['push']);
