@@ -17,10 +17,10 @@ importers:
     devDependencies:
       11ty.ts:
         specifier: 0.0.5
-        version: 0.0.5(@11ty/eleventy@3.0.1-alpha.3)
+        version: 0.0.5(@11ty/eleventy@3.0.1-alpha.4)
       '@11ty/eleventy':
-        specifier: 3.0.1-alpha.3
-        version: 3.0.1-alpha.3
+        specifier: 3.0.1-alpha.4
+        version: 3.0.1-alpha.4
       '@changesets/cli':
         specifier: 2.27.12
         version: 2.27.12
@@ -94,8 +94,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@11ty/eleventy-plugin-bundle@3.0.0':
-    resolution: {integrity: sha512-JSnqehT+sWSPi6e44jTXUW+KiV9284YF9fzPQvfGB4cXlk/m/SJk17CavHCleIvKXDN+jrUw9TZkwAwr85ONWQ==}
+  '@11ty/eleventy-plugin-bundle@3.0.1':
+    resolution: {integrity: sha512-mskptUoN7PY+rv7DCH3ZwnvMc9aFBGEHHBjmlu+WGde6ySaa43qsLqjseX6RRijDILxp3EiYQ9XnDmmsSnoqIw==}
     engines: {node: '>=18'}
 
   '@11ty/eleventy-utils@1.0.3':
@@ -106,8 +106,8 @@ packages:
     resolution: {integrity: sha512-rKny6X7+ARuke0TaA6FwNv2PWJCNSdPQqbqDgaZgi+bPXwnPRTEi3CWzvr6vVgh/1XpO1G4FhRPreLhtcwHUyg==}
     engines: {node: '>=18'}
 
-  '@11ty/eleventy@3.0.1-alpha.3':
-    resolution: {integrity: sha512-t416AuK1/Cwk8Vi5RmT6ovKLGcnWuw+LF7VW8arXkEGebjv/DXBvAvUwx4TSFBZVqxTKomW4KwwM5yuQjSJj0g==}
+  '@11ty/eleventy@3.0.1-alpha.4':
+    resolution: {integrity: sha512-3bjLwckro8QoChYnb/GI27l9YPqlook7oeFwlQkkwH/vcdZufWAr2fGj2thfaa/bUpSb978ELCjw12ByG3mWAQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -2351,9 +2351,9 @@ packages:
 
 snapshots:
 
-  11ty.ts@0.0.5(@11ty/eleventy@3.0.1-alpha.3):
+  11ty.ts@0.0.5(@11ty/eleventy@3.0.1-alpha.4):
     dependencies:
-      '@11ty/eleventy': 3.0.1-alpha.3
+      '@11ty/eleventy': 3.0.1-alpha.4
 
   '@11ty/dependency-tree-esm@1.0.2':
     dependencies:
@@ -2386,7 +2386,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@11ty/eleventy-plugin-bundle@3.0.0(posthtml@0.16.6)':
+  '@11ty/eleventy-plugin-bundle@3.0.1(posthtml@0.16.6)':
     dependencies:
       debug: 4.4.0
       posthtml-match-helper: 2.0.3(posthtml@0.16.6)
@@ -2400,12 +2400,12 @@ snapshots:
 
   '@11ty/eleventy-utils@2.0.0': {}
 
-  '@11ty/eleventy@3.0.1-alpha.3':
+  '@11ty/eleventy@3.0.1-alpha.4':
     dependencies:
       '@11ty/dependency-tree': 3.0.1
       '@11ty/dependency-tree-esm': 1.0.2
       '@11ty/eleventy-dev-server': 2.0.6
-      '@11ty/eleventy-plugin-bundle': 3.0.0(posthtml@0.16.6)
+      '@11ty/eleventy-plugin-bundle': 3.0.1(posthtml@0.16.6)
       '@11ty/eleventy-utils': 2.0.0
       '@11ty/lodash-custom': 4.17.21
       '@11ty/posthtml-urls': 1.0.1
