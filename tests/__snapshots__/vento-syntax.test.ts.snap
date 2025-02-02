@@ -55,5 +55,7 @@ exports[`Can run functions in templates 1`] = `
 exports[`Can set/print variables in templates 1`] = `
 "
 my val
+
+foo!!
 "
 `;
