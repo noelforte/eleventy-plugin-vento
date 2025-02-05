@@ -110,3 +110,8 @@ describe('Can run Eleventy shortcodes as Vento tags', { concurrent: true }, () =
 		expect(result?.content).toMatchSnapshot(`shortcodes-${slug}`);
 	});
 });
+
+test('Can access collection data within templates', { concurrent: true }, async ({ expect }) => {
+	const result = testInstance.getBuildResultForUrl(`/collections/iterate/`);
+	expect(result?.content).toMatchSnapshot(`collections-iterate`);
+});

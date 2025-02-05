@@ -18,6 +18,12 @@ export default function eleventy(eleventyConfig) {
 
 	eleventyConfig.addTemplate('filters/with-env-compile.vto', "{{ '{{ 2 + 2 }}' |> await vento }}");
 
+	// Collections
+	eleventyConfig.addCollection('posts', (collectionsApi) => {
+		const items = collectionsApi.getFilteredByGlob('./tests/stubs/posts/*.md');
+		return items;
+	});
+
 	// Filters
 	eleventyConfig.addFilter('wrapWith', (content, tag = 'span') => `<${tag}>${content}</${tag}>`);
 
