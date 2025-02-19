@@ -67,11 +67,11 @@
 		"nano-spawn": "0.2.0",
 		"picocolors": "1.1.1",
 		"tsup": "8.3.6",
-		"tsx": "4.19.2",
+		"tsx": "4.19.3",
 		"type-fest": "4.35.0",
 		"typescript": "5.7.3",
 		"typescript-eslint": "8.24.1",
-		"vitest": "3.0.5"
+		"vitest": "3.0.6"
 	},
 	"prettier": {
 		"bracketSameLine": true,
