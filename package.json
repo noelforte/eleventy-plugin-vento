@@ -61,7 +61,7 @@
 		"@types/eslint__js": "8.42.3",
 		"@types/node": "22.13.9",
 		"eslint": "9.21.0",
-		"eslint-config-prettier": "10.0.2",
+		"eslint-config-prettier": "10.1.1",
 		"eslint-plugin-unicorn": "56.0.1",
 		"globals": "15.15.0",
 		"nano-spawn": "0.2.0",
@@ -71,7 +71,7 @@
 		"type-fest": "4.37.0",
 		"typescript": "5.8.2",
 		"typescript-eslint": "8.26.0",
-		"vitest": "3.0.7"
+		"vitest": "3.0.8"
 	},
 	"prettier": {
 		"bracketSameLine": true,
