@@ -18,8 +18,8 @@ export type EleventyTagInfo = {
 };
 
 export function createVentoTag(tagInfo: EleventyTagInfo) {
+	let LEVEL = 1;
 	const IS_PAIRED = tagInfo.group === 'pairedShortcodes';
-	let INT = 0;
 
 	const tag: EleventyTag = (env, code, output, tokens) => {
 		if (!code.startsWith(tagInfo.name)) return;
@@ -41,7 +41,7 @@ export function createVentoTag(tagInfo: EleventyTagInfo) {
 		const compiled = [];
 
 		if (IS_PAIRED) {
-			const nestedVarname = `__arg${INT++}`;
+			const nestedVarname = `__content${output.startsWith('__content') ? LEVEL++ : 0}`;
 
 			args.unshift(env.compileFilters(tokens, nestedVarname, env.options.autoescape));
 			compiled.push(
