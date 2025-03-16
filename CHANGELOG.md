@@ -1,5 +1,16 @@
 # eleventy-plugin-vento
 
+## 4.2.0
+
+### Minor Changes
+
+- fc6aa07: Update `ventojs` to 1.12.16
+
+### Patch Changes
+
+- 02d75fd: Adjust `nestedVarname` for Eleventy-provided shortcodes so that conflicts in internal template variable names are less likely. Should not have significant impact on builds.
+- 12e04fe: Made `DEBUG` messages regarding whether Eleventy or Vento was caching a template more verbose
+
 ## 4.1.1
 
 ### Patch Changes
