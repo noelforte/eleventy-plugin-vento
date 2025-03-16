@@ -63,9 +63,9 @@ export function createVentoEngine(options: ventojs.Options) {
 			template = env.compile(source, file);
 
 			debugCache(
-				`Cache MISS for \`%s\`, compiled new template:\nUse Vento cache: %o\n\n${template}`,
+				`Cache MISS for \`%s\`, compiled new template; %s\n\n${template}`,
 				file,
-				useVentoCache
+				useVentoCache ? 'let Vento cache result' : 'defer result caching to Eleventy'
 			);
 			if (useVentoCache) {
 				env.cache.set(file, template);
