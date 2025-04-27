@@ -1,6 +1,7 @@
+blank_issues_enabled: false
 contact_links:
   - name: Ask questions about using this plugin
     url: https://github.com/noelforte/eleventy-plugin-vento/discussions
     about: >
-      Have a question? Please use GitHub discussions instead of opening an
-      issue. Thanks!
+      Have a question? Please use GitHub discussions instead of opening
+      an issue. Thanks!
