@@ -1,5 +1,5 @@
 ---
-name: Known issue
+name: ‼️ Known issue
 about: Create an issue tracking a known problem or future enhancement
 title: '<issue title>'
 labels: known issue
