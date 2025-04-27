@@ -2,7 +2,6 @@
 name: Known issue
 about: Create a blank issue for tracking a known problem or future enhancement.
 labels: known issue
-assignees: noelforte
 ---
 
 NOTE
