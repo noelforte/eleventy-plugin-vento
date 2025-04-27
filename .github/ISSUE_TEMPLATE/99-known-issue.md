@@ -1,6 +1,6 @@
 ---
-name: ‼️ Known issue
-about: Create an issue tracking a known problem or future enhancement
+name: Known issue
+about: Create a blank issue for tracking a known problem or future enhancement.
 title: '<issue title>'
 labels: known issue
 assignees: noelforte
