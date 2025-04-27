@@ -19,5 +19,5 @@ test.for(matrix)('%s', async ([_label, autotrim, slug], { expect }) => {
 
 	const result = testInstance.getBuildResultForUrl('/');
 
-	expect(result?.content).toMatchSnapshot(`autotrim-${slug}`);
+	await expect(result?.content).toMatchFileSnapshot(`./snapshots/autotrim-${slug}.htmlsnap`);
 });

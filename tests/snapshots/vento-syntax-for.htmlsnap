@@ -1,0 +1,16 @@
+Eleventy keys:
+version
+generator
+env
+directories
+
+Page keys:
+inputPath
+fileSlug
+filePathStem
+outputFileExtension
+templateSyntax
+date
+rawInput
+url
+outputPath

@@ -1,0 +1,23 @@
+Paired shortcode call:
+<pre class="code-block"><code class="lang-text">
+	This is some plaintext.
+</code></pre>
+
+Paired shortcode call with argument:
+<pre class="code-block"><code class="lang-html">
+	<h1>Who puts tags in all uppercase anyway?</h1>
+</code></pre>
+
+Paired shortcode call with page data:
+
+	<p>This is a paragraph</p>
+	<p>And this is another one</p>
+	<p>One more for luck</p>
+
+<span class="url">/shortcodes/paired/</span>
+
+Paired shortcode call with explicit page data:
+<section>
+	<p>The page url is: /shortcodes/paired/</p>
+	<p>The project description is: Adds support for the Vento templating language to Eleventy.</p>
+</section>

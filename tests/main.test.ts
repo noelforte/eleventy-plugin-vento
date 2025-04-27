@@ -13,7 +13,7 @@ describe('Can print Eleventy data', { concurrent: true }, () => {
 
 	test.for(matrix)('%s', async ([_label, slug], { expect }) => {
 		const result = testInstance.getBuildResultForUrl(`/data-handling/${slug}/`);
-		expect(result?.content).toMatchSnapshot(`data-${slug}`);
+		await expect(result?.content).toMatchFileSnapshot(`./snapshots/data-${slug}.htmlsnap`);
 	});
 });
 
@@ -25,7 +25,7 @@ describe("Can include from Eleventy's `includes` directory", { concurrent: true 
 
 	test.for(matrix)('%s', async ([_label, slug], { expect }) => {
 		const result = testInstance.getBuildResultForUrl(`/include-handling/${slug}/`);
-		expect(result?.content).toMatchSnapshot(`includes-${slug}`);
+		await expect(result?.content).toMatchFileSnapshot(`./snapshots/includes-${slug}.htmlsnap`);
 	});
 });
 
@@ -37,19 +37,19 @@ describe("Can use layouts from Eleventy's `layouts` directory", { concurrent: tr
 
 	test.for(matrix)('%s', async ([_label, slug], { expect }) => {
 		const result = testInstance.getBuildResultForUrl(`/layout-handling/${slug}/`);
-		expect(result?.content).toMatchSnapshot(`layouts-${slug}`);
+		await expect(result?.content).toMatchFileSnapshot(`./snapshots/layouts-${slug}.htmlsnap`);
 	});
 });
 
 describe('Can process Eleventy permalink keys', { concurrent: true }, () => {
 	test('render a page at a nested permalink', async ({ expect }) => {
 		const result = testInstance.getBuildResultForUrl('/page/at/nested/permalink/');
-		expect(result?.content).toMatchSnapshot('permalink-nested');
+		await expect(result?.content).toMatchFileSnapshot('./snapshots/permalink-nested.htmlsnap');
 	});
 
 	test('render a page at root url', async ({ expect }) => {
 		const result = testInstance.getBuildResultForUrl('/');
-		expect(result?.content).toMatchSnapshot('permalink-root');
+		await expect(result?.content).toMatchFileSnapshot('./snapshots/permalink-root.htmlsnap');
 	});
 
 	test('render a page at a dynamic permalink', async ({ expect }) => {
@@ -78,7 +78,7 @@ describe('Can run Vento filters', { concurrent: true }, () => {
 
 	test.for(matrix)('%s', async ([_label, slug], { expect }) => {
 		const result = testInstance.getBuildResultForUrl(`/filters/${slug}/`);
-		expect(result?.content).toMatchSnapshot(`filters-${slug}`);
+		await expect(result?.content).toMatchFileSnapshot(`./snapshots/filters-${slug}.htmlsnap`);
 	});
 
 	test('use context data (this.page)', async ({ expect }) => {
@@ -107,11 +107,11 @@ describe('Can run Eleventy shortcodes as Vento tags', { concurrent: true }, () =
 
 	test.for(matrix)('run %s', async ([_label, slug], { expect }) => {
 		const result = testInstance.getBuildResultForUrl(`/shortcodes/${slug}/`);
-		expect(result?.content).toMatchSnapshot(`shortcodes-${slug}`);
+		await expect(result?.content).toMatchFileSnapshot(`./snapshots/shortcodes-${slug}.htmlsnap`);
 	});
 });
 
 test('Can access collection data within templates', { concurrent: true }, async ({ expect }) => {
 	const result = testInstance.getBuildResultForUrl(`/collections/iterate/`);
-	expect(result?.content).toMatchSnapshot(`collections-iterate`);
+	await expect(result?.content).toMatchFileSnapshot(`./snapshots/collections-iterate.htmlsnap`);
 });

@@ -1,0 +1,8 @@
+
+<h1>Page with includes (data passing)</h1>
+
+<section class="include">
+	<p>This content is included.</p>
+	<p>Passed data for `extra` key: 'super fancy data'</p>
+</section>
+
