@@ -23,6 +23,8 @@ export function createVentoTag(tagInfo: EleventyTagInfo) {
 
 	const tag: EleventyTag = (env, code, output, tokens) => {
 		if (code !== tagInfo.name && !code.startsWith(`${tagInfo.name} `)) {
+			// Return early if the received code is not either the tag name
+			// exactly or in the case of arguments is the tag name with a space
 			return;
 		}
 
