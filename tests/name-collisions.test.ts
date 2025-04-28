@@ -1,22 +1,28 @@
 import { EleventyTest } from './_eleventy-test-instance.js';
-import { test } from 'vitest';
+import { test, describe } from 'vitest';
 
 const testInstance = new EleventyTest('./tests/stubs-name-collisions/');
 
 await testInstance.rebuild();
 
-const matrix = [
-	['paired forward', 'paired-forward'],
-	['paired reverse', 'paired-reverse'],
-	['single forward', 'single-forward'],
-	['single reverse', 'single-reverse'],
-];
+describe('Can handle paired shortcode name overlap', { concurrent: true }, () => {
+	const matrix = ['forward', 'reverse'];
 
-test.for(matrix)(
-	'Naming collisions (%s)',
-	{ concurrent: true },
-	async ([_label, format], { expect }) => {
-		const result = testInstance.getBuildResultForUrl(format);
-		await expect(result?.content).toMatchFileSnapshot(`./snapshots/collisions-${format}.htmlsnap`);
-	}
-);
+	test.for(matrix)('Can handle %s overlap', { concurrent: true }, async (direction, { expect }) => {
+		const result = testInstance.getBuildResultForUrl(`/paired-${direction}/`);
+		await expect(result?.content).toMatchFileSnapshot(
+			`./snapshots/collisions-paired-${direction}.htmlsnap`
+		);
+	});
+});
+
+describe('Can handle single shortcode name overlap', { concurrent: true }, () => {
+	const matrix = ['forward', 'reverse'];
+
+	test.for(matrix)('Can handle %s overlap', { concurrent: true }, async (direction, { expect }) => {
+		const result = testInstance.getBuildResultForUrl(`/single-${direction}/`);
+		await expect(result?.content).toMatchFileSnapshot(
+			`./snapshots/collisions-single-${direction}.htmlsnap`
+		);
+	});
+});
