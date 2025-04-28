@@ -37,7 +37,7 @@ export function createVentoTag(tagInfo: EleventyTagInfo) {
 
 		// Declare helper variables for repeated strings in template
 		const fn = `__env.utils.eleventyFunctions.${tagInfo.group}.${tagInfo.name}`;
-		const args = [code.replace(new RegExp(`^${tagInfo.name} ?`), '').trim()];
+		const args = [code.replace(tagInfo.name, '').trim()];
 
 		// Create an array to hold compiled template code
 		const compiled = [];
