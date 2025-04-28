@@ -1,1 +1,7 @@
-undefined
+Paired shortcode call with overlapping name child (forwards):
+<section class="lettergroup">
+	<span class="letter">a</span>
+	<span class="letter">b</span>
+	<span class="letter">c</span>
+</section>
+

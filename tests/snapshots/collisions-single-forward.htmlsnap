@@ -1,1 +1,5 @@
-undefined
+<span class="letter">a</span>
+<span class="letterstring">b</span>
+<span class="letter">c</span>
+<span class="letterstring">d</span>
+<span class="letter">e</span>

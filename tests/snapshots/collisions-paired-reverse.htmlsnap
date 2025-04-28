@@ -1,1 +1,6 @@
-undefined
+Paired shortcode call with overlapping name child (reverse):
+<section class="groupletter">
+	<span class="letter">a</span>
+	<span class="letter">b</span>
+	<span class="letter">c</span>
+</section>
