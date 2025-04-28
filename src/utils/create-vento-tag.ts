@@ -22,7 +22,9 @@ export function createVentoTag(tagInfo: EleventyTagInfo) {
 	const IS_PAIRED = tagInfo.group === 'pairedShortcodes';
 
 	const tag: EleventyTag = (env, code, output, tokens) => {
-		if (code !== tagInfo.name && !code.startsWith(`${tagInfo.name} `)) {
+		const match = code === tagInfo.name || code.startsWith(`${tagInfo.name} `);
+
+		if (!match) {
 			// Return early if the received code is not either the tag name
 			// exactly or in the case of arguments is the tag name with a space
 			return;
