@@ -16,7 +16,7 @@
 		"body": [
 			"test('${1:test name}', async ({ expect }) => {",
 			"\tconst { content } = await testInstance.getBuildResultForUrl('${2:/page-url/}');",
-			"\tawait expect(content).toMatchFileSnapshot('./_results/${3:output.html}');",
+			"\tawait expect(content).toMatchFileSnapshot('./snapshots/${3:.htmlsnap}');",
 			"});"
 		],
 		"description": "Create a new test for eleventy-plugin-vento"
