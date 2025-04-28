@@ -1,5 +1,5 @@
-import { EleventyTest } from './_eleventy-test-instance.js';
 import { test } from 'vitest';
+import { EleventyTest } from './_eleventy-test-instance.js';
 
 const testInstance = new EleventyTest('./tests/stubs-vento-syntax/', {
 	pluginOptions: {

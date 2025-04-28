@@ -2,8 +2,8 @@
 import type { MergeDeep } from 'type-fest';
 import type { Environment, Tag } from 'ventojs/src/environment.js';
 
-import type { EleventyTagInfo, EleventyTag } from '../utils/create-vento-tag.ts';
-import type { EleventyFunctionMap, EleventyDataCascade, EleventyFunction } from './eleventy.ts';
+import type { EleventyTag, EleventyTagInfo } from '../utils/create-vento-tag.ts';
+import type { EleventyDataCascade, EleventyFunction, EleventyFunctionMap } from './eleventy.ts';
 
 // Filter overrides
 type EleventyVentoFilterThis = {

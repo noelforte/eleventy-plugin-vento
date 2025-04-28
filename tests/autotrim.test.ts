@@ -1,6 +1,6 @@
+import { test } from 'vitest';
 import { PluginOptions } from '../src/types/options.js';
 import { EleventyTest } from './_eleventy-test-instance.js';
-import { test } from 'vitest';
 
 const matrix: [string, PluginOptions['autotrim'], string][] = [
 	['All tags', true, 'all'],

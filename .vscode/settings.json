@@ -8,5 +8,8 @@
 		"*.scss.liquid": "liquid-scss",
 		"*.htmlsnap": "html"
 	},
-	"eslint.enable": true
+	"eslint.enable": true,
+	"editor.codeActionsOnSave": {
+		"source.sortImports": "always"
+	}
 }

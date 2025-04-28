@@ -2,8 +2,8 @@
  * @file Factory function that creates vento tags from eleventy functions
  */
 
-import type { EleventyVentoEnvironment } from '../types/vento.js';
 import type { Token } from 'ventojs/src/tokenizer.js';
+import type { EleventyVentoEnvironment } from '../types/vento.js';
 
 export type EleventyTag = (
 	env: EleventyVentoEnvironment,

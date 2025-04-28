@@ -1,5 +1,5 @@
+import { describe, test } from 'vitest';
 import { EleventyTest } from './_eleventy-test-instance.js';
-import { test, describe } from 'vitest';
 
 const testInstance = new EleventyTest('./tests/stubs-name-collisions/');
 

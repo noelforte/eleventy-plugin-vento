@@ -6,7 +6,7 @@
 // External library
 import createVentoEnv, * as ventojs from 'ventojs';
 import type { Plugin, Template } from 'ventojs/src/environment.js';
-import type { EleventyFunctionMap, EleventyDataCascade } from './types/eleventy.js';
+import type { EleventyDataCascade, EleventyFunctionMap } from './types/eleventy.js';
 
 // Internal modules
 import { createVentoTag } from './utils/create-vento-tag.js';
