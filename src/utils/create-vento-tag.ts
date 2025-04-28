@@ -22,7 +22,7 @@ export function createVentoTag(tagInfo: EleventyTagInfo) {
 	const IS_PAIRED = tagInfo.group === 'pairedShortcodes';
 
 	const tag: EleventyTag = (env, code, output, tokens) => {
-		if (code != tagInfo.name && !code.startsWith(`${tagInfo.name} `)) {
+		if (code !== tagInfo.name && !code.startsWith(`${tagInfo.name} `)) {
 			return;
 		}
 
@@ -37,7 +37,7 @@ export function createVentoTag(tagInfo: EleventyTagInfo) {
 
 		// Declare helper variables for repeated strings in template
 		const fn = `__env.utils.eleventyFunctions.${tagInfo.group}.${tagInfo.name}`;
-		const args = [code.replace(RegExp(`^${tagInfo.name} ?`), '').trim()];
+		const args = [code.replace(new RegExp(`^${tagInfo.name} ?`), '').trim()];
 
 		// Create an array to hold compiled template code
 		const compiled = [];
