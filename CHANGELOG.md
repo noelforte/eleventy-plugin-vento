@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 4.2.1
+
+### Patch Changes
+
+- aa931db: handle shortcode names that start with the same sequence (fixes #220)
+
 ## 4.2.0
 
 ### Minor Changes
