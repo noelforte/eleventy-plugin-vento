@@ -63,7 +63,7 @@
 		"eslint-config-prettier": "10.1.5",
 		"eslint-plugin-unicorn": "59.0.1",
 		"globals": "16.1.0",
-		"nano-spawn": "0.2.1",
+		"nano-spawn": "1.0.1",
 		"picocolors": "1.1.1",
 		"tsup": "8.4.0",
 		"tsx": "4.19.4",
