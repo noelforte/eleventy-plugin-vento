@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 4.3.0
+
+### Minor Changes
+
+- 8369ae1: Update `debug` to 4.4.1
+
 ## 4.2.1
 
 ### Patch Changes
