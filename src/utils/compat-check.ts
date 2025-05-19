@@ -1,7 +1,7 @@
 import type UserConfig from '@11ty/eleventy/UserConfig';
 import { debugMain } from './debuggers.js';
 
-export const REQUIRED_API_METHODS = [
+const REQUIRED_API_METHODS = [
 	['getShortcodes', 'v3.0.0-alpha.15'],
 	['getPairedShortcodes', 'v3.0.0-alpha.15'],
 	['getFilters', 'v3.0.0-alpha.15'],
