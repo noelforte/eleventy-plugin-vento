@@ -11,6 +11,7 @@
 		"check": "pnpm --color run '/^check:/'",
 		"check:lint": "eslint '.'",
 		"check:types": "tsc --noEmit",
+		"check:project": "knip",
 		"build": "tsup",
 		"dev": "tsup --watch ./src",
 		"ci:version": "changeset version && pnpm install --no-frozen-lockfile",
