@@ -12,8 +12,8 @@ importers:
         specifier: 4.4.1
         version: 4.4.1
       ventojs:
-        specifier: 1.12.16
-        version: 1.12.16
+        specifier: 1.13.0
+        version: 1.13.0
     devDependencies:
       11ty.ts:
         specifier: 0.0.5
@@ -172,12 +172,6 @@ packages:
 
   '@changesets/write@0.4.0':
     resolution: {integrity: sha512-CdTLvIOPiCNuH71pyDu3rA+Q0n65cmAbXnwWH84rKGiFumFzkmHNT8KHTMEchcxN+Kl8I54xGUhJ7l3E7X396Q==}
-
-  '@deno/shim-deno-test@0.5.0':
-    resolution: {integrity: sha512-4nMhecpGlPi0cSzT67L+Tm+GOJqvuk8gqHBziqcUQOarnuIax1z96/gJHCSIz2Z0zhxE6Rzwb3IZXPtFh51j+w==}
-
-  '@deno/shim-deno@0.18.2':
-    resolution: {integrity: sha512-oQ0CVmOio63wlhwQF75zA4ioolPvOwAoK0yuzcS5bDC1JUvH3y1GS8xPh8EOpcoDQRU4FTG8OQfxhpR+c6DrzA==}
 
   '@emnapi/core@1.4.3':
     resolution: {integrity: sha512-4m62DuCE07lw01soJwPiBGC0nAww0Q+RY70VZ+n49yDIO13yyinhbWCeNnaob0lakDtWQzSdtNWzJeOJt2ma+g==}
@@ -1363,10 +1357,6 @@ packages:
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
-  isexe@3.1.1:
-    resolution: {integrity: sha512-LpB/54B+/2J5hqQ7imZHfdU31OlgQqx7ZicVlkm9kzg9/w8GKLEcFfJl/t7DCEDueOyBAD6zCCwTO6Fzs0NoEQ==}
-    engines: {node: '>=16'}
-
   iso-639-1@3.1.5:
     resolution: {integrity: sha512-gXkz5+KN7HrG0Q5UGqSMO2qB9AsbEeyLP54kF1YrMsIxmu+g4BdB7rflReZTSTZGpfj8wywu6pfPBCylPIzGQA==}
     engines: {node: '>=6.0'}
@@ -2086,8 +2076,8 @@ packages:
   urlpattern-polyfill@10.1.0:
     resolution: {integrity: sha512-IGjKp/o0NL3Bso1PymYURCJxMPNAf/ILOpendP9f5B6e1rTJgdgiOvgfoT8VxCAdY+Wisb9uhGaJJf3yZ2V9nw==}
 
-  ventojs@1.12.16:
-    resolution: {integrity: sha512-HHemaBdjSQ//1emDqHkuyGse0uJgm28L4X/WXNN2Wh1B8vZnvLuG27TzylRMPSoxuKHnLmrM0KMf755a9c6DiA==}
+  ventojs@1.13.0:
+    resolution: {integrity: sha512-+ev2oJR+yJ2gjf5ytsF9rO7EoCCkFonQK9RsVOPr46gYl6wO1EeS+r0t3Xoj70WnWuiHktKJKXMLoKrnnhKTpA==}
 
   vite-node@3.1.4:
     resolution: {integrity: sha512-6enNwYnpyDo4hEgytbmc6mYWHXDHYEn0D1/rw4Q+tnHUGtKTJsn8T1YkX6Q18wI5LCrS8CTYlBaiCqxOy2kvUA==}
@@ -2174,11 +2164,6 @@ packages:
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
     engines: {node: '>= 8'}
-    hasBin: true
-
-  which@4.0.0:
-    resolution: {integrity: sha512-GlaYyEb07DPxYCKhKzplCWBJtvxZcZMrL+4UkrTSJHHPyZU4mYYTv3qaOe77H7EODLSSopAUFAc6W8U4yqvscg==}
-    engines: {node: ^16.13.0 || >=18.0.0}
     hasBin: true
 
   why-is-node-running@2.3.0:
@@ -2471,13 +2456,6 @@ snapshots:
       fs-extra: 7.0.1
       human-id: 4.1.1
       prettier: 2.8.8
-
-  '@deno/shim-deno-test@0.5.0': {}
-
-  '@deno/shim-deno@0.18.2':
-    dependencies:
-      '@deno/shim-deno-test': 0.5.0
-      which: 4.0.0
 
   '@emnapi/core@1.4.3':
     dependencies:
@@ -3585,8 +3563,6 @@ snapshots:
 
   isexe@2.0.0: {}
 
-  isexe@3.1.1: {}
-
   iso-639-1@3.1.5: {}
 
   jackspeak@3.4.3:
@@ -4242,9 +4218,8 @@ snapshots:
 
   urlpattern-polyfill@10.1.0: {}
 
-  ventojs@1.12.16:
+  ventojs@1.13.0:
     dependencies:
-      '@deno/shim-deno': 0.18.2
       estree-walker: 3.0.3
       meriyah: 6.0.5
 
@@ -4336,10 +4311,6 @@ snapshots:
   which@2.0.2:
     dependencies:
       isexe: 2.0.0
-
-  which@4.0.0:
-    dependencies:
-      isexe: 3.1.1
 
   why-is-node-running@2.3.0:
     dependencies:
