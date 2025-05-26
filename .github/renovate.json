@@ -1,13 +1,19 @@
 {
 	"extends": ["github>noelforte/renovate-config"],
 	"semanticCommits": "disabled",
-	"gitIgnoredAuthors": ["github-actions[bot]@users.noreply.github.com>"],
-	"automergeType": "pr",
 	"vulnerabilityAlerts": {
 		"labels": ["security"],
 		"automerge": true,
 		"assignees": ["noelforte"],
 		"vulnerabilityFixStrategy": "highest"
 	},
+	"packageRules": [
+		{
+			"matchDepNames": ["ventojs", "debug"],
+			"automergeType": "pr",
+			"automerge": false,
+			"assignees": ["noelforte"]
+		}
+	],
 	"osvVulnerabilityAlerts": true
 }

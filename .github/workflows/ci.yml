@@ -6,24 +6,6 @@ on:
     branches: [main]
 
 jobs:
-  changesets:
-    runs-on: ubuntu-24.04
-    if: startsWith(github.head_ref, 'renovate/')
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.head_ref }}
-
-      - name: Setup
-        uses: ./.github/actions/setup
-
-      - name: Add changesets from renovate
-        id: sync-changesets
-        run: pnpm ci:generate-renovate-changesets
-
   test:
     runs-on: ubuntu-24.04
     steps:
