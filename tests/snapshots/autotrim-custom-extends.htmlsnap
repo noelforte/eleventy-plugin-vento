@@ -133,7 +133,7 @@
 		</section>
 	
 	<a class="magic-button" href="https://11ty.dev/">Link to Eleventy Homepage</a>
-	<p>Here's a block of text with some<span style="background-color:#BADA55;">really cool</span> text.</p>
+	<p>Here's a block of text with some	<span style="background-color:#BADA55;">really cool</span> text.</p>
 <article class="card magic">
 				<header>A data card</header>
 						<p>Here's some card content.</p>
