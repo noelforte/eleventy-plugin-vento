@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 4.4.1
+
+### Patch Changes
+
+- e6c4262: Update vento to 1.13.1 (fixes #257)
+
 ## 4.4.0
 
 ### Minor Changes
