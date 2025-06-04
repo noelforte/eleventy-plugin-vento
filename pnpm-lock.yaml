@@ -12,8 +12,8 @@ importers:
         specifier: 4.4.1
         version: 4.4.1
       ventojs:
-        specifier: 1.13.1
-        version: 1.13.1
+        specifier: 1.13.2
+        version: 1.13.2
     devDependencies:
       11ty.ts:
         specifier: 0.0.5
@@ -2086,8 +2086,8 @@ packages:
   urlpattern-polyfill@10.1.0:
     resolution: {integrity: sha512-IGjKp/o0NL3Bso1PymYURCJxMPNAf/ILOpendP9f5B6e1rTJgdgiOvgfoT8VxCAdY+Wisb9uhGaJJf3yZ2V9nw==}
 
-  ventojs@1.13.1:
-    resolution: {integrity: sha512-DO8iQ2PbvjfyCLCUu8nczLWBjQHZYVqwbrcC3rTvtqkewjVF5vYAWuN8ao+UDM2hPUnzStLmMUvhjYeixCTsnQ==}
+  ventojs@1.13.2:
+    resolution: {integrity: sha512-vKMa8TkZjGzoz5KDzWnIRgiFVPq1/CC6Dadivio930apGw4la1vdlurO1GEeohGINYI1FYQeHxqFja3dgTVc7g==}
 
   vite-node@3.1.4:
     resolution: {integrity: sha512-6enNwYnpyDo4hEgytbmc6mYWHXDHYEn0D1/rw4Q+tnHUGtKTJsn8T1YkX6Q18wI5LCrS8CTYlBaiCqxOy2kvUA==}
@@ -4243,7 +4243,7 @@ snapshots:
 
   urlpattern-polyfill@10.1.0: {}
 
-  ventojs@1.13.1:
+  ventojs@1.13.2:
     dependencies:
       estree-walker: 3.0.3
       meriyah: 6.0.5
