@@ -58,18 +58,18 @@
 		"@changesets/cli": "2.29.4",
 		"@eslint/js": "9.29.0",
 		"@types/debug": "4.1.12",
-		"@types/node": "22.15.31",
+		"@types/node": "22.15.32",
 		"eslint": "9.29.0",
 		"eslint-config-prettier": "10.1.5",
 		"eslint-plugin-unicorn": "59.0.1",
 		"globals": "16.2.0",
-		"knip": "5.61.0",
+		"knip": "5.61.2",
 		"tsup": "8.5.0",
 		"tsx": "4.20.3",
 		"type-fest": "4.41.0",
 		"typescript": "5.8.3",
-		"typescript-eslint": "8.34.0",
-		"vitest": "3.2.3"
+		"typescript-eslint": "8.34.1",
+		"vitest": "3.2.4"
 	},
 	"prettier": {
 		"bracketSameLine": true,
