@@ -54,11 +54,11 @@
 	},
 	"devDependencies": {
 		"11ty.ts": "0.0.5",
-		"@11ty/eleventy": "3.1.1",
+		"@11ty/eleventy": "3.1.2",
 		"@changesets/cli": "2.29.5",
 		"@eslint/js": "9.29.0",
 		"@types/debug": "4.1.12",
-		"@types/node": "22.15.32",
+		"@types/node": "22.15.33",
 		"eslint": "9.29.0",
 		"eslint-config-prettier": "10.1.5",
 		"eslint-plugin-unicorn": "59.0.1",
@@ -68,7 +68,7 @@
 		"tsx": "4.20.3",
 		"type-fest": "4.41.0",
 		"typescript": "5.8.3",
-		"typescript-eslint": "8.34.1",
+		"typescript-eslint": "8.35.0",
 		"vitest": "3.2.4"
 	},
 	"prettier": {
