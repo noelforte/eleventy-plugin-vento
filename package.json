@@ -58,7 +58,7 @@
 		"@changesets/cli": "2.29.5",
 		"@eslint/js": "9.31.0",
 		"@types/debug": "4.1.12",
-		"@types/node": "22.16.3",
+		"@types/node": "22.16.4",
 		"eslint": "9.31.0",
 		"eslint-config-prettier": "10.1.5",
 		"eslint-plugin-unicorn": "59.0.1",
@@ -68,7 +68,7 @@
 		"tsx": "4.20.3",
 		"type-fest": "4.41.0",
 		"typescript": "5.8.3",
-		"typescript-eslint": "8.36.0",
+		"typescript-eslint": "8.37.0",
 		"vitest": "3.2.4"
 	},
 	"prettier": {
