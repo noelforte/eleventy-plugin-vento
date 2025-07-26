@@ -53,13 +53,13 @@
 		"ventojs": "1.14.0"
 	},
 	"devDependencies": {
-		"11ty.ts": "0.0.5",
+		"11ty.ts": "0.0.6",
 		"@11ty/eleventy": "3.1.2",
 		"@changesets/cli": "2.29.5",
-		"@eslint/js": "9.31.0",
+		"@eslint/js": "9.32.0",
 		"@types/debug": "4.1.12",
 		"@types/node": "22.16.5",
-		"eslint": "9.31.0",
+		"eslint": "9.32.0",
 		"eslint-config-prettier": "10.1.8",
 		"eslint-plugin-unicorn": "59.0.1",
 		"globals": "16.3.0",
