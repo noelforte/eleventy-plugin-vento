@@ -217,7 +217,7 @@
 
   While more verbose, this change ensures that there isn't any ambiguity between a tag that needs ignoring and JS negation expressions:
 
-  ```hbs
+  ```vto
   <!-- These are functionally equivalent and can lead to collisions in rendering functionality -->
 
   {{! conditionStatementToIgnore }}
@@ -339,7 +339,7 @@
 
   Of course, the big news is that **paired** shortcodes are now officially supported by this plugin!! Prior to this release, paired shortcodes were exposed just like regular shortcodes, but were plain JS functions. With this release you can now use paired shortcodes just like any other tag.
 
-  ```hbs
+  ```vto
   <!-- Before: everything is jammed into the function call :( -->
   {{ blockquote("<p>Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.</p>\n<p>It is a way I have of driving off the spleen and regulating the circulation.</p>", "Herman Melville", "1851") }}
 
@@ -396,7 +396,7 @@
 
   Prior to this release this feature was referred to as the "SSR" or "hybrid-rendering" syntax. It's purpose was to skip over processing a tag like Vento's built-in `{{ echo }}` tag, but with a much shorter syntax: `{{! ... }}`. Any code following a `!` in your markup is wrapped in `{{ }}` and output as-is.
 
-  ```hbs
+  ```vto
   {{!> console.log('Hello world'); }} <!-- tag remains in output -->
   ```
 

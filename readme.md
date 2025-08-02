@@ -77,7 +77,7 @@ View the [full list of options](https://vento.js.org/configuration/#options/) to
 > [!NOTE]
 > Remember, Vento can pipe any JS data type to any built-in global as the first-argument or any `.prototype` method in addition to declared filters. For instance to print the `eleventy` variable as JSON you could use the following snippet:
 >
-> ```nunjucks
+> ```vto
 > {{ eleventy |> JSON.stringify }}
 > ```
 >
@@ -120,13 +120,13 @@ Single and Paired Shortcodes added via Eleventy's `.addShortcode()`, `.addAsyncS
 
 When using shortcodes in your templates, write them like any other Vento tag:
 
-```nunjucks
+```vto
 {{ myShortcode }}
 ```
 
 To pass arguments, add a space and your arguments, comma-separated. Arguments are interpreted as JavaScript so type-safety should be considered (quote strings, use booleans if your shortcode expects them, etc.)
 
-```nunjucks
+```vto
 {{ myShortcode 'arg1', 'arg2' }}
 {{ myBooleanShortcode false, false, true }}
 {{ myNumberShortcode 10, 20, 0 }}
@@ -135,7 +135,7 @@ To pass arguments, add a space and your arguments, comma-separated. Arguments ar
 
 For paired shortcodes, the syntax is the same, just add a closing tag. Paired shortcodes also accept arguments and can re-process nested Vento tags (including other shortcodes).
 
-```nunjucks
+```vto
 {{ codeBlock 'css' }} <!-- takes arguments too -->
   a {
     color: red;
