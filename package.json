@@ -84,7 +84,8 @@
 			}
 		},
 		"onlyBuiltDependencies": [
-			"esbuild"
+			"esbuild",
+			"oxc-resolver"
 		]
 	}
 }
