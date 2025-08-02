@@ -110,13 +110,13 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: PluginOptio
 		outputFileExtension: 'html',
 		read: true,
 
-		compile(inputContent: string, inputPath: string) {
+		async compile(inputContent: string, inputPath: string) {
 			// Normalize input path
 			inputPath = path.normalize(inputPath);
 
 			// Retrieve the template function
 			debugMain('Getting template function for `%s`', inputPath);
-			const template = engine.getTemplateFunction(inputContent, inputPath, false);
+			const template = await engine.getTemplateFunction(inputContent, inputPath, false);
 
 			// Return a render function
 			return async (data: EleventyDataCascade) =>
@@ -125,7 +125,7 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: PluginOptio
 
 		compileOptions: {
 			// Custom permalink compilation
-			permalink(permalinkContent: string, inputPath: string) {
+			async permalink(permalinkContent: string, inputPath: string) {
 				// Short circuit if input isn't a string and doesn't look like a vento template
 				if (typeof permalinkContent !== 'string' || !/\{\{\s+.+\s+\}\}/.test(permalinkContent)) {
 					return permalinkContent;
@@ -136,7 +136,7 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: PluginOptio
 
 				// Retrieve the template function
 				debugMain('Getting template function for `%s`', inputPath);
-				const template = engine.getTemplateFunction(permalinkContent, inputPath);
+				const template = await engine.getTemplateFunction(permalinkContent, inputPath);
 
 				// Return a render function
 				return async (data: EleventyDataCascade) =>
