@@ -53,9 +53,9 @@ export function createVentoEngine(options: VentoOptions) {
 		}
 	}
 
-	function getTemplateFunction(source: string, file: string, useVentoCache: boolean = true) {
+	async function getTemplateFunction(source: string, file: string, useVentoCache: boolean = true) {
 		// Attempt to retrieve template function from cache
-		let template = env.cache.get(file);
+		let template = await env.cache.get(file);
 
 		if (template?.source === source) {
 			debugCache('Cache HIT for `%s`, used precompiled template', file);
