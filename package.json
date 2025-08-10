@@ -78,10 +78,8 @@
 		"trailingComma": "es5"
 	},
 	"pnpm": {
-		"peerDependencyRules": {
-			"allowedVersions": {
-				"@11ty/eleventy": "^3.0.0"
-			}
+		"overrides": {
+			"tmp": "^0.2.4"
 		},
 		"onlyBuiltDependencies": [
 			"esbuild",
