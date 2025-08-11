@@ -54,7 +54,7 @@
 	},
 	"devDependencies": {
 		"11ty.ts": "0.0.6",
-		"@11ty/eleventy": "3.1.2",
+		"@11ty/eleventy": "4.0.0-alpha.4",
 		"@changesets/cli": "2.29.5",
 		"@eslint/js": "9.33.0",
 		"@types/debug": "4.1.12",
