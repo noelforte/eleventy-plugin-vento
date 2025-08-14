@@ -1,8 +1,8 @@
 import Eleventy from '@11ty/eleventy';
 import type UserConfig from '@11ty/eleventy/UserConfig';
 
-import path from 'node:path';
 import fs from 'node:fs';
+import path from 'node:path';
 
 import { VentoPlugin } from '../src/plugin.js';
 import type { PluginOptions } from '../src/types/options.js';
@@ -16,7 +16,7 @@ interface JsonResult {
 }
 
 interface TestOptions {
-	pluginOptions?: PluginOptions;
+	pluginOptions: PluginOptions;
 	eleventy?: ConstructorParameters<typeof Eleventy>[2];
 }
 
