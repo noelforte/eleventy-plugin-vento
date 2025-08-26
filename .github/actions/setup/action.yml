@@ -4,12 +4,13 @@ description: Setup project with pnpm
 outputs:
   cache-hit:
     description: 'Whether restoring the cache was successful or not'
-    value: ${{ steps.setup-node.outputs.cache-hit }}
+    value: ${{ steps.setup-tools.outputs.cache-hit }}
 
 runs:
   using: composite
   steps:
     - name: Setup tools
+      id: setup-tools
       uses: jdx/mise-action@v3.2.0
 
     - name: Install dependencies
