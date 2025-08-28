@@ -28,5 +28,5 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Lint and Type Check
+      - name: Run linting tasks
         run: pnpm check
