@@ -2,7 +2,7 @@
  * @file Factory function that creates vento tags from eleventy functions
  */
 
-import type { Token } from 'ventojs/src/tokenizer.js';
+import type { Token } from 'ventojs/core/tokenizer.js';
 import type { EleventyVentoEnvironment } from '../types/vento.js';
 
 export type EleventyTag = (
@@ -53,7 +53,7 @@ export function createVentoTag(tagInfo: EleventyTagInfo) {
 			compiled.push(
 				'{',
 				`let ${nestedVarname} = "";`,
-				...env.compileTokens(tokens, nestedVarname, [`/${tagInfo.name}`])
+				...env.compileTokens(tokens, nestedVarname, `/${tagInfo.name}`)
 			);
 			if (tokens.length > 0 && (tokens[0][0] !== 'tag' || tokens[0][1] !== `/${tagInfo.name}`)) {
 				throw new Error(`Vento: Missing closing tag for ${tagInfo.name} tag: ${code}`);

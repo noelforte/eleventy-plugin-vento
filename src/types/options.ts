@@ -1,6 +1,6 @@
 import type { LiteralUnion } from 'type-fest';
 import type * as ventojs from 'ventojs';
-import { Plugin } from 'ventojs/src/environment.js';
+import { Plugin } from 'ventojs/core/environment.js';
 
 export interface PluginOptions {
 	/**
