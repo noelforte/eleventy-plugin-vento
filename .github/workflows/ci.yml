@@ -3,7 +3,7 @@ name: CI
 on:
   workflow_call:
   pull_request:
-    branches: [main]
+    branches: [main, beta]
 
 jobs:
   test:
