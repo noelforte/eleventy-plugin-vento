@@ -15,8 +15,8 @@ importers:
         specifier: 4.4.1
         version: 4.4.1
       ventojs:
-        specifier: 2.0.0-canary.2
-        version: 2.0.0-canary.2
+        specifier: 2.0.0-canary.3
+        version: 2.0.0-canary.3
     devDependencies:
       11ty.ts:
         specifier: 0.0.6
@@ -2132,8 +2132,8 @@ packages:
   urlpattern-polyfill@10.1.0:
     resolution: {integrity: sha512-IGjKp/o0NL3Bso1PymYURCJxMPNAf/ILOpendP9f5B6e1rTJgdgiOvgfoT8VxCAdY+Wisb9uhGaJJf3yZ2V9nw==}
 
-  ventojs@2.0.0-canary.2:
-    resolution: {integrity: sha512-PU7r+IWgfQ7IiEfYbTx1CJlKThOfw+Xq4mNQ+Dbnl3TDUtisgrrdJhUdwzdVqlkYA8uDFPAsNMTPz3t16TAQtA==}
+  ventojs@2.0.0-canary.3:
+    resolution: {integrity: sha512-trCv9ImG6ZX3QlVFwhW6Ad+NZqmMgSbLm3AF5idaUDciKl287KoIo7NBMHzc6UpsXm9pYBWVoGD69MHqIXIYeg==}
 
   vite-node@3.2.4:
     resolution: {integrity: sha512-EbKSKh+bh1E1IFxeO0pg1n4dvoOTt0UDiXMd/qn++r98+jPO1xtJilvXldeuQ8giIB5IkpjCgMleHMNEsGH6pg==}
@@ -4326,7 +4326,7 @@ snapshots:
 
   urlpattern-polyfill@10.1.0: {}
 
-  ventojs@2.0.0-canary.2: {}
+  ventojs@2.0.0-canary.3: {}
 
   vite-node@3.2.4(@types/node@22.18.0)(jiti@2.5.1)(tsx@4.20.5):
     dependencies:
