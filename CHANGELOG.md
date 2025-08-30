@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 4.6.0-beta.0
+
+### Minor Changes
+
+- 5ed2cca: Update `ventojs` to v2
+
 ## 4.5.1
 
 ### Patch Changes
