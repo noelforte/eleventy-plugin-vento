@@ -11,7 +11,7 @@ describe('Can handle paired shortcode name overlap', { concurrent: true }, () =>
 	test.for(matrix)('Can handle %s overlap', { concurrent: true }, async (direction, { expect }) => {
 		const result = testInstance.getBuildResultForUrl(`/paired-${direction}/`);
 		await expect(result?.content).toMatchFileSnapshot(
-			`./snapshots/collisions-paired-${direction}.htmlsnap`
+			`./snapshots/collisions-paired-${direction}.html.snap`
 		);
 	});
 });
@@ -22,7 +22,7 @@ describe('Can handle single shortcode name overlap', { concurrent: true }, () =>
 	test.for(matrix)('Can handle %s overlap', { concurrent: true }, async (direction, { expect }) => {
 		const result = testInstance.getBuildResultForUrl(`/single-${direction}/`);
 		await expect(result?.content).toMatchFileSnapshot(
-			`./snapshots/collisions-single-${direction}.htmlsnap`
+			`./snapshots/collisions-single-${direction}.html.snap`
 		);
 	});
 });
