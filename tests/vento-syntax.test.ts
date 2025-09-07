@@ -19,5 +19,5 @@ const matrix: [string, string][] = [
 
 test.for(matrix)('%s in templates', async ([_label, slug], { expect }) => {
 	const result = testInstance.getBuildResultForUrl(`/${slug}/`);
-	await expect(result?.content).toMatchFileSnapshot(`./snapshots/vento-syntax-${slug}.htmlsnap`);
+	await expect(result?.content).toMatchFileSnapshot(`./snapshots/vento-syntax-${slug}.html.snap`);
 });

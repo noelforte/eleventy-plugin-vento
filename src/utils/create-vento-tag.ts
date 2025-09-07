@@ -2,12 +2,12 @@
  * @file Factory function that creates vento tags from eleventy functions
  */
 
-import type { Token } from 'ventojs/src/tokenizer.js';
+import type { Token } from 'ventojs/core/tokenizer.js';
 import type { EleventyVentoEnvironment } from '../types/vento.js';
 
 export type EleventyTag = (
 	env: EleventyVentoEnvironment,
-	code: string,
+	token: Token,
 	output: string,
 	tokens: Token[]
 ) => string | undefined;
@@ -21,7 +21,8 @@ export function createVentoTag(tagInfo: EleventyTagInfo) {
 	let LEVEL = 1;
 	const IS_PAIRED = tagInfo.group === 'pairedShortcodes';
 
-	const tag: EleventyTag = (env, code, output, tokens) => {
+	const tag: EleventyTag = (env, token, output, tokens) => {
+		const code = token[1];
 		const match = code === tagInfo.name || code.startsWith(`${tagInfo.name} `);
 
 		if (!match) {
@@ -53,12 +54,8 @@ export function createVentoTag(tagInfo: EleventyTagInfo) {
 			compiled.push(
 				'{',
 				`let ${nestedVarname} = "";`,
-				...env.compileTokens(tokens, nestedVarname, [`/${tagInfo.name}`])
+				...env.compileTokens(tokens, nestedVarname, `/${tagInfo.name}`)
 			);
-			if (tokens.length > 0 && (tokens[0][0] !== 'tag' || tokens[0][1] !== `/${tagInfo.name}`)) {
-				throw new Error(`Vento: Missing closing tag for ${tagInfo.name} tag: ${code}`);
-			}
-			tokens.shift();
 		}
 
 		args.unshift(thisArg);

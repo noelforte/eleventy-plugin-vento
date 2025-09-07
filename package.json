@@ -1,6 +1,6 @@
 {
 	"name": "eleventy-plugin-vento",
-	"version": "4.5.1",
+	"version": "4.6.0-beta.0",
 	"description": "Adds support for the Vento templating language to Eleventy.",
 	"type": "module",
 	"engines": {
@@ -50,7 +50,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"debug": "4.4.1",
-		"ventojs": "1.15.2"
+		"ventojs": "2.0.1"
 	},
 	"devDependencies": {
 		"11ty.ts": "0.0.6",

@@ -6,7 +6,7 @@
 		"*.js.liquid": "liquid-javascript",
 		"*.css.liquid": "liquid-css",
 		"*.scss.liquid": "liquid-scss",
-		"*.htmlsnap": "html"
+		"*.html.snap": "html"
 	},
 	"eslint.enable": true,
 	"editor.codeActionsOnSave": {

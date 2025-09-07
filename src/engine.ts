@@ -5,7 +5,7 @@
 
 // External library
 import createVentoEnv, { type Options as VentoOptions } from 'ventojs';
-import type { Plugin, Template } from 'ventojs/src/environment.js';
+import type { Plugin, Template } from 'ventojs/core/environment.js';
 import type { EleventyDataCascade, EleventyFunctionMap } from './types/eleventy.js';
 
 // Internal modules
