@@ -1,0 +1,10 @@
+{
+  "mode": "exit",
+  "tag": "beta",
+  "initialVersions": {
+    "eleventy-plugin-vento": "4.5.1"
+  },
+  "changesets": [
+    "chatty-symbols-sleep"
+  ]
+}
