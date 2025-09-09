@@ -160,7 +160,7 @@ Eleventy: See [Shortcodes](https://www.11ty.dev/docs/shortcodes/) and the sub-se
 ## Vento Plugins
 
 > [!NOTE]
-> The `auto_trim` plugin that ships with Vento has a specific implementation in the scope of this plugin. See [Auto-Trimming Tags](#auto-trimming-tags) for more details.\_
+> The `auto_trim` plugin that ships with Vento has a specific implementation in the scope of this plugin. See [Auto-Trimming Tags](#auto-trimming-tags) for more details.
 
 If you'd like to extend the Vento library with any plugins, include them in an array passed to the `plugins` option.
 
