@@ -2,8 +2,12 @@
 	"New test suite": {
 		"scope": "javascript,typescript",
 		"prefix": "#new-test-suite",
-		"body": ["describe('${1:suite name}', ${2:{ concurrent: true \\} ,} () => {", "\t${0}", "});"],
-		"description": "Create a new test suite for eleventy-plugin-vento"
+		"body": [
+			"describe('${1:suite name}', ${2:{ concurrent: true \\} ,} () => {",
+			"\t${0}",
+			"});"
+		],
+		"description": "Create a new test suite for eleventy-plugin-vento",
 	},
 
 	"New test": {
@@ -12,7 +16,7 @@
 		"body": [
 			"test('${1:test name}', async ({ expect }) => {",
 			"\tconst { content } = await testInstance.getBuildResultForUrl('${2:/page-url/}');",
-			"\tawait expect(content).toMatchFileSnapshot('./snapshots/${3:.html.snap}');",
+			"\tawait expect(content).toMatchFileSnapshot('./snapshots/${3:.htmlsnap}');",
 			"});"
 		],
 		"description": "Create a new test for eleventy-plugin-vento"

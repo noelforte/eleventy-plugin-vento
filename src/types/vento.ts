@@ -1,6 +1,6 @@
 // Vento library augmentations
 import type { MergeDeep } from 'type-fest';
-import type { Environment, Tag } from 'ventojs/core/environment.js';
+import type { Environment, Tag } from 'ventojs/src/environment.js';
 
 import type { EleventyTag, EleventyTagInfo } from '../utils/create-vento-tag.ts';
 import type { EleventyDataCascade, EleventyFunction, EleventyFunctionMap } from './eleventy.ts';
