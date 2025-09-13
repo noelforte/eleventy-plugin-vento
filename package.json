@@ -58,7 +58,7 @@
 		"@changesets/cli": "2.29.7",
 		"@eslint/js": "9.35.0",
 		"@types/debug": "4.1.12",
-		"@types/node": "22.18.1",
+		"@types/node": "22.18.3",
 		"eslint": "9.35.0",
 		"eslint-config-prettier": "10.1.8",
 		"eslint-plugin-unicorn": "61.0.2",
