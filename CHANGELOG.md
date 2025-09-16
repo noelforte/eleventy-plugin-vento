@@ -1,5 +1,15 @@
 # eleventy-plugin-vento
 
+## 5.0.1
+
+### Patch Changes
+
+- a2e961d: Update `debug` to 4.4.3.
+
+  4.4.3 handles a vulnerability in 4.4.2 which was never distributed by this package. Pinning 4.4.3 over 4.4.2 circumvents the now-yanked version.
+
+  See https://github.com/debug-js/debug/issues/1005#issuecomment-3293627810 for more information.
+
 ## 5.0.0
 
 ### Major Changes
@@ -11,7 +21,6 @@
   More critical to note for Vento v2 is the rearrangement of core library features that this plugin exposes. Definitely review [the changelog for v2](https://github.com/ventojs/vento/blob/main/CHANGELOG.md#200---2025-09-01) to determine whether your implementation needs updating.
 
   The biggest changes are:
-
   - `meriyah` was removed via https://github.com/ventojs/vento/pull/128 at the benefit of performance. If you were absorbing `meriyah`'s functionality via this plugin, you should adjust accordingly.
   - `runStringSync` is no longer supported and has been removed
   - `ventoOptions.useWith` was previously deprecated and has since been removed. If you relied on `useWith` in your [plugin options](https://github.com/noelforte/eleventy-plugin-vento?tab=readme-ov-file#plugin-options), you should instead use `ventoOptions.dataVarname` and `ventoOptions.autoDataVarname` to control how the global namespace for template data is exposed. For more info, see more on [the Vento docs](https://vento.js.org/configuration/#datavarname).
@@ -52,7 +61,6 @@
 ### Minor Changes
 
 - 1f1a13a: Update ventojs to 1.14.0. This version bump incorporates the following new features:
-
   - Loading templates via URLs
   - Destructuring in `for` loops
   - `{{ continue }}` and `{{ break }}` tags
@@ -109,7 +117,6 @@
 - 335f21e: Select type updates (shouldn't affect compilation, however should improve DX)
 
   Changes are:
-
   - split types into separate files
   - namespace `ventojs` type imports
   - make `PluginOptions` optional by default
@@ -117,7 +124,6 @@
   - declare a special (`EleventyVentoEnvironment`) for this plugin to replace Vento's own `Environment`
 
 - 070109a: Refactored files and functions internally that shouldn't have any impact on usage or performance:
-
   - Split `debug` functions into separate exports, renamed `runCompatiblityCheck -> compatibilityCheck` (dd4c379b)
   - Utilities are now split into separate files (e06a83ab)
   - Main file renamed from `index.ts` to `plugin.ts` (1b122d2a)
@@ -148,7 +154,6 @@
 - 335f21e: Select type updates (shouldn't affect compilation, however should improve DX)
 
   Changes are:
-
   - split types into separate files
   - namespace `ventojs` type imports
   - make `PluginOptions` optional by default
@@ -158,7 +163,6 @@
 - 9eaa059: Update `debug` to v4.4.0
 - f387b5e: Update `ventojs` to v1.12.13
 - 070109a: Refactored files and functions internally that shouldn't have any impact on usage or performance:
-
   - Split `debug` functions into separate exports, renamed `runCompatiblityCheck -> compatibilityCheck` (dd4c379b)
   - Utilities are now split into separate files (e06a83ab)
   - Main file renamed from `index.ts` to `plugin.ts` (1b122d2a)
@@ -279,7 +283,6 @@
 ### Patch Changes
 
 - 693e1a2: Refactored the following features internally:
-
   - Reverts 2c3548c1 for modularity: The compatibility check has moved back to `modules/utils.js`
   - Revises caching further: Instead of deferring to Vento for everything, permalink templates and templates loaded by Vento (like includes) are cached by Vento. Everything else is cached by Eleventy.
   - Rename some internal variables to help with readability (`_11ty.ctx => _11Ctx`)
@@ -292,7 +295,6 @@
 
 - 7e6ba68: Separate `shortcodes` and `pairedShortcodes` into seperate object namespaces. Prior to this version, Eleventy shortcodes and paired shortcodes were merged into a single object keyed as `_11ty.functions` which allowed for naming collisions between shortcodes and their paired counterparts.
 - b8f0a03: Adds new dependency on `debug` package, to help out with testing and getting more verbose logs. The following `DEBUG` namespaces are implemented:
-
   - `Eleventy:Vento:Setup` - Logs initial setup of the plugin, loading features, pre-page compile setup steps (like changing `page` and `eleventy` objects)
   - `Eleventy:Vento:Cache` - Logs updates to Vento's own internal cache, which is used in tandem with Eleventy's cache.
   - `Eleventy:Vento:Template` - Logs rendered templates and other template related actions
@@ -320,7 +322,6 @@
   Templates are now compiled directly instead of using Vento's `.runString` method which reduces overhead and enables this plugin to manage the Vento cache in a more direct manner.
 
 - 494b184: Permalink compilation optimizations:
-
   - Permalinks now short-circuit to raw strings if they don't contain Vento template syntax, avoiding compilation entirely.
   - Permalinks are now assigned (fake) pathnames in Vento's cache. If you change template content but don't change a dynamic permalink in development, Vento will reuse the compiled permalink template. Note that **any** modifications to a template file will **always** cause it to be recompiled (see 19c352fa) — this improvement just optimizes recompiling dynamic permalinks that haven't changed.
 
@@ -352,7 +353,6 @@
 ### Patch Changes
 
 - 9f5a90f: Various Refactors - These changes shouldn't have any observable effect on your templates or usage.
-
   - Replaced `class` based approach for a closure implementation instead. Since there was only 1 Vento `env` object ever instanced in this plugin, steering away from using `class` removes some complexity and overhead.
 
   - `DATA_KEYS` (used internally) moved into utils file alongside other utilities (like compatibility checks) and renamed to `CONTEXT_DATA_KEYS`.
