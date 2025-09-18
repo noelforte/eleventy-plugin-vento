@@ -1,0 +1,13 @@
+{
+	"New changset": {
+		"isFileTemplate": true,
+		"scope": "markdown",
+		"description": "Create a new release changeset",
+		"body": [
+			"---\n'${1:eleventy-plugin-vento}': ${2:patch}\n---\n",
+			"${3:Name of change}\n",
+			"${4:Changeset notes go here...}",
+		],
+		"prefix": "#create-changeset",
+	},
+}
