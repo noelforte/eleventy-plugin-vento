@@ -4,7 +4,7 @@ export const config = {
 	},
 };
 
-/** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
+/** @param {import("@11ty/eleventy/UserConfig")} eleventyConfig */
 export default function eleventy(eleventyConfig) {
 	// Global data
 	eleventyConfig.addGlobalData('listTypes', () => listTypes);
