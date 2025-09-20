@@ -33,7 +33,7 @@ jobs:
         run: npm audit signatures
 
       - name: Build Package
-        run: pnpm tsup
+        run: pnpm build
 
       - name: Create Pull Request or Publish Packages
         uses: changesets/action@v1

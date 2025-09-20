@@ -18,7 +18,7 @@ jobs:
         run: pnpm test
 
       - name: Test Build
-        run: pnpm tsup
+        run: pnpm build
 
   lint:
     runs-on: ubuntu-24.04
