@@ -7,12 +7,12 @@ on:
 
 jobs:
   qa:
-    runs-on: linux
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
         type: ['test', 'lint', 'build']
-    name: QA ${{ matrix.type }}
+    name: Run ${{ matrix.type }}
     steps:
       - uses: actions/checkout@v5
 
