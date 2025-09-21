@@ -1,7 +1,7 @@
 import type { KnipConfig } from 'knip';
 
 const config: KnipConfig = {
-	project: ['src/**/*.ts'],
+	project: ['**/*.{js,ts}', '!tests/stubs*/**'],
 };
 
 export default config;
