@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 5.1.1
+
+### Patch Changes
+
+- deadab6: Update Vento to v2.1.1
+
 ## 5.1.0
 
 ### Minor Changes
