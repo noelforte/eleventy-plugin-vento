@@ -6,27 +6,20 @@ on:
     branches: [main, beta]
 
 jobs:
-  test:
-    runs-on: ubuntu-24.04
+  qa:
+    runs-on: linux
+    strategy:
+      fail-fast: true
+      matrix:
+        type: ['test', 'lint', 'build']
+    name: QA ${{ matrix.type }}
     steps:
       - uses: actions/checkout@v5
 
-      - name: Setup
-        uses: ./.github/actions/setup
+      - name: Install tools with mise
+        uses: jdx/mise-action@v3.2.0
 
-      - name: Test
-        run: pnpm test
+      - name: Install dependencies
+        run: pnpm install
 
-      - name: Test Build
-        run: pnpm build
-
-  lint:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v5
-
-      - name: Setup
-        uses: ./.github/actions/setup
-
-      - name: Run linting tasks
-        run: pnpm lint
+      - run: pnpm ${{ matrix.type }}

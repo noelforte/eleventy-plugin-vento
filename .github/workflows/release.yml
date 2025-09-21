@@ -21,16 +21,16 @@ jobs:
 
   publish:
     name: PR or Publish
-    runs-on: ubuntu-24.04
+    runs-on: linux
     needs: [check]
     steps:
       - uses: actions/checkout@v5
 
-      - name: Setup
-        uses: ./.github/actions/setup
+      - name: Install tools with mise
+        uses: jdx/mise-action@v3.2.0
 
-      - name: Verify Integrity of Dependencies
-        run: npm audit signatures
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Build Package
         run: pnpm build

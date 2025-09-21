@@ -14,8 +14,8 @@
 		"lint:project": "knip",
 		"build": "tsdown",
 		"dev": "tsdown --watch ./src",
-		"ci:version": "changeset version && pnpm install --no-frozen-lockfile",
-		"ci:publish": "changeset publish",
+		"ci:version": "changeset version",
+		"ci:publish": "npm audit signatures && changeset publish",
 		"fmt": "prettier --write ."
 	},
 	"types": "./dist/plugin.d.ts",
