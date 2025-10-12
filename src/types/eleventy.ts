@@ -1,4 +1,5 @@
 // Utility types to fill in gaps in Eleventy
+
 import type { EleventyScope } from '11ty.ts';
 import type { Merge, Promisable } from 'type-fest';
 

@@ -1,3 +1,5 @@
+// Debuggers used by eleventy-plugin-vento
+
 import createDebugger from 'debug';
 
 const debugBaseNamespace = 'Eleventy:Vento';

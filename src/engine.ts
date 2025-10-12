@@ -1,7 +1,5 @@
-/**
- * @file Function that handles creating the Vento environment. Exposes
- * a small API for Eleventy to interface with.
- */
+// Function that handles creating the Vento environment. Exposes
+// a small API for Eleventy to interface with.
 
 // External library
 import createVentoEnv, { type Options as VentoOptions } from 'ventojs';

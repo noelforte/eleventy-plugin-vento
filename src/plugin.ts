@@ -1,3 +1,9 @@
+// eleventy-plugin-vento main entry point
+//
+// This file contains the main plugin function and defers
+// other functionality (like custom tag handling, debugging,
+// and rendering) to other files.
+
 // Built-ins
 import path from 'node:path';
 

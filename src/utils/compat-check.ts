@@ -1,3 +1,6 @@
+// Compatibility checks for this plugin to ensure API methods
+// are available in Eleventy before proceeding
+
 import type UserConfig from '@11ty/eleventy/UserConfig';
 import { debugMain } from './debuggers.js';
 

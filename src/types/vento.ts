@@ -1,4 +1,5 @@
-// Vento library augmentations
+// Type augmentations for Vento that eleventy-plugin-vento utilizes
+
 import type { MergeDeep } from 'type-fest';
 import type { Environment, Tag } from 'ventojs/core/environment.js';
 
