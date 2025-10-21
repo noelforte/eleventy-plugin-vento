@@ -32,9 +32,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build Package
-        run: pnpm build
-
       - name: Create Pull Request or Publish Packages
         uses: changesets/action@v1
         env:
@@ -42,9 +39,9 @@ jobs:
           # See: https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
           NPM_TOKEN: ''
         with:
-          # Run changeset version
-          version: 'pnpm exec changeset version'
-          # Use mise to install latest version of npm (for OIDC) and then publish
+          # Run changeset version (via mise env)
+          version: 'changeset version'
+          # Publish with mise task
           publish: 'mise run publish'
           commit: '[ci] release'
           title: '[ci] release'

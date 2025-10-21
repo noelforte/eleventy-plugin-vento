@@ -5,6 +5,37 @@ pnpm = "10.18.3"
 [env]
 _.path = "node_modules/.bin"
 
+# Grouped tasks
 [tasks.publish]
 tools.npm = "latest"
 run = "changeset publish"
+depends = ["build"]
+
+[tasks.qa]
+description = "Runs all QA checks for the project"
+run = [
+  { tasks = ["lint", "type-check", "audit-deps"] },
+  { task = "test" },
+  { task = "build" }
+]
+
+# Individual tasks
+[tasks.build]
+description = "Build package with tsdown"
+run = "tsdown"
+
+[tasks.test]
+description = "Run tests with vitest"
+run = "vitest --run"
+
+[tasks.lint]
+description = "Lint source with eslint"
+run = "eslint ."
+
+[tasks.type-check]
+description = "Run type checks"
+run = "tsc --noEmit"
+
+[tasks.audit-deps]
+description = "Audit source with knip"
+run = "knip"

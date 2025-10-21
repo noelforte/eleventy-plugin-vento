@@ -8,11 +8,7 @@ on:
 jobs:
   qa:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        type: ['test', 'lint', 'build']
-    name: Run ${{ matrix.type }}
+    name: Run checks
     steps:
       - uses: actions/checkout@v5
 
@@ -22,4 +18,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - run: pnpm ${{ matrix.type }}
+      - run: mise run qa
