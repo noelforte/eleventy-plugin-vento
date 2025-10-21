@@ -38,11 +38,13 @@ jobs:
       - name: Create Pull Request or Publish Packages
         uses: changesets/action@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
+          # Use OIDC for npm authentication instead of NPM_TOKEN
+          # See: https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
+          NPM_TOKEN: ''
         with:
-          version: 'pnpm ci:version'
-          publish: 'pnpm ci:publish'
+          # Run changeset version
+          version: 'pnpm exec changeset version'
+          # Use mise to install latest version of npm (for OIDC) and then publish
+          publish: 'mise install npm@latest && pnpm exec changeset publish'
           commit: '[ci] release'
           title: '[ci] release'
