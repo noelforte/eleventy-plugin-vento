@@ -45,6 +45,6 @@ jobs:
           # Run changeset version
           version: 'pnpm exec changeset version'
           # Use mise to install latest version of npm (for OIDC) and then publish
-          publish: 'mise install npm@latest && pnpm exec changeset publish'
+          publish: 'mise run publish'
           commit: '[ci] release'
           title: '[ci] release'

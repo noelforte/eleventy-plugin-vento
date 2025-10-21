@@ -1,3 +1,10 @@
 [tools]
 node = "22.20.0"
 pnpm = "10.18.3"
+
+[env]
+_.path = "node_modules/.bin"
+
+[tasks.publish]
+tools.npm = "latest"
+run = "changeset publish"
