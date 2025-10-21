@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 5.2.0
+
+### Minor Changes
+
+- 46bff19: Update Vento to 2.2.0
+
 ## 5.1.1
 
 ### Patch Changes
