@@ -7,6 +7,7 @@ _.path = "node_modules/.bin"
 
 # Grouped tasks
 [tasks.publish]
+description = "Publish package with npm and changesets"
 tools.npm = "latest"
 run = "changeset publish"
 depends = ["build"]
