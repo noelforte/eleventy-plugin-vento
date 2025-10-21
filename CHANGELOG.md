@@ -1,5 +1,15 @@
 # eleventy-plugin-vento
 
+## 5.2.0
+
+### Minor Changes
+
+- 8d96bc4: Update Vento to 2.2.0
+
+### Patch Changes
+
+- f20d811: Use of OIDC-backed trusted publishing to npm is now enforced for this package.
+
 ## 5.1.1
 
 ### Patch Changes
