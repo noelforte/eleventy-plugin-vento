@@ -12,9 +12,9 @@ tools.npm = "latest"
 run = "changeset publish"
 depends = ["build"]
 
-[tasks.qa]
+[tasks.check]
 description = "Runs all code quality checks (linting, types, dependencies)"
-run = { tasks = ["lint-syntax", "type-check", "audit-deps"] }
+run = { tasks = ["check:lint", "check:types", "check:deps"] }
 
 # Individual tasks
 [tasks.build]
@@ -25,14 +25,14 @@ run = "tsdown"
 description = "Run functionality tests with vitest"
 run = "vitest --run"
 
-[tasks.lint-syntax]
+[tasks."check:lint"]
 description = "Lint source with eslint"
 run = "eslint ."
 
-[tasks.type-check]
+[tasks."check:types"]
 description = "Run type checks"
 run = "tsc --noEmit"
 
-[tasks.audit-deps]
+[tasks."check:deps"]
 description = "Audit source with knip"
 run = "knip"

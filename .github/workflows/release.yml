@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   check:
-    name: Check
+    name: CI Checks
     uses: ./.github/workflows/ci.yml
 
   publish:

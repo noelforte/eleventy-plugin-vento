@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        type: ['test', 'qa', 'build']
+        type: ['test', 'check', 'build']
     name: Run ${{ matrix.type }}
     steps:
       - uses: actions/checkout@v5
