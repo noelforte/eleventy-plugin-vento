@@ -1,9 +1,9 @@
 # eleventy-plugin-vento 🌬️🎈🐀
 
-<img src="https://img.shields.io/badge/Eleventy-v3_&amp;_later_-333?style=flat-square&logo=eleventy&logoColor=fff&labelColor=333&color=111" alt="Eleventy v3 and later">
-<a href="https://github.com/noelforte/eleventy-plugin-vento/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/noelforte/eleventy-plugin-vento/ci.yml?branch=main&style=flat-square&logo=github&logoColor=fff&label=Tests&labelColor=333" alt="Github Actions Status"></a>
-<a href="https://npmjs.com/package/eleventy-plugin-vento"><img src="https://img.shields.io/npm/v/eleventy-plugin-vento?style=flat-square&logo=npm&logoColor=fff&labelColor=333" alt="eleventy-plugin-vento on npm"></a>
-<a href="https://github.com/changesets/changesets/"><img src="https://img.shields.io/badge/🦋_Changesets-333?style=flat-square" alt="changesets on GitHub"></a>
+![Eleventy v3 and later](https://img.shields.io/badge/Eleventy-v3_&_later_-333?style=flat-square&logo=eleventy&logoColor=fff&labelColor=333&color=111)
+[![Github Actions Status](https://img.shields.io/github/actions/workflow/status/noelforte/eleventy-plugin-vento/ci.yml?style=flat-square&logo=github&logoColor=fff&label=Tests&labelColor=333)](https://github.com/noelforte/eleventy-plugin-vento/actions/workflows/ci.yml)
+[![eleventy-plugin-vento on npm](https://img.shields.io/npm/v/eleventy-plugin-vento?style=flat-square&logo=npm&logoColor=fff&labelColor=333)](https://npmjs.com/package/eleventy-plugin-vento)
+[![changesets on GitHub](https://img.shields.io/badge/🦋_Changesets-333?style=flat-square)](https://github.com/changesets/changesets/)
 
 An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://vento.js.org/) templates.
 
@@ -24,6 +24,10 @@ An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://ve
 npm install eleventy-plugin-vento
 ```
 
+---
+
+[↑ Return to Top](#contents)
+
 ## Usage
 
 This plugin is ESM only and cannot be required from CommonJS.
@@ -39,6 +43,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(VentoPlugin);
 }
 ```
+
+---
+
+[↑ Return to Top](#contents)
 
 ## Plugin Options
 
@@ -71,6 +79,10 @@ export default function (eleventyConfig) {
 ```
 
 View the [full list of options](https://vento.js.org/configuration/#options/) to pass as a Vento Configuration object (as `ventoOptions`).
+
+---
+
+[↑ Return to Top](#contents)
 
 ## Filters
 
@@ -110,6 +122,10 @@ eleventyConfig.addFilter('vento', function (content) {
 Vento: See [Filters](https://vento.js.org/configuration/#filters) and [Pipes](https://vento.js.org/syntax/pipes/)
 
 Eleventy: See [Filters](https://www.11ty.dev/docs/filters/)
+
+---
+
+[↑ Return to Top](#contents)
 
 ## Shortcodes (Single & Paired)
 
@@ -157,6 +173,10 @@ If you'd prefer to set shortcodes yourself (via a plugin or other method) or pre
 
 Eleventy: See [Shortcodes](https://www.11ty.dev/docs/shortcodes/) and the sub-section on [Paired Shortcodes](https://www.11ty.dev/docs/shortcodes/#paired-shortcodes).
 
+---
+
+[↑ Return to Top](#contents)
+
 ## Vento Plugins
 
 > [!NOTE]
@@ -177,6 +197,10 @@ export default function (eleventyConfig) {
   });
 }
 ```
+
+---
+
+[↑ Return to Top](#contents)
 
 ## Auto-Trimming Tags
 
@@ -214,6 +238,10 @@ eleventyConfig.addPlugin(VentoPlugin, {
 
 Vento: See [Auto Trim Plugin](https://vento.js.org/plugins/auto-trim/).
 
+---
+
+[↑ Return to Top](#contents)
+
 ## Debugging
 
 Like Eleventy, this plugin uses the [`debug`](https://www.npmjs.com/package/debug) package to handle verbose logging. The following `DEBUG` namespaces are implemented:
@@ -243,3 +271,7 @@ $ DEBUG='Eleventy:Vento:Template' npx @11ty/eleventy
 Eleventy: See [Debug Mode](https://www.11ty.dev/docs/debugging/).
 
 Debug: See [`debug` on npm](https://www.npmjs.com/package/debug).
+
+---
+
+[↑ Return to Top](#contents)
