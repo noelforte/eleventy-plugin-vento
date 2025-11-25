@@ -1,9 +1,9 @@
 # eleventy-plugin-vento 🌬️🎈🐀
 
-![Eleventy v3 and later](https://img.shields.io/badge/Eleventy-v3_&_later_-333?style=flat-square&logo=eleventy&logoColor=fff&labelColor=333&color=111)
+[![Eleventy v3 and later](https://img.shields.io/badge/Eleventy-v3_&_later_-333?style=flat-square&logo=eleventy&logoColor=fff&labelColor=333&color=111)](https://11ty.dev)
 [![Github Actions Status](https://img.shields.io/github/actions/workflow/status/noelforte/eleventy-plugin-vento/ci.yml?style=flat-square&logo=github&logoColor=fff&label=Tests&labelColor=333)](https://github.com/noelforte/eleventy-plugin-vento/actions/workflows/ci.yml)
 [![eleventy-plugin-vento on npm](https://img.shields.io/npm/v/eleventy-plugin-vento?style=flat-square&logo=npm&logoColor=fff&labelColor=333)](https://npmjs.com/package/eleventy-plugin-vento)
-[![changesets on GitHub](https://img.shields.io/badge/🦋_Changesets-333?style=flat-square)](https://github.com/changesets/changesets/)
+[![Changesets on GitHub](https://img.shields.io/badge/🦋_Changesets-333?style=flat-square)](https://github.com/changesets/changesets/)
 
 An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://vento.js.org/) templates.
 
@@ -24,8 +24,6 @@ An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://ve
 npm install eleventy-plugin-vento
 ```
 
----
-
 [↑ Return to Top](#contents)
 
 ## Usage
@@ -43,8 +41,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(VentoPlugin);
 }
 ```
-
----
 
 [↑ Return to Top](#contents)
 
@@ -79,8 +75,6 @@ export default function (eleventyConfig) {
 ```
 
 View the [full list of options](https://vento.js.org/configuration/#options/) to pass as a Vento Configuration object (as `ventoOptions`).
-
----
 
 [↑ Return to Top](#contents)
 
@@ -122,8 +116,6 @@ eleventyConfig.addFilter('vento', function (content) {
 Vento: See [Filters](https://vento.js.org/configuration/#filters) and [Pipes](https://vento.js.org/syntax/pipes/)
 
 Eleventy: See [Filters](https://www.11ty.dev/docs/filters/)
-
----
 
 [↑ Return to Top](#contents)
 
@@ -173,8 +165,6 @@ If you'd prefer to set shortcodes yourself (via a plugin or other method) or pre
 
 Eleventy: See [Shortcodes](https://www.11ty.dev/docs/shortcodes/) and the sub-section on [Paired Shortcodes](https://www.11ty.dev/docs/shortcodes/#paired-shortcodes).
 
----
-
 [↑ Return to Top](#contents)
 
 ## Vento Plugins
@@ -197,8 +187,6 @@ export default function (eleventyConfig) {
   });
 }
 ```
-
----
 
 [↑ Return to Top](#contents)
 
@@ -238,8 +226,6 @@ eleventyConfig.addPlugin(VentoPlugin, {
 
 Vento: See [Auto Trim Plugin](https://vento.js.org/plugins/auto-trim/).
 
----
-
 [↑ Return to Top](#contents)
 
 ## Debugging
@@ -271,7 +257,5 @@ $ DEBUG='Eleventy:Vento:Template' npx @11ty/eleventy
 Eleventy: See [Debug Mode](https://www.11ty.dev/docs/debugging/).
 
 Debug: See [`debug` on npm](https://www.npmjs.com/package/debug).
-
----
 
 [↑ Return to Top](#contents)
