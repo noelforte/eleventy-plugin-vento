@@ -56,11 +56,11 @@
 		"globals": "16.5.0",
 		"knip": "5.70.1",
 		"prettier": "3.6.2",
-		"tsdown": "0.16.5",
+		"tsdown": "0.16.6",
 		"type-fest": "5.2.0",
 		"typescript": "5.9.3",
 		"typescript-eslint": "8.47.0",
-		"vitest": "4.0.10"
+		"vitest": "4.0.13"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
