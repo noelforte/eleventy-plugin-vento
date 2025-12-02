@@ -1,5 +1,16 @@
 # eleventy-plugin-vento
 
+## 5.2.1
+
+### Patch Changes
+
+- d74eb1d: Simplify compatibility check with `eleventyConfig.versionCheck` call instead of checking individual features
+- 928f544: Switch to fixed .mjs/.mts extensions for disambiguation of filetypes in package entrypoints.
+
+  This behavior is used by `tsdown` (the build system for this project) when the `platform` is set to `node` (the default).
+
+- eb854e3: Revise `inputPath` used for cache key on dynamic permalinks to be more descriptive
+
 ## 5.2.0
 
 ### Minor Changes
