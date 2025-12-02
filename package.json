@@ -6,10 +6,6 @@
 	"engines": {
 		"node": ">=18"
 	},
-	"scripts": {
-		"dev": "tsdown --watch ./src",
-		"fmt": "prettier --write ."
-	},
 	"types": "./dist/plugin.d.ts",
 	"exports": {
 		".": {

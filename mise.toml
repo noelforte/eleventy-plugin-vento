@@ -20,6 +20,14 @@ description = "Runs all code quality checks (linting, types, dependencies)"
 run = { tasks = ["check:lint", "check:types", "check:deps"] }
 
 # Individual tasks
+[tasks.dev]
+description = "Start the dev environment"
+run = "tsdown --watch ./src"
+
+[tasks.format]
+description = "Format all files"
+run = "prettier --write ."
+
 [tasks.build]
 description = "Build package with tsdown"
 run = "tsdown"
@@ -39,3 +47,7 @@ run = "tsc --noEmit"
 [tasks."lint:knip"]
 description = "Audit source with knip"
 run = "knip"
+
+[tasks."lint:prettier"]
+description = "Check code style with prettier"
+run = "prettier --check ."
