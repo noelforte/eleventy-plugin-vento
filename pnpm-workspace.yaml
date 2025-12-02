@@ -1,0 +1,7 @@
+onlyBuiltDependencies:
+  - esbuild
+  - oxc-resolver
+
+overrides:
+  js-yaml@<3.14.2: '>=3.14.2'
+  js-yaml@>=4.0.0 <4.1.1: '>=4.1.1'
