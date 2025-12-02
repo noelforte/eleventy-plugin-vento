@@ -12,16 +12,16 @@ tools.npm = "latest"
 run = "changeset publish"
 depends = ["build"]
 
-[tasks.check]
-description = "Runs all code quality checks (linting, types, dependencies)"
-run = { tasks = ["check:lint", "check:types", "check:deps"] }
+[tasks.ci]
+description = "Runs all CI tasks"
+run = { tasks = ["check:*", "build"] }
 
 # Individual tasks
 [tasks.build]
 description = "Build package with tsdown"
 run = "tsdown"
 
-[tasks.test]
+[tasks."check:tests"]
 description = "Run functionality tests with vitest"
 run = "vitest --run"
 
