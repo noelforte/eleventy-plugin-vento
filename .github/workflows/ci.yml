@@ -6,8 +6,13 @@ on:
     branches: [main, beta]
 
 jobs:
-  main:
+  checks:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        type: ['test', 'check', 'build']
+    name: Run ${{ matrix.type }}
     steps:
       - uses: actions/checkout@v6
 
@@ -17,4 +22,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - run: mise ci
+      - run: mise ${{ matrix.type }}

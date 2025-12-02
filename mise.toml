@@ -15,9 +15,9 @@ tools = { npm = "latest" }
 run = "changeset publish"
 depends = ["build"]
 
-[tasks.ci]
-description = "Runs all CI tasks"
-run = { tasks = ["build", "test", "lint:*"] }
+[tasks.check]
+description = "Runs all code quality checks (linting, types, dependencies)"
+run = { tasks = ["check:lint", "check:types", "check:deps"] }
 
 # Individual tasks
 [tasks.build]
