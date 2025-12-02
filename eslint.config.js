@@ -1,5 +1,6 @@
 // @ts-check
 import eslint from '@eslint/js';
+import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -9,11 +10,11 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 // Plugins
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 
-export default tseslint.config(
+export default defineConfig(
 	// Import configuration presets
 	eslint.configs.recommended,
-	...tseslint.configs.recommended,
-	eslintPluginUnicorn.configs['flat/recommended'],
+	tseslint.configs.recommended,
+	eslintPluginUnicorn.configs.recommended,
 	eslintConfigPrettier,
 
 	// Configure files
