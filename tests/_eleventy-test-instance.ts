@@ -16,7 +16,7 @@ interface JsonResult {
 }
 
 interface TestOptions {
-	pluginOptions: PluginOptions;
+	pluginOptions: Partial<PluginOptions>;
 	eleventy?: ConstructorParameters<typeof Eleventy>[2];
 }
 
