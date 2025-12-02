@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        type: ['test', 'check', 'build']
+        type: ['test', 'lint', 'build']
     name: Run ${{ matrix.type }}
     steps:
       - uses: actions/checkout@v6
@@ -22,4 +22,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - run: mise ${{ matrix.type }}
+      - run: mise r ${{ matrix.type }}
