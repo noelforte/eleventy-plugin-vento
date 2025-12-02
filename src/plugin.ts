@@ -15,12 +15,11 @@ import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plug
 import { createVentoEngine, renderVentoTemplate } from './engine.js';
 import type { EleventyDataCascade } from './types/eleventy.js';
 import type { PluginOptions } from './types/options.js';
-import { compatibilityCheck } from './utils/compat-check.js';
 import { debugCache, debugMain } from './utils/debuggers.js';
 
 export function VentoPlugin(eleventyConfig: UserConfig, userOptions: PluginOptions) {
 	debugMain('Initializing eleventy-plugin-vento');
-	compatibilityCheck(eleventyConfig);
+	eleventyConfig.versionCheck('>=3.0.0');
 
 	const options = {
 		// Define defaults
