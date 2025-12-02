@@ -37,12 +37,12 @@ jobs:
         env:
           # Use OIDC for npm authentication instead of NPM_TOKEN
           # See: https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
-          NPM_TOKEN: ""
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          NPM_TOKEN: ''
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
         with:
           # Run changeset version (via mise env)
-          version: "changeset version"
+          version: 'changeset version'
           # Publish with mise task
-          publish: "mise run publish"
-          commit: "[ci] release"
-          title: "[ci] release"
+          publish: 'mise run publish'
+          commit: '[ci] release'
+          title: '[ci] release'
