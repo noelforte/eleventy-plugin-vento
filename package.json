@@ -6,11 +6,11 @@
 	"engines": {
 		"node": ">=18"
 	},
-	"types": "./dist/plugin.d.ts",
+	"types": "./dist/plugin.d.mts",
 	"exports": {
 		".": {
-			"import": "./dist/plugin.js",
-			"types": "./dist/plugin.d.ts"
+			"import": "./dist/plugin.mjs",
+			"types": "./dist/plugin.d.mts"
 		}
 	},
 	"files": [
