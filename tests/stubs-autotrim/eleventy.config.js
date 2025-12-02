@@ -1,4 +1,7 @@
-/** @param {import("@11ty/eleventy/UserConfig")} eleventyConfig */
+/**
+ * @import UserConfig from '@11ty/eleventy/UserConfig'
+ * @param {UserConfig} eleventyConfig
+ */
 export default function eleventy(eleventyConfig) {
 	eleventyConfig.addShortcode(
 		'button',
