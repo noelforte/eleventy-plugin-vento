@@ -59,13 +59,5 @@ export default defineConfig(
 			eqeqeq: ['error', 'smart'],
 			'unicorn/prevent-abbreviations': 'off',
 		},
-	},
-
-	// Overrides
-	{
-		files: ['.github/scripts/*.ts'],
-		rules: {
-			'unicorn/no-process-exit': 'off',
-		},
 	}
 );
