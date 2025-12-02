@@ -17,11 +17,11 @@ import type { EleventyDataCascade } from './types/eleventy.js';
 import type { PluginOptions } from './types/options.js';
 import { debugCache, debugMain } from './utils/debuggers.js';
 
-export function VentoPlugin(eleventyConfig: UserConfig, userOptions: PluginOptions) {
+export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<PluginOptions>) {
 	debugMain('Initializing eleventy-plugin-vento');
 	eleventyConfig.versionCheck('>=3.0.0');
 
-	const options = {
+	const options: PluginOptions = {
 		// Define defaults
 		autotrim: false,
 		plugins: [],

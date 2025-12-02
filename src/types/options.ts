@@ -8,32 +8,40 @@ export interface PluginOptions {
 	/**
 	 * An array of Vento plugins
 	 */
-	plugins?: Plugin[];
+	plugins: Plugin[];
 	/**
 	 * Enables Vento's autotrim plugin.
-	 * ```js
+	 * @example
 	 * // Set to an array of tags
 	 * autotrim: ['tag1', 'tag2']
-	 *
+	 * @example
 	 * // Use Vento's defaults and Eleventy paired shortcodes
-	 * // If set to `true`, uses both
+	 * // Setting `true` is functionally equivalent to both
+	 * // `@vento` and `@11ty` being present
 	 * autotrim: ['@vento', '@11ty']
 	 * autotrim: true
-	 * ```
 	 */
-	autotrim?: LiteralUnion<'@11ty' | '@vento', string>[] | boolean;
-	/** Enable use of Eleventy filters */
-	filters?: boolean;
-	/** Enable use of Eleventy shortcodes */
-	shortcodes?: boolean;
-	/** Enable use of Eleventy paired shortcodes */
-	pairedShortcodes?: boolean;
+	autotrim: LiteralUnion<'@11ty' | '@vento', string>[] | boolean;
+	/**
+	 * Enable use of Eleventy filters
+	 */
+	filters: boolean;
+	/**
+	 * Enable use of Eleventy shortcodes
+	 */
+	shortcodes: boolean;
+	/**
+	 * Enable use of Eleventy paired shortcodes
+	 */
+	pairedShortcodes: boolean;
 	/**
 	 * A Vento configuration object.
-	 *
-	 * **Note that `ventoOptions.includes` defaults to
-	 * Eleventy's own `dir.includes` location.**
 	 * @see {@link https://vento.js.org/configuration/}
+	 * @default
+	 * {
+	 *   // Defaults to Eleventy's own `includes` directory
+	 *   includes: eleventyConfig.directories.includes
+	 * }
 	 */
-	ventoOptions?: ventojs.Options;
+	ventoOptions: ventojs.Options;
 }
