@@ -5,34 +5,37 @@ pnpm = "10.23.0"
 [env]
 _.path = "node_modules/.bin"
 
+[settings]
+task_output = "keep-order"
+
 # Grouped tasks
 [tasks.publish]
 description = "Publish package with npm and changesets"
-tools.npm = "latest"
+tools = { npm = "latest" }
 run = "changeset publish"
 depends = ["build"]
 
 [tasks.ci]
 description = "Runs all CI tasks"
-run = { tasks = ["check:*", "build"] }
+run = { tasks = ["build", "test", "lint:*"] }
 
 # Individual tasks
 [tasks.build]
 description = "Build package with tsdown"
 run = "tsdown"
 
-[tasks."check:tests"]
+[tasks.test]
 description = "Run functionality tests with vitest"
-run = "vitest --run"
+run = "vitest run"
 
-[tasks."check:lint"]
+[tasks."lint:eslint"]
 description = "Lint source with eslint"
 run = "eslint ."
 
-[tasks."check:types"]
+[tasks."lint:tsc"]
 description = "Run type checks"
 run = "tsc --noEmit"
 
-[tasks."check:deps"]
+[tasks."lint:knip"]
 description = "Audit source with knip"
 run = "knip"
