@@ -5,9 +5,6 @@ pnpm = "10.23.0"
 [env]
 _.path = "node_modules/.bin"
 
-[settings]
-task_output = "keep-order"
-
 # Grouped tasks
 [tasks.publish]
 description = "Publish package with npm and changesets"
@@ -15,9 +12,9 @@ tools = { npm = "latest" }
 run = "changeset publish"
 depends = ["build"]
 
-[tasks.check]
+[tasks.lint]
 description = "Runs all code quality checks (linting, types, dependencies)"
-run = { tasks = ["check:lint", "check:types", "check:deps"] }
+depends = ["lint:*"]
 
 # Individual tasks
 [tasks.dev]
