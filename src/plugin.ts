@@ -137,8 +137,9 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: PluginOptio
 					return permalinkContent;
 				}
 
-				// Normalize input path
-				inputPath = 'Permalink::' + path.normalize(inputPath);
+				// Normalize input path and prepend a specifier to disambiguate
+				// cached dynamic permalinks and cached templates
+				inputPath = 'EleventyVentoDynamicPermalink:'.concat(path.normalize(inputPath));
 
 				// Retrieve the template function
 				debugMain('Getting template function for `%s`', inputPath);
