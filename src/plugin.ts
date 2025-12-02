@@ -8,8 +8,8 @@
 import path from 'node:path';
 
 // External modules
-import type UserConfig from '@11ty/eleventy/UserConfig';
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
+import type { UserConfig } from './types/eleventy.js';
 
 // Local modules
 import { createVentoEngine, renderVentoTemplate } from './engine.js';
@@ -29,7 +29,7 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions: PluginOptio
 		shortcodes: true,
 		pairedShortcodes: true,
 		ventoOptions: {
-			includes: (eleventyConfig.directories as Record<string, string>).includes,
+			includes: eleventyConfig.directories.includes,
 		},
 
 		// Merge in user-provided options

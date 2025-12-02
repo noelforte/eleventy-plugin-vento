@@ -1,11 +1,11 @@
-import Eleventy from '@11ty/eleventy';
-import type UserConfig from '@11ty/eleventy/UserConfig';
-
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { VentoPlugin } from '../src/plugin.js';
+import type { UserConfig } from '../src/types/eleventy.js';
 import type { PluginOptions } from '../src/types/options.js';
+
+import Eleventy from '@11ty/eleventy';
+import { VentoPlugin } from '../src/plugin.js';
 
 interface JsonResult {
 	url: string | false;
