@@ -1,6 +1,6 @@
 [tools]
 node = "24.12.0"
-pnpm = "10.26.0"
+pnpm = "10.26.1"
 
 [env]
 _.path = "node_modules/.bin"
