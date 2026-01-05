@@ -1,5 +1,13 @@
 # eleventy-plugin-vento
 
+## 5.3.0
+
+### Minor Changes
+
+- bf9130c: Update Vento to v2.3.0
+
+  [Upstream release notes](https://github.com/ventojs/vento/blob/main/CHANGELOG.md#230---2025-12-25)
+
 ## 5.2.1
 
 ### Patch Changes
