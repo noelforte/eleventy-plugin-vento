@@ -16,8 +16,8 @@ importers:
         version: 2.3.0
     devDependencies:
       11ty.ts:
-        specifier: 0.0.6
-        version: 0.0.6(@11ty/eleventy@3.1.2)
+        specifier: 0.0.7
+        version: 0.0.7(@11ty/eleventy@3.1.2)
       '@11ty/eleventy':
         specifier: 3.1.2
         version: 3.1.2
@@ -46,8 +46,8 @@ importers:
         specifier: 17.0.0
         version: 17.0.0
       knip:
-        specifier: 5.78.0
-        version: 5.78.0(@types/node@24.10.4)(typescript@5.9.3)
+        specifier: 5.79.0
+        version: 5.79.0(@types/node@24.10.4)(typescript@5.9.3)
       prettier:
         specifier: 3.7.4
         version: 3.7.4
@@ -69,8 +69,8 @@ importers:
 
 packages:
 
-  11ty.ts@0.0.6:
-    resolution: {integrity: sha512-F8z9iaRiBwGWf01o8QVHmHw8QWNYiAdOzGCA+T6IkvyygGKgNNT5w76mvsoOKNlf6eVGmCUokscoyD46WkbuOQ==}
+  11ty.ts@0.0.7:
+    resolution: {integrity: sha512-71Jqaimpefof8pt51lIy59Ea2GqU9Bmp3mejWznxVPxxhKBbWBIKBdVsxWSRJSoudUw3KPzpSaThw+KqR3yo3w==}
     peerDependencies:
       '@11ty/eleventy': ^3.0.0
 
@@ -1622,8 +1622,8 @@ packages:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
 
-  knip@5.78.0:
-    resolution: {integrity: sha512-nB7i/fgiJl7WVxdv5lX4ZPfDt9/zrw/lOgZtyioy988xtFhKuFJCRdHWT1Zg9Avc0yaojvnmEuAXU8SeMblKww==}
+  knip@5.79.0:
+    resolution: {integrity: sha512-rcg+mNdqm6UiTuRVyy6UuuHw1n4ABMpNXDtrfGaCeUtJoRBAvAENIebr8YMtOz6XE7iVHZ8+rY7skgEtosczhQ==}
     engines: {node: '>=18.18.0'}
     hasBin: true
     peerDependencies:
@@ -2325,7 +2325,7 @@ packages:
 
 snapshots:
 
-  11ty.ts@0.0.6(@11ty/eleventy@3.1.2):
+  11ty.ts@0.0.7(@11ty/eleventy@3.1.2):
     dependencies:
       '@11ty/eleventy': 3.1.2
 
@@ -3825,7 +3825,7 @@ snapshots:
 
   kleur@4.1.5: {}
 
-  knip@5.78.0(@types/node@24.10.4)(typescript@5.9.3):
+  knip@5.79.0(@types/node@24.10.4)(typescript@5.9.3):
     dependencies:
       '@nodelib/fs.walk': 1.2.8
       '@types/node': 24.10.4
