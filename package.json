@@ -50,12 +50,12 @@
 		"eslint-config-prettier": "10.1.8",
 		"eslint-plugin-unicorn": "62.0.0",
 		"globals": "17.0.0",
-		"knip": "5.79.0",
+		"knip": "5.80.0",
 		"prettier": "3.7.4",
 		"tsdown": "0.18.4",
 		"type-fest": "5.3.1",
 		"typescript": "5.9.3",
-		"typescript-eslint": "8.51.0",
+		"typescript-eslint": "8.52.0",
 		"vitest": "4.0.16"
 	}
 }
