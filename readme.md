@@ -20,9 +20,7 @@ An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://ve
 
 ## Installing
 
-```sh
-npm install eleventy-plugin-vento
-```
+This plugin is available [via the `npm` registry](https://www.npmjs.com/package/eleventy-plugin-vento). You may install it via any compatible package manager (`npm`, `pnpm`, `yarn`, direct download, etc).
 
 [↑ Return to Top](#contents)
 
