@@ -7,6 +7,7 @@ import type { Plugin, Template } from 'ventojs/core/environment.js';
 import type { EleventyDataCascade, EleventyFunctionMap } from './types/eleventy.js';
 
 // Internal modules
+import { RuntimeError, stringifyError } from 'ventojs/core/errors.js';
 import { createVentoTag } from './utils/create-vento-tag.js';
 import { debugCache, debugRender } from './utils/debuggers.js';
 
@@ -88,7 +89,19 @@ export async function renderVentoTemplate(
 	data: EleventyDataCascade,
 	from: string
 ) {
-	debugRender('Rendering `%s`', from);
-	const { content } = await template(data);
-	return content;
+	try {
+		debugRender('Rendering `%s`', from);
+		const { content } = await template(data);
+		return content;
+	} catch (error) {
+		// If this is a Vento runtime error, parse and rethrow
+		if (error instanceof RuntimeError) {
+			const context = await error.getContext();
+
+			throw new Error(stringifyError(context));
+		}
+
+		// Else, throw as is
+		throw error;
+	}
 }
