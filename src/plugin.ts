@@ -130,7 +130,6 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 				debugRender('Rendering `%s`', inputPath);
 				const exported = dataExports.get(data.page.inputPath) ?? {};
 				const result = await template({ ...data, ...exported });
-				console.log(data.page.inputPath, result)
 				const { content, ...newExports } = result;
 				if (data.page.inputPath) {
 					Object.assign(exported, newExports);
