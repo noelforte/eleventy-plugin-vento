@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Install tools with mise
-        uses: jdx/mise-action@v3.5.1
+        uses: jdx/mise-action@v3.6.1
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
