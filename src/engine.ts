@@ -3,6 +3,7 @@
 
 // External library
 import createVentoEnv, { type Options as VentoOptions } from 'ventojs';
+import { stringifyError, VentoError } from 'ventojs/core/errors.js';
 import type { Plugin, Template } from 'ventojs/core/environment.js';
 import type { EleventyDataCascade, EleventyFunctionMap } from './types/eleventy.js';
 
@@ -89,6 +90,16 @@ export async function renderVentoTemplate(
 	from: string
 ) {
 	debugRender('Rendering `%s`', from);
-	const { content } = await template(data);
-	return content;
+	try {
+		const { content } = await template(data);
+		return content;
+	} catch (error) {
+		if (error instanceof VentoError) {
+			const context = await error.getContext();
+			if (context) {
+				throw new Error(stringifyError(context));
+			}
+		}
+		throw error;
+	}
 }
