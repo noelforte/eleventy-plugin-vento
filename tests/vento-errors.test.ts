@@ -1,4 +1,4 @@
-import { bench, test } from 'vitest';
+import { test } from 'vitest';
 import { EleventyTest } from './_eleventy-test-instance.js';
 
 test('error', { concurrent: true }, async ({ expect }) => {
