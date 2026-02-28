@@ -43,8 +43,8 @@ importers:
         specifier: 63.0.0
         version: 63.0.0(eslint@9.39.3(jiti@2.6.1))
       globals:
-        specifier: 17.0.0
-        version: 17.0.0
+        specifier: 17.3.0
+        version: 17.3.0
       knip:
         specifier: 5.81.0
         version: 5.81.0(@types/node@24.10.9)(typescript@5.9.3)
@@ -1503,8 +1503,8 @@ packages:
     resolution: {integrity: sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ==}
     engines: {node: '>=18'}
 
-  globals@17.0.0:
-    resolution: {integrity: sha512-gv5BeD2EssA793rlFWVPMMCqefTlpusw6/2TbAVMy0FzcG8wKJn4O+NqJ4+XWmmwrayJgw5TzrmWjFgmz1XPqw==}
+  globals@17.3.0:
+    resolution: {integrity: sha512-yMqGUQVVCkD4tqjOJf3TnrvaaHDMYp4VlUSObbkIiuCPe/ofdMBFIAcBbCSRFWOnos6qRiTVStDwqPLUclaxIw==}
     engines: {node: '>=18'}
 
   globby@11.1.0:
@@ -3740,7 +3740,7 @@ snapshots:
 
   globals@16.5.0: {}
 
-  globals@17.0.0: {}
+  globals@17.3.0: {}
 
   globby@11.1.0:
     dependencies:
