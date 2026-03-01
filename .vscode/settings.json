@@ -1,13 +1,4 @@
 {
-	"files.associations": {
-		"*.json.liquid": "json",
-		"*.yaml.liquid": "yaml",
-		"*.md.liquid": "markdown",
-		"*.js.liquid": "liquid-javascript",
-		"*.css.liquid": "liquid-css",
-		"*.scss.liquid": "liquid-scss",
-		"*.html.snap": "html"
-	},
 	"editor.codeActionsOnSave": {
 		"source.sortImports": "always"
 	}
