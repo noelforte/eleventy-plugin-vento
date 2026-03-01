@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 5.3.1
+
+### Patch Changes
+
+- 9f8c8ae: Update ventojs to v2.3.1
+
 ## 5.3.0
 
 ### Minor Changes
