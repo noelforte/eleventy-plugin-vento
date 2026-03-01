@@ -4,10 +4,10 @@
 // External library
 import createVentoEnv, { type Options as VentoOptions } from 'ventojs';
 import type { Plugin, Template } from 'ventojs/core/environment.js';
+import { stringifyError, VentoError } from 'ventojs/core/errors.js';
 import type { EleventyDataCascade, EleventyFunctionMap } from './types/eleventy.js';
 
 // Internal modules
-import { RuntimeError, stringifyError } from 'ventojs/core/errors.js';
 import { createVentoTag } from './utils/create-vento-tag.js';
 import { debugCache, debugRender } from './utils/debuggers.js';
 
@@ -95,10 +95,12 @@ export async function renderVentoTemplate(
 		return content;
 	} catch (error) {
 		// If this is a Vento runtime error, parse and rethrow
-		if (error instanceof RuntimeError) {
+		if (error instanceof VentoError) {
 			const context = await error.getContext();
 
-			throw new Error(stringifyError(context));
+			if (context) {
+				throw new Error(stringifyError(context));
+			}
 		}
 
 		// Else, throw as is
