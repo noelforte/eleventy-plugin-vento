@@ -82,13 +82,3 @@ export function createVentoEngine(options: VentoOptions) {
 		getTemplateFunction,
 	};
 }
-
-export async function renderVentoTemplate(
-	template: Template,
-	data: EleventyDataCascade,
-	from: string
-) {
-	debugRender('Rendering `%s`', from);
-	const { content } = await template(data);
-	return content;
-}

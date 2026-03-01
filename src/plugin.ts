@@ -12,10 +12,10 @@ import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plug
 import type { UserConfig } from './types/eleventy.js';
 
 // Local modules
-import { createVentoEngine, renderVentoTemplate } from './engine.js';
+import { createVentoEngine } from './engine.js';
 import type { EleventyDataCascade } from './types/eleventy.js';
 import type { PluginOptions } from './types/options.js';
-import { debugCache, debugMain } from './utils/debuggers.js';
+import { debugCache, debugMain, debugRender } from './utils/debuggers.js';
 
 export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<PluginOptions>) {
 	debugMain('Initializing eleventy-plugin-vento');
@@ -95,6 +95,9 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 		engine.loadPairedShortcodes(pairedShortcodes);
 	}
 
+	// Prepare reverse data cascade for Vento-exported variables
+	const dataExports = new Map<string, Record<string, unknown>>();
+
 	// Handle emptying the cache when files are updated
 	debugMain('Registering Vento cache handler on eleventy.beforeWatch event');
 	eleventyConfig.on('eleventy.beforeWatch', async (updatedFiles: string[]) => {
@@ -114,7 +117,6 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 	eleventyConfig.addExtension('vto', {
 		outputFileExtension: 'html',
 		read: true,
-
 		async compile(inputContent: string, inputPath: string) {
 			// Normalize input path
 			inputPath = path.normalize(inputPath);
@@ -124,8 +126,17 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 			const template = await engine.getTemplateFunction(inputContent, inputPath, false);
 
 			// Return a render function
-			return async (data: EleventyDataCascade) =>
-				await renderVentoTemplate(template, data, inputPath);
+			return async (data: EleventyDataCascade) => {
+				debugRender('Rendering `%s`', inputPath);
+				const exported = dataExports.get(data.page.inputPath) ?? {};
+				const result = await template({ ...data, ...exported });
+				const { content, ...newExports } = result;
+				if (data.page.inputPath) {
+					Object.assign(exported, newExports);
+					dataExports.set(data.page.inputPath, exported);
+				}
+				return content;
+			}
 		},
 
 		compileOptions: {
@@ -145,8 +156,10 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 				const template = await engine.getTemplateFunction(permalinkContent, inputPath);
 
 				// Return a render function
-				return async (data: EleventyDataCascade) =>
-					await renderVentoTemplate(template, data, inputPath);
+				return async (data: EleventyDataCascade) => {
+					debugRender('Rendering permalink `%s`', from);
+					return await template(data).content;
+				}
 			},
 		},
 	});
