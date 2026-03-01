@@ -44,7 +44,7 @@ export default function (eleventyConfig) {
 
 ## Plugin Options
 
-This plugin ships with default options out of the box, but you can [pass an options object](https://www.11ty.dev/docs/plugins/#plugin-configuration-options) to your `addPlugin` call to configure things further. The below example shows the configurable options as well as their defaults.
+This plugin ships with default options out of the box, but you can [pass an options object](https://www.11ty.dev/docs/create-plugin/#plugin-configuration-options) to your `addPlugin` call to configure things further. The below example shows the configurable options as well as their defaults.
 
 ```js
 import { VentoPlugin } from 'eleventy-plugin-vento';
