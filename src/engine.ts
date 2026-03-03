@@ -4,11 +4,13 @@
 // External library
 import createVentoEnv, { type Options as VentoOptions } from 'ventojs';
 import type { Plugin, Template } from 'ventojs/core/environment.js';
+import { stringifyError, VentoError } from 'ventojs/core/errors.js';
 import type { EleventyDataCascade, EleventyFunctionMap } from './types/eleventy.js';
 
 // Internal modules
 import { createVentoTag } from './utils/create-vento-tag.js';
-import { debugCache, debugRender } from './utils/debuggers.js';
+import { debugCache, debugError, debugRender } from './utils/debuggers.js';
+import { logWarning } from './utils/logging.js';
 
 export function createVentoEngine(options: VentoOptions) {
 	const env = createVentoEnv(options);
@@ -88,7 +90,30 @@ export async function renderVentoTemplate(
 	data: EleventyDataCascade,
 	from: string
 ) {
-	debugRender('Rendering `%s`', from);
-	const { content } = await template(data);
-	return content;
+	try {
+		debugRender('Rendering `%s`', from);
+		const { content } = await template(data);
+		return content;
+	} catch (error) {
+		// If this is a Vento runtime error, parse and rethrow
+		if (error instanceof VentoError) {
+			const context = await error.getContext();
+
+			if (context) {
+				if (!context.position) {
+					logWarning(
+						'An error occured, but the exact location within the source code cannot be obtained',
+						'Set DEBUG="Eleventy:Vento:Error" to print the raw `ErrorContext` object'
+					);
+				}
+
+				debugError('ErrorContext (via Vento) %O', context);
+
+				throw new Error(stringifyError(context));
+			}
+		}
+
+		// Else, throw as is
+		throw error;
+	}
 }

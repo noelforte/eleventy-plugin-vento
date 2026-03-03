@@ -1,0 +1,12 @@
+<head>
+Not part of the stack
+</head>
+<div>
+<p>
+This is context that should not be part of the
+specific error stack.
+</p>
+{{ for key of [1, 2, 3] }}
+	{{- k.notaproperty }}
+{{ /for }}
+</div>

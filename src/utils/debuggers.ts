@@ -1,9 +1,8 @@
 // Debuggers used by eleventy-plugin-vento
 
-import createDebugger from 'debug';
+import debug from 'debug';
 
-const debugBaseNamespace = 'Eleventy:Vento';
-
-export const debugMain = createDebugger(debugBaseNamespace);
-export const debugCache = createDebugger(`${debugBaseNamespace}:Cache`);
-export const debugRender = createDebugger(`${debugBaseNamespace}:Render`);
+export const debugMain = debug('Eleventy:Vento');
+export const debugCache = debugMain.extend('Cache');
+export const debugRender = debugMain.extend('Render');
+export const debugError = debugMain.extend('Error');
