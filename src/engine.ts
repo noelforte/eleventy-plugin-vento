@@ -102,7 +102,7 @@ export async function renderVentoTemplate(
 			if (context) {
 				if (!context.position) {
 					logWarning(
-						'An error occured, but the exact location within the source code cannot be obtained',
+						'An error was thrown, but the exact location within the source code cannot be obtained',
 						'Set DEBUG="Eleventy:Vento:Error" to print the raw `ErrorContext` object'
 					);
 				}
