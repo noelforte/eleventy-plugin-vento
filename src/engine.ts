@@ -9,7 +9,8 @@ import type { EleventyDataCascade, EleventyFunctionMap } from './types/eleventy.
 
 // Internal modules
 import { createVentoTag } from './utils/create-vento-tag.js';
-import { debugCache, debugRender } from './utils/debuggers.js';
+import { debugCache, debugError, debugRender } from './utils/debuggers.js';
+import { logWarning } from './utils/logging.js';
 
 export function createVentoEngine(options: VentoOptions) {
 	const env = createVentoEnv(options);
@@ -99,6 +100,15 @@ export async function renderVentoTemplate(
 			const context = await error.getContext();
 
 			if (context) {
+				if (!context.position) {
+					logWarning(
+						'An error occured, but the exact location within the source code cannot be obtained',
+						'Set DEBUG="Eleventy:Vento:Error" to print the raw `ErrorContext` object'
+					);
+				}
+
+				debugError('ErrorContext (via Vento) %O', context);
+
 				throw new Error(stringifyError(context));
 			}
 		}

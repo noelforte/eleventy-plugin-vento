@@ -230,9 +230,10 @@ Vento: See [Auto Trim Plugin](https://vento.js.org/plugins/auto-trim/).
 
 Like Eleventy, this plugin uses the [`debug`](https://www.npmjs.com/package/debug) package to handle verbose logging. The following `DEBUG` namespaces are implemented:
 
-- `Eleventy:Vento` - Logs initial setup of the plugin, loading features, pre-page compile setup steps (like changing `page` and `eleventy` objects)
+- `Eleventy:Vento` - Logs initial setup of the plugin, loading features, pre-page compile setup steps (like changing `page` and `eleventy` objects).
 - `Eleventy:Vento:Cache` - Logs updates to Vento's own internal cache, which is used in tandem with Eleventy's cache.
-- `Eleventy:Vento:Render` - Logs when templates are rendered
+- `Eleventy:Vento:Render` - Logs when templates are rendered.
+- `Eleventy:Vento:Error` - Logs extra debugging information when errors occur.
 
 Because it is a child of the `Eleventy:` namespace, the following command will include output from this plugin as well:
 
