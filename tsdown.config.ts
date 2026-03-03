@@ -4,4 +4,5 @@ export default defineConfig({
 	entry: ['src/plugin.ts'],
 	fixedExtension: true,
 	platform: 'node',
+	inlineOnly: false,
 });
