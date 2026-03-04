@@ -23,6 +23,6 @@ export const debug = {
  */
 export function logWarning(...messages: string[]) {
 	for (const message of messages) {
-		console.error(`${st('gray', '[warning]')} ${st('yellow', message)}`);
+		console.error(st('gray', '[warning]'), st('yellow', message));
 	}
 }
