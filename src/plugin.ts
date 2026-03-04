@@ -15,10 +15,10 @@ import type { UserConfig } from './types/eleventy.js';
 import { createVentoEngine, renderVentoTemplate } from './engine.js';
 import type { EleventyDataCascade } from './types/eleventy.js';
 import type { PluginOptions } from './types/options.js';
-import { debugCache, debugMain } from './utils/debuggers.js';
+import { debug } from './utils/logging.js';
 
 export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<PluginOptions>) {
-	debugMain('Initializing eleventy-plugin-vento');
+	debug.main('Initializing eleventy-plugin-vento');
 	eleventyConfig.versionCheck('>=3.0.0');
 
 	const options: PluginOptions = {
@@ -36,17 +36,17 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 		...userOptions,
 	};
 
-	debugMain('Merged default and user config: %O', options);
+	debug.main('Merged default and user config: %O', options);
 
 	// Get list of filters, shortcodes and paired shortcodes
 	const filters = eleventyConfig.getFilters();
-	debugMain('Reading filters from Eleventy: %o', filters);
+	debug.main('Reading filters from Eleventy: %o', filters);
 
 	const shortcodes = eleventyConfig.getShortcodes();
-	debugMain('Reading shortcodes from Eleventy: %o', shortcodes);
+	debug.main('Reading shortcodes from Eleventy: %o', shortcodes);
 
 	const pairedShortcodes = eleventyConfig.getPairedShortcodes();
-	debugMain('Reading paired shortcodes from Eleventy: %o', pairedShortcodes);
+	debug.main('Reading paired shortcodes from Eleventy: %o', pairedShortcodes);
 
 	// Add autotrim plugin if enabled
 	if (options.autotrim) {
@@ -68,49 +68,49 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 			}
 		}
 
-		debugMain('Enabled autotrim for tags: %o', tagSet);
+		debug.main('Enabled autotrim for tags: %o', tagSet);
 
 		options.plugins.push(autotrimPlugin({ tags: [...tagSet] }));
 	}
 
 	// Create the vento engine instance
-	debugMain('Initializing Vento environment');
+	debug.main('Initializing Vento environment');
 	const engine = createVentoEngine(options.ventoOptions);
 
 	// Load plugins
-	debugMain('Loading plugins: %o', options.plugins);
+	debug.main('Loading plugins: %o', options.plugins);
 	engine.loadPlugins(options.plugins);
 
 	// Add filters, single and paired shortcodes if enabled
 	if (options.filters) {
-		debugMain('Loading filters: %o', filters);
+		debug.main('Loading filters: %o', filters);
 		engine.loadFilters(filters);
 	}
 	if (options.shortcodes) {
-		debugMain('Loading shortcodes: %o', shortcodes);
+		debug.main('Loading shortcodes: %o', shortcodes);
 		engine.loadShortcodes(shortcodes);
 	}
 	if (options.pairedShortcodes) {
-		debugMain('Loading paired shortcodes: %o', pairedShortcodes);
+		debug.main('Loading paired shortcodes: %o', pairedShortcodes);
 		engine.loadPairedShortcodes(pairedShortcodes);
 	}
 
 	// Handle emptying the cache when files are updated
-	debugMain('Registering Vento cache handler on eleventy.beforeWatch event');
+	debug.main('Registering Vento cache handler on eleventy.beforeWatch event');
 	eleventyConfig.on('eleventy.beforeWatch', async (updatedFiles: string[]) => {
 		for (let file of updatedFiles) {
 			file = path.normalize(file);
-			debugCache('Delete cache entry for %s', file);
+			debug.cache('Delete cache entry for %s', file);
 			engine.cache.delete(file);
 		}
 	});
 
 	// Add vto as a template format
-	debugMain('Registering .vto as a template format');
+	debug.main('Registering .vto as a template format');
 	eleventyConfig.addTemplateFormats('vto');
 
 	// Add extension handling
-	debugMain('Registering .vto extension with eleventy');
+	debug.main('Registering .vto extension with eleventy');
 	eleventyConfig.addExtension('vto', {
 		outputFileExtension: 'html',
 		read: true,
@@ -120,7 +120,7 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 			inputPath = path.normalize(inputPath);
 
 			// Retrieve the template function
-			debugMain('Getting template function for `%s`', inputPath);
+			debug.main('Getting template function for `%s`', inputPath);
 			const template = await engine.getTemplateFunction(inputContent, inputPath, false);
 
 			// Return a render function
@@ -141,7 +141,7 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 				inputPath = 'EleventyVentoDynamicPermalink:'.concat(path.normalize(inputPath));
 
 				// Retrieve the template function
-				debugMain('Getting template function for `%s`', inputPath);
+				debug.main('Getting template function for `%s`', inputPath);
 				const template = await engine.getTemplateFunction(permalinkContent, inputPath);
 
 				// Return a render function
@@ -151,5 +151,5 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 		},
 	});
 
-	debugMain('eleventy-plugin-vento initialized');
+	debug.main('eleventy-plugin-vento initialized');
 }

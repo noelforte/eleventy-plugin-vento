@@ -1,7 +1,7 @@
 // Function that handles creating the Vento environment. Exposes
 // a small API for Eleventy to interface with.
 
-// External library
+// External modules
 import createVentoEnv, { type Options as VentoOptions } from 'ventojs';
 import type { Plugin, Template } from 'ventojs/core/environment.js';
 import { stringifyError, VentoError } from 'ventojs/core/errors.js';
@@ -9,8 +9,8 @@ import type { EleventyDataCascade, EleventyFunctionMap } from './types/eleventy.
 
 // Internal modules
 import { createVentoTag } from './utils/create-vento-tag.js';
-import { debugCache, debugError, debugRender } from './utils/debuggers.js';
 import { logWarning } from './utils/logging.js';
+import { debug } from './utils/logging.js';
 
 export function createVentoEngine(options: VentoOptions) {
 	const env = createVentoEnv(options);
@@ -59,14 +59,11 @@ export function createVentoEngine(options: VentoOptions) {
 
 		if (template?.source === source) {
 			debugCache('Cache HIT for `%s`, used precompiled template', file);
+			debug.cache('Cache HIT for `%s`, using precompiled template', file);
 		} else {
+			debug.cache('Cache MISS for `%s`, will compile new template function', file);
 			template = env.compile(source, file);
 
-			debugCache(
-				`Cache MISS for \`%s\`, compiled new template; %s\n\n${template}`,
-				file,
-				useVentoCache ? 'let Vento cache result' : 'defer result caching to Eleventy'
-			);
 			if (useVentoCache) {
 				env.cache.set(file, template);
 			}
@@ -91,7 +88,7 @@ export async function renderVentoTemplate(
 	from: string
 ) {
 	try {
-		debugRender('Rendering `%s`', from);
+		debug.render('Rendering `%s`', from);
 		const { content } = await template(data);
 		return content;
 	} catch (error) {
