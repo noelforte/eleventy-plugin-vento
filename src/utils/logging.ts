@@ -18,10 +18,7 @@ export const debug = {
 	},
 };
 
-/**
- * Log one or more warnings to stderr
- */
-export function logWarning(...messages: string[]) {
+export function warn(...messages: string[]) {
 	for (const message of messages) {
 		console.error(st('gray', '[warning]'), st('yellow', message));
 	}

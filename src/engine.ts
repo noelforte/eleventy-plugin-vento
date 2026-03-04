@@ -4,12 +4,12 @@
 // External modules
 import createVentoEnv, { type Options as VentoOptions } from 'ventojs';
 import type { Plugin, Template } from 'ventojs/core/environment.js';
-import { stringifyError, VentoError } from 'ventojs/core/errors.js';
+import { VentoError } from 'ventojs/core/errors.js';
 import type { EleventyDataCascade, EleventyFunctionMap } from './types/eleventy.js';
 
 // Internal modules
 import { createVentoTag } from './utils/create-vento-tag.js';
-import { logWarning } from './utils/logging.js';
+import { EleventyVentoError } from './utils/errors.js';
 import { debug } from './utils/logging.js';
 
 export function createVentoEngine(options: VentoOptions) {
@@ -58,18 +58,25 @@ export function createVentoEngine(options: VentoOptions) {
 		let template = await env.cache.get(file);
 
 		if (template?.source === source) {
-			debugCache('Cache HIT for `%s`, used precompiled template', file);
 			debug.cache('Cache HIT for `%s`, using precompiled template', file);
-		} else {
+			return template;
+		}
+
+		try {
 			debug.cache('Cache MISS for `%s`, will compile new template function', file);
 			template = env.compile(source, file);
 
 			if (useVentoCache) {
 				env.cache.set(file, template);
 			}
-		}
 
-		return template;
+			return template;
+		} catch (error) {
+			if (error instanceof VentoError) {
+				throw await EleventyVentoError.createFromContext(error);
+			}
+			throw error;
+		}
 	}
 
 	return {
@@ -92,25 +99,9 @@ export async function renderVentoTemplate(
 		const { content } = await template(data);
 		return content;
 	} catch (error) {
-		// If this is a Vento runtime error, parse and rethrow
 		if (error instanceof VentoError) {
-			const context = await error.getContext();
-
-			if (context) {
-				if (!context.position) {
-					logWarning(
-						'An error was thrown, but the exact location within the source code cannot be obtained',
-						'Set DEBUG="Eleventy:Vento:Error" to print the raw `ErrorContext` object'
-					);
-				}
-
-				debugError('ErrorContext (via Vento) %O', context);
-
-				throw new Error(stringifyError(context));
-			}
+			throw await EleventyVentoError.createFromContext(error);
 		}
-
-		// Else, throw as is
 		throw error;
 	}
 }

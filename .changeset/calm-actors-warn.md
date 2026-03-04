@@ -4,13 +4,13 @@
 
 Error logging improvements (thanks @tmcw for the help on this!)
 
-This addition leverages Vento's `stringifyError` utility to capture and pretty-print syntax errors, which should improve the overall debugging experience.
+Re-implements Vento's `stringifyError` function tailored specifically for Eleventy in order to show errors in a nice format that Eleventy expects
 
 Notably, the one case where this doesn't work is if Vento cannot capture a position from the source code [due to limitations in Node/Bun](https://github.com/noelforte/eleventy-plugin-vento/issues/408#issuecomment-3748576474). In this case, we'll log a warning to the console...
 
 ```
-[warning] An error occured, but the exact location within the source code cannot be obtained
-[warning] Set DEBUG="Eleventy:Vento:Error" to print the raw `ErrorContext` object
+[warning] A `SyntaxError` was thrown, but the exact position within the source code cannot be obtained
+[warning] Use DEBUG="Eleventy:Vento*" to view raw `ErrorContext` information
 ```
 
 ...and log the entire context object to the `DEBUG` namespace `Eleventy:Vento:Error`:
