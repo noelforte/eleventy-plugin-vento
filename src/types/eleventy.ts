@@ -2,21 +2,18 @@
 
 import type { EleventyScope } from '11ty.ts';
 import type _UserConfig from '@11ty/eleventy/UserConfig';
-import type { Merge, Promisable } from 'type-fest';
+import type { MaybePromise } from './utilities.js';
 
-type UnknownData = Record<string, unknown>;
+export interface EleventyDataCascade extends EleventyScope {
+	[K: string]: unknown;
+}
 
-type EleventyDataCascade = Merge<EleventyScope, UnknownData>;
-
-type EleventyFunction<Context = EleventyScope> = (
+export type EleventyFunction<Context = EleventyScope> = (
 	this: Context,
-	content?: string,
-	...restArgs: unknown[]
-) => Promisable<void | string>;
+	...args: unknown[]
+) => MaybePromise<void | string>;
 
-type EleventyFunctionMap = Record<string, EleventyFunction>;
-
-export type { EleventyDataCascade, EleventyFunction, EleventyFunctionMap };
+export type EleventyFunctionMap = Record<string, EleventyFunction>;
 
 export interface UserConfig extends _UserConfig {
 	directories: {
