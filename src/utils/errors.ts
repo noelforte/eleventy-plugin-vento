@@ -66,7 +66,7 @@ export class EleventyVentoError extends Error {
 		const codelines = codeToLines(ctx.code);
 		err.message +=
 			`\n\n` +
-			`${indent} | /* ...compiled to... */\n` +
+			`${indent} │ /// compiled Vento function for ${ctx.file} ///\n` +
 			`${indent} │ ${codelines[ctx.line - 1].trimEnd()}\n` +
 			`${indent}   ${' '.repeat(ctx.column - 1)}^`;
 
