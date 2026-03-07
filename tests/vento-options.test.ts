@@ -42,5 +42,5 @@ test('should fail in strict mode', { concurrent: true }, async ({ expect }) => {
 
 	const build = testInstance.rebuild();
 
-	await expect(build).rejects.toThrowError();
+	await expect(build).rejects.toThrow();
 });

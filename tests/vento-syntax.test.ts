@@ -9,7 +9,7 @@ const testInstance = new EleventyTest('./tests/stubs-vento-syntax/', {
 
 await testInstance.rebuild();
 
-const matrix: [string, string][] = [
+const matrix = [
 	['Can set/print variables', 'set'],
 	['Can run functions', 'function'],
 	['Can iterate through loops', 'for'],
