@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 5.4.1
+
+### Patch Changes
+
+- 744f059: correct minor formatting issue in errors
+
 ## 5.4.0
 
 ### Minor Changes
