@@ -42,7 +42,7 @@
 	"devDependencies": {
 		"11ty.ts": "0.0.7",
 		"@11ty/eleventy": "3.1.2",
-		"@changesets/cli": "2.29.8",
+		"@changesets/cli": "2.30.0",
 		"@eslint/js": "10.0.1",
 		"@types/debug": "4.1.12",
 		"@types/node": "24.11.0",
