@@ -3,6 +3,7 @@ onlyBuiltDependencies:
   - oxc-resolver
 
 overrides:
+  liquidjs@<10.25.0: '>=10.25.0'
   minimatch@<3.1.3: '>=3.1.3'
   minimatch@<3.1.4: '>=3.1.4'
   rollup@>=4.0.0 <4.59.0: '>=4.59.0'
