@@ -52,7 +52,7 @@
 		"globals": "17.4.0",
 		"knip": "5.85.0",
 		"prettier": "3.8.1",
-		"tsdown": "0.21.0",
+		"tsdown": "0.21.1",
 		"typescript": "5.9.3",
 		"typescript-eslint": "8.56.1",
 		"vitest": "4.0.18"
