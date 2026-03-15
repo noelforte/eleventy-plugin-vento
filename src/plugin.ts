@@ -12,7 +12,7 @@ import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plug
 import type { UserConfig } from './types/eleventy.js';
 
 // Local modules
-import { createVentoEngine } from './engine.js';
+import { createVentoEngine, renderVentoTemplate } from './engine.js';
 import type { EleventyDataCascade } from './types/eleventy.js';
 import type { PluginOptions } from './types/options.js';
 import { debug } from './utils/logging.js';
@@ -156,10 +156,8 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 				const template = await engine.getTemplateFunction(permalinkContent, inputPath);
 
 				// Return a render function
-				return async (data: EleventyDataCascade) => {
-					debug.render('Rendering permalink `%s`', from);
-					return await template(data).content;
-				};
+				return async (data: EleventyDataCascade) =>
+					await renderVentoTemplate(template, data, inputPath);
 			},
 		},
 	});
