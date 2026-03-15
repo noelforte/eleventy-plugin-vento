@@ -15,6 +15,8 @@ export type EleventyFunction<Context = EleventyScope> = (
 
 export type EleventyFunctionMap = Record<string, EleventyFunction>;
 
+export type EleventyRenderFunction = (data: EleventyDataCascade) => MaybePromise<string>;
+
 export interface UserConfig extends _UserConfig {
 	directories: {
 		input: string;

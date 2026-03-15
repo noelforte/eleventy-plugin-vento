@@ -12,8 +12,7 @@ import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plug
 import type { UserConfig } from './types/eleventy.js';
 
 // Local modules
-import { createVentoEngine, renderVentoTemplate } from './engine.js';
-import type { EleventyDataCascade } from './types/eleventy.js';
+import { createVentoEngine } from './engine.js';
 import type { PluginOptions } from './types/options.js';
 import { debug } from './utils/logging.js';
 
@@ -96,7 +95,7 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 	}
 
 	// Handle emptying the cache when files are updated
-	debug.main('Registering Vento cache handler on eleventy.beforeWatch event');
+	debug.main('Adding Vento cache handler for eleventy.beforeWatch event');
 	eleventyConfig.on('eleventy.beforeWatch', async (updatedFiles: string[]) => {
 		for (let file of updatedFiles) {
 			file = path.normalize(file);
@@ -119,13 +118,11 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 			// Normalize input path
 			inputPath = path.normalize(inputPath);
 
-			// Retrieve the template function
-			debug.main('Getting template function for `%s`', inputPath);
-			const template = await engine.getTemplateFunction(inputContent, inputPath, false);
+			// Retrieve the render function
+			const render = await engine.getRenderFunction(inputContent, inputPath, false);
 
 			// Return a render function
-			return async (data: EleventyDataCascade) =>
-				await renderVentoTemplate(template, data, inputPath);
+			return render;
 		},
 
 		compileOptions: {
@@ -140,13 +137,11 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 				// cached dynamic permalinks and cached templates
 				inputPath = 'EleventyVentoDynamicPermalink:'.concat(path.normalize(inputPath));
 
-				// Retrieve the template function
-				debug.main('Getting template function for `%s`', inputPath);
-				const template = await engine.getTemplateFunction(permalinkContent, inputPath);
+				// Retrieve the render function
+				const render = await engine.getRenderFunction(permalinkContent, inputPath);
 
 				// Return a render function
-				return async (data: EleventyDataCascade) =>
-					await renderVentoTemplate(template, data, inputPath);
+				return render;
 			},
 		},
 	});

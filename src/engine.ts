@@ -3,9 +3,9 @@
 
 // External modules
 import createVentoEnv, { type Options as VentoOptions } from 'ventojs';
-import type { Plugin, Template } from 'ventojs/core/environment.js';
+import type { Plugin } from 'ventojs/core/environment.js';
 import { VentoError } from 'ventojs/core/errors.js';
-import type { EleventyDataCascade, EleventyFunctionMap } from './types/eleventy.js';
+import type { EleventyFunctionMap, EleventyRenderFunction } from './types/eleventy.js';
 
 // Internal modules
 import { createVentoTag } from './utils/create-vento-tag.js';
@@ -53,30 +53,47 @@ export function createVentoEngine(options: VentoOptions) {
 		}
 	}
 
-	async function getTemplateFunction(source: string, file: string, useVentoCache: boolean = true) {
+	async function getRenderFunction(source: string, file: string, useVentoCache: boolean = true) {
+		debug.main('Getting render function for `%s`', file);
+
 		// Attempt to retrieve template function from cache
 		let template = await env.cache.get(file);
 
 		if (template?.source === source) {
 			debug.cache('Cache HIT for `%s`, using precompiled template', file);
-			return template;
-		}
+		} else {
+			// Attempt to compile a new template
+			try {
+				debug.cache('Cache MISS for `%s`, will compile new template function', file);
+				template = env.compile(source, file);
+			} catch (error) {
+				if (error instanceof VentoError) {
+					throw await EleventyVentoError.createFromContext(error);
+				}
+				throw error;
+			}
 
-		try {
-			debug.cache('Cache MISS for `%s`, will compile new template function', file);
-			template = env.compile(source, file);
-
+			// Cache the template if need be
 			if (useVentoCache) {
 				env.cache.set(file, template);
 			}
-
-			return template;
-		} catch (error) {
-			if (error instanceof VentoError) {
-				throw await EleventyVentoError.createFromContext(error);
-			}
-			throw error;
 		}
+
+		// Construct a render function from the returned template
+		const render: EleventyRenderFunction = async function (data) {
+			try {
+				debug.render('Rendering %s', file);
+				const { content } = await template(data);
+				return content;
+			} catch (error) {
+				if (error instanceof VentoError) {
+					throw await EleventyVentoError.createFromContext(error);
+				}
+				throw error;
+			}
+		};
+
+		return render;
 	}
 
 	return {
@@ -85,23 +102,6 @@ export function createVentoEngine(options: VentoOptions) {
 		loadFilters,
 		loadShortcodes,
 		loadPairedShortcodes,
-		getTemplateFunction,
+		getRenderFunction,
 	};
-}
-
-export async function renderVentoTemplate(
-	template: Template,
-	data: EleventyDataCascade,
-	from: string
-) {
-	try {
-		debug.render('Rendering `%s`', from);
-		const { content } = await template(data);
-		return content;
-	} catch (error) {
-		if (error instanceof VentoError) {
-			throw await EleventyVentoError.createFromContext(error);
-		}
-		throw error;
-	}
 }
