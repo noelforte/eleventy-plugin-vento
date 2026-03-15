@@ -127,12 +127,14 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 
 			// Return a render function
 			return async (data: EleventyDataCascade) => {
-				debug.render('Rendering `%s`', inputPath);
 				const exported = dataExports.get(data.page.inputPath) ?? {};
-				const result = await template({ ...data, ...exported });
-				const { content, ...newExports } = result;
+				const { content, exports } = await renderVentoTemplate(
+					template,
+					{ ...data, ...exported },
+					inputPath
+				);
 				if (data.page.inputPath) {
-					Object.assign(exported, newExports);
+					Object.assign(exported, exports);
 					dataExports.set(data.page.inputPath, exported);
 				}
 				return content;
@@ -156,8 +158,10 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 				const template = await engine.getTemplateFunction(permalinkContent, inputPath);
 
 				// Return a render function
-				return async (data: EleventyDataCascade) =>
-					await renderVentoTemplate(template, data, inputPath);
+				return async (data: EleventyDataCascade) => {
+					const { content } = await renderVentoTemplate(template, data, inputPath);
+					return content;
+				};
 			},
 		},
 	});
