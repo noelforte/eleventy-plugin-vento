@@ -96,8 +96,8 @@ export async function renderVentoTemplate(
 ) {
 	try {
 		debug.render('Rendering `%s`', from);
-		const { content } = await template(data);
-		return content;
+		const { content, ...exports } = await template(data);
+		return { content, exports };
 	} catch (error) {
 		if (error instanceof VentoError) {
 			throw await EleventyVentoError.createFromContext(error);
