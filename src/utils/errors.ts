@@ -23,7 +23,7 @@ export class EleventyVentoError extends Error {
 		const ctx = await error.getContext();
 		const err = new this('An unknown error occured processing Vento templates', ctx, error);
 
-		if (!ctx.position || !ctx.file) {
+		if (ctx.position === undefined || ctx.file === undefined) {
 			warn(
 				`A \`${ctx.type}\` was thrown, but the exact position within the source code cannot be obtained`,
 				'Use DEBUG="Eleventy:Vento*" to view raw `ErrorContext` information'
