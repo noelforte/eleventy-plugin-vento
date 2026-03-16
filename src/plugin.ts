@@ -118,11 +118,8 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 			// Normalize input path
 			inputPath = path.normalize(inputPath);
 
-			// Retrieve the render function
-			const render = await engine.getRenderFunction(inputContent, inputPath, false);
-
-			// Return a render function
-			return render;
+			// Get and return the render function
+			return await engine.getRenderFunction(inputContent, inputPath, { cache: false });
 		},
 
 		compileOptions: {
@@ -137,11 +134,8 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 				// cached dynamic permalinks and cached templates
 				inputPath = 'EleventyVentoDynamicPermalink:'.concat(path.normalize(inputPath));
 
-				// Retrieve the render function
-				const render = await engine.getRenderFunction(permalinkContent, inputPath);
-
-				// Return a render function
-				return render;
+				// Get and return the render function
+				return await engine.getRenderFunction(permalinkContent, inputPath);
 			},
 		},
 	});

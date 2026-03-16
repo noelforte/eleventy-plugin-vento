@@ -53,7 +53,7 @@ export function createVentoEngine(options: VentoOptions) {
 		}
 	}
 
-	async function getRenderFunction(source: string, file: string, useVentoCache: boolean = true) {
+	async function getRenderFunction(source: string, file: string, options?: { cache: boolean }) {
 		debug.main('Getting render function for `%s`', file);
 
 		// Attempt to retrieve template function from cache
@@ -73,14 +73,14 @@ export function createVentoEngine(options: VentoOptions) {
 				throw error;
 			}
 
-			// Cache the template if need be
-			if (useVentoCache) {
+			// Cache the template unless specifically requested not to
+			if (options?.cache !== false) {
 				env.cache.set(file, template);
 			}
 		}
 
 		// Construct a render function from the returned template
-		const render: EleventyRenderFunction = async function (data) {
+		const render: EleventyRenderFunction = async (data) => {
 			try {
 				debug.render('Rendering %s', file);
 				const { content } = await template(data);
