@@ -1,27 +1,36 @@
 // Function that handles creating the Vento environment. Exposes
 // a small API for Eleventy to interface with.
 
+// Built-in modules
+import path from 'node:path';
+
 // External modules
-import createVentoEnv, { type Options as VentoOptions } from 'ventojs';
-import type { Plugin } from 'ventojs/core/environment.js';
+import ventojs, { type Options as VentoOptions } from 'ventojs';
+import { type Plugin } from 'ventojs/core/environment.js';
 import { VentoError } from 'ventojs/core/errors.js';
 import type { EleventyFunctionMap, EleventyRenderFunction } from './types/eleventy.js';
 
 // Internal modules
-import { createVentoTag } from './utils/create-vento-tag.js';
+import type { EleventyVentoEnvironment } from './types/vento.js';
+import { createVentoTag, type EleventyTagInfo } from './utils/create-vento-tag.js';
 import { EleventyVentoError } from './utils/errors.js';
 import { debug } from './utils/logging.js';
 
 export function createVentoEngine(options: VentoOptions) {
-	const env = createVentoEnv(options);
-	env.utils.eleventyFunctions = { shortcodes: {}, pairedShortcodes: {} };
+	const env = ventojs(options) as EleventyVentoEnvironment;
 
+	/**
+	 * Load plugins into Vento environment
+	 */
 	function loadPlugins(plugins: Plugin[]) {
 		for (const plugin of plugins) {
 			env.use(plugin);
 		}
 	}
 
+	/**
+	 * Load filters into Vento environment
+	 */
 	function loadFilters(filters: EleventyFunctionMap) {
 		for (const [name, fn] of Object.entries(filters)) {
 			env.filters[name] = function (...args) {
@@ -31,28 +40,38 @@ export function createVentoEngine(options: VentoOptions) {
 		}
 	}
 
-	function loadShortcodes(shortcodes: EleventyFunctionMap) {
+	/**
+	 * Load shortcodes (tags) into Vento environment
+	 */
+	function loadShortcodes(group: EleventyTagInfo['group'], shortcodes: EleventyFunctionMap) {
+		if (!(env.utils.eleventyFunctions instanceof Map)) {
+			env.utils.eleventyFunctions = new Map();
+		}
+
 		for (const [name, fn] of Object.entries(shortcodes)) {
 			// Add shortcode function to environment
-			env.utils.eleventyFunctions.shortcodes[name] = fn;
+			env.utils.eleventyFunctions.set(`${group}:${name}`, fn);
 
 			// Create tag for shortcode and add it to the environment
-			const shortcodeTag = createVentoTag({ name, group: 'shortcodes' });
-			env.tags.push(shortcodeTag);
+			env.tags.push(createVentoTag({ name, group }));
 		}
 	}
 
-	function loadPairedShortcodes(pairedShortcodes: EleventyFunctionMap) {
-		for (const [name, fn] of Object.entries(pairedShortcodes)) {
-			// Add shortcode function to environment
-			env.utils.eleventyFunctions.pairedShortcodes[name] = fn;
-
-			// Create tag for paired shortcode and add it to the environment
-			const shortcodeTag = createVentoTag({ name, group: 'pairedShortcodes' });
-			env.tags.push(shortcodeTag);
+	/**
+	 * Clear one or more items from Vento's cache
+	 */
+	function removeCachedItems(items: string[]) {
+		for (let item of items) {
+			item = path.normalize(item);
+			debug.cache('Delete cache entry for %s', item);
+			env.cache.delete(item);
 		}
 	}
 
+	/**
+	 * Given a source string and file, compile or get a cached template function,
+	 * then produce an Eleventy render function for it and return it.
+	 */
 	async function getRenderFunction(source: string, file: string, options?: { cache: boolean }) {
 		debug.main('Getting render function for `%s`', file);
 
@@ -97,11 +116,10 @@ export function createVentoEngine(options: VentoOptions) {
 	}
 
 	return {
-		cache: env.cache,
 		loadPlugins,
 		loadFilters,
 		loadShortcodes,
-		loadPairedShortcodes,
+		removeCachedItems,
 		getRenderFunction,
 	};
 }

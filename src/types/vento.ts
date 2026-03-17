@@ -18,7 +18,7 @@ declare class VentoOverrides {
 	tags: (Tag | EleventyTag)[];
 	filters: Record<string, EleventyVentoFilter>;
 	utils: {
-		eleventyFunctions: Record<EleventyTagInfo['group'], Record<string, EleventyFunction>>;
+		eleventyFunctions?: Map<`${EleventyTagInfo['group']}:${string}`, EleventyFunction>;
 		[K: string]: unknown;
 	};
 }
@@ -27,5 +27,5 @@ export type EleventyVentoEnvironment = Omit<Environment, keyof VentoOverrides> &
 
 // Redeclare vento's default export declaration so we can use EleventyVentoEnvironment instead
 declare module 'ventojs' {
-	export default function (options: Options): EleventyVentoEnvironment;
+	export default function (options?: Options): EleventyVentoEnvironment;
 }

@@ -87,22 +87,16 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 	}
 	if (options.shortcodes) {
 		debug.main('Loading shortcodes: %o', shortcodes);
-		engine.loadShortcodes(shortcodes);
+		engine.loadShortcodes('single', shortcodes);
 	}
 	if (options.pairedShortcodes) {
 		debug.main('Loading paired shortcodes: %o', pairedShortcodes);
-		engine.loadPairedShortcodes(pairedShortcodes);
+		engine.loadShortcodes('paired', pairedShortcodes);
 	}
 
 	// Handle emptying the cache when files are updated
 	debug.main('Adding Vento cache handler for eleventy.beforeWatch event');
-	eleventyConfig.on('eleventy.beforeWatch', async (updatedFiles: string[]) => {
-		for (let file of updatedFiles) {
-			file = path.normalize(file);
-			debug.cache('Delete cache entry for %s', file);
-			engine.cache.delete(file);
-		}
-	});
+	eleventyConfig.on('eleventy.beforeWatch', engine.removeCachedItems);
 
 	// Add vto as a template format
 	debug.main('Registering .vto as a template format');
