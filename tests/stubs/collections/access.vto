@@ -1,0 +1,16 @@
+---
+eleventyImport:
+  collections: ["all"]
+---
+
+{{ set examplePage = collections.all.find(({page}) => page.url === '/pages/example-page/') }}
+
+Title:
+{{ examplePage.data.title }}
+
+Content:
+{{ examplePage.content |> trim }}
+
+Custom Data:
+- {{ examplePage.data.custom }}
+- {{ examplePage.data.fruits |> JSON.stringify }}

@@ -1,0 +1,11 @@
+---js
+{
+  title: "My page title",
+  get exclaimed() {
+    return `${this.title.toUpperCase()}!!!`;
+  }
+}
+---
+
+<h1>{{ title }}</h1>
+<p>Dynamically generated title: {{ exclaimed }}</p>

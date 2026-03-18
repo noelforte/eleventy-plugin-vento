@@ -9,6 +9,8 @@ describe('Can print Eleventy data', { concurrent: true }, () => {
 	const matrix = [
 		['Static data', 'static'],
 		['Computed data', 'computed'],
+		['Javascript Frontmatter', 'js-frontmatter'],
+		['JSON Frontmatter', 'json-frontmatter'],
 	];
 
 	test.for(matrix)('%s', async ([_label, slug], { expect }) => {
@@ -113,9 +115,16 @@ describe('Can run Eleventy shortcodes as Vento tags', { concurrent: true }, () =
 	});
 });
 
-test('Can access collection data within templates', { concurrent: true }, async ({ expect }) => {
-	const result = testInstance.getBuildResultForUrl(`/collections/iterate/`);
-	await expect(result?.content).toMatchFileSnapshot(
-		`./__snapshots__/collections-iterate.html.snap`
-	);
+describe('Can access collection data within templates', { concurrent: true }, () => {
+	const matrix = [
+		['Iterate through collection data', 'iterate'],
+		['Access an individual collection item', 'access'],
+	];
+
+	test.for(matrix)('%s', async ([_label, slug], { expect }) => {
+		const result = testInstance.getBuildResultForUrl(`/collections/${slug}/`);
+		await expect(result?.content).toMatchFileSnapshot(
+			`./__snapshots__/collections-${slug}.html.snap`
+		);
+	});
 });
