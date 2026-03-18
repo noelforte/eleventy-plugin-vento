@@ -5,9 +5,10 @@ labels: [bug]
 body:
   - type: markdown
     attributes:
-      value: "In order to better determine what might be
-        causing the bug, please fill out the form below. **Please search open
-        issues** before filing a new bug report, thank you!!\n\n---"
+      value:
+        "In order to better determine what might be causing the bug, please fill
+        out the form below. **Please search open issues** before filing a new
+        bug report, thank you!!\n\n---"
 
   - type: textarea
     id: reproduce
@@ -36,7 +37,8 @@ body:
     id: actual
     attributes:
       label: Actual behavior
-      description: What was the behavior that you observed? Be clear and concise.
+      description:
+        What was the behavior that you observed? Be clear and concise.
       placeholder: |
         For example: "Got error `Error: Invalid data` with the following log..."
     validations:
@@ -55,7 +57,9 @@ body:
     id: eleventy
     attributes:
       label: Eleventy version
-      description: In case this is an upstream issue, what version of Eleventy are you using?
+      description:
+        In case this is an upstream issue, what version of Eleventy are you
+        using?
       placeholder: 'x.x.x'
     validations:
       required: true

@@ -6,9 +6,10 @@ labels: [enhancement]
 body:
   - type: markdown
     attributes:
-      value: "Use the form below to provide information about the feature you're
-        requesting.\n\n**Please search open issues** before filing a new
-        bug report, thank you!!\n\n---"
+      value:
+        "Use the form below to provide information about the feature you're
+        requesting.\n\n**Please search open issues** before filing a new bug
+        report, thank you!!\n\n---"
 
   - type: textarea
     id: problem
