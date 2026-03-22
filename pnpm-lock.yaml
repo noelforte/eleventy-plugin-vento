@@ -52,8 +52,8 @@ importers:
         specifier: 17.4.0
         version: 17.4.0
       knip:
-        specifier: 5.86.0
-        version: 5.86.0(@types/node@24.12.0)(typescript@5.9.3)
+        specifier: 5.88.1
+        version: 5.88.1(@types/node@24.12.0)(typescript@5.9.3)
       prettier:
         specifier: 3.8.1
         version: 3.8.1
@@ -1371,8 +1371,8 @@ packages:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
 
-  knip@5.86.0:
-    resolution: {integrity: sha512-tGpRCbP+L+VysXnAp1bHTLQ0k/SdC3M3oX18+Cpiqax1qdS25iuCPzpK8LVmAKARZv0Ijri81Wq09Rzk0JTl+Q==}
+  knip@5.88.1:
+    resolution: {integrity: sha512-tpy5o7zu1MjawVkLPuahymVJekYY3kYjvzcoInhIchgePxTlo+api90tBv2KfhAIe5uXh+mez1tAfmbv8/TiZg==}
     engines: {node: '>=18.18.0'}
     hasBin: true
     peerDependencies:
@@ -3428,7 +3428,7 @@ snapshots:
 
   kleur@4.1.5: {}
 
-  knip@5.86.0(@types/node@24.12.0)(typescript@5.9.3):
+  knip@5.88.1(@types/node@24.12.0)(typescript@5.9.3):
     dependencies:
       '@nodelib/fs.walk': 1.2.8
       '@types/node': 24.12.0
