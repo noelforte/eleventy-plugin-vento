@@ -1,5 +1,14 @@
 # eleventy-plugin-vento
 
+## 5.4.3
+
+### Patch Changes
+
+- 138db0f: Refactor Vento engine internal methods, should not introduce any functionally breaking changes
+- 2f42cc1: Refactor render function declaration
+  - Replaced `getTemplateFunction` with `getRenderFunction`
+  - New method now returns the render function signature Eleventy expects with all error handling logic built in, eliminating the need for a separate render function handler
+
 ## 5.4.2
 
 ### Patch Changes
