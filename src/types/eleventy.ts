@@ -3,14 +3,12 @@
 import type _UserConfig from '@11ty/eleventy/UserConfig';
 import type { MaybePromise } from './utilities.js';
 
-interface EleventyContext {
+export interface EleventyContext {
 	page: Record<string, unknown>;
 	eleventy: Record<string, string>;
 }
 
-export interface EleventyDataCascade extends EleventyContext {
-	[K: string]: unknown;
-}
+export type EleventyDataCascade = EleventyContext & Record<string, unknown>;
 
 export type EleventyFunction<Context = EleventyContext> = (
 	this: Context,

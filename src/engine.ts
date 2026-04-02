@@ -11,13 +11,12 @@ import { VentoError } from 'ventojs/core/errors.js';
 import type { EleventyFunctionMap, EleventyRenderFunction } from './types/eleventy.js';
 
 // Internal modules
-import type { EleventyVentoEnvironment } from './types/vento.js';
 import { createVentoTag, type EleventyTagInfo } from './utils/create-vento-tag.js';
 import { EleventyVentoError } from './utils/errors.js';
 import { debug } from './utils/logging.js';
 
 export function createVentoEngine(options: VentoOptions) {
-	const env = ventojs(options) as EleventyVentoEnvironment;
+	const env = ventojs(options);
 
 	/**
 	 * Load plugins into Vento environment
