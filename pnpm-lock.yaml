@@ -21,9 +21,6 @@ importers:
         specifier: 2.3.1
         version: 2.3.1
     devDependencies:
-      11ty.ts:
-        specifier: 0.0.7
-        version: 0.0.7(@11ty/eleventy@3.1.5)
       '@11ty/eleventy':
         specifier: 3.1.5
         version: 3.1.5
@@ -71,11 +68,6 @@ importers:
         version: 4.1.2(@types/node@24.12.0)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@24.12.0)(jiti@2.6.1)(yaml@2.8.3))
 
 packages:
-
-  11ty.ts@0.0.7:
-    resolution: {integrity: sha512-71Jqaimpefof8pt51lIy59Ea2GqU9Bmp3mejWznxVPxxhKBbWBIKBdVsxWSRJSoudUw3KPzpSaThw+KqR3yo3w==}
-    peerDependencies:
-      '@11ty/eleventy': ^3.0.0
 
   '@11ty/dependency-tree-esm@2.0.4':
     resolution: {integrity: sha512-MYKC0Ac77ILr1HnRJalzKDlb9Z8To3kXQCltx299pUXXUFtJ1RIONtULlknknqW8cLe19DLVgmxVCtjEFm7h0A==}
@@ -2257,10 +2249,6 @@ packages:
     resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
 
 snapshots:
-
-  11ty.ts@0.0.7(@11ty/eleventy@3.1.5):
-    dependencies:
-      '@11ty/eleventy': 3.1.5
 
   '@11ty/dependency-tree-esm@2.0.4':
     dependencies:

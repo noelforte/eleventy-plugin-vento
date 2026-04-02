@@ -1,14 +1,18 @@
 // Utility types to fill in gaps in Eleventy
 
-import type { EleventyScope } from '11ty.ts';
 import type _UserConfig from '@11ty/eleventy/UserConfig';
 import type { MaybePromise } from './utilities.js';
 
-export interface EleventyDataCascade extends EleventyScope {
+interface EleventyContext {
+	page: Record<string, unknown>;
+	eleventy: Record<string, string>;
+}
+
+export interface EleventyDataCascade extends EleventyContext {
 	[K: string]: unknown;
 }
 
-export type EleventyFunction<Context = EleventyScope> = (
+export type EleventyFunction<Context = EleventyContext> = (
 	this: Context,
 	...args: unknown[]
 ) => MaybePromise<void | string>;

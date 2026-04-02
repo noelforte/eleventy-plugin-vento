@@ -40,7 +40,6 @@
 		"ventojs": "2.3.1"
 	},
 	"devDependencies": {
-		"11ty.ts": "0.0.7",
 		"@11ty/eleventy": "3.1.5",
 		"@changesets/cli": "2.30.0",
 		"@eslint/js": "10.0.1",
