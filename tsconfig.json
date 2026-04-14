@@ -3,6 +3,7 @@
 	"exclude": ["**/node_modules/**", "dist"],
 	"compilerOptions": {
 		"rootDir": ".",
+		"types": ["node"],
 		"strict": true,
 		"allowJs": true,
 		"maxNodeModuleJsDepth": 3,
