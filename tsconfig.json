@@ -6,7 +6,6 @@
 		"strict": true,
 		"allowJs": true,
 		"maxNodeModuleJsDepth": 3,
-		"lib": ["ES2023"],
 		"module": "nodenext",
 		"moduleResolution": "nodenext",
 		"esModuleInterop": true,
