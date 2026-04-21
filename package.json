@@ -52,7 +52,7 @@
 		"knip": "6.4.1",
 		"prettier": "3.8.3",
 		"tsdown": "0.21.9",
-		"typescript": "6.0.2",
+		"typescript": "6.0.3",
 		"typescript-eslint": "8.58.2",
 		"vitest": "4.1.4"
 	}
