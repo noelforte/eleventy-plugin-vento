@@ -3,7 +3,7 @@
 import type _UserConfig from '@11ty/eleventy/UserConfig';
 import type { MaybePromise } from './utilities.js';
 
-export interface EleventyContext {
+interface EleventyContext {
 	page: Record<string, unknown>;
 	eleventy: Record<string, string>;
 }
