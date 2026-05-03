@@ -34,7 +34,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Create Pull Request or Publish Packages
-        uses: changesets/action@v1
+        uses: changesets/action@v1.7.0
         env:
           # Use OIDC for npm authentication instead of NPM_TOKEN
           # See: https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
