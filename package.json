@@ -45,7 +45,7 @@
 		"@eslint/js": "10.0.1",
 		"@types/debug": "4.1.13",
 		"@types/node": "24.12.2",
-		"eslint": "10.2.1",
+		"eslint": "10.3.0",
 		"eslint-config-prettier": "10.1.8",
 		"eslint-plugin-unicorn": "64.0.0",
 		"globals": "17.5.0",
