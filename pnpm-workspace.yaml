@@ -1,6 +1,6 @@
-onlyBuiltDependencies:
-  - esbuild
-  - oxc-resolver
+allowBuilds:
+  esbuild: true
+  oxc-resolver: true
 
 overrides:
   liquidjs@<10.25.0: '>=10.25.0'

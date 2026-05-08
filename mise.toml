@@ -6,12 +6,6 @@ pnpm = "11.0.5"
 _.path = "node_modules/.bin"
 
 # Grouped tasks
-[tasks.publish]
-description = "Publish package with npm and changesets"
-tools = { npm = "latest" }
-run = "changeset publish"
-depends = ["build"]
-
 [tasks.lint]
 description = "Runs all code quality checks (linting, types, dependencies)"
 depends = ["lint:*"]

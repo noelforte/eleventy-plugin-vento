@@ -31,7 +31,7 @@ jobs:
         uses: jdx/mise-action@v4.0.1
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm ci
 
       - name: Create Pull Request or Publish Packages
         uses: changesets/action@v1
@@ -44,6 +44,6 @@ jobs:
           # Run changeset version (via mise env)
           version: 'changeset version'
           # Publish with mise task
-          publish: 'mise run publish'
+          publish: 'pnpm publish'
           commit: '[ci] release'
           title: '[ci] release'

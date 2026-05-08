@@ -21,6 +21,6 @@ jobs:
         uses: jdx/mise-action@v4.0.1
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm ci
 
       - run: mise r ${{ matrix.type }}
