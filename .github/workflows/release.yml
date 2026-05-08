@@ -44,6 +44,6 @@ jobs:
           # Run changeset version (via mise env)
           version: 'changeset version'
           # Publish with mise task
-          publish: 'pnpm publish'
+          publish: 'changeset publish'
           commit: '[ci] release'
           title: '[ci] release'
