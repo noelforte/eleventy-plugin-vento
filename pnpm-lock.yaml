@@ -55,8 +55,8 @@ importers:
         specifier: 3.8.4
         version: 3.8.4
       tsdown:
-        specifier: 0.22.2
-        version: 0.22.2(oxc-resolver@11.20.0)(typescript@6.0.3)
+        specifier: 0.22.3
+        version: 0.22.3(oxc-resolver@11.20.0)(typescript@6.0.3)
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -105,8 +105,8 @@ packages:
     resolution: {integrity: sha512-oI7m8pa7/IAU/3lqRU9vjBbs20iKFo7x+1K9kT3aVira6scc1X9MjBdgLCHzLJeJ7iB6wydioA+kr9/qPnvmlQ==}
     engines: {node: '>=18'}
 
-  '@babel/generator@8.0.0-rc.6':
-    resolution: {integrity: sha512-6mIzgVK8DgEzvIapoQwhXTMnnkuE4STQmVv9H03i/tZ2ml8oev3TRvZJgTenK2Bsq0YWNtzOrFdTyNzCMFtjJQ==}
+  '@babel/generator@8.0.0':
+    resolution: {integrity: sha512-NT9NrVwJsbSV6Y2FSstWa71EETOnzrjkL5/wX3D2mYHtKM+qvqB1DvR4D0Setb/gDBsHzRICifwEWMO8CnTF6g==}
     engines: {node: ^22.18.0 || >=24.11.0}
 
   '@babel/helper-string-parser@8.0.0':
@@ -121,17 +121,8 @@ packages:
     resolution: {integrity: sha512-kXxQVZHNOctSJJsqzmcbPSCEkM6oHNnDIkua7g9RCO9xRHj2eCiKvRx2KPdfWR9QxcGWnK/oArrtunmie3rL9g==}
     engines: {node: ^22.18.0 || >=24.11.0}
 
-  '@babel/helper-validator-identifier@8.0.0-rc.6':
-    resolution: {integrity: sha512-nVJ+1JcCgntv8d78rRo++o2wuODT0Irknx2BF8Np4Ft2CRgjLqIs4qzSZ8b66yGbBdMWGmZBO9WEZv1hhNiSpg==}
-    engines: {node: ^22.18.0 || >=24.11.0}
-
   '@babel/parser@8.0.0':
     resolution: {integrity: sha512-aLxAE+imI9bCcyaPrUDjBv3uSkWieifjLe0kuFOZF0zli0L6GCsTmsePnTr55adbIAgYz2zhN1vnFimCBUYcRQ==}
-    engines: {node: ^22.18.0 || >=24.11.0}
-    hasBin: true
-
-  '@babel/parser@8.0.0-rc.6':
-    resolution: {integrity: sha512-rOS8IpdO7mQELkTPlCsTgPejO0bFuZdEDCGQJouYbYf9e1FLTym7Fei2pEjq8q7MWbX0ravcd7QQYKs1TxOuog==}
     engines: {node: ^22.18.0 || >=24.11.0}
     hasBin: true
 
@@ -1890,15 +1881,15 @@ packages:
     resolution: {integrity: sha512-g6QUff04oZpHs0eG5p83rFLhHeV00ug/Yf9nZM6fLeUrPguBTkTQOdpAWWspMh55TZfVQDPaN3NQJfbVRAxdIw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
 
-  rolldown-plugin-dts@0.25.2:
-    resolution: {integrity: sha512-nMhN/R+vmR8GM45ZW1FWMSjRTSDDn/6w4GTf8RNrEFCBdl8B1kySWrU1ixPtbwzXoRlcO+R/S88VgXuJQwfdDg==}
-    engines: {node: ^22.18.0 || >=24.0.0}
+  rolldown-plugin-dts@0.26.0:
+    resolution: {integrity: sha512-e+kEPtUiDES0htk5iqkSeF4EzAV7R+vugGB44iPDuw1Kw9E+WyL1VG7PaV0IIjGHLiacztMBcMTyrr8ON9CT1Q==}
+    engines: {node: ^22.18.0 || >=24.11.0}
     peerDependencies:
       '@ts-macro/tsc': ^0.3.6
       '@typescript/native-preview': '>=7.0.0-dev.20260325.1'
       rolldown: ^1.0.0
       typescript: ^5.0.0 || ^6.0.0
-      vue-tsc: ~3.2.0
+      vue-tsc: ~3.2.0 || ~3.3.0
     peerDependenciesMeta:
       '@ts-macro/tsc':
         optional: true
@@ -2052,14 +2043,14 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4'
 
-  tsdown@0.22.2:
-    resolution: {integrity: sha512-VX9gsyKXsTnBZjnIM4jsHl9aRv+GfgkE/k1hQslilaBfZMlaw3JuGR+6yhiU0QxWBtOCDnTjwOSoXzgB7Rr50g==}
-    engines: {node: ^22.18.0 || >=24.0.0}
+  tsdown@0.22.3:
+    resolution: {integrity: sha512-louqbfA8Qf//B9jTTL0FPtXTNpjCWv1VPkbcmQMph2pTpzs+LnB1tbe4tDDRVpo2BjF5SgUXaTZe45SxB8pWHg==}
+    engines: {node: ^22.18.0 || >=24.11.0}
     hasBin: true
     peerDependencies:
       '@arethetypeswrong/core': ^0.18.1
-      '@tsdown/css': 0.22.2
-      '@tsdown/exe': 0.22.2
+      '@tsdown/css': 0.22.3
+      '@tsdown/exe': 0.22.3
       '@vitejs/devtools': '*'
       publint: ^0.3.8
       tsx: '*'
@@ -2366,9 +2357,9 @@ snapshots:
       minimatch: 3.1.5
       slash: 3.0.0
 
-  '@babel/generator@8.0.0-rc.6':
+  '@babel/generator@8.0.0':
     dependencies:
-      '@babel/parser': 8.0.0-rc.6
+      '@babel/parser': 8.0.0
       '@babel/types': 8.0.0
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
@@ -2381,13 +2372,7 @@ snapshots:
 
   '@babel/helper-validator-identifier@8.0.0': {}
 
-  '@babel/helper-validator-identifier@8.0.0-rc.6': {}
-
   '@babel/parser@8.0.0':
-    dependencies:
-      '@babel/types': 8.0.0
-
-  '@babel/parser@8.0.0-rc.6':
     dependencies:
       '@babel/types': 8.0.0
 
@@ -4016,11 +4001,11 @@ snapshots:
 
   reusify@1.1.0: {}
 
-  rolldown-plugin-dts@0.25.2(oxc-resolver@11.20.0)(rolldown@1.1.1)(typescript@6.0.3):
+  rolldown-plugin-dts@0.26.0(oxc-resolver@11.20.0)(rolldown@1.1.1)(typescript@6.0.3):
     dependencies:
-      '@babel/generator': 8.0.0-rc.6
-      '@babel/helper-validator-identifier': 8.0.0-rc.6
-      '@babel/parser': 8.0.0-rc.6
+      '@babel/generator': 8.0.0
+      '@babel/helper-validator-identifier': 8.0.0
+      '@babel/parser': 8.0.0
       ast-kit: 3.0.0
       birpc: 4.0.0
       dts-resolver: 3.0.0(oxc-resolver@11.20.0)
@@ -4179,7 +4164,7 @@ snapshots:
     dependencies:
       typescript: 6.0.3
 
-  tsdown@0.22.2(oxc-resolver@11.20.0)(typescript@6.0.3):
+  tsdown@0.22.3(oxc-resolver@11.20.0)(typescript@6.0.3):
     dependencies:
       ansis: 4.3.1
       cac: 7.0.0
@@ -4190,7 +4175,7 @@ snapshots:
       obug: 2.1.3
       picomatch: 4.0.4
       rolldown: 1.1.1
-      rolldown-plugin-dts: 0.25.2(oxc-resolver@11.20.0)(rolldown@1.1.1)(typescript@6.0.3)
+      rolldown-plugin-dts: 0.26.0(oxc-resolver@11.20.0)(rolldown@1.1.1)(typescript@6.0.3)
       semver: 7.8.4
       tinyexec: 1.2.4
       tinyglobby: 0.2.17
