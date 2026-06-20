@@ -54,6 +54,6 @@
 		"tsdown": "0.22.2",
 		"typescript": "6.0.3",
 		"typescript-eslint": "8.61.1",
-		"vitest": "4.1.8"
+		"vitest": "4.1.9"
 	}
 }
