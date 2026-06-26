@@ -9,16 +9,9 @@
 import { VentoError, type ErrorContext } from 'ventojs/core/errors.js';
 import { debug, warn } from './logging.js';
 
-const LINE_TERMINATOR = /(\r\n?|[\n\u2028\u2029])/;
+const LINE_TERMINATOR = /(\r\n?|[\n\u{2028}\u{2029}])/u;
 
 export class EleventyVentoError extends Error {
-	context?: ErrorContext;
-
-	constructor(message: string, context?: ErrorContext, cause?: Error) {
-		super(message, { cause });
-		this.context = context;
-	}
-
 	static async createFromContext(error: VentoError) {
 		const ctx = await error.getContext();
 		const err = new this('An unknown error occured processing Vento templates', ctx, error);
@@ -52,7 +45,7 @@ export class EleventyVentoError extends Error {
 
 		// Print lines of code leading up to error
 		for (let line = Math.max(sourceLine - 3, 1); line <= sourceLine; line++) {
-			err.message += `${`${line}`.padStart(pad)} │ ${sourceLines[line - 1].trimEnd()}\n`;
+			err.message += `${String(line).padStart(pad)} │ ${sourceLines[line - 1].trimEnd()}\n`;
 		}
 
 		// Annotate source
@@ -71,6 +64,13 @@ export class EleventyVentoError extends Error {
 			`${indent}   ${' '.repeat(ctx.column - 1)}^`;
 
 		return err;
+	}
+
+	context?: ErrorContext;
+
+	constructor(message: string, context?: ErrorContext, cause?: Error) {
+		super(message, { cause });
+		this.context = context;
 	}
 }
 

@@ -57,7 +57,8 @@ export default defineConfig(
 			'object-shorthand': ['error', 'always'],
 			'arrow-body-style': ['error', 'as-needed'],
 			eqeqeq: ['error', 'smart'],
-			'unicorn/prevent-abbreviations': 'off',
+			'unicorn/name-replacements': 'off',
+			'unicorn/no-this-outside-of-class': 'off',
 		},
 	}
 );

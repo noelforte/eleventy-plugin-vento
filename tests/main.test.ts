@@ -84,12 +84,12 @@ describe('Can run Vento filters', { concurrent: true }, () => {
 	});
 
 	test('use context data (this.page)', async ({ expect }) => {
-		const result = [
+		const results = [
 			testInstance.getBuildResultForUrl('/filters/with-this-example-1/'),
 			testInstance.getBuildResultForUrl('/filters/with-this-example-2/'),
-		].every((result) => result?.content === 'true');
+		];
 
-		expect(result).toBe(true);
+		expect(results.map((result) => result?.content)).toEqual(['true', 'true']);
 	});
 
 	test('use context env (this.env)', async ({ expect }) => {

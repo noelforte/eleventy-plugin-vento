@@ -55,7 +55,7 @@ class EleventyTest extends Eleventy {
 	}
 
 	countResultPages(): number {
-		return this.buildResults.filter(({ outputPath }) => Boolean(outputPath)).length;
+		return this.buildResults.filter(({ outputPath }) => outputPath).length;
 	}
 }
 

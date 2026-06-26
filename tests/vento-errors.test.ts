@@ -13,9 +13,16 @@ describe('can handle template errors', { concurrent: true }, () => {
 
 	test.for(matrix)('%s', async ([_label, slug, message], { expect }) => {
 		const testInstance = new EleventyTest(`./tests/stubs-vento-errors/${slug}.vto`);
-		const error = await testInstance.rebuild().catch((error) => error);
 
-		expect(error).toMatchObject({
+		let result;
+
+		try {
+			await testInstance.rebuild();
+		} catch (error) {
+			result = error;
+		}
+
+		expect(result).toMatchObject({
 			originalError: {
 				originalError: {
 					cause: {

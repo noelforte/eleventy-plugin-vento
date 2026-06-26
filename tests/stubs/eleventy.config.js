@@ -53,9 +53,9 @@ export default function eleventy(eleventyConfig) {
 			typeof booleanType === 'boolean',
 		];
 
-		const test = checks.every((check) => check === true);
+		const isValid = checks.every((check) => check === true);
 
-		return `${test}`;
+		return String(isValid);
 	});
 
 	eleventyConfig.addPairedShortcode(
