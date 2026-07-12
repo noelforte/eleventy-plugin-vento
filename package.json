@@ -44,7 +44,7 @@
 		"@changesets/cli": "2.31.0",
 		"@eslint/js": "10.0.1",
 		"@types/debug": "4.1.13",
-		"@types/node": "24.13.2",
+		"@types/node": "24.13.3",
 		"eslint": "10.6.0",
 		"eslint-config-prettier": "10.1.8",
 		"eslint-plugin-unicorn": "71.1.0",
