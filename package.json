@@ -50,7 +50,7 @@
 		"eslint-plugin-unicorn": "71.1.0",
 		"globals": "17.7.0",
 		"knip": "6.25.0",
-		"prettier": "3.9.4",
+		"prettier": "3.9.5",
 		"tsdown": "0.22.4",
 		"typescript": "6.0.3",
 		"typescript-eslint": "8.63.0",
