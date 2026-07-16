@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 5.5.0
+
+### Minor Changes
+
+- a8f6efe: Update Vento to v2.4.0 ([release notes](https://github.com/ventojs/vento/blob/HEAD/CHANGELOG.md#240---2026-07-09))
+
 ## 5.4.3
 
 ### Patch Changes
