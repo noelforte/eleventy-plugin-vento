@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 5.5.1
+
+### Patch Changes
+
+- 3702292: Partially revert 1087bec127bf569a601cb7afb76230b51f5be652, which introduced a regression causing the package to be published without first being built. (fixes #603)
+
 ## 5.5.0
 
 ### Minor Changes
