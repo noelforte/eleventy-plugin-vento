@@ -48,7 +48,7 @@
 		"oxlint": "1.74.0",
 		"prettier": "3.9.5",
 		"tsdown": "0.22.7",
-		"typescript": "6.0.3",
+		"typescript": "7.0.2",
 		"vitest": "4.1.10"
 	}
 }
