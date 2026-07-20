@@ -1,0 +1,5 @@
+# Sampo configuration
+version = 1
+
+[github]
+repository = "noelforte/eleventy-plugin-vento"

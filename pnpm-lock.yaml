@@ -42,6 +42,9 @@ importers:
       prettier:
         specifier: 3.9.5
         version: 3.9.5
+      sampo:
+        specifier: 0.19.0
+        version: 0.19.0
       tsdown:
         specifier: 0.22.7
         version: 0.22.7(oxc-resolver@11.21.3)(typescript@7.0.2)
@@ -93,6 +96,36 @@ packages:
   '@babel/runtime@7.29.7':
     resolution: {integrity: sha512-Nq8OhGWiZIZGV6hLHoyAKLLcJihP/xFeBMGJoUrxTX2psI8dCifzLhZISFb+VWS3wFMRDmCGw5R+dOySCqPLhw==}
     engines: {node: '>=6.9.0'}
+
+  '@bruits/sampo-darwin-arm64@0.19.0':
+    resolution: {integrity: sha512-jvptfT/cu9aNH8UD0K+paeskUAtiuNcclTpYI1/yDIUiXsq87cMnCT6YM95zBY9I6zayi9+pfjEM2oC/wYgpUA==}
+    cpu: [arm64]
+    os: [darwin]
+    hasBin: true
+
+  '@bruits/sampo-darwin-x64@0.19.0':
+    resolution: {integrity: sha512-LxA7YxGq7/b+0cnHLIIf5dPaN94RjLyOWazzh+DmeLCgQoJcoSWDRddA0DNhjSKToeSL43k9zCniWxmuuMeVTw==}
+    cpu: [x64]
+    os: [darwin]
+    hasBin: true
+
+  '@bruits/sampo-linux-arm64@0.19.0':
+    resolution: {integrity: sha512-g7+/0JQkIvoZOTDWaPUtsHnnixSvx2J7QOlnWwC2i3l+30uRYfNnwk0j3LKDZzXQQEw8w64U1jHhSGYaCP7K5w==}
+    cpu: [arm64]
+    os: [linux]
+    hasBin: true
+
+  '@bruits/sampo-linux-x64@0.19.0':
+    resolution: {integrity: sha512-/DWH2KhYkZh20uSX52sAlW8P3wNoerUDQnvYrXBLr+BmSHYukSQ+XWmvbcBc/wchoskIgbwZxjFHz+MjOSy1zg==}
+    cpu: [x64]
+    os: [linux]
+    hasBin: true
+
+  '@bruits/sampo-win32-x64@0.19.0':
+    resolution: {integrity: sha512-Df7MTNM7/Fv/vJ4IIRncEkYztfOO4I9D4zHm9k4et9uT2ly3+iLReT/YZCNOiaSqNHzBibLQmvJyZt6T/+dF8Q==}
+    cpu: [x64]
+    os: [win32]
+    hasBin: true
 
   '@changesets/apply-release-plan@7.1.1':
     resolution: {integrity: sha512-9qPCm/rLx/xoOFXIHGB229+4GOL76S4MC+7tyOuTsR6+1jYlfFDQORdvwR5hDA6y4FL2BPt3qpbcQIS+dW85LA==}
@@ -1770,6 +1803,11 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
+  sampo@0.19.0:
+    resolution: {integrity: sha512-E2pZZAtD67BAgPykpGBQ849zkedk+ConzOTaX52qfgdKvpcifOiHJ2IRY1TerBqibhyZutjH979dRIur/ibRyQ==}
+    engines: {node: '>=22'}
+    hasBin: true
+
   section-matter@1.0.0:
     resolution: {integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==}
     engines: {node: '>=4'}
@@ -2183,6 +2221,21 @@ snapshots:
       slash: 3.0.0
 
   '@babel/runtime@7.29.7': {}
+
+  '@bruits/sampo-darwin-arm64@0.19.0':
+    optional: true
+
+  '@bruits/sampo-darwin-x64@0.19.0':
+    optional: true
+
+  '@bruits/sampo-linux-arm64@0.19.0':
+    optional: true
+
+  '@bruits/sampo-linux-x64@0.19.0':
+    optional: true
+
+  '@bruits/sampo-win32-x64@0.19.0':
+    optional: true
 
   '@changesets/apply-release-plan@7.1.1':
     dependencies:
@@ -3587,6 +3640,14 @@ snapshots:
       queue-microtask: 1.2.3
 
   safer-buffer@2.1.2: {}
+
+  sampo@0.19.0:
+    optionalDependencies:
+      '@bruits/sampo-darwin-arm64': 0.19.0
+      '@bruits/sampo-darwin-x64': 0.19.0
+      '@bruits/sampo-linux-arm64': 0.19.0
+      '@bruits/sampo-linux-x64': 0.19.0
+      '@bruits/sampo-win32-x64': 0.19.0
 
   section-matter@1.0.0:
     dependencies:

@@ -33,17 +33,11 @@ jobs:
       - name: Install dependencies
         run: pnpm ci
 
-      - name: Create Pull Request or Publish Packages
-        uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d # v1.9.0
+      - name: Run Sampo
+        uses: bruits/sampo/crates/sampo-github-action@cf9c5e32badb587ecd549a5728a78f4f17e0ea12 # cargo-sampo-github-action-v0.17.0
         env:
           # Use OIDC for npm authentication instead of NPM_TOKEN
           # See: https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
-          NPM_TOKEN: ''
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
         with:
-          # Run changeset version (via mise env)
-          version: 'changeset version'
-          # Publish with mise task
-          publish: 'mise run publish'
-          commit: '[ci] release'
-          title: '[ci] release'
+          create-github-release: true
