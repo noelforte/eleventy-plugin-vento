@@ -1,6 +1,0 @@
----
-cargo/example: minor
-npm/web-app: patch
----
-
-A helpful description of the change, to be read by your users.
