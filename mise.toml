@@ -9,6 +9,11 @@ _.path = "node_modules/.bin"
 description = "Runs all code quality checks (linting, types, dependencies)"
 depends = ["lint:*"]
 
+[tasks.publish]
+description = "Publish changesets with pnpm"
+depends = ["build"]
+run = "pnpm exec changeset publish"
+
 # Individual tasks
 [tasks.dev]
 description = "Start the dev environment"
