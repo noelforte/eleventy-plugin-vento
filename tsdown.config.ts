@@ -5,6 +5,6 @@ export default defineConfig({
 	fixedExtension: true,
 	platform: 'node',
 	deps: {
-		skipNodeModulesBundle: true,
+		neverBundle: true,
 	},
 });
