@@ -18,7 +18,13 @@
 	},
 	"linter": {
 		"enabled": true,
-		"rules": { "preset": "recommended" }
+		"rules": {
+			"preset": "recommended",
+			"style": {
+				"noUselessElse": "error",
+				"useObjectSpread": "error"
+			}
+		}
 	},
 	"javascript": {
 		"formatter": {
