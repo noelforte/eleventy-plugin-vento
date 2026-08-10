@@ -6,7 +6,7 @@ import path from 'node:path';
 
 // External modules
 import ventojs, { type Options as VentoOptions } from 'ventojs';
-import { type Plugin } from 'ventojs/core/environment.js';
+import type { Plugin } from 'ventojs/core/environment.js';
 import { VentoError } from 'ventojs/core/errors.js';
 import type { EleventyFunctionMap, EleventyRenderFunction } from './types/eleventy.js';
 

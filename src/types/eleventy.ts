@@ -13,7 +13,7 @@ export type EleventyDataCascade = EleventyContext & Record<string, unknown>;
 export type EleventyFunction<Context = EleventyContext> = (
 	this: Context,
 	...args: unknown[]
-) => MaybePromise<void | string>;
+) => MaybePromise<undefined | string>;
 
 export type EleventyFunctionMap = Record<string, EleventyFunction>;
 

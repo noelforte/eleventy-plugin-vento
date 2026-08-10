@@ -1,5 +1,5 @@
 import { test } from 'vitest';
-import { PluginOptions } from '../src/types/options.js';
+import type { PluginOptions } from '../src/types/options.js';
 import { EleventyTest } from './_eleventy-test-instance.js';
 
 const matrix: [string, PluginOptions['autotrim'], string][] = [

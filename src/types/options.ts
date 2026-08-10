@@ -1,7 +1,7 @@
 // Plugin option type declarations bundled with dist-package
 
 import type * as ventojs from 'ventojs';
-import { Plugin } from 'ventojs/core/environment.js';
+import type { Plugin } from 'ventojs/core/environment.js';
 import type { AnyString } from './utilities.js';
 
 export interface PluginOptions {
