@@ -31,9 +31,9 @@ run = "tsdown"
 description = "Run functionality tests with vitest"
 run = "vitest run"
 
-[tasks."lint:oxlint"]
-description = "Lint source with oxlint"
-run = "oxlint"
+[tasks."lint:eslint"]
+description = "Lint source with eslint"
+run = "eslint ."
 
 [tasks."lint:tsc"]
 description = "Run type checks"
