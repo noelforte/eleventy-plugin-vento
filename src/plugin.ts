@@ -113,7 +113,9 @@ export function VentoPlugin(eleventyConfig: UserConfig, userOptions?: Partial<Pl
 			inputPath = path.normalize(inputPath);
 
 			// Get and return the render function
-			return await engine.getRenderFunction(inputContent, inputPath, { cache: false });
+			return await engine.getRenderFunction(inputContent, inputPath, {
+				cache: false,
+			});
 		},
 
 		compileOptions: {

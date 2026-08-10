@@ -5,7 +5,9 @@ const testInstance = new EleventyTest('./tests/stubs-name-collisions/');
 
 await testInstance.rebuild();
 
-describe('Can handle paired shortcode name overlap', { concurrent: true }, () => {
+describe('Can handle paired shortcode name overlap', {
+	concurrent: true,
+}, () => {
 	const matrix = ['forward', 'reverse'];
 
 	test.for(matrix)('Can handle %s overlap', { concurrent: true }, async (direction, { expect }) => {
@@ -16,7 +18,9 @@ describe('Can handle paired shortcode name overlap', { concurrent: true }, () =>
 	});
 });
 
-describe('Can handle single shortcode name overlap', { concurrent: true }, () => {
+describe('Can handle single shortcode name overlap', {
+	concurrent: true,
+}, () => {
 	const matrix = ['forward', 'reverse'];
 
 	test.for(matrix)('Can handle %s overlap', { concurrent: true }, async (direction, { expect }) => {

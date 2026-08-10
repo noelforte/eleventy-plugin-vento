@@ -19,7 +19,9 @@ describe('Can print Eleventy data', { concurrent: true }, () => {
 	});
 });
 
-describe("Can include from Eleventy's `includes` directory", { concurrent: true }, () => {
+describe("Can include from Eleventy's `includes` directory", {
+	concurrent: true,
+}, () => {
 	const matrix = [
 		['Without data', 'without-data'],
 		['With data', 'with-data'],
@@ -31,7 +33,9 @@ describe("Can include from Eleventy's `includes` directory", { concurrent: true 
 	});
 });
 
-describe("Can use layouts from Eleventy's `layouts` directory", { concurrent: true }, () => {
+describe("Can use layouts from Eleventy's `layouts` directory", {
+	concurrent: true,
+}, () => {
 	const matrix = [
 		['Example 1', 'example-1'],
 		['Example 2', 'example-2'],
@@ -98,7 +102,9 @@ describe('Can run Vento filters', { concurrent: true }, () => {
 	});
 });
 
-describe('Can run Eleventy shortcodes as Vento tags', { concurrent: true }, () => {
+describe('Can run Eleventy shortcodes as Vento tags', {
+	concurrent: true,
+}, () => {
 	const matrix = [
 		['single shortcodes', 'single'],
 		['single shortcodes with filters', 'single-filters'],
@@ -115,7 +121,9 @@ describe('Can run Eleventy shortcodes as Vento tags', { concurrent: true }, () =
 	});
 });
 
-describe('Can access collection data within templates', { concurrent: true }, () => {
+describe('Can access collection data within templates', {
+	concurrent: true,
+}, () => {
 	const matrix = [
 		['Iterate through collection data', 'iterate'],
 		['Access an individual collection item', 'access'],

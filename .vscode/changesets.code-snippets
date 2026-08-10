@@ -6,8 +6,8 @@
 		"body": [
 			"---\n'${1:eleventy-plugin-vento}': ${2:patch}\n---\n",
 			"${3:Name of change}\n",
-			"${4:Changeset notes go here...}",
+			"${4:Changeset notes go here...}"
 		],
-		"prefix": "#create-changeset",
-	},
+		"prefix": "#create-changeset"
+	}
 }

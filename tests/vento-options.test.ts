@@ -27,7 +27,9 @@ test('can disable autoDataVarname', { concurrent: true }, async ({ expect }) => 
 
 test('can change dataVarname', { concurrent: true }, async ({ expect }) => {
 	const testInstance = new EleventyTest('./tests/stubs-vento-options/change-datavarname/', {
-		pluginOptions: { ventoOptions: { dataVarname: 'global', autoDataVarname: false } },
+		pluginOptions: {
+			ventoOptions: { dataVarname: 'global', autoDataVarname: false },
+		},
 	});
 	await testInstance.rebuild();
 
