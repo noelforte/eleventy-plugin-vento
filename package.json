@@ -9,8 +9,8 @@
 	"types": "./dist/plugin.d.mts",
 	"exports": {
 		".": {
-			"import": "./dist/plugin.mjs",
-			"types": "./dist/plugin.d.mts"
+			"types": "./dist/plugin.d.mts",
+			"import": "./dist/plugin.mjs"
 		}
 	},
 	"files": [
