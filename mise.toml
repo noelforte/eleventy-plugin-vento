@@ -21,7 +21,7 @@ run = "tsdown --watch ./src"
 
 [tasks.format]
 description = "Format all files"
-run = "prettier --write ."
+run = "biome format --write"
 
 [tasks.build]
 description = "Build package with tsdown"
@@ -31,9 +31,9 @@ run = "tsdown"
 description = "Run functionality tests with vitest"
 run = "vitest run"
 
-[tasks."lint:eslint"]
-description = "Lint source with eslint"
-run = "eslint ."
+[tasks."lint:syntax"]
+description = "Lint source"
+run = "biome lint"
 
 [tasks."lint:tsc"]
 description = "Run type checks"
@@ -43,6 +43,6 @@ run = "tsc --noEmit"
 description = "Audit source with knip"
 run = "knip"
 
-[tasks."lint:prettier"]
-description = "Check code style with prettier"
-run = "prettier --check ."
+[tasks."lint:format"]
+description = "Check code style"
+run = "biome format"
