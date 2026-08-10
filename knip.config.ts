@@ -1,8 +1,8 @@
 import type { KnipConfig } from 'knip';
 
 const config: KnipConfig = {
-	project: ['**/*.{js,ts}', '!tests/stubs*/**'],
-	ignoreDependencies: ['prettier'],
+	project: ['src/**/*', 'tests/**/*.{js,ts}', '!tests/stubs*'],
+	ignoreDependencies: ['@biomejs/biome'],
 };
 
 export default config;
