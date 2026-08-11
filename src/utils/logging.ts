@@ -1,10 +1,11 @@
 import { styleText as st } from 'node:util';
 
-import createDebugger from 'debug';
+// External modules
+import { createDebug } from 'obug';
 
 // Export all debugging functions as one object
 export const debug = {
-	main: createDebugger('Eleventy:Vento'),
+	main: createDebug('Eleventy:Vento'),
 	get cache() {
 		return this.main.extend('Cache');
 	},
