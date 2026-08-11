@@ -13,12 +13,22 @@
 			"import": "./dist/plugin.mjs"
 		}
 	},
-	"files": ["dist/*", "LICENSE", "CHANGELOG.md", "readme.md"],
+	"files": [
+		"dist/*",
+		"LICENSE",
+		"CHANGELOG.md",
+		"readme.md"
+	],
 	"repository": "git@github.com:noelforte/eleventy-plugin-vento.git",
 	"bugs": {
 		"url": "https://github.com/noelforte/eleventy-plugin-vento/issues"
 	},
-	"keywords": ["eleventy", "eleventy-plugin", "ventojs", "templating"],
+	"keywords": [
+		"eleventy",
+		"eleventy-plugin",
+		"ventojs",
+		"templating"
+	],
 	"author": {
 		"name": "Noel Forte",
 		"email": "noel@forte.is",

@@ -4,6 +4,16 @@
 	"files": {
 		"includes": ["**", "!!**/dist", "!tests/stubs-engine-overrides/*"]
 	},
+	"overrides": [
+		{
+			"includes": ["package.json"],
+			"json": {
+				"formatter": {
+					"expand": "always"
+				}
+			}
+		}
+	],
 	"formatter": {
 		"enabled": true,
 		"formatWithErrors": false,
