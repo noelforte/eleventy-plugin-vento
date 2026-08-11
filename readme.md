@@ -1,10 +1,11 @@
 # eleventy-plugin-vento 🌬️🎈🐀
 
-[![Eleventy v3 and later](https://img.shields.io/badge/Eleventy-v3_&_later_-333?style=flat-square&logo=eleventy&logoColor=fff&labelColor=333&color=111)](https://11ty.dev)
 [![Github Actions Status](https://img.shields.io/github/actions/workflow/status/noelforte/eleventy-plugin-vento/ci.yml?style=flat-square&logo=github&logoColor=fff&label=Tests&labelColor=333)](https://github.com/noelforte/eleventy-plugin-vento/actions/workflows/ci.yml)
 [![eleventy-plugin-vento on npm](https://img.shields.io/npm/v/eleventy-plugin-vento?style=flat-square&logo=npm&logoColor=fff&labelColor=333)](https://npmjs.com/package/eleventy-plugin-vento)
+
+[![Eleventy v3 and later](https://img.shields.io/badge/Eleventy-v3_&_later_-333?style=flat-square&logo=eleventy&logoColor=fff&labelColor=333&color=111)](https://11ty.dev)
 [![Changesets on GitHub](https://img.shields.io/badge/🦋_Changesets-333?style=flat-square)](https://github.com/changesets/changesets/)
-[![Uses Prettier](https://img.shields.io/badge/code_style-prettier-cc00aa?style=flat-square&labelColor=333)](https://prettier.io/)
+[![Uses Biome](https://img.shields.io/badge/Biome-333?style=flat-square&logo=biome&labelColor=333)](https://biomejs.dev/)
 
 An [Eleventy](https://11ty.dev/) plugin that adds support for [Vento](https://vento.js.org/) templates.
 
