@@ -1,5 +1,13 @@
 # eleventy-plugin-vento
 
+## 6.0.0
+
+### Major Changes
+
+- ba537b9: Replace `debug` with `obug`
+
+  [Eleventy/Build Awesome is moving from `debug` to `obug` in v4](https://github.com/11ty/buildawesome/issues/4291) and this plugin is getting ahead of the curve. Marked as a major change to guard against any conflicts that might arise from `@11ty/eleventy@<4`. Otherwise, this change should be a drop-in replacement.
+
 ## 5.5.1
 
 ### Patch Changes
@@ -157,6 +165,7 @@
   More critical to note for Vento v2 is the rearrangement of core library features that this plugin exposes. Definitely review [the changelog for v2](https://github.com/ventojs/vento/blob/main/CHANGELOG.md#200---2025-09-01) to determine whether your implementation needs updating.
 
   The biggest changes are:
+
   - `meriyah` was removed via https://github.com/ventojs/vento/pull/128 at the benefit of performance. If you were absorbing `meriyah`'s functionality via this plugin, you should adjust accordingly.
   - `runStringSync` is no longer supported and has been removed
   - `ventoOptions.useWith` was previously deprecated and has since been removed. If you relied on `useWith` in your [plugin options](https://github.com/noelforte/eleventy-plugin-vento?tab=readme-ov-file#plugin-options), you should instead use `ventoOptions.dataVarname` and `ventoOptions.autoDataVarname` to control how the global namespace for template data is exposed. For more info, see more on [the Vento docs](https://vento.js.org/configuration/#datavarname).
@@ -197,6 +206,7 @@
 ### Minor Changes
 
 - 1f1a13a: Update ventojs to 1.14.0. This version bump incorporates the following new features:
+
   - Loading templates via URLs
   - Destructuring in `for` loops
   - `{{ continue }}` and `{{ break }}` tags
@@ -253,6 +263,7 @@
 - 335f21e: Select type updates (shouldn't affect compilation, however should improve DX)
 
   Changes are:
+
   - split types into separate files
   - namespace `ventojs` type imports
   - make `PluginOptions` optional by default
@@ -260,6 +271,7 @@
   - declare a special (`EleventyVentoEnvironment`) for this plugin to replace Vento's own `Environment`
 
 - 070109a: Refactored files and functions internally that shouldn't have any impact on usage or performance:
+
   - Split `debug` functions into separate exports, renamed `runCompatiblityCheck -> compatibilityCheck` (dd4c379b)
   - Utilities are now split into separate files (e06a83ab)
   - Main file renamed from `index.ts` to `plugin.ts` (1b122d2a)
@@ -290,6 +302,7 @@
 - 335f21e: Select type updates (shouldn't affect compilation, however should improve DX)
 
   Changes are:
+
   - split types into separate files
   - namespace `ventojs` type imports
   - make `PluginOptions` optional by default
@@ -431,6 +444,7 @@
 
 - 7e6ba68: Separate `shortcodes` and `pairedShortcodes` into seperate object namespaces. Prior to this version, Eleventy shortcodes and paired shortcodes were merged into a single object keyed as `_11ty.functions` which allowed for naming collisions between shortcodes and their paired counterparts.
 - b8f0a03: Adds new dependency on `debug` package, to help out with testing and getting more verbose logs. The following `DEBUG` namespaces are implemented:
+
   - `Eleventy:Vento:Setup` - Logs initial setup of the plugin, loading features, pre-page compile setup steps (like changing `page` and `eleventy` objects)
   - `Eleventy:Vento:Cache` - Logs updates to Vento's own internal cache, which is used in tandem with Eleventy's cache.
   - `Eleventy:Vento:Template` - Logs rendered templates and other template related actions
@@ -489,6 +503,7 @@
 ### Patch Changes
 
 - 9f5a90f: Various Refactors - These changes shouldn't have any observable effect on your templates or usage.
+
   - Replaced `class` based approach for a closure implementation instead. Since there was only 1 Vento `env` object ever instanced in this plugin, steering away from using `class` removes some complexity and overhead.
 
   - `DATA_KEYS` (used internally) moved into utils file alongside other utilities (like compatibility checks) and renamed to `CONTEXT_DATA_KEYS`.
@@ -561,7 +576,7 @@
 
   ```js
   eleventyConfig.addPlugin(VentoPlugin, {
-    autotrim: ['@vento', '@11ty', 'tag1', 'tag2'],
+    autotrim: ["@vento", "@11ty", "tag1", "tag2"],
   });
   ```
 
