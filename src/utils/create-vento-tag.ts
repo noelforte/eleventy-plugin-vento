@@ -1,6 +1,7 @@
 // Factory function that creates vento tags from eleventy functions
 
 import type { Token } from 'ventojs/core/tokenizer.js';
+
 import type { EleventyVentoEnvironment } from '../types/vento-overrides.js';
 
 export type EleventyTag = (

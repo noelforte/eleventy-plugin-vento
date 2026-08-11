@@ -7,6 +7,7 @@
 // function for ideal formatting
 
 import type { ErrorContext, VentoError } from 'ventojs/core/errors.js';
+
 import { debug, warn } from './logging.js';
 
 const LINE_TERMINATOR = /(\r\n?|[\n\u{2028}\u{2029}])/u;

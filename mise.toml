@@ -31,9 +31,9 @@ run = "tsdown"
 description = "Run functionality tests with vitest"
 run = "vitest run"
 
-[tasks."lint:syntax"]
+[tasks."lint:biome"]
 description = "Lint source"
-run = "biome lint"
+run = "biome check"
 
 [tasks."lint:tsc"]
 description = "Run type checks"
@@ -42,7 +42,3 @@ run = "tsc --noEmit"
 [tasks."lint:knip"]
 description = "Audit source with knip"
 run = "knip"
-
-[tasks."lint:format"]
-description = "Check code style"
-run = "biome format"

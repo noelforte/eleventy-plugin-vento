@@ -1,7 +1,5 @@
-// Built-in modules
 import { styleText as st } from 'node:util';
 
-// External modules
 import createDebugger from 'debug';
 
 // Export all debugging functions as one object

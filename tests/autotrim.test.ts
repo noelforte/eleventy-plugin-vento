@@ -1,4 +1,5 @@
 import { test } from 'vitest';
+
 import type { PluginOptions } from '../src/types/options.js';
 import { EleventyTest } from './_eleventy-test-instance.js';
 
@@ -10,7 +11,7 @@ const matrix: [string, PluginOptions['autotrim'], string][] = [
 	['All custom tags (with extends)', ['@11ty', 'tag1', 'tag2'], 'custom-extends'],
 ];
 
-test.for(matrix)('%s', async ([_label, autotrim, slug], { expect }) => {
+test.for(matrix)('%s', { concurrent: true }, async ([_label, autotrim, slug], { expect }) => {
 	const testInstance = new EleventyTest('./tests/stubs-autotrim/', {
 		pluginOptions: { autotrim },
 	});

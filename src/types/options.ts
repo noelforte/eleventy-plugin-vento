@@ -2,6 +2,7 @@
 
 import type * as ventojs from 'ventojs';
 import type { Plugin } from 'ventojs/core/environment.js';
+
 import type { AnyString } from './utilities.js';
 
 export interface PluginOptions {

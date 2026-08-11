@@ -1,16 +1,13 @@
 // Function that handles creating the Vento environment. Exposes
 // a small API for Eleventy to interface with.
 
-// Built-in modules
 import path from 'node:path';
 
-// External modules
 import ventojs, { type Options as VentoOptions } from 'ventojs';
 import type { Plugin } from 'ventojs/core/environment.js';
 import { VentoError } from 'ventojs/core/errors.js';
-import type { EleventyFunctionMap, EleventyRenderFunction } from './types/eleventy.js';
 
-// Internal modules
+import type { EleventyFunctionMap, EleventyRenderFunction } from './types/eleventy.js';
 import { createVentoTag, type EleventyTagInfo } from './utils/create-vento-tag.js';
 import { EleventyVentoError } from './utils/errors.js';
 import { debug } from './utils/logging.js';

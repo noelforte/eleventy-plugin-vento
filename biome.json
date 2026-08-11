@@ -45,6 +45,22 @@
 	},
 	"assist": {
 		"enabled": true,
-		"actions": { "source": { "organizeImports": "on" } }
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"groups": [
+							[":NODE:"],
+							":BLANK_LINE:",
+							[":PACKAGE:", "!eleventy-plugin-vento"],
+							["eleventy-plugin-vento"],
+							":BLANK_LINE:",
+							[":ALIAS:", ":PATH:"]
+						]
+					}
+				}
+			}
+		}
 	}
 }

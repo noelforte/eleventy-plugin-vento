@@ -1,6 +1,7 @@
 // Utility types to fill in gaps in Eleventy
 
 import type _UserConfig from '@11ty/eleventy/UserConfig';
+
 import type { MaybePromise } from './utilities.js';
 
 interface EleventyContext {

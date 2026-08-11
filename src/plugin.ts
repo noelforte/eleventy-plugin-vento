@@ -4,15 +4,12 @@
 // other functionality (like custom tag handling, debugging,
 // and rendering) to other files.
 
-// Built-ins
 import path from 'node:path';
 
-// External modules
 import autotrimPlugin, { defaultTags as autotrimDefaultTags } from 'ventojs/plugins/auto_trim.js';
-import type { UserConfig } from './types/eleventy.js';
 
-// Local modules
 import { createVentoEngine } from './engine.js';
+import type { UserConfig } from './types/eleventy.js';
 import type { PluginOptions } from './types/options.js';
 import { debug } from './utils/logging.js';
 
