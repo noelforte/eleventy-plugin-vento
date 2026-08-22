@@ -1,5 +1,5 @@
 {
-	"extends": ["github>noelforte/renovate-config"],
+	"extends": ["github>noelforte/renovate-config", "github>noelforte/renovate-config:changesets"],
 	"semanticCommits": "disabled",
 	"vulnerabilityAlerts": {
 		"labels": ["security"],
