@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       obug:
-        specifier: 2.2.1
-        version: 2.2.1
+        specifier: 3.0.0
+        version: 3.0.0
       ventojs:
         specifier: 2.4.0
         version: 2.4.0
@@ -1171,6 +1171,10 @@ packages:
 
   obug@2.2.1:
     resolution: {integrity: sha512-XrsrhT5sybtKI6wakr2SPOlGZWWYbUXZ7a0jT8/QOeAPau+1X/bSegNe5YR75oJmEZQbKningirmGOEJCIk61Q==}
+    engines: {node: '>=12.20.0'}
+
+  obug@3.0.0:
+    resolution: {integrity: sha512-5vvB5+W7ePv+p3uqxi+RcW1XAzLW0/hxt3/4X4Lc4qHudzOhmBiBwOY6DRob4WnanAEGvNcLjF+KNOufrUoEQw==}
     engines: {node: '>=12.20.0'}
 
   on-finished@2.4.1:
@@ -2445,6 +2449,8 @@ snapshots:
   normalize-path@3.0.0: {}
 
   obug@2.2.1: {}
+
+  obug@3.0.0: {}
 
   on-finished@2.4.1:
     dependencies:
