@@ -1,5 +1,13 @@
 # eleventy-plugin-vento
 
+## 7.0.0
+
+### Major Changes
+
+- 654706a: Update `obug` to v3
+  
+  Should not produce any serious breaking changes. Marked as a major change just in case.
+
 ## 6.0.0
 
 ### Major Changes
