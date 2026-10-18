@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 7.0.1
+
+### Patch Changes
+
+- c9d2f2b: Update ventojs to v2.4.1
+
 ## 7.0.0
 
 ### Major Changes
