@@ -12,8 +12,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       ventojs:
-        specifier: 2.4.1
-        version: 2.4.1
+        specifier: 2.4.2
+        version: 2.4.2
     devDependencies:
       '@11ty/eleventy':
         specifier: 4.0.0-alpha.10
@@ -1289,8 +1289,8 @@ packages:
   urlpattern-polyfill@10.1.0:
     resolution: {integrity: sha512-IGjKp/o0NL3Bso1PymYURCJxMPNAf/ILOpendP9f5B6e1rTJgdgiOvgfoT8VxCAdY+Wisb9uhGaJJf3yZ2V9nw==}
 
-  ventojs@2.4.1:
-    resolution: {integrity: sha512-6UrIusjh+2gCfSzomX9WXVe9bCC3eryOst3HmPb+ZhS8i+80FhZDiWuqlqwOqeKxobNz0GvcXwSQJrWfgA0CeQ==}
+  ventojs@2.4.2:
+    resolution: {integrity: sha512-8s/OVgVTiw8njyJRd98qVVcLKmZ7VHLw8zeBDji8TiC6k+myEBHok2QvZcRnKEmlF6BbFlc2887XAWaBY5Ep7Q==}
 
   verkit@0.5.0:
     resolution: {integrity: sha512-u4J1hr6Y+C/hit34GwL3eIcUf3wngT8TlYUjK7tk0jxydKLAq3sYvifjdTDA6U3KCKRcQCQDGf/srjxfZF3l7g==}
@@ -2500,7 +2500,7 @@ snapshots:
 
   urlpattern-polyfill@10.1.0: {}
 
-  ventojs@2.4.1: {}
+  ventojs@2.4.2: {}
 
   verkit@0.5.0: {}
 
