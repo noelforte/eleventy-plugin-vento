@@ -1,5 +1,11 @@
 # eleventy-plugin-vento
 
+## 7.0.2
+
+### Patch Changes
+
+- 033c098: Update `ventojs` to v2.4.2
+
 ## 7.0.1
 
 ### Patch Changes
