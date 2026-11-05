@@ -43,7 +43,7 @@
 		"@11ty/eleventy": "4.0.0-alpha.10",
 		"@biomejs/biome": "2.6.4",
 		"@changesets/cli": "3.0.3",
-		"@types/node": "24.19.2",
+		"@types/node": "26.6.6",
 		"knip": "6.44.1",
 		"tsdown": "0.23.4",
 		"typescript": "6.0.3",
