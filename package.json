@@ -44,7 +44,7 @@
 		"@biomejs/biome": "2.6.8",
 		"@changesets/cli": "3.0.3",
 		"@types/node": "24.19.2",
-		"knip": "6.45.1",
+		"knip": "6.47.0",
 		"tsdown": "0.23.7",
 		"typescript": "6.0.3",
 		"vitest": "5.1.1"
