@@ -40,7 +40,7 @@
 		"ventojs": "2.4.2"
 	},
 	"devDependencies": {
-		"@11ty/eleventy": "4.0.0-alpha.10",
+		"@11ty/eleventy": "4.0.0-alpha.12",
 		"@biomejs/biome": "2.6.8",
 		"@changesets/cli": "3.0.3",
 		"@types/node": "24.19.2",
